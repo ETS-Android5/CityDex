@@ -10,7 +10,7 @@
         android:id="@+id/selectFileButton"
         android:layout_width="176dp"
         android:layout_height="55dp"
-        android:text="Select File"
+        android:text="selectioné une image"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.068"
