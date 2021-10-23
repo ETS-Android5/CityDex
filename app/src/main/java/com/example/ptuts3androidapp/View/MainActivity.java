@@ -1,8 +1,10 @@
-package com.example.ptuts3androidapp;
+package com.example.ptuts3androidapp.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+
+import com.example.ptuts3androidapp.R;
 
 public class MainActivity extends AppCompatActivity {
 
