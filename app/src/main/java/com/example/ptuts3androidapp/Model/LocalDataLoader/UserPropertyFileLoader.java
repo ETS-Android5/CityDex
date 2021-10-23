@@ -17,8 +17,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
 
 public class UserPropertyFileLoader implements UserPropertyLoader {
 
@@ -32,19 +30,9 @@ public class UserPropertyFileLoader implements UserPropertyLoader {
         directory = context.getFilesDir();
     }
 
-    public File getDirectory() {
-        return directory;
-    }
-
 
     @Override
     public UserProperty getUserProperty() {
-        HashMap<String, String> userData = new LinkedHashMap<>();
-        UserProperty userPropertyLoaded = new UserProperty(userData);
-        File[] filesOfDirectory = directory.listFiles();
-        for (File file: filesOfDirectory ) {
-            Log.i("files23424" , file.toString());
-        }
         try {
             FileInputStream fileInputStream = context.openFileInput(DATA_FILE_NAME);
             ObjectInputStream ois = new ObjectInputStream(fileInputStream);

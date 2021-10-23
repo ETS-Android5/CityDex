@@ -26,15 +26,46 @@ public class UserTest {
     public void setUp(){
         context = InstrumentationRegistry.getInstrumentation().getTargetContext();
         Assert.assertNotNull(context);
-        UserPropertyFileLoader userPropertyLoader = new UserPropertyFileLoader(context);
-        Log.i("testAccessToDirectory", "userPropertyLoader.getDirectory() = " + userPropertyLoader.getDirectory());
+        user = generateRandomUser();
+    }
+
+    private User generateRandomUser(){
+        String username = "bob " + Double.toString(Math.random() * 100);
+        UserPropertyLoader userPropertyLoader = new UserPropertyFileLoader(context);
+        User user = new User(username, userPropertyLoader);
+        user.setProperty("test", "true");
+        return user;
+
     }
 
 
     @Test
-    public void getUserProperty() {
+    public void newlygeneratedUserIsNotNull(){
+        Assert.assertNotNull(user);
+    }
 
+    @Test
+    public void propertiesOfUserIsNotNull(){
+        Assert.assertNotNull(user.getUserProperties());
+        Assert.assertNotNull(user.getUserName());
+        Assert.assertNotNull(user.getUserProperties().get("test"));
+    }
 
+    @Test
+    public void propertiesOfUserIsCorrect(){
+        Assert.assertEquals("true" ,user.getUserProperties().get("test"));
+    }
+
+    @Test
+    public void propertiesOfUserIsCorrectAfterChange(){
+        user.setProperty("test", "false");
+        Assert.assertEquals("false" ,user.getUserProperties().get("test"));
+        user.setProperty("test", "true");
+        Assert.assertEquals("true" ,user.getUserProperties().get("test"));
 
     }
+
+
+
+
 }

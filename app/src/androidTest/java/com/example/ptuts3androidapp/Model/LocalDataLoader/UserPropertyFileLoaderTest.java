@@ -21,7 +21,7 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 
 @RunWith(AndroidJUnit4.class)
-public class UserPropertyFileLoaderTest {
+public class UserPropertyFileLoaderTest  {
 
     private Context context;
     private UserPropertyFileLoader userPropertyFileLoader;
@@ -31,15 +31,9 @@ public class UserPropertyFileLoaderTest {
         context = InstrumentationRegistry.getInstrumentation().getTargetContext();
         Assert.assertNotNull(context);
         userPropertyFileLoader = new UserPropertyFileLoader(context);
-        userPropertyFileLoader.setUserProperty(new UserProperty(new HashMap<>()));
+        userPropertyFileLoader.setUserProperty(generateRandomUserProperties());
     }
 
-    @Test
-    public void testAccessToDirectory(){
-        Assert.assertNotNull(userPropertyFileLoader.getDirectory());
-        Log.i("testAccessToDirectory", "userPropertyLoader.getDirectory() = " + userPropertyFileLoader.getDirectory());
-
-    }
 
 
     @Test
@@ -50,16 +44,26 @@ public class UserPropertyFileLoaderTest {
 
     @Test
     public void userPropertyDifferentWhenSet(){
-        HashMap<String, String> userData = new LinkedHashMap<>();
-        UserProperty userProperty = new UserProperty(userData);
+        UserProperty userProperty = generateRandomUserProperties();
         UserProperty previousproperty = userPropertyFileLoader.getUserProperty();
         userPropertyFileLoader.setUserProperty(userProperty);
-        Assert.assertEquals(userPropertyFileLoader.getUserProperty(), userProperty);
-        //Assert.assertNotEquals(userPropertyFileLoader.getUserProperty(),previousproperty);
+        Assert.assertNotEquals(userPropertyFileLoader.getUserProperty(),previousproperty);
+    }
 
+    @Test
+    public void userPropertyCoresspondToPreviousSet(){
+        UserProperty userProperty = generateRandomUserProperties();
+        userPropertyFileLoader.setUserProperty(userProperty);
+        Assert.assertEquals(userPropertyFileLoader.getUserProperty(), userProperty);
 
     }
 
 
+    private UserProperty generateRandomUserProperties(){
+
+        HashMap<String, String> userData = new LinkedHashMap<>();
+        userData.put("test", Double.toString(Math.random() * 1000));
+        return new UserProperty(userData);
+    }
 
 }
