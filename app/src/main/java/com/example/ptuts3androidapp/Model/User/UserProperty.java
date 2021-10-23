@@ -1,4 +1,4 @@
-package com.example.ptuts3androidapp.Model;
+package com.example.ptuts3androidapp.Model.User;
 
 import java.io.Serializable;
 import java.util.HashMap;

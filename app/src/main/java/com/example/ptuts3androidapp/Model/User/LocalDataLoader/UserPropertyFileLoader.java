@@ -1,14 +1,9 @@
-package com.example.ptuts3androidapp.Model.LocalDataLoader;
+package com.example.ptuts3androidapp.Model.User.LocalDataLoader;
 
-import static android.os.ParcelFileDescriptor.MODE_WORLD_READABLE;
-
-import android.app.Application;
 import android.content.Context;
-import android.util.Log;
 
-import com.example.ptuts3androidapp.Model.User;
-import com.example.ptuts3androidapp.Model.UserProperty;
-import com.example.ptuts3androidapp.Model.UserPropertyLoader;
+import com.example.ptuts3androidapp.Model.User.UserProperty;
+import com.example.ptuts3androidapp.Model.User.UserPropertyLoader;
 
 import java.io.File;
 import java.io.FileInputStream;

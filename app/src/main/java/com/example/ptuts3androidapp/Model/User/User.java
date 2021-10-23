@@ -1,4 +1,4 @@
-package com.example.ptuts3androidapp.Model;
+package com.example.ptuts3androidapp.Model.User;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;

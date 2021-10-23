@@ -1,14 +1,13 @@
 package com.example.ptuts3androidapp.Model;
 
-import static org.junit.Assert.*;
-
 import android.content.Context;
-import android.util.Log;
 
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 import androidx.test.platform.app.InstrumentationRegistry;
 
-import com.example.ptuts3androidapp.Model.LocalDataLoader.UserPropertyFileLoader;
+import com.example.ptuts3androidapp.Model.User.LocalDataLoader.UserPropertyFileLoader;
+import com.example.ptuts3androidapp.Model.User.User;
+import com.example.ptuts3androidapp.Model.User.UserPropertyLoader;
 
 import org.junit.Assert;
 import org.junit.Before;
