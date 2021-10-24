@@ -9,6 +9,7 @@
     <LinearLayout
         android:layout_width="411dp"
         android:layout_height="738dp"
+        android:divider="@drawable/ic_launcher_background"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -22,23 +23,29 @@
             android:layout_height="72dp"
             app:srcCompat="@drawable/logoApplicationCitiDex" />
 
-        <Button
-            android:id="@+id/button"
-            android:layout_width="189dp"
-            android:layout_height="64dp"
-            android:text="Ma Collec'" />
+        <ImageButton
+            android:id="@+id/imageButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:srcCompat="@tools:sample/avatars" />
 
-        <Button
-            android:id="@+id/button2"
-            android:layout_width="190dp"
-            android:layout_height="65dp"
-            android:text="Succes" />
+        <ImageButton
+            android:id="@+id/imageButton2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:srcCompat="@tools:sample/avatars" />
 
-        <Button
-            android:id="@+id/button3"
-            android:layout_width="190dp"
-            android:layout_height="66dp"
-            android:text="Option" />
+        <ImageButton
+            android:id="@+id/imageButton3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:srcCompat="@tools:sample/avatars" />
+
+        <ImageButton
+            android:id="@+id/imageButton4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:srcCompat="@tools:sample/avatars" />
 
     </LinearLayout>
 
