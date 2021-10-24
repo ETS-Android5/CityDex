@@ -2,6 +2,7 @@ package com.example.ptuts3androidapp;
 
 import android.graphics.Bitmap;
 import android.os.Environment;
+import android.util.Log;
 
 import com.googlecode.tesseract.android.TessBaseAPI;
 
@@ -10,6 +11,7 @@ import java.io.File;
 public class TessOCR {
 
     private TessBaseAPI mTess;
+    private String result;
 
     public TessOCR() {
         mTess = new TessBaseAPI();
@@ -18,14 +20,18 @@ public class TessOCR {
         File dir = new File(datapath + "tessdata/");
         if (!dir.exists())
             dir.mkdirs();
+        Log.i("message", dir.getAbsolutePath());
         mTess.init(datapath, language);
     }
 
     public String getOCRResult(Bitmap bitmap) {
-
-        mTess.setImage(bitmap);
-        String result = mTess.getUTF8Text();
-
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                mTess.setImage(bitmap);
+                result = mTess.getUTF8Text();
+            }
+        });
         return result;
     }
 

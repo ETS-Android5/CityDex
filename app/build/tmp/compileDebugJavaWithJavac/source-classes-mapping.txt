@@ -6,5 +6,6 @@ com/example/ptuts3androidapp/BuildConfig.java
  com.example.ptuts3androidapp.BuildConfig
 com/example/ptuts3androidapp/TessOCR.java
  com.example.ptuts3androidapp.TessOCR
+ com.example.ptuts3androidapp.TessOCR$1
 com/example/ptuts3androidapp/MainActivity.java
  com.example.ptuts3androidapp.MainActivity

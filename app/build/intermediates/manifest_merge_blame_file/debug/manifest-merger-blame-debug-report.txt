@@ -11,49 +11,52 @@
 9-->C:\Users\natha\Documents\GitHub\PtutS3Android\app\src\main\AndroidManifest.xml
 10
 11    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-11-->C:\Users\natha\Documents\GitHub\PtutS3Android\app\src\main\AndroidManifest.xml:21:5-81
-11-->C:\Users\natha\Documents\GitHub\PtutS3Android\app\src\main\AndroidManifest.xml:21:22-78
-12
-13    <uses-feature android:name="android.hardware.camera" />
-13-->C:\Users\natha\Documents\GitHub\PtutS3Android\app\src\main\AndroidManifest.xml:22:5-60
-13-->C:\Users\natha\Documents\GitHub\PtutS3Android\app\src\main\AndroidManifest.xml:22:19-57
-14
-15    <uses-permission android:name="android.permission.CAMERA" />
-15-->C:\Users\natha\Documents\GitHub\PtutS3Android\app\src\main\AndroidManifest.xml:23:5-65
-15-->C:\Users\natha\Documents\GitHub\PtutS3Android\app\src\main\AndroidManifest.xml:23:22-62
-16
-17    <application
-17-->C:\Users\natha\Documents\GitHub\PtutS3Android\app\src\main\AndroidManifest.xml:5:5-19:19
-18        android:allowBackup="true"
-18-->C:\Users\natha\Documents\GitHub\PtutS3Android\app\src\main\AndroidManifest.xml:6:9-35
-19        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
-19-->[androidx.core:core:1.5.0] C:\Users\natha\.gradle\caches\transforms-3\255d63c0f9f8f5d12ab3191ffb377750\transformed\core-1.5.0\AndroidManifest.xml:24:18-86
-20        android:debuggable="true"
-21        android:icon="@mipmap/ic_launcher"
-21-->C:\Users\natha\Documents\GitHub\PtutS3Android\app\src\main\AndroidManifest.xml:7:9-43
-22        android:label="@string/app_name"
-22-->C:\Users\natha\Documents\GitHub\PtutS3Android\app\src\main\AndroidManifest.xml:8:9-41
-23        android:roundIcon="@mipmap/ic_launcher_round"
-23-->C:\Users\natha\Documents\GitHub\PtutS3Android\app\src\main\AndroidManifest.xml:9:9-54
-24        android:supportsRtl="true"
-24-->C:\Users\natha\Documents\GitHub\PtutS3Android\app\src\main\AndroidManifest.xml:10:9-35
-25        android:testOnly="true"
-26        android:theme="@style/Theme.PtutS3AndroidApp" >
-26-->C:\Users\natha\Documents\GitHub\PtutS3Android\app\src\main\AndroidManifest.xml:11:9-54
-27        <activity android:name="com.example.ptuts3androidapp.MainActivity" >
-27-->C:\Users\natha\Documents\GitHub\PtutS3Android\app\src\main\AndroidManifest.xml:12:9-18:20
-27-->C:\Users\natha\Documents\GitHub\PtutS3Android\app\src\main\AndroidManifest.xml:12:19-47
-28            <intent-filter>
-28-->C:\Users\natha\Documents\GitHub\PtutS3Android\app\src\main\AndroidManifest.xml:13:13-17:29
-29                <action android:name="android.intent.action.MAIN" />
-29-->C:\Users\natha\Documents\GitHub\PtutS3Android\app\src\main\AndroidManifest.xml:14:17-69
-29-->C:\Users\natha\Documents\GitHub\PtutS3Android\app\src\main\AndroidManifest.xml:14:25-66
-30
-31                <category android:name="android.intent.category.LAUNCHER" />
-31-->C:\Users\natha\Documents\GitHub\PtutS3Android\app\src\main\AndroidManifest.xml:16:17-77
-31-->C:\Users\natha\Documents\GitHub\PtutS3Android\app\src\main\AndroidManifest.xml:16:27-74
-32            </intent-filter>
-33        </activity>
-34    </application>
-35
-36</manifest>
+11-->C:\Users\natha\Documents\GitHub\PtutS3Android\app\src\main\AndroidManifest.xml:5:5-81
+11-->C:\Users\natha\Documents\GitHub\PtutS3Android\app\src\main\AndroidManifest.xml:5:22-78
+12    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+12-->C:\Users\natha\Documents\GitHub\PtutS3Android\app\src\main\AndroidManifest.xml:6:5-80
+12-->C:\Users\natha\Documents\GitHub\PtutS3Android\app\src\main\AndroidManifest.xml:6:22-77
+13
+14    <uses-feature android:name="android.hardware.camera" />
+14-->C:\Users\natha\Documents\GitHub\PtutS3Android\app\src\main\AndroidManifest.xml:7:5-60
+14-->C:\Users\natha\Documents\GitHub\PtutS3Android\app\src\main\AndroidManifest.xml:7:19-57
+15
+16    <uses-permission android:name="android.permission.CAMERA" />
+16-->C:\Users\natha\Documents\GitHub\PtutS3Android\app\src\main\AndroidManifest.xml:8:5-65
+16-->C:\Users\natha\Documents\GitHub\PtutS3Android\app\src\main\AndroidManifest.xml:8:22-62
+17
+18    <application
+18-->C:\Users\natha\Documents\GitHub\PtutS3Android\app\src\main\AndroidManifest.xml:9:5-24:19
+19        android:allowBackup="true"
+19-->C:\Users\natha\Documents\GitHub\PtutS3Android\app\src\main\AndroidManifest.xml:10:9-35
+20        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+20-->[androidx.core:core:1.5.0] C:\Users\natha\.gradle\caches\transforms-3\255d63c0f9f8f5d12ab3191ffb377750\transformed\core-1.5.0\AndroidManifest.xml:24:18-86
+21        android:debuggable="true"
+22        android:icon="@mipmap/ic_launcher"
+22-->C:\Users\natha\Documents\GitHub\PtutS3Android\app\src\main\AndroidManifest.xml:11:9-43
+23        android:label="@string/app_name"
+23-->C:\Users\natha\Documents\GitHub\PtutS3Android\app\src\main\AndroidManifest.xml:12:9-41
+24        android:roundIcon="@mipmap/ic_launcher_round"
+24-->C:\Users\natha\Documents\GitHub\PtutS3Android\app\src\main\AndroidManifest.xml:13:9-54
+25        android:supportsRtl="true"
+25-->C:\Users\natha\Documents\GitHub\PtutS3Android\app\src\main\AndroidManifest.xml:14:9-35
+26        android:testOnly="true"
+27        android:theme="@style/Theme.PtutS3AndroidApp" >
+27-->C:\Users\natha\Documents\GitHub\PtutS3Android\app\src\main\AndroidManifest.xml:15:9-54
+28        <activity android:name="com.example.ptuts3androidapp.MainActivity" >
+28-->C:\Users\natha\Documents\GitHub\PtutS3Android\app\src\main\AndroidManifest.xml:17:9-23:20
+28-->C:\Users\natha\Documents\GitHub\PtutS3Android\app\src\main\AndroidManifest.xml:17:19-47
+29            <intent-filter>
+29-->C:\Users\natha\Documents\GitHub\PtutS3Android\app\src\main\AndroidManifest.xml:18:13-22:29
+30                <action android:name="android.intent.action.MAIN" />
+30-->C:\Users\natha\Documents\GitHub\PtutS3Android\app\src\main\AndroidManifest.xml:19:17-69
+30-->C:\Users\natha\Documents\GitHub\PtutS3Android\app\src\main\AndroidManifest.xml:19:25-66
+31
+32                <category android:name="android.intent.category.LAUNCHER" />
+32-->C:\Users\natha\Documents\GitHub\PtutS3Android\app\src\main\AndroidManifest.xml:21:17-77
+32-->C:\Users\natha\Documents\GitHub\PtutS3Android\app\src\main\AndroidManifest.xml:21:27-74
+33            </intent-filter>
+34        </activity>
+35    </application>
+36
+37</manifest>
