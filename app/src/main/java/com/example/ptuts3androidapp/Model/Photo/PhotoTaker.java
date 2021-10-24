@@ -1,28 +1,57 @@
 package com.example.ptuts3androidapp.Model.Photo;
 
+import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.widget.ImageView;
 
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityOptionsCompat;
 import androidx.core.content.FileProvider;
+import androidx.core.content.res.ResourcesCompat;
+
+import com.example.ptuts3androidapp.R;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URI;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class PhotoTaker {
 
-    static final int REQUEST_IMAGE_CAPTURE = 1;
+    public static final int REQUEST_IMAGE_CAPTURE = 1;
 
     private AppCompatActivity appCompatActivity;
 
     String currentPhotoPath;
+    private ImageView imageView;
+    private ActivityResultLauncher<Intent> mStartForResult;
+    public Uri photoUri;
+
 
     public PhotoTaker(AppCompatActivity appCompatActivity) {
         this.appCompatActivity = appCompatActivity;
+        imageView = appCompatActivity.findViewById(R.id.imageView);
+        mStartForResult = appCompatActivity.registerForActivityResult(new ActivityResultContracts.StartActivityForResult(),
+                new ActivityResultCallback<ActivityResult>() {
+                    @Override
+                    public void onActivityResult(ActivityResult result) {
+                        if (result.getResultCode() == Activity.RESULT_OK) {
+                            Intent intent = result.getData();
+                        }
+                    }
+                });
     }
 
     public void takePhoto(){
@@ -30,12 +59,16 @@ public class PhotoTaker {
         galleryAddPic();
     }
 
+
+
     private void galleryAddPic() {
         Intent mediaScanIntent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
         File f = new File(currentPhotoPath);
         Uri contentUri = Uri.fromFile(f);
         mediaScanIntent.setData(contentUri);
         appCompatActivity.sendBroadcast(mediaScanIntent);
+        photoUri = contentUri;
+
     }
 
 
@@ -56,10 +89,14 @@ public class PhotoTaker {
                         "com.example.android.fileprovider",
                         photoFile);
                 takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
-                appCompatActivity.startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
+
+                mStartForResult.launch(takePictureIntent);
+
+                //appCompatActivity.startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
             }
         }
     }
+
 
 
     private File createImageFile() throws IOException {
@@ -76,5 +113,9 @@ public class PhotoTaker {
         // Save a file: path for use with ACTION_VIEW intents
         currentPhotoPath = image.getAbsolutePath();
         return image;
+
     }
+
+
+
 }
