@@ -1,11 +1,20 @@
 package com.example.ptuts3androidapp;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.nio.file.Files;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -22,9 +31,17 @@ public class MainActivity extends AppCompatActivity {
         button = findViewById(R.id.button);
         textView = findViewById(R.id.textView);
 
-        TessOCR ocr = new TessOCR();
-        String text = ocr.getOCRResult(((BitmapDrawable)imgView.getDrawable()).getBitmap());
+        textView.setText("test");
+        TessOCR ocr = null;
+        try {
+            ocr = new TessOCR(getAssets().open("fra.traineddata"));
+    } catch (IOException e) {
+            e.printStackTrace();
+        }
+        Drawable drawable = imgView.getDrawable();
+        Bitmap bitmap = Bitmap.createBitmap(drawable.getIntrinsicWidth(),drawable.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
+        String text = ocr.getOCRResult(bitmap);
+        Log.i("test", ocr.getOCRResult(bitmap));
         textView.setText(text);
-
     }
 }
