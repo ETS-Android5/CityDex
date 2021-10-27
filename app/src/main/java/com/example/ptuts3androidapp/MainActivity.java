@@ -1,12 +1,17 @@
 package com.example.ptuts3androidapp;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
+import android.Manifest;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
+import android.webkit.PermissionRequest;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -22,6 +27,9 @@ public class MainActivity extends AppCompatActivity {
     private Button button;
     private TextView textView;
 
+    private String[] perms = {Manifest.permission.WRITE_EXTERNAL_STORAGE,Manifest.permission.READ_EXTERNAL_STORAGE};
+    private int permCode = 23;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,6 +38,8 @@ public class MainActivity extends AppCompatActivity {
         imgView = findViewById(R.id.imageView);
         button = findViewById(R.id.button);
         textView = findViewById(R.id.textView);
+
+        requestPermissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE,Manifest.permission.WRITE_EXTERNAL_STORAGE},permCode);
 
         textView.setText("test");
         TessOCR ocr = null;
@@ -48,5 +58,10 @@ public class MainActivity extends AppCompatActivity {
         }
         Log.i("test", result);
         textView.setText(result);
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
     }
 }
