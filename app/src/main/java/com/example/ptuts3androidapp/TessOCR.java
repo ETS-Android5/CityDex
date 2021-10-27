@@ -24,7 +24,7 @@ import java.nio.file.StandardCopyOption;
 public class TessOCR {
 
     private TessBaseAPI mTess;
-    private String result;
+    private String result = "";
 
     public TessOCR(InputStream dataToCopy) throws IOException {
         mTess = new TessBaseAPI();
@@ -41,14 +41,16 @@ public class TessOCR {
         mTess.init(datapath, language);
     }
 
-    public String getOCRResult(Bitmap bitmap) {
-        new Thread(new Runnable() {
+    public String getOCRResult(Bitmap bitmap) throws InterruptedException {
+        Thread t = new Thread(new Runnable() {
             @Override
             public void run() {
                 mTess.setImage(bitmap);
                 result = mTess.getUTF8Text();
             }
         });
+        t.start();
+        t.join();
         return result;
     }
 

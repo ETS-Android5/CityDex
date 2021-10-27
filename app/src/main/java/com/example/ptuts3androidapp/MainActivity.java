@@ -40,8 +40,13 @@ public class MainActivity extends AppCompatActivity {
         }
         Drawable drawable = imgView.getDrawable();
         Bitmap bitmap = Bitmap.createBitmap(drawable.getIntrinsicWidth(),drawable.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
-        String text = ocr.getOCRResult(bitmap);
-        Log.i("test", ocr.getOCRResult(bitmap));
-        textView.setText(text);
+        String result = null;
+        try {
+            result = ocr.getOCRResult(bitmap);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        Log.i("test", result);
+        textView.setText(result);
     }
 }
