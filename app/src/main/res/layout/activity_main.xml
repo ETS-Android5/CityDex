@@ -33,33 +33,103 @@
         app:srcCompat="@drawable/appareil_photo" />
 
     <FrameLayout
-        android:layout_width="422dp"
-        android:layout_height="152dp"
+        android:id="@+id/frameLayout"
+        android:layout_width="409dp"
+        android:layout_height="132dp"
+        app:layout_constraintBottom_toTopOf="@+id/imageView3"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.545"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView">
+        app:layout_constraintTop_toBottomOf="@+id/imageView"
+        app:layout_constraintVertical_bias="0.024">
 
         <ImageButton
-            android:id="@+id/imageButton6"
-            android:layout_width="419dp"
+            android:id="@+id/collec_button"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:backgroundTint="@color/white"
+            app:srcCompat="@drawable/panneau_agglomeration"
+            tools:ignore="SpeakableTextPresentCheck" />
+
+        <TextView
+            android:id="@+id/collec_text"
+            android:layout_width="167dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:clickable="false"
+            android:fontFamily="sans-serif"
+            android:text="Ma Collec'"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textColorHighlight="@color/black"
+            android:textSize="24sp" />
+        android:text="TextView" />
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/frameLayout2"
+        android:layout_width="414dp"
+        android:layout_height="143dp"
+        app:layout_constraintBottom_toTopOf="@+id/imageView3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/frameLayout"
+        app:layout_constraintVertical_bias="0.011">
+
+        <ImageButton
+            android:id="@+id/succes"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:backgroundTint="@color/white"
             app:srcCompat="@drawable/panneau_agglomeration"
             tools:ignore="SpeakableTextPresentCheck" />
 
         <TextView
-            android:id="@+id/textView"
+            android:id="@+id/succes_text"
             android:layout_width="167dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:clickable="false"
             android:fontFamily="sans-serif"
-            android:text="Ma COLLEC'"
+            android:text="Succes"
             android:textAlignment="center"
             android:textColor="@color/black"
             android:textColorHighlight="@color/black"
-            android:textSize="24sp"/>
-            android:text="TextView" />
+            android:textSize="24sp" />
+        android:text="TextView" />
+
+
+    </FrameLayout>
+
+    <FrameLayout
+        android:layout_width="407dp"
+        android:layout_height="123dp"
+        app:layout_constraintBottom_toTopOf="@+id/imageView3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/frameLayout2">
+
+        <ImageButton
+            android:id="@+id/reglage_button"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:backgroundTint="@color/white"
+            app:srcCompat="@drawable/panneau_agglomeration"
+            tools:ignore="SpeakableTextPresentCheck" />
+
+        <TextView
+            android:id="@+id/reglage_test"
+            android:layout_width="167dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:clickable="false"
+            android:fontFamily="sans-serif"
+            android:text="Reglage"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textColorHighlight="@color/black"
+            android:textSize="24sp" />
+        android:text="TextView" />
     </FrameLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
