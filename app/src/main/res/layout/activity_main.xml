@@ -15,52 +15,51 @@
         android:id="@+id/imageView"
         android:layout_width="match_parent"
         android:layout_height="72dp"
-        app:srcCompat="@drawable/logoApplicationCitiDex"
-        tools:layout_editor_absoluteY="2dp" />
-
-    <ImageButton
-        android:id="@+id/imageButton2"
-        style="@style/Widget.AppCompat.ImageButton"
-        android:layout_width="369dp"
-        android:layout_height="120dp"
-        android:layout_marginTop="77dp"
-        android:background="@color/white"
-        app:layout_constraintBottom_toTopOf="@+id/imageButton3"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView"
-        app:layout_constraintVertical_bias="0.0"
-        app:srcCompat="@drawable/panneau_agglomeration" />
-
-    <ImageButton
-        android:id="@+id/imageButton3"
-        android:layout_width="371dp"
-        android:layout_height="118dp"
-        android:layout_marginBottom="44dp"
-        android:backgroundTint="@color/white"
-        app:layout_constraintBottom_toTopOf="@+id/imageButton4"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/panneau_agglomeration" />
-
-    <ImageButton
-        android:id="@+id/imageButton4"
-        android:layout_width="376dp"
-        android:layout_height="114dp"
-        android:backgroundTint="@color/white"
-        app:layout_constraintBottom_toTopOf="@+id/imageView3"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView"
-        app:layout_constraintVertical_bias="0.868"
-        app:srcCompat="@drawable/panneau_agglomeration" />
+        android:layout_marginBottom="656dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:srcCompat="@drawable/logo_application_citidex"
+        tools:layout_editor_absoluteX="59dp" />
 
     <ImageView
         android:id="@+id/imageView3"
         android:layout_width="100dp"
         android:layout_height="90dp"
-        app:srcCompat="@drawable/appareil_photo"
-        tools:layout_editor_absoluteX="155dp"
-        tools:layout_editor_absoluteY="642dp" />
+        android:layout_marginTop="548dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.533"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView"
+        app:srcCompat="@drawable/appareil_photo" />
+
+    <FrameLayout
+        android:layout_width="422dp"
+        android:layout_height="152dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView">
+
+        <ImageButton
+            android:id="@+id/imageButton6"
+            android:layout_width="419dp"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/white"
+            app:srcCompat="@drawable/panneau_agglomeration"
+            tools:ignore="SpeakableTextPresentCheck" />
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="167dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:clickable="false"
+            android:fontFamily="sans-serif"
+            android:text="Ma COLLEC'"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textColorHighlight="@color/black"
+            android:textSize="24sp"/>
+            android:text="TextView" />
+    </FrameLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
