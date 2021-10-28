@@ -2,8 +2,16 @@ package com.example.ptuts3androidapp;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
+import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
+import android.view.View;
 import android.widget.ImageButton;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -29,6 +37,23 @@ public class MainActivity extends AppCompatActivity {
         succes_button = (ImageButton) findViewById(R.id.succes_button);
         reglage_button = (ImageButton) findViewById(R.id.reglage_button);
         photo_button = (ImageButton) findViewById(R.id.photo_button);
+        // Initialisation des méthodes click sur bouton
 
     }
+
+
+    /**
+     * méthode de click sur le bouton Ma Collec'
+     */
+    private void createOnClickCollecButton(){
+        collec_button.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+    }
+
+
 }

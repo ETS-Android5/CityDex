@@ -7,7 +7,58 @@
     tools:context=".MainActivity">
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/background"
+        android:layout_width="477dp"
+        android:layout_height="200dp"
+        android:layout_marginBottom="200dp"
+        android:adjustViewBounds="true"
+        android:cropToPadding="true"
+        android:scaleType="fitCenter"
+        app:layout_constraintBottom_toBottomOf="@+id/photo_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/panneau_pruille" />
+
+    <ImageView
+        android:id="@+id/backgroud2"
+        android:layout_width="477dp"
+        android:layout_height="200dp"
+        app:layout_constraintBottom_toTopOf="@+id/frameLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/background"
+        app:layout_constraintVertical_bias="0.0"
+        tools:srcCompat="@tools:sample/backgrounds/scenic" />
+
+    <ImageView
+        android:id="@+id/background3"
+        android:layout_width="477dp"
+        android:layout_height="200dp"
+        app:layout_constraintBottom_toTopOf="@+id/frameLayout2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/backgroud2"
+        app:layout_constraintVertical_bias="0.0"
+        tools:srcCompat="@tools:sample/backgrounds/scenic" />
+
+    <ImageView
+        android:id="@+id/imageView5"
+        android:layout_width="480dp"
+        android:layout_height="188dp"
+        app:layout_constraintBottom_toTopOf="@+id/photo_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/background3"
+        app:layout_constraintVertical_bias="0.0"
+        tools:srcCompat="@tools:sample/backgrounds/scenic" />
+
+    <ImageView
+        android:id="@+id/logo"
         android:layout_width="277dp"
         android:layout_height="62dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -16,20 +67,22 @@
         app:srcCompat="@drawable/logo_application_citidex" />
 
     <FrameLayout
+        android:id="@+id/frameLayout3"
         android:layout_width="268dp"
         android:layout_height="79dp"
         app:layout_constraintBottom_toTopOf="@+id/frameLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.776"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView"
-        app:layout_constraintVertical_bias="0.502">
+        app:layout_constraintTop_toBottomOf="@+id/logo"
+        app:layout_constraintVertical_bias="0.502"
+        tools:visibility="visible">
 
         <ImageButton
             android:id="@+id/collec_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:backgroundTint="@color/white"
+            android:backgroundTint="@color/cardview_shadow_end_color"
             android:scaleType="fitCenter"
             app:srcCompat="@drawable/panneau_agglomeration"
             tools:ignore="SpeakableTextPresentCheck" />
@@ -61,10 +114,10 @@
             android:id="@+id/succes_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:backgroundTint="@color/white"
+            android:backgroundTint="@color/cardview_shadow_end_color"
             android:scaleType="fitCenter"
             app:srcCompat="@drawable/panneau_agglomeration"
-            tools:ignore="SpeakableTextPresentCheck"/>
+            tools:ignore="SpeakableTextPresentCheck" />
 
         <TextView
             android:id="@+id/textView2"
@@ -93,7 +146,7 @@
             android:id="@+id/reglage_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:backgroundTint="@color/white"
+            android:backgroundTint="@color/cardview_shadow_end_color"
             android:scaleType="fitCenter"
             app:srcCompat="@drawable/panneau_agglomeration"
             tools:ignore="SpeakableTextPresentCheck" />
@@ -116,7 +169,7 @@
         android:id="@+id/photo_button"
         android:layout_width="89dp"
         android:layout_height="78dp"
-        android:background="@color/white"
+        android:background="@color/cardview_shadow_end_color"
         android:scaleType="fitCenter"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
