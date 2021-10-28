@@ -18,7 +18,6 @@
     <FrameLayout
         android:layout_width="268dp"
         android:layout_height="79dp"
-        android:foreground="@drawable/panneau_agglomeration"
         app:layout_constraintBottom_toTopOf="@+id/frameLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.776"
@@ -26,6 +25,26 @@
         app:layout_constraintTop_toBottomOf="@+id/imageView"
         app:layout_constraintVertical_bias="0.502">
 
+        <ImageButton
+            android:id="@+id/imageButton4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/white"
+            android:scaleType="fitCenter"
+            app:srcCompat="@drawable/panneau_agglomeration"
+            tools:ignore="SpeakableTextPresentCheck" />
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:clickable="false"
+            android:text="Ma Collec'"
+            android:textAlignment="gravity"
+            android:textColor="@color/black"
+            android:textColorHighlight="@color/black"
+            android:textSize="20sp" />
     </FrameLayout>
 
     <FrameLayout
@@ -33,22 +52,65 @@
         android:layout_width="268dp"
         android:layout_height="79dp"
         android:layout_marginBottom="92dp"
-        android:foreground="@drawable/panneau_agglomeration"
         app:layout_constraintBottom_toTopOf="@+id/frameLayout2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.776"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent" >
+
+        <ImageButton
+            android:id="@+id/imageButton5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/white"
+            android:scaleType="fitCenter"
+            app:srcCompat="@drawable/panneau_agglomeration"
+            tools:ignore="SpeakableTextPresentCheck"/>
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:clickable="false"
+            android:text="Succes"
+            android:textAlignment="gravity"
+            android:textColor="@color/black"
+            android:textColorHighlight="@color/black"
+            android:textSize="20sp" />
+    </FrameLayout>
 
     <FrameLayout
         android:id="@+id/frameLayout2"
         android:layout_width="268dp"
         android:layout_height="79dp"
         android:layout_marginBottom="76dp"
-        android:foreground="@drawable/panneau_agglomeration"
         app:layout_constraintBottom_toTopOf="@+id/imageButton3"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.776"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent" >
+
+        <ImageButton
+            android:id="@+id/imageButton6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/white"
+            android:scaleType="fitCenter"
+            app:srcCompat="@drawable/panneau_agglomeration"
+            tools:ignore="SpeakableTextPresentCheck" />
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:clickable="false"
+            android:text="Règlage"
+            android:textAlignment="gravity"
+            android:textColor="@color/black"
+            android:textColorHighlight="@color/black"
+            android:textSize="20sp" />
+
+    </FrameLayout>
 
     <ImageButton
         android:id="@+id/imageButton3"
