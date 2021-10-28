@@ -4,4 +4,34 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity"/>
+    tools:context=".MainActivity">
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="277dp"
+        android:layout_height="62dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/logo_application_citidex" />
+
+    <FrameLayout
+        android:layout_width="268dp"
+        android:layout_height="79dp"
+        tools:layout_editor_absoluteX="111dp"
+        tools:layout_editor_absoluteY="157dp">
+
+    </FrameLayout>
+
+    <FrameLayout
+        android:layout_width="268dp"
+        android:layout_height="79dp"
+        tools:layout_editor_absoluteX="111dp"
+        tools:layout_editor_absoluteY="326dp" />
+
+    <FrameLayout
+        android:layout_width="268dp"
+        android:layout_height="79dp"
+        tools:layout_editor_absoluteX="111dp"
+        tools:layout_editor_absoluteY="500dp" />
+</androidx.constraintlayout.widget.ConstraintLayout>
