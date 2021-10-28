@@ -26,7 +26,7 @@
         app:layout_constraintVertical_bias="0.502">
 
         <ImageButton
-            android:id="@+id/imageButton4"
+            android:id="@+id/collec_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:backgroundTint="@color/white"
@@ -58,7 +58,7 @@
         app:layout_constraintStart_toStartOf="parent" >
 
         <ImageButton
-            android:id="@+id/imageButton5"
+            android:id="@+id/succes_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:backgroundTint="@color/white"
@@ -84,13 +84,13 @@
         android:layout_width="268dp"
         android:layout_height="79dp"
         android:layout_marginBottom="76dp"
-        app:layout_constraintBottom_toTopOf="@+id/imageButton3"
+        app:layout_constraintBottom_toTopOf="@+id/photo_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.776"
         app:layout_constraintStart_toStartOf="parent" >
 
         <ImageButton
-            android:id="@+id/imageButton6"
+            android:id="@+id/reglage_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:backgroundTint="@color/white"
@@ -113,7 +113,7 @@
     </FrameLayout>
 
     <ImageButton
-        android:id="@+id/imageButton3"
+        android:id="@+id/photo_button"
         android:layout_width="89dp"
         android:layout_height="78dp"
         android:background="@color/white"
