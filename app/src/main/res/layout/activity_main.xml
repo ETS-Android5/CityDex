@@ -18,20 +18,47 @@
     <FrameLayout
         android:layout_width="268dp"
         android:layout_height="79dp"
-        tools:layout_editor_absoluteX="111dp"
-        tools:layout_editor_absoluteY="157dp">
+        android:foreground="@drawable/panneau_agglomeration"
+        app:layout_constraintBottom_toTopOf="@+id/frameLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.776"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView"
+        app:layout_constraintVertical_bias="0.502">
 
     </FrameLayout>
 
     <FrameLayout
+        android:id="@+id/frameLayout"
         android:layout_width="268dp"
         android:layout_height="79dp"
-        tools:layout_editor_absoluteX="111dp"
-        tools:layout_editor_absoluteY="326dp" />
+        android:layout_marginBottom="92dp"
+        android:foreground="@drawable/panneau_agglomeration"
+        app:layout_constraintBottom_toTopOf="@+id/frameLayout2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.776"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <FrameLayout
+        android:id="@+id/frameLayout2"
         android:layout_width="268dp"
         android:layout_height="79dp"
-        tools:layout_editor_absoluteX="111dp"
-        tools:layout_editor_absoluteY="500dp" />
+        android:layout_marginBottom="76dp"
+        android:foreground="@drawable/panneau_agglomeration"
+        app:layout_constraintBottom_toTopOf="@+id/imageButton3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.776"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageButton
+        android:id="@+id/imageButton3"
+        android:layout_width="89dp"
+        android:layout_height="78dp"
+        android:background="@color/white"
+        android:scaleType="fitCenter"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/appareil_photo"
+        tools:ignore="SpeakableTextPresentCheck" />
 </androidx.constraintlayout.widget.ConstraintLayout>
