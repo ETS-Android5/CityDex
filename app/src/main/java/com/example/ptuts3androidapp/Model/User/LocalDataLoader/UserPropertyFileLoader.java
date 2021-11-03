@@ -2,6 +2,7 @@ package com.example.ptuts3androidapp.Model.User.LocalDataLoader;
 
 import android.content.Context;
 
+import com.example.ptuts3androidapp.Model.User.User;
 import com.example.ptuts3androidapp.Model.User.UserProperty;
 import com.example.ptuts3androidapp.Model.User.UserPropertyLoader;
 
@@ -12,6 +13,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.util.HashMap;
 
 public class UserPropertyFileLoader implements UserPropertyLoader {
 
@@ -23,6 +25,11 @@ public class UserPropertyFileLoader implements UserPropertyLoader {
     public UserPropertyFileLoader(Context context){
         this.context = context;
         directory = context.getFilesDir();
+        if(getUserProperty() == null){
+            HashMap<String, String> hashMap = new HashMap();
+            UserProperty userProperty = new UserProperty(hashMap);
+            setUserProperty(userProperty);
+        }
     }
 
 
