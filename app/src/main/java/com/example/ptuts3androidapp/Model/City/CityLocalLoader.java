@@ -1,10 +1,9 @@
-package com.example.ptuts3androidapp.Model.User.LocalDataLoader;
+package com.example.ptuts3androidapp.Model.City;
 
 import android.content.Context;
 
-import com.example.ptuts3androidapp.Model.User.User;
+import com.example.ptuts3androidapp.Model.Photo.Photo;
 import com.example.ptuts3androidapp.Model.User.UserProperty;
-import com.example.ptuts3androidapp.Model.User.UserPropertyLoader;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -13,35 +12,35 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
-public class UserPropertyFileLoader implements UserPropertyLoader {
+public class CityLocalLoader implements Serializable{
 
-    private static final String DATA_FILE_NAME = "data.xml";
-    File directory;
+    private static final String DATA_FILE_NAME = "citydata.xml";
     private Context context;
+    File photoDirectory;
 
-
-    public UserPropertyFileLoader(Context context){
+    public CityLocalLoader(Context context){
         this.context = context;
-        directory = context.getFilesDir();
-        if(getUserProperty() == null){
-            HashMap<String, String> hashMap = new HashMap();
-            UserProperty userProperty = new UserProperty(hashMap);
-            setUserProperty(userProperty);
+        photoDirectory = context.getFilesDir();
+        if(getCities() == null){
+            setLocalCities(new ArrayList<City>());
         }
     }
 
 
-    @Override
-    public UserProperty getUserProperty() {
+
+    public List<City> getCities() {
         try {
             FileInputStream fileInputStream = context.openFileInput(DATA_FILE_NAME);
             ObjectInputStream ois = new ObjectInputStream(fileInputStream);
-            UserProperty userProperty = (UserProperty) ois.readObject();
+            List<City> cities = (List<City>) ois.readObject();
             fileInputStream.close();
             ois.close();
-            return userProperty;
+            return cities;
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
@@ -52,12 +51,11 @@ public class UserPropertyFileLoader implements UserPropertyLoader {
         return null;
     }
 
-    @Override
-    public void setUserProperty(UserProperty userProperty) {
+    public void setLocalCities(List<City> cities) {
         try {
             FileOutputStream fOut = context.openFileOutput(DATA_FILE_NAME, Context.MODE_PRIVATE);
             ObjectOutputStream oosOfUserProperty = new ObjectOutputStream(fOut);
-            oosOfUserProperty.writeObject(userProperty);
+            oosOfUserProperty.writeObject(cities);
             fOut.close();
             oosOfUserProperty.close();
 
@@ -67,7 +65,5 @@ public class UserPropertyFileLoader implements UserPropertyLoader {
             e.printStackTrace();
         }
     }
-
-
 
 }

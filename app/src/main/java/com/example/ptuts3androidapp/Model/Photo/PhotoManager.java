@@ -1,12 +1,13 @@
 package com.example.ptuts3androidapp.Model.Photo;
 
 import android.content.Context;
+import android.net.Uri;
 import android.provider.MediaStore;
 import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.ptuts3androidapp.Model.User.LocalDataLoader.UserPropertyFileLoader;
+import com.example.ptuts3androidapp.Model.User.LocalDataLoader.UserPropertyLocalLoader;
 import com.example.ptuts3androidapp.Model.User.User;
 
 import java.io.IOException;
@@ -28,7 +29,7 @@ public class PhotoManager {
     }
 
     public PhotoManager(AppCompatActivity appCompatActivity){
-        this(appCompatActivity, new User("bob", new UserPropertyFileLoader(appCompatActivity)));
+        this(appCompatActivity, new User(new UserPropertyLocalLoader(appCompatActivity), new com.example.ptuts3androidapp.Model.City.CityLocalLoader(appCompatActivity)));
     }
     
     public void takePhoto(){
@@ -42,8 +43,13 @@ public class PhotoManager {
     }
 
     public void loadLastPhotoTakedFromLocalStorage(){
-        user.get(PHOTO_URI_PROPERTI);
+        photoTaker.photoUri = Uri.parse(user.get(PHOTO_URI_PROPERTI));
     }
+
+    public Uri getPhotoUri(){
+        return photoTaker.photoUri;
+    }
+
 
     public void loadPhotoIntoImageView(ImageView imageView){
         try {

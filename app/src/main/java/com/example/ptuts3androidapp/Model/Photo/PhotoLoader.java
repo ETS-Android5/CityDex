@@ -5,6 +5,6 @@ import java.util.List;
 
 public interface PhotoLoader {
 
-    public List<File> getPhotoFile();
+    public List<Photo> getPhoto();
 
 }

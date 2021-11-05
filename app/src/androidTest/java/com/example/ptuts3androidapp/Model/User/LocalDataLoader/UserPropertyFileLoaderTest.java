@@ -20,13 +20,13 @@ import java.util.LinkedHashMap;
 public class UserPropertyFileLoaderTest  {
 
     private Context context;
-    private UserPropertyFileLoader userPropertyFileLoader;
+    private UserPropertyLocalLoader userPropertyFileLoader;
 
     @Before
     public void setUp(){
         context = InstrumentationRegistry.getInstrumentation().getTargetContext();
         Assert.assertNotNull(context);
-        userPropertyFileLoader = new UserPropertyFileLoader(context);
+        userPropertyFileLoader = new UserPropertyLocalLoader(context);
         userPropertyFileLoader.setUserProperty(generateRandomUserProperties());
     }
 

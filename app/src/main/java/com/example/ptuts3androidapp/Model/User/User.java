@@ -3,22 +3,39 @@ package com.example.ptuts3androidapp.Model.User;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.example.ptuts3androidapp.Model.City.City;
+import com.example.ptuts3androidapp.Model.City.CityLocalLoader;
+
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
 public class User implements Map<String, String> {
 
-    private String userName;
     private HashMap<String, String> properties;
     private UserPropertyLoader userPropertyLoader;
+    private List<City> ownedCity;
+    private CityLocalLoader cityLocalLoader;
 
-    public User(String userName, UserPropertyLoader userPropertyLoader) {
+    public User(UserPropertyLoader userPropertyLoader, CityLocalLoader cityLocalLoader) {
         this.userPropertyLoader = userPropertyLoader;
-        this.userName = userName;
         this.properties = userPropertyLoader.getUserProperty().getProperties();
+        this.cityLocalLoader = cityLocalLoader;
+        ownedCity = cityLocalLoader.getCities();
+
+    }
+
+
+    public List<City> getOwnedCity() {
+        return ownedCity;
+    }
+
+    public void setOwnedCity(List<City> ownedCity) {
+        this.ownedCity = ownedCity;
+        cityLocalLoader.setLocalCities(ownedCity);
     }
 
 
@@ -37,10 +54,6 @@ public class User implements Map<String, String> {
 
     private void updateUserProperty(){
         userPropertyLoader.setUserProperty(new UserProperty(properties));
-    }
-
-    public String getUserName() {
-        return userName;
     }
 
     @Override
