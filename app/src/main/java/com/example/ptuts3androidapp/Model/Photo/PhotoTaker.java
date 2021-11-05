@@ -35,23 +35,12 @@ public class PhotoTaker {
     private AppCompatActivity appCompatActivity;
 
     String currentPhotoPath;
-    private ImageView imageView;
     private ActivityResultLauncher<Intent> mStartForResult;
     public Uri photoUri;
 
 
     public PhotoTaker(AppCompatActivity appCompatActivity) {
         this.appCompatActivity = appCompatActivity;
-        imageView = appCompatActivity.findViewById(R.id.imageView);
-        mStartForResult = appCompatActivity.registerForActivityResult(new ActivityResultContracts.StartActivityForResult(),
-                new ActivityResultCallback<ActivityResult>() {
-                    @Override
-                    public void onActivityResult(ActivityResult result) {
-                        if (result.getResultCode() == Activity.RESULT_OK) {
-                            Intent intent = result.getData();
-                        }
-                    }
-                });
     }
 
     public void takePhoto(){
