@@ -1,9 +1,9 @@
-package com.example.ptuts3androidapp.Model.City;
+package com.example.ptuts3androidapp.Model.City.CityLoaders;
 
 import android.content.Context;
 
-import com.example.ptuts3androidapp.Model.Photo.Photo;
-import com.example.ptuts3androidapp.Model.User.UserProperty;
+import com.example.ptuts3androidapp.Model.City.City;
+import com.example.ptuts3androidapp.Model.City.CityLoader;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -14,25 +14,26 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
-public class CityLocalLoader implements Serializable{
+public class CityLocalLoader implements CityLoader, Serializable{
 
     private static final String DATA_FILE_NAME = "citydata.xml";
+
     private Context context;
-    File photoDirectory;
+    private File photoDirectory;
 
     public CityLocalLoader(Context context){
         this.context = context;
         photoDirectory = context.getFilesDir();
         if(getCities() == null){
-            setLocalCities(new ArrayList<City>());
+            setCities(new ArrayList<City>());
         }
     }
 
 
 
+    @Override
     public List<City> getCities() {
         try {
             FileInputStream fileInputStream = context.openFileInput(DATA_FILE_NAME);
@@ -51,7 +52,8 @@ public class CityLocalLoader implements Serializable{
         return null;
     }
 
-    public void setLocalCities(List<City> cities) {
+    @Override
+    public void setCities(List<City> cities) {
         try {
             FileOutputStream fOut = context.openFileOutput(DATA_FILE_NAME, Context.MODE_PRIVATE);
             ObjectOutputStream oosOfUserProperty = new ObjectOutputStream(fOut);

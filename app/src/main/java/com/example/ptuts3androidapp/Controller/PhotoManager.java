@@ -1,4 +1,4 @@
-package com.example.ptuts3androidapp.Model.Photo;
+package com.example.ptuts3androidapp.Controller;
 
 import android.content.Context;
 import android.net.Uri;
@@ -7,6 +7,8 @@ import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.ptuts3androidapp.Model.City.CityLoaders.CityLocalLoader;
+import com.example.ptuts3androidapp.Model.Photo.PhotoTaker;
 import com.example.ptuts3androidapp.Model.User.LocalDataLoader.UserPropertyLocalLoader;
 import com.example.ptuts3androidapp.Model.User.User;
 
@@ -29,7 +31,7 @@ public class PhotoManager {
     }
 
     public PhotoManager(AppCompatActivity appCompatActivity){
-        this(appCompatActivity, new User(new UserPropertyLocalLoader(appCompatActivity), new com.example.ptuts3androidapp.Model.City.CityLocalLoader(appCompatActivity)));
+        this(appCompatActivity, new User(new UserPropertyLocalLoader(appCompatActivity), new CityLocalLoader(appCompatActivity)));
     }
     
     public void takePhoto(){

@@ -1,12 +1,14 @@
-package com.example.ptuts3androidapp.Model.User;
+package com.example.ptuts3androidapp.Controller;
 
 import android.content.Context;
 import android.net.Uri;
 
 import com.example.ptuts3androidapp.Model.City.City;
 import com.example.ptuts3androidapp.Model.City.CityData;
+import com.example.ptuts3androidapp.Model.City.CityLoaders.CityLocalLoader;
 import com.example.ptuts3androidapp.Model.Photo.Photo;
 import com.example.ptuts3androidapp.Model.User.LocalDataLoader.UserPropertyLocalLoader;
+import com.example.ptuts3androidapp.Model.User.User;
 
 import java.util.HashMap;
 import java.util.List;
@@ -18,7 +20,7 @@ public class UserManager {
 
 
     public UserManager(Context context) {
-        this.user = new User(new UserPropertyLocalLoader(context), new com.example.ptuts3androidapp.Model.City.CityLocalLoader(context));
+        this.user = new User(new UserPropertyLocalLoader(context), new CityLocalLoader(context));
     }
 
     public void addCity(Uri photoUri, String cityName){

@@ -4,7 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.example.ptuts3androidapp.Model.City.City;
-import com.example.ptuts3androidapp.Model.City.CityLocalLoader;
+import com.example.ptuts3androidapp.Model.City.CityLoaders.CityLocalLoader;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -35,7 +35,7 @@ public class User implements Map<String, String> {
 
     public void setOwnedCity(List<City> ownedCity) {
         this.ownedCity = ownedCity;
-        cityLocalLoader.setLocalCities(ownedCity);
+        cityLocalLoader.setCities(ownedCity);
     }
 
 

@@ -9,10 +9,9 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.example.ptuts3androidapp.Model.City.City;
-import com.example.ptuts3androidapp.Model.User.UserManager;
+import com.example.ptuts3androidapp.Controller.UserManager;
 import com.example.ptuts3androidapp.R;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class AllcityActivity extends AppCompatActivity {

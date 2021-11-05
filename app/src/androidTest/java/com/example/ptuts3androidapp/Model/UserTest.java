@@ -5,6 +5,7 @@ import android.content.Context;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 import androidx.test.platform.app.InstrumentationRegistry;
 
+import com.example.ptuts3androidapp.Model.City.CityLoaders.CityLocalLoader;
 import com.example.ptuts3androidapp.Model.User.LocalDataLoader.UserPropertyLocalLoader;
 import com.example.ptuts3androidapp.Model.User.User;
 import com.example.ptuts3androidapp.Model.User.UserPropertyLoader;
@@ -31,7 +32,7 @@ public class UserTest {
     private User generateRandomUser(){
         String username = "bob " + Double.toString(Math.random() * 100);
         UserPropertyLoader userPropertyLoader = new UserPropertyLocalLoader(context);
-        com.example.ptuts3androidapp.Model.City.CityLocalLoader cityLocalLoader = new com.example.ptuts3androidapp.Model.City.CityLocalLoader(context);
+        CityLocalLoader cityLocalLoader = new CityLocalLoader(context);
         User user = new User(userPropertyLoader, cityLocalLoader);
         user.setProperty("test", "true");
         return user;

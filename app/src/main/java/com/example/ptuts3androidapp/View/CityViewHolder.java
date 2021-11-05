@@ -10,7 +10,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.ptuts3androidapp.Model.City.City;
 import com.example.ptuts3androidapp.Model.City.CityData;
-import com.example.ptuts3androidapp.Model.Photo.PhotoManager;
 import com.example.ptuts3androidapp.R;
 
 import java.io.IOException;

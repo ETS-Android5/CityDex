@@ -7,8 +7,8 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.content.Intent;
 
-import com.example.ptuts3androidapp.Model.Photo.PhotoManager;
-import com.example.ptuts3androidapp.Model.User.UserManager;
+import com.example.ptuts3androidapp.Controller.PhotoManager;
+import com.example.ptuts3androidapp.Controller.UserManager;
 import com.example.ptuts3androidapp.R;
 
 public class MainActivity extends AppCompatActivity {

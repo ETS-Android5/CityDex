@@ -6,6 +6,7 @@ import android.util.Log;
 
 import androidx.test.platform.app.InstrumentationRegistry;
 
+import com.example.ptuts3androidapp.Model.City.CityLoaders.CityLocalLoader;
 import com.example.ptuts3androidapp.Model.Photo.Photo;
 
 import org.junit.Assert;
@@ -33,7 +34,7 @@ public class CityLocalLoaderTest {
         context = InstrumentationRegistry.getInstrumentation().getTargetContext();
         Assert.assertNotNull(context);
         cityLocalLoader = new CityLocalLoader(context);
-        cityLocalLoader.setLocalCities(generateCities());
+        cityLocalLoader.setCities(generateCities());
     }
 
 
@@ -131,7 +132,7 @@ public class CityLocalLoaderTest {
     public void userPropertyDifferentWhenSet(){
 
         List<City> oldcities = cityLocalLoader.getCities();
-        cityLocalLoader.setLocalCities(generateCities());
+        cityLocalLoader.setCities(generateCities());
         Assert.assertNotEquals(cityLocalLoader.getCities(),oldcities);
     }
 
