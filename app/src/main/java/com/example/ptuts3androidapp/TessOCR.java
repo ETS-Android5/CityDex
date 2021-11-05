@@ -28,29 +28,27 @@ public class TessOCR {
 
     public TessOCR(InputStream dataToCopy) throws IOException {
         mTess = new TessBaseAPI();
-        String datapath = Environment.getExternalStorageDirectory() + "/tesseract/";
+        String datapath = Environment.getExternalStorageDirectory() + "/Citydex/";
         String language = "fra";
-        File dir = new File(datapath + "tessdata/");
-        if (!dir.exists()) {
-            dir.mkdirs();
-        }
-        File data = new File(dir.getAbsolutePath(), "fra.traineddata");
-        if (!data.exists()){
-            copy(dataToCopy, data);
-        }
+        createOCRData(dataToCopy, datapath);
         mTess.init(datapath, language);
     }
 
-    public String getOCRResult(Bitmap bitmap) throws InterruptedException {
-        Thread t = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                mTess.setImage(bitmap);
-                result = mTess.getUTF8Text();
-            }
-        });
-        t.start();
-        t.join();
+    public String getOCRResult(Bitmap bitmap) {
+        try {
+            Thread t = new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    mTess.setImage(bitmap);
+                    result ="";
+                    result = mTess.getUTF8Text();
+                }
+            });
+            t.start();
+            t.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         return result;
     }
 
@@ -70,4 +68,15 @@ public class TessOCR {
             }
     }
 
+
+    private void createOCRData(InputStream dataToCopy, String datapath) throws IOException {
+        File dir = new File(datapath + "tessdata/");
+        if (!dir.exists()) {
+            dir.mkdirs();
+        }
+        File data = new File(dir.getAbsolutePath(), "fra.traineddata");
+        if (!data.exists()){
+            copy(dataToCopy, data);
+        }
+    }
 }
