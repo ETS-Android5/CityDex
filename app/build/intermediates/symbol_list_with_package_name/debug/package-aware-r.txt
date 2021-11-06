@@ -1932,6 +1932,7 @@ id ignore
 id ignoreRequest
 id image
 id imageView
+id imgGray
 id info
 id invisible
 id inward

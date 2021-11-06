@@ -8,6 +8,10 @@ import android.Manifest;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
+import android.graphics.ColorMatrix;
+import android.graphics.ColorMatrixColorFilter;
+import android.graphics.Paint;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -30,6 +34,7 @@ import java.nio.file.Files;
 public class MainActivity extends AppCompatActivity {
 
     private ImageView imgView;
+    private ImageView imgGray;
     private Button button;
     private TextView textView;
 
@@ -46,6 +51,7 @@ public class MainActivity extends AppCompatActivity {
         imgView = findViewById(R.id.imageView);
         button = findViewById(R.id.button);
         textView = findViewById(R.id.textView);
+        imgGray = findViewById(R.id.imgGray);
 
         requestPermissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE,Manifest.permission.WRITE_EXTERNAL_STORAGE},permCode);
 
@@ -60,14 +66,20 @@ public class MainActivity extends AppCompatActivity {
         if (!dir.exists()){
             dir.mkdirs();
         }
-        File file = new File(Environment.getExternalStorageDirectory() + "/Citydex/images/img.png");
+        File file = new File(Environment.getExternalStorageDirectory() + "/Citydex/images/image_cropcrop_ocr.jpg");
         try {
-            copy(getAssets().open("img.png") ,file);
+            copy(getAssets().open("image_cropcrop_ocr.jpg") ,file);
         } catch (IOException e) {
             e.printStackTrace();
         }
+
         Bitmap bitmap = BitmapFactory.decodeFile(file.getPath());
-        textView.setText(ocr.getOCRResult(bitmap));
+
+        Bitmap bitmap_gray = toGrayscale(bitmap);
+
+        imgGray.setImageBitmap(bitmap_gray);
+
+        textView.setText(ocr.getOCRResult(bitmap_gray));
     }
 
     @Override
@@ -91,4 +103,22 @@ public class MainActivity extends AppCompatActivity {
         super.onDestroy();
         ocr.onDestroy();
     }
+
+    public Bitmap toGrayscale(Bitmap bmpOriginal)
+    {
+        int width, height;
+        height = bmpOriginal.getHeight();
+        width = bmpOriginal.getWidth();
+
+        Bitmap bmpGrayscale = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
+        Canvas c = new Canvas(bmpGrayscale);
+        Paint paint = new Paint();
+        ColorMatrix cm = new ColorMatrix();
+        cm.setSaturation(0);
+        ColorMatrixColorFilter f = new ColorMatrixColorFilter(cm);
+        paint.setColorFilter(f);
+        c.drawBitmap(bmpOriginal, 0, 0, paint);
+        return bmpGrayscale;
+    }
+
 }

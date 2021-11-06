@@ -20,7 +20,7 @@
         <TextView
             android:id="@+id/textView"
             android:layout_width="match_parent"
-            android:layout_height="349dp"
+            android:layout_height="71dp"
             android:text="TextView" />
 
         <Button
@@ -28,6 +28,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Button" />
+
+        <ImageView
+            android:id="@+id/imgGray"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/ic_launcher_background" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1931,6 +1931,7 @@ int id ignore 0x7f0800bc
 int id ignoreRequest 0x7f0800bd
 int id image 0x7f0800be
 int id imageView 0x7f0800bf
+int id imgGray 0x7f0801aa
 int id info 0x7f0800c0
 int id invisible 0x7f0800c1
 int id inward 0x7f0800c2
