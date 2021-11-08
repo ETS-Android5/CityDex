@@ -23,6 +23,7 @@
         android:id="@+id/b_photo"
         android:layout_width="89dp"
         android:layout_height="70dp"
+        android:background="@color/cardview_shadow_end_color"
         android:scaleType="fitCenter"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -33,16 +34,17 @@
 
     <ImageButton
         android:id="@+id/b_retour"
-        android:layout_width="69dp"
-        android:layout_height="65dp"
+        android:layout_width="82dp"
+        android:layout_height="77dp"
         android:layout_marginTop="14dp"
+        android:background="@color/cardview_shadow_end_color"
+        android:scaleType="fitCenter"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/b_photo"
         app:layout_constraintHorizontal_bias="0.489"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView4"
         app:layout_constraintVertical_bias="1.0"
-        android:scaleType="fitCenter"
         app:srcCompat="@android:drawable/ic_menu_revert"
         tools:ignore="SpeakableTextPresentCheck" />
 
@@ -51,10 +53,12 @@
         android:layout_width="88dp"
         android:layout_height="69dp"
         android:layout_marginTop="3dp"
+        android:background="@color/cardview_shadow_end_color"
         android:scaleType="fitCenter"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/b_photo"
         app:layout_constraintTop_toBottomOf="@+id/imageView4"
-        app:srcCompat="@drawable/collec_icon" />
+        app:srcCompat="@drawable/collec_icon"
+        tools:ignore="SpeakableTextPresentCheck" />
 </androidx.constraintlayout.widget.ConstraintLayout>
