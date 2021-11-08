@@ -41,7 +41,6 @@ public class MainActivity extends AppCompatActivity {
 
     private ImageView imgView;
     private ImageView imgGray;
-    private Button button;
     private TextView textView;
 
     private String[] perms = {Manifest.permission.WRITE_EXTERNAL_STORAGE,Manifest.permission.READ_EXTERNAL_STORAGE};
@@ -55,7 +54,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         imgView = findViewById(R.id.imageView);
-        button = findViewById(R.id.button);
         textView = findViewById(R.id.textView);
         imgGray = findViewById(R.id.imgGray);
 

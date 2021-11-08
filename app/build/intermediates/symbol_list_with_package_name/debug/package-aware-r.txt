@@ -1704,6 +1704,7 @@ drawable ic_mtrl_chip_checked_black
 drawable ic_mtrl_chip_checked_circle
 drawable ic_mtrl_chip_close_circle
 drawable image_ocr
+drawable image_travers_crop
 drawable material_cursor_drawable
 drawable material_ic_calendar_black_24dp
 drawable material_ic_clear_black_24dp
@@ -1828,7 +1829,6 @@ id beginning
 id blocking
 id bottom
 id bounce
-id button
 id buttonPanel
 id cache_measures
 id cancel_button
