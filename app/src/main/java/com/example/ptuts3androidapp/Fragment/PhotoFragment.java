@@ -32,7 +32,7 @@ import java.util.Arrays;
  * Use the {@link PhotoFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class PhotoFragment extends Fragment {
+public class PhotoFragment extends Fragment implements TextureView.SurfaceTextureListener{
 
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
@@ -69,14 +69,17 @@ public class PhotoFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
         // Inflate the layout for this fragment
         View result =  inflater.inflate(R.layout.fragment_photo, container, false);
 
 
         myTextrureView = result.findViewById(R.id.textureView);
 
+        myTextrureView.setSurfaceTextureListener(this);
+
         myCameraManager = (CameraManager) getActivity().getSystemService(CAMERA_SERVICE);
-        openCamera();
+
 
         return result;
     }
@@ -151,4 +154,23 @@ public class PhotoFragment extends Fragment {
 
     }
 
+    @Override
+    public void onSurfaceTextureAvailable(@NonNull SurfaceTexture surfaceTexture, int i, int i1) {
+        openCamera();
+    }
+
+    @Override
+    public void onSurfaceTextureSizeChanged(@NonNull SurfaceTexture surfaceTexture, int i, int i1) {
+
+    }
+
+    @Override
+    public boolean onSurfaceTextureDestroyed(@NonNull SurfaceTexture surfaceTexture) {
+        return false;
+    }
+
+    @Override
+    public void onSurfaceTextureUpdated(@NonNull SurfaceTexture surfaceTexture) {
+
+    }
 }
