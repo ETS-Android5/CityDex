@@ -9,6 +9,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.os.Handler;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
@@ -18,8 +19,12 @@ import android.content.Intent;
 import com.example.ptuts3androidapp.Controller.PhotoManager;
 import com.example.ptuts3androidapp.Controller.UserManager;
 import com.example.ptuts3androidapp.Model.City.City;
+import com.example.ptuts3androidapp.Model.City.CityLoaders.CityLocalLoader;
+import com.example.ptuts3androidapp.Model.User.LocalDataLoader.UserPropertyLocalLoader;
+import com.example.ptuts3androidapp.Model.User.User;
 import com.example.ptuts3androidapp.R;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -53,17 +58,22 @@ public class MainActivity extends AppCompatActivity {
                 R.drawable.polish_cow);
 
 
+        User user = new User(new UserPropertyLocalLoader(getApplicationContext()) , new CityLocalLoader(getApplicationContext()));
+
+        List<City> cities = user.getOwnedCity();
+
         List<Bitmap> bitmaps = new ArrayList<>();
-        bitmaps.add(icon);
-        bitmaps.add(icon);
-        bitmaps.add(icon);
-        bitmaps.add(icon);
-        bitmaps.add(icon);
-        bitmaps.add(icon);
-        bitmaps.add(icon);
-        bitmaps.add(icon);
-        bitmaps.add(icon);
-        bitmaps.add(icon);
+
+        for (City city: cities
+             ) {
+
+            try {
+                bitmaps.add(MediaStore.Images.Media.getBitmap(getApplicationContext().getContentResolver(),  city.getPhoto().getPhotoUri()));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
 
         BackgroundViewAdapter backgroundViewAdapter = new BackgroundViewAdapter(bitmaps);
 
