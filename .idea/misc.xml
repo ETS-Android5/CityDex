@@ -3,11 +3,12 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/NathanPollart/Documents/GitHub/PtutS3Android/app/src/main/res/layout/activity_main.xml" value="0.33488372093023255" />
-        <entry key="..\:/Users/basti/Documents/GitHub/PtutS3Android/app/src/main/res/drawable/AppIcon_background.xml" value="0.14635416666666667" />
-        <entry key="..\:/Users/basti/Documents/GitHub/PtutS3Android/app/src/main/res/layout/activity_main.xml" value="0.25416666666666665" />
-        <entry key="..\:/Users/basti/Documents/GitHub/PtutS3Android/app/src/main/res/mipmap-anydpi-v26/app_icon.xml" value="0.10364583333333334" />
-        <entry key="..\:/Users/natha/Documents/GitHub/PtutS3Android/app/src/main/res/layout/activity_main.xml" value="0.3145833333333333" />
+        <entry key="..\:/Users/axelg/OneDrive/Documents/GitHub/PtutS3Android/app/src/main/res/layout/activity_main.xml" value="0.2318840579710145" />
+        <entry key="..\:/Users/axelg/OneDrive/Documents/GitHub/PtutS3Android/app/src/main/res/layout/galerie.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/axelg/OneDrive/Documents/GitHub/PtutS3Android/app/src/main/res/layout/home.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/axelg/OneDrive/Documents/GitHub/PtutS3Android/app/src/main/res/layout/parametre.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/axelg/OneDrive/Documents/GitHub/PtutS3Android/app/src/main/res/layout/photo.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/axelg/OneDrive/Documents/GitHub/PtutS3Android/app/src/main/res/layout/succes.xml" value="0.36666666666666664" />
       </map>
     </option>
   </component>
