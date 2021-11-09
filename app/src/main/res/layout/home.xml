@@ -43,7 +43,7 @@
             tools:ignore="SpeakableTextPresentCheck" />
 
         <TextView
-            android:id="@+id/textView"
+            android:id="@+id/t_collec"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -75,7 +75,7 @@
             tools:ignore="SpeakableTextPresentCheck" />
 
         <TextView
-            android:id="@+id/textView2"
+            android:id="@+id/t_succes"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -107,7 +107,7 @@
             tools:ignore="SpeakableTextPresentCheck" />
 
         <TextView
-            android:id="@+id/textView3"
+            android:id="@+id/t_reglage"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -134,7 +134,7 @@
         tools:ignore="SpeakableTextPresentCheck" />
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/i_gallerie"
         android:layout_width="74dp"
         android:layout_height="75dp"
         android:layout_marginStart="32dp"
@@ -146,7 +146,7 @@
         app:srcCompat="@drawable/collec_icon" />
 
     <ImageView
-        android:id="@+id/imageView2"
+        android:id="@+id/i_succes"
         android:layout_width="74dp"
         android:layout_height="75dp"
         android:layout_marginStart="32dp"
@@ -157,7 +157,7 @@
         app:srcCompat="@drawable/succes_icon" />
 
     <ImageView
-        android:id="@+id/imageView3"
+        android:id="@+id/i_paramettre"
         android:layout_width="74dp"
         android:layout_height="75dp"
         android:layout_marginStart="32dp"
