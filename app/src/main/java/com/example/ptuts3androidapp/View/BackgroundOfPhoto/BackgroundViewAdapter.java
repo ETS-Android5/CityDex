@@ -1,4 +1,4 @@
-package com.example.ptuts3androidapp.View;
+package com.example.ptuts3androidapp.View.BackgroundOfPhoto;
 
 import android.content.Context;
 import android.graphics.Bitmap;
