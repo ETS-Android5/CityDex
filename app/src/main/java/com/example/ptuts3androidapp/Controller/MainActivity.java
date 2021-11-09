@@ -12,6 +12,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getSupportActionBar().hide();
         setContentView(R.layout.home);
 
         new BackgroundRecyclerView(this, findViewById(R.id.recyclerView));
