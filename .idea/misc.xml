@@ -4,8 +4,10 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/axelg/OneDrive/Documents/GitHub/PtutS3Android/app/src/main/res/layout/activity_main.xml" value="0.2318840579710145" />
+        <entry key="..\:/Users/axelg/OneDrive/Documents/GitHub/PtutS3Android/app/src/main/res/layout/galerie.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/axelg/OneDrive/Documents/GitHub/PtutS3Android/app/src/main/res/layout/parametre.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/axelg/OneDrive/Documents/GitHub/PtutS3Android/app/src/main/res/layout/photo.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/axelg/OneDrive/Documents/GitHub/PtutS3Android/app/src/main/res/layout/succes.xml" value="0.36666666666666664" />
       </map>
     </option>
   </component>

@@ -10,7 +10,7 @@
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:foreground="@drawable/panneau_pruille" />
+        android:foreground="@color/cardview_shadow_end_color" />
 
     <ImageView
         android:id="@+id/logo"
@@ -154,7 +154,7 @@
         app:layout_constraintEnd_toStartOf="@+id/frameLayout"
         app:layout_constraintStart_toStartOf="@+id/recyclerView"
         app:layout_constraintTop_toTopOf="@+id/frameLayout"
-        app:srcCompat="@drawable/collec_icon" />
+        app:srcCompat="@drawable/succes_icon" />
 
     <ImageView
         android:id="@+id/imageView3"
