@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.provider.MediaStore;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -36,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
     private UserManager userManager;
     private EditText cityNameEditText;
     private RecyclerView recyclerView;
-
+    private int velocity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,10 +54,6 @@ public class MainActivity extends AppCompatActivity {
     private void setRecyclerView() {
 
         recyclerView = findViewById(R.id.recyclerViewBackground);
-
-        Bitmap icon = BitmapFactory.decodeResource(getResources(),
-                R.drawable.polish_cow);
-
 
         User user = new User(new UserPropertyLocalLoader(getApplicationContext()) , new CityLocalLoader(getApplicationContext()));
 
@@ -80,9 +77,24 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setAdapter(backgroundViewAdapter);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
-        //recyclerView.smoothScrollToPosition(backgroundViewAdapter.getItemCount());
 
+        recyclerView.addOnItemTouchListener(new RecyclerView.OnItemTouchListener() {
+            @Override
+            public boolean onInterceptTouchEvent(@NonNull RecyclerView rv, @NonNull MotionEvent e) {
+                return true;
+            }
 
+            @Override
+            public void onTouchEvent(@NonNull RecyclerView rv, @NonNull MotionEvent e) {
+                
+            }
+
+            @Override
+            public void onRequestDisallowInterceptTouchEvent(boolean disallowIntercept) {
+
+            }
+
+        });
 
         autoScroll();
 
@@ -93,20 +105,18 @@ public class MainActivity extends AppCompatActivity {
     public void autoScroll() {
         final int speedScroll = 3000;
         Handler handler = new Handler();
+        velocity = 1;
         Runnable runnable = new Runnable() {
             int count = -1;
 
             @Override
             public void run() {
-                if (count < recyclerView.getAdapter().getItemCount()) {
-                    recyclerView.smoothScrollToPosition(++count);
-                    handler.postDelayed(this, speedScroll);
+                if (count == recyclerView.getAdapter().getItemCount() || (count == 0 && velocity == -1)) {
+                    velocity = -velocity;
                 }
-                if (count == recyclerView.getAdapter().getItemCount()) {
-                    recyclerView.smoothScrollToPosition(--count);
-                    handler.postDelayed(this, speedScroll);
-                }
-
+                count += velocity;
+                recyclerView.smoothScrollToPosition(count);
+                handler.postDelayed(this, speedScroll);
             }
 
         };
