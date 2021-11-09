@@ -9,7 +9,11 @@
         android:roundIcon="@mipmap/app_icon_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.PtutS3AndroidApp">
-        <activity android:name=".Controller.MainActivity">
+        <activity android:name=".Controller.HomeActivity"></activity>
+        <activity android:name=".Controller.CollectionActivity" />
+        <activity android:name=".Controller.ReglageActivity" />
+        <activity android:name=".Controller.SuccesActivity" />
+        <activity android:name=".Controller.LoadingScreenActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
