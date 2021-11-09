@@ -3,13 +3,9 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/theol/Documents/GitHub/PtutS3Android/app/src/main/res/drawable/ic_cow_background.xml" value="0.21770833333333334" />
-        <entry key="..\:/Users/theol/Documents/GitHub/PtutS3Android/app/src/main/res/drawable/ic_launcher_background.xml" value="0.21770833333333334" />
-        <entry key="..\:/Users/theol/Documents/GitHub/PtutS3Android/app/src/main/res/layout/activity_allcity.xml" value="0.33" />
-        <entry key="..\:/Users/theol/Documents/GitHub/PtutS3Android/app/src/main/res/layout/activity_main.xml" value="0.33" />
-        <entry key="..\:/Users/theol/Documents/GitHub/PtutS3Android/app/src/main/res/layout/cityviewholder.xml" value="0.33" />
-        <entry key="..\:/Users/theol/Documents/GitHub/PtutS3Android/app/src/main/res/mipmap-anydpi-v26/ic_cow.xml" value="0.21770833333333334" />
-        <entry key="..\:/Users/theol/Documents/GitHub/PtutS3Android/app/src/main/res/mipmap-anydpi-v26/ic_cow_round.xml" value="0.22239583333333332" />
+        <entry key="..\:/Users/theol/Documents/GitHub/PtutS3Android/app/src/main/res/layout/activity_main.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/theol/Documents/GitHub/PtutS3Android/app/src/main/res/layout/fragment_photo.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/theol/Documents/GitHub/PtutS3Android/app/src/main/res/layout/imageviewinframelayout.xml" value="0.1605351170568562" />
       </map>
     </option>
   </component>
