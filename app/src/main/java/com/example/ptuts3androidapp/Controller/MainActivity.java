@@ -24,11 +24,15 @@ public class MainActivity extends AppCompatActivity {
         LayoutInflater inflater = (LayoutInflater) getApplicationContext().getSystemService(LAYOUT_INFLATER_SERVICE);
         inflater.inflate(R.layout.loadind_screen, findViewById(R.id.constraint));
         LoadingAnimation loadingAnimation = new LoadingAnimation(findViewById(R.id.loading_screen),4);
-        try {
-            loadingAnimation.start();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        loadingAnimation.start();
+
+        button = findViewById(R.id.button);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                loadingAnimation.start();
+            }
+        });
     }
 
 }

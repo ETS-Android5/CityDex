@@ -2,6 +2,7 @@ package com.example.ptuts3androidapp;
 
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
+import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 
@@ -21,31 +22,37 @@ public class LoadingAnimation {
         }
         int count = layout.getChildCount();
         for (int i = 1; i < count; i++) {
-            signsBlocks.get(count%signsBlocks.size()-1).add(layout.getChildAt(i));
+            signsBlocks.get(i%signsBlocks.size()).add(layout.getChildAt(i));
         }
     }
 
-    public void start() throws InterruptedException {
-        for (List<View> signsBlock: signsBlocks) {
-            animateGroup(signsBlock);
-
+    public void start(){
+        for (int i = 0; i < signsBlocks.size(); i++) {
+            animateGroup(signsBlocks.get(i), i);
         }
     }
 
-    private void animateGroup(List<View> views){
-        for (View view:views)  {
-            signAnimation(view);
+    private void animateGroup(List<View> views, int i){
+        for (View view:views) {
+            signAnimation(view, i);
         }
     }
 
-    private void signAnimation(View view){
+    private void signAnimation(View view, int i){
         ObjectAnimator fade = fadeAnimation(view);
         ObjectAnimator hop = hopAnimation(view);
         ObjectAnimator down = downAnimation(view);
+        ObjectAnimator wait= waitAnimation(view, i);
 
         AnimatorSet animation = new AnimatorSet();
-        animation.playSequentially(hop, down);
-        fade.start();
+        AnimatorSet animationHopDown = new AnimatorSet();
+
+        if(wait.getDuration() > 0){
+            animation.playSequentially(wait, fade);
+        }
+        animationHopDown.playSequentially(hop, down);
+        animation.playTogether(fade, animationHopDown);
+        animation.start();
         animation.start();
     }
 
@@ -53,6 +60,12 @@ public class LoadingAnimation {
         ObjectAnimator fade = ObjectAnimator.ofFloat(view,"alpha", 1);
         fade.setDuration(500);
         return fade;
+    }
+
+    private ObjectAnimator waitAnimation(View view, int i){
+        ObjectAnimator wait = ObjectAnimator.ofFloat(view, "alpha", 0);
+        wait.setDuration(i*500);
+        return wait;
     }
 
     private ObjectAnimator hopAnimation(View view){
