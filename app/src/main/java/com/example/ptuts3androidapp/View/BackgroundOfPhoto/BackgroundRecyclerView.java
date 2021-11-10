@@ -91,6 +91,7 @@ public class BackgroundRecyclerView {
 
             @Override
             public void run() {
+                if(recyclerView.getAdapter().getItemCount() <= 0) return;
                 if (count == recyclerView.getAdapter().getItemCount() || (count == 0 && velocity == -1)) {
                     velocity = -velocity;
                 }

@@ -39,7 +39,7 @@ public class HomeActivity extends AppCompatActivity {
         findViewById(R.id.succes_button).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent activityIntent = new Intent(HomeActivity.this, SuccesActivity.class);
+                Intent activityIntent = new Intent(HomeActivity.this, AchievementActivity.class);
                 HomeActivity.this.startActivity(activityIntent);
 
             }
