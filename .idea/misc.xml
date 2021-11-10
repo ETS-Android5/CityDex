@@ -3,11 +3,14 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/theol/Documents/GitHub/PtutS3Android/app/src/main/res/layout/activity_layout.xml" value="0.26979166666666665" />
         <entry key="..\:/Users/theol/Documents/GitHub/PtutS3Android/app/src/main/res/layout/activity_loading_screen.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/theol/Documents/GitHub/PtutS3Android/app/src/main/res/layout/activity_main.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/theol/Documents/GitHub/PtutS3Android/app/src/main/res/layout/activity_photo.xml" value="0.26979166666666665" />
         <entry key="..\:/Users/theol/Documents/GitHub/PtutS3Android/app/src/main/res/layout/activity_reglage.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/theol/Documents/GitHub/PtutS3Android/app/src/main/res/layout/archivemenviewholder.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/theol/Documents/GitHub/PtutS3Android/app/src/main/res/layout/fragment_photo.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/theol/Documents/GitHub/PtutS3Android/app/src/main/res/layout/fragment_photo2.xml" value="0.28854166666666664" />
         <entry key="..\:/Users/theol/Documents/GitHub/PtutS3Android/app/src/main/res/layout/galerie.xml" value="0.23802083333333332" />
         <entry key="..\:/Users/theol/Documents/GitHub/PtutS3Android/app/src/main/res/layout/home.xml" value="0.25" />
         <entry key="..\:/Users/theol/Documents/GitHub/PtutS3Android/app/src/main/res/layout/imageviewinframelayout.xml" value="0.1605351170568562" />

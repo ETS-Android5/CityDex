@@ -4,56 +4,44 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/cardview_shadow_end_color"
-    android:backgroundTint="@color/cardview_shadow_end_color">
+    tools:context=".Controller.PhotoActivity">
 
-
-    <View
-        android:id="@+id/view3"
-        android:layout_width="412dp"
-        android:layout_height="731dp"
-        android:background="@drawable/gradient_background"
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/fragmentContainerView"
+        android:name="com.example.ptuts3androidapp.Controller.Fragment.PhotoFragment"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
 
     <ImageButton
-        android:id="@+id/b_photo"
+        android:id="@+id/b_photo2"
         android:layout_width="89dp"
         android:layout_height="70dp"
-        android:layout_marginEnd="36dp"
         android:background="@color/cardview_shadow_end_color"
         android:scaleType="fitCenter"
-        app:layout_constraintBottom_toBottomOf="@+id/b_galeri"
-        app:layout_constraintEnd_toStartOf="@+id/b_galeri"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:srcCompat="@drawable/appareil_photo"
         tools:ignore="SpeakableTextPresentCheck" />
 
     <ImageButton
-        android:id="@+id/b_retour"
-        android:layout_width="82dp"
-        android:layout_height="77dp"
-        android:background="@color/cardview_shadow_end_color"
-        android:scaleType="fitCenter"
-        app:layout_constraintBottom_toBottomOf="@+id/b_photo"
-        app:layout_constraintEnd_toStartOf="@+id/b_photo"
-        app:srcCompat="@android:drawable/ic_menu_revert"
-        tools:ignore="SpeakableTextPresentCheck" />
-
-    <ImageButton
-        android:id="@+id/b_galeri"
+        android:id="@+id/b_galeri2"
         android:layout_width="88dp"
         android:layout_height="69dp"
         android:background="@color/cardview_shadow_end_color"
         android:scaleType="fitCenter"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:srcCompat="@drawable/collec_icon"
-        tools:ignore="SpeakableTextPresentCheck"
-        tools:layout_editor_absoluteX="296dp"
-        tools:layout_editor_absoluteY="646dp" />
+        tools:ignore="SpeakableTextPresentCheck" />
 
     <ImageView
-        android:id="@+id/imageView2"
+        android:id="@+id/imageView3"
         android:layout_width="277dp"
         android:layout_height="62dp"
         app:layout_constraintEnd_toEndOf="parent"
