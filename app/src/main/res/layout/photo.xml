@@ -7,11 +7,22 @@
     android:background="@color/cardview_shadow_end_color"
     android:backgroundTint="@color/cardview_shadow_end_color">
 
+
+    <View
+        android:layout_width="412dp"
+        android:layout_height="731dp"
+        android:background="@drawable/gradient_background"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <ImageView
         android:id="@+id/imageView4"
-        android:layout_width="390dp"
-        android:layout_height="576dp"
+        android:layout_width="389dp"
+        android:layout_height="650dp"
         android:layout_marginTop="70dp"
+        android:background="@drawable/contour"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.476"
@@ -24,12 +35,11 @@
         android:id="@+id/b_photo"
         android:layout_width="89dp"
         android:layout_height="70dp"
+        android:layout_marginEnd="36dp"
         android:background="@color/cardview_shadow_end_color"
         android:scaleType="fitCenter"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView4"
+        app:layout_constraintBottom_toBottomOf="@+id/b_galeri"
+        app:layout_constraintEnd_toStartOf="@+id/b_galeri"
         app:srcCompat="@drawable/appareil_photo"
         tools:ignore="SpeakableTextPresentCheck" />
 
@@ -37,15 +47,12 @@
         android:id="@+id/b_retour"
         android:layout_width="82dp"
         android:layout_height="77dp"
-        android:layout_marginTop="14dp"
+        android:layout_marginStart="4dp"
         android:background="@color/cardview_shadow_end_color"
         android:scaleType="fitCenter"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toBottomOf="@+id/b_photo"
         app:layout_constraintEnd_toStartOf="@+id/b_photo"
-        app:layout_constraintHorizontal_bias="0.489"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView4"
-        app:layout_constraintVertical_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/imageView4"
         app:srcCompat="@android:drawable/ic_menu_revert"
         tools:ignore="SpeakableTextPresentCheck" />
 
@@ -53,13 +60,12 @@
         android:id="@+id/b_galeri"
         android:layout_width="88dp"
         android:layout_height="69dp"
-        android:layout_marginTop="3dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="5dp"
         android:background="@color/cardview_shadow_end_color"
         android:scaleType="fitCenter"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/b_photo"
-        app:layout_constraintTop_toBottomOf="@+id/imageView4"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView4"
+        app:layout_constraintEnd_toEndOf="@+id/imageView4"
         app:srcCompat="@drawable/collec_icon"
         tools:ignore="SpeakableTextPresentCheck" />
 
@@ -72,4 +78,5 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/logo_application_citidex" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
