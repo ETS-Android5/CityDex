@@ -1,33 +1,25 @@
-package com.example.ptuts3androidapp.Controller;
+package com.example.ptuts3androidapp;
 
-import android.graphics.Bitmap;
-import android.os.Bundle;
-import android.os.PersistableBundle;
-
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.os.Bundle;
+
 import com.example.ptuts3androidapp.Model.Achievement.Achievement;
-import com.example.ptuts3androidapp.R;
 import com.example.ptuts3androidapp.View.Achievement.AchievementAdaptater;
-import com.example.ptuts3androidapp.View.BackgroundOfPhoto.BackgroundViewAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class AchievementActivity extends AppCompatActivity {
 
-
     private RecyclerView recyclerView;
 
     @Override
-    public void onCreate(@Nullable Bundle savedInstanceState, @Nullable PersistableBundle persistentState) {
-        super.onCreate(savedInstanceState, persistentState);
-        System.out.println("slaut");
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
         setContentView(R.layout.succes);
-
         bindUI();
 
         setupRecyclerView();
@@ -55,4 +47,6 @@ public class AchievementActivity extends AppCompatActivity {
         recyclerView = findViewById(R.id.succesRecyclerView);
 
     }
+
+
 }

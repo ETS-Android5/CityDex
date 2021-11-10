@@ -6,7 +6,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
+import com.example.ptuts3androidapp.AchievementActivity;
+import com.example.ptuts3androidapp.CollectionActivity;
 import com.example.ptuts3androidapp.R;
+import com.example.ptuts3androidapp.ReglageActivity;
 import com.example.ptuts3androidapp.View.BackgroundOfPhoto.BackgroundRecyclerView;
 
 public class HomeActivity extends AppCompatActivity {
