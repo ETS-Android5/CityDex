@@ -2,6 +2,9 @@ package com.example.ptuts3androidapp;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.Rect;
+import android.graphics.RectF;
+import android.util.Log;
 import android.widget.TextView;
 
 import com.example.ptuts3androidapp.ml.SsdMobilenetV11Metadata1;
@@ -44,11 +47,10 @@ public class ObjectDetector {
             e.printStackTrace();
         }
 
-
     }
 
 
-    public  void displayData(TextView textViewResult) {
+    public void displayData(TextView textViewResult) {
         String resultText = "";
         for (Detection detection : result){
             resultText += "position de l'objet : (" + detection.getBoundingBox().left + " | " +
@@ -56,11 +58,23 @@ public class ObjectDetector {
                     detection.getBoundingBox().bottom + " ) ";
             resultText += "\nje pense que c'est : ";
             for (Category category: detection.getCategories()){
-                resultText += " - " + category.getLabel();
-
+                resultText += " - " + category.getLabel() + "\n";
             }
         }
         textViewResult.setText(resultText);
+    }
+
+    public RectF getRect(){
+        Rect r = new Rect();
+        r.set((int)result.get(0).getBoundingBox().left, (int)result.get(0).getBoundingBox().top,
+                (int)result.get(0).getBoundingBox().right, (int)result.get(0).getBoundingBox().bottom);
+
+        Log.i("LEFT_Rect", "" + result.get(0).getBoundingBox().left);
+        Log.i("TOP_Rect", "" + result.get(0).getBoundingBox().top);
+        Log.i("RIGHT_Rect", "" + result.get(0).getBoundingBox().right);
+        Log.i("BOTTOM_Rect", "" + result.get(0).getBoundingBox().bottom);
+
+        return new RectF(r);
     }
 
 }
