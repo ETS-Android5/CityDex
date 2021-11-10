@@ -1,4 +1,4 @@
-package com.example.ptuts3androidapp;
+package com.example.ptuts3androidapp.Controller;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.os.Bundle;
 
 import com.example.ptuts3androidapp.Model.Achievement.Achievement;
+import com.example.ptuts3androidapp.R;
 import com.example.ptuts3androidapp.View.Achievement.AchievementAdaptater;
 
 import java.util.ArrayList;

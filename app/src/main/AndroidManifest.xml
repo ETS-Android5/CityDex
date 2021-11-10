@@ -10,13 +10,16 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.PtutS3AndroidApp">
         <activity
-            android:name=".ReglageActivity"
+            android:name=".Controller.PhotoActivity"
             android:exported="false" />
         <activity
-            android:name=".CollectionActivity"
+            android:name=".Controller.ReglageActivity"
             android:exported="false" />
         <activity
-            android:name=".AchievementActivity"
+            android:name=".Controller.CollectionActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Controller.AchievementActivity"
             android:exported="false" />
         <activity
             android:name=".Controller.HomeActivity"

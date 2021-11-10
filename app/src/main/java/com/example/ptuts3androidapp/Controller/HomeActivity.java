@@ -6,10 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
-import com.example.ptuts3androidapp.AchievementActivity;
-import com.example.ptuts3androidapp.CollectionActivity;
 import com.example.ptuts3androidapp.R;
-import com.example.ptuts3androidapp.ReglageActivity;
 import com.example.ptuts3androidapp.View.BackgroundOfPhoto.BackgroundRecyclerView;
 
 public class HomeActivity extends AppCompatActivity {
@@ -55,7 +52,14 @@ public class HomeActivity extends AppCompatActivity {
 
             }
         });
+        findViewById(R.id.photo_button).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent activityIntent = new Intent(HomeActivity.this, PhotoActivity.class);
+                HomeActivity.this.startActivity(activityIntent);
 
+            }
+        });
 
     }
 }
