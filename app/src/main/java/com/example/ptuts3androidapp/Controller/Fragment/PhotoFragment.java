@@ -91,7 +91,7 @@ public class PhotoFragment extends Fragment implements TextureView.SurfaceTextur
         View result =  inflater.inflate(R.layout.fragment_photo, container, false);
 
 
-        myTextrureView = result.findViewById(R.id.textureView);
+        myTextrureView = result.findViewById(R.id.photoPreviewTextureView);
 
         myTextrureView.setSurfaceTextureListener(this);
 

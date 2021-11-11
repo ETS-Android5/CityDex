@@ -11,20 +11,22 @@ import com.example.ptuts3androidapp.View.BackgroundOfPhoto.BackgroundRecyclerVie
 
 public class HomeActivity extends AppCompatActivity {
 
+    private BackgroundRecyclerView backgroundRecyclerView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getSupportActionBar().hide();
+        backgroundRecyclerView = new BackgroundRecyclerView(this);
         setContentView(R.layout.home);
-
         bindUI();
-
-        new BackgroundRecyclerView(this, findViewById(R.id.recyclerView));
-
-
-
-
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        backgroundRecyclerView.start(findViewById(R.id.recyclerView));
+    }
+
 
 
 

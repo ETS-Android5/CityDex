@@ -2,8 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.ptuts3androidapp">
 
-
     <uses-permission android:name="android.permission.CAMERA" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/app_icon"
@@ -11,6 +11,9 @@
         android:roundIcon="@mipmap/app_icon_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.PtutS3AndroidApp">
+        <activity
+            android:name=".Controller.ResultActivity"
+            android:exported="false" />
         <activity
             android:name=".Controller.PhotoActivity"
             android:exported="false" />

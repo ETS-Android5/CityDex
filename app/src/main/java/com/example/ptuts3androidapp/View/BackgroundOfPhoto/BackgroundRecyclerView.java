@@ -22,24 +22,22 @@ import java.util.List;
 
 public class BackgroundRecyclerView {
 
-    private RecyclerView recyclerView;
     private int velocity;
     private Context context;
     private AppCompatActivity appCompatActivity;
+    private List<Bitmap> bitmaps;
+    private RecyclerView recyclerView;
 
-
-
-    public BackgroundRecyclerView(AppCompatActivity appCompatActivity, RecyclerView recyclerView){
+    public BackgroundRecyclerView(AppCompatActivity appCompatActivity){
         velocity = 1;
         this.appCompatActivity = appCompatActivity;
         this.context = appCompatActivity.getApplicationContext();
-        this.recyclerView = recyclerView;
 
         User user = new User(new UserPropertyLocalLoader(context) , new CityLocalLoader(context));
 
         List<City> cities = user.getOwnedCity();
 
-        List<Bitmap> bitmaps = new ArrayList<>();
+        bitmaps = new ArrayList<>();
 
         for (City city: cities
         ) {
@@ -52,6 +50,12 @@ public class BackgroundRecyclerView {
         }
 
 
+
+    }
+
+
+    public void start(RecyclerView recyclerView){
+        this.recyclerView = recyclerView;
         BackgroundViewAdapter backgroundViewAdapter = new BackgroundViewAdapter(bitmaps);
 
         recyclerView.setAdapter(backgroundViewAdapter);
