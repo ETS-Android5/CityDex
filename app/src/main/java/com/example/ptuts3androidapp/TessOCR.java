@@ -87,15 +87,6 @@ public class TessOCR {
         //Permet d'enlever les pixels de "couleurs"
         bmpOriginal = bmpOriginal.copy(Bitmap.Config.ARGB_8888 , true);
 
-        /*for (int i = 0; i < bmpOriginal.getWidth(); i++){
-            for(int j = 0; j < bmpOriginal.getHeight(); j++){
-                    int c = bmpOriginal.getPixel(i,j);
-                    if(Color.red(c) > 100 || Color.blue(c) > 100 || Color.green(c) > 100){
-                        bmpOriginal.setPixel(i,j,Color.rgb(255,255,255));
-                    }
-            }
-        }*/
-
         int width, height;
         height = bmpOriginal.getHeight();
         width = bmpOriginal.getWidth();
