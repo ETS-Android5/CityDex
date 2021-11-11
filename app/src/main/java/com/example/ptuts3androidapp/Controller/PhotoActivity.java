@@ -23,9 +23,8 @@ public class PhotoActivity extends AppCompatActivity {
     private ImageButton imageButton;
     private ConstraintLayout constraintLayout;
     private boolean isloading;
-    private TextureView textureView;
     private PhotoManager photoManager;
-
+    private View fragmentPhoto;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,7 +35,7 @@ public class PhotoActivity extends AppCompatActivity {
     }
 
     private void bindUI() {
-        textureView = findViewById(R.id.photoPreviewTextureView);
+        fragmentPhoto = findViewById(R.id.fragmentPhotoContainerView);
         constraintLayout = findViewById(R.id.rootactivityPhotoConstraintLayout);
         imageButton = findViewById(R.id.takePhotoImageButton);
         imageButton.setOnClickListener(new View.OnClickListener() {
@@ -50,7 +49,12 @@ public class PhotoActivity extends AppCompatActivity {
     private void takePhoto() {
         if(isloading) return;
         addLoadingLayout();
-        startResultActivityWithPhotoInfo();
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                startResultActivityWithPhotoInfo();
+            }
+        }).start();
         isloading = true;
 
     }
@@ -64,6 +68,7 @@ public class PhotoActivity extends AppCompatActivity {
     }
 
     private Uri getUriBitmapOfFragment() {
+        TextureView textureView = fragmentPhoto.findViewById(R.id.photoPreviewTextureView);
         Bitmap bitmap = textureView.getBitmap();
         Photo photoToReturn = photoManager.createPhotoObjectFromBitmap(bitmap);
         return photoToReturn.getPhotoUri();

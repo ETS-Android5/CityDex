@@ -31,8 +31,8 @@ public class PhotoManager {
 
     private void writeBitmapToFile(Bitmap bmp, File fileToWrite){
         try {
-            FileOutputStream stream = appCompatActivity.openFileOutput(
-                    fileToWrite.getAbsolutePath(), appCompatActivity.getApplicationContext().MODE_PRIVATE);
+            System.out.println("l'image est save en" + fileToWrite.getName());
+            FileOutputStream stream = new FileOutputStream(fileToWrite);
             bmp.compress(Bitmap.CompressFormat.PNG, 100, stream);
             //Cleanup
             stream.close();
