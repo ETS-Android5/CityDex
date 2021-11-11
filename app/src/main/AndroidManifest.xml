@@ -19,9 +19,6 @@
             android:name=".Controller.PhotoActivity"
             android:exported="false" />
         <activity
-            android:name=".Controller.PhotoActivity"
-            android:exported="false" />
-        <activity
             android:name=".Controller.ReglageActivity"
             android:exported="false" />
         <activity

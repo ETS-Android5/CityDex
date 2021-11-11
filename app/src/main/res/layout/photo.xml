@@ -22,11 +22,12 @@
         android:id="@+id/b_photo"
         android:layout_width="89dp"
         android:layout_height="70dp"
-        android:layout_marginEnd="36dp"
+        android:layout_marginBottom="56dp"
         android:background="@color/cardview_shadow_end_color"
         android:scaleType="fitCenter"
-        app:layout_constraintBottom_toBottomOf="@+id/b_galeri"
-        app:layout_constraintEnd_toStartOf="@+id/b_galeri"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:srcCompat="@drawable/appareil_photo"
         tools:ignore="SpeakableTextPresentCheck" />
 
@@ -34,10 +35,12 @@
         android:id="@+id/b_retour"
         android:layout_width="82dp"
         android:layout_height="77dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginBottom="52dp"
         android:background="@color/cardview_shadow_end_color"
         android:scaleType="fitCenter"
-        app:layout_constraintBottom_toBottomOf="@+id/b_photo"
-        app:layout_constraintEnd_toStartOf="@+id/b_photo"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:srcCompat="@android:drawable/ic_menu_revert"
         tools:ignore="SpeakableTextPresentCheck" />
 
@@ -45,12 +48,14 @@
         android:id="@+id/b_galeri"
         android:layout_width="88dp"
         android:layout_height="69dp"
+        android:layout_marginEnd="36dp"
+        android:layout_marginBottom="52dp"
         android:background="@color/cardview_shadow_end_color"
         android:scaleType="fitCenter"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:srcCompat="@drawable/collec_icon"
-        tools:ignore="SpeakableTextPresentCheck"
-        tools:layout_editor_absoluteX="296dp"
-        tools:layout_editor_absoluteY="646dp" />
+        tools:ignore="SpeakableTextPresentCheck" />
 
     <ImageView
         android:id="@+id/imageView2"
