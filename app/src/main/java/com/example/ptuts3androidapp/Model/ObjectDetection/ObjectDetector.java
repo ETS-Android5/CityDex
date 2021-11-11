@@ -51,7 +51,7 @@ public class ObjectDetector {
     }
 
 
-    public void displayData(TextView textViewResult) {
+    public String getResultDataInText() {
         String resultText = "";
         for (Detection detection : result){
             resultText += "position de l'objet : (" + detection.getBoundingBox().left + " | " +
@@ -62,7 +62,7 @@ public class ObjectDetector {
                 resultText += " - " + category.getLabel() + "\n";
             }
         }
-        textViewResult.setText(resultText);
+        return resultText;
     }
 
     public RectF getRect() throws OcrErrorException {

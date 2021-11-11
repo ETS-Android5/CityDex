@@ -2,7 +2,6 @@ package com.example.ptuts3androidapp.Model.DetectionTextPanneau;
 
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.ptuts3androidapp.Model.OCR.OCRDetection;
@@ -17,8 +16,8 @@ public class OCRFromObjectDetector  implements OcrResultListener {
     //Attributs
     private com.example.ptuts3androidapp.Model.OCR.OCRDetection OCRDetection;
     private ObjectDetector objectDetector;
-    private Context context;
-    private TextView textView;
+    private OnPanneauResultFinishListener onPanneauResultFinishListener;
+    private String objetDetectionResult;
 
     //Constructeur
     public OCRFromObjectDetector(Context context){
@@ -34,30 +33,32 @@ public class OCRFromObjectDetector  implements OcrResultListener {
     }
 
     //Methode qui lance la détection d'objet + qui renvoie le résultat OCR
-    public void runObjetDetectionAndOCR(Bitmap bitmap, TextView view, ImageView img){
-        this.textView = view;
+    public void runObjetDetectionAndOCR(Bitmap bitmap, OnPanneauResultFinishListener onPanneauResultFinishListener){
+
+        this.onPanneauResultFinishListener = onPanneauResultFinishListener;
         //Object detection
         objectDetector.runObjectDetection(bitmap);
-        objectDetector.displayData(view);
+        objetDetectionResult = objectDetector.getResultDataInText();
         bitmap = Bitmap.createScaledBitmap(bitmap, 300, 300, true);
         //OCR detection
         try {
             bitmap = OCRDetection.cropImage(bitmap, objectDetector.getRect());
             bitmap = OCRDetection.toGrayscale(bitmap);
             OCRDetection.runOcrResult(this, bitmap);
-            img.setImageBitmap(bitmap);
+            //img.setImageBitmap(bitmap);
         } catch (OcrErrorException e) {
             e.printStackTrace();
-            abortOcrDetection(view);
+            abortOcrDetection();
         }
     }
 
-    private void abortOcrDetection(TextView textView) {
-        textView.setText("erreur aucun objet detecté !!!");
+    private void abortOcrDetection() {
+
+        onPanneauResultFinishListener.onPanneauResultFinishListener(new ResultScan("erreur aucun text detecter", ""));
     }
 
     @Override
     public void onOcrFinish(String result) {
-        textView.setText(textView.getText() + result);
+        onPanneauResultFinishListener.onPanneauResultFinishListener(new ResultScan(objetDetectionResult, result));
     }
 }

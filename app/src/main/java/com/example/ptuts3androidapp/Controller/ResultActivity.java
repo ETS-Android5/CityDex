@@ -8,16 +8,23 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.ptuts3androidapp.Model.DetectionTextPanneau.OCRFromObjectDetector;
+import com.example.ptuts3androidapp.Model.DetectionTextPanneau.OnPanneauResultFinishListener;
+import com.example.ptuts3androidapp.Model.DetectionTextPanneau.ResultScan;
 import com.example.ptuts3androidapp.R;
 
 import java.io.IOException;
 
-public class ResultActivity extends AppCompatActivity {
+public class ResultActivity extends AppCompatActivity implements OnPanneauResultFinishListener {
 
     private Bitmap bitmapPhoto;
     private ImageView imageView;
+    private OCRFromObjectDetector ocrFromObjectDetector;
+    private TextView textView;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,17 +32,6 @@ public class ResultActivity extends AppCompatActivity {
         getDataFromPhotoActivity();
         setContentView(R.layout.activity_result);
         bindUI();
-    }
-
-    private void bindUI() {
-        imageView = findViewById(R.id.resultedPhotoTakenImageView);
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        imageView.setImageBitmap(bitmapPhoto);
-        System.out.println("bitmapPhoto = " + bitmapPhoto);
     }
 
     private void getDataFromPhotoActivity() {
@@ -56,5 +52,34 @@ public class ResultActivity extends AppCompatActivity {
     private void returnToPhotoActivity() {
         Intent activityIntent = new Intent(this, PhotoActivity.class);
         this.startActivity(activityIntent);
+    }
+
+    private void bindUI() {
+        imageView = findViewById(R.id.resultedPhotoTakenImageView);
+        textView = findViewById(R.id.resutlTextview);
+    }
+
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        imageView.setImageBitmap(bitmapPhoto);
+        startOCR();
+    }
+
+    private void startOCR(){
+        ocrFromObjectDetector = new OCRFromObjectDetector(getApplicationContext());
+        ocrFromObjectDetector.runObjetDetectionAndOCR(bitmapPhoto, this);
+    }
+
+    @Override
+    public void onPanneauResultFinishListener(ResultScan resultScan) {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                textView.setText(" object detection : " + resultScan.getObjectDetectionTextResult()
+                        + " ocr detection " + resultScan.getOcrDetectionTextResult());
+            }
+        });
     }
 }
