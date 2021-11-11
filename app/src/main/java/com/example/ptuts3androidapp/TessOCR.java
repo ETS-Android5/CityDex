@@ -40,22 +40,16 @@ public class TessOCR {
         mTess.init(datapath, language);
     }
 
-    public String getOCRResult(Bitmap bitmap) {
-        try {
-            Thread t = new Thread(new Runnable() {
-                @Override
-                public void run() {
-                    mTess.setImage(bitmap);
-                    result ="";
-                    result = mTess.getUTF8Text();
-                }
-            });
-            t.start();
-            t.join();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        return result;
+    public void runOcrResult(OcrResultListener ocrResultListener, Bitmap bitmap) {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                mTess.setImage(bitmap);
+                result ="";
+                result = mTess.getUTF8Text();
+                ocrResultListener.onOcrFinish(result);
+            }
+        }).start();
     }
 
     public void onDestroy() {
@@ -118,8 +112,13 @@ public class TessOCR {
     }
 
     //Méthode qui crop un bitmap
-    public Bitmap cropImage(Bitmap src, RectF rect) {
+    public Bitmap cropImage(Bitmap src, RectF rect) throws OcrErrorException {
+        if(rectIsNotCorrect(rect, src)) throw new OcrErrorException();
         Bitmap dest = src.createBitmap(src, (int) rect.top, (int) rect.left, (int) rect.width(), (int) rect.height());
         return dest;
+    }
+
+    private boolean rectIsNotCorrect(RectF rect, Bitmap src) {
+        return rect == null || rect.top < 0 || rect.left < 0 || rect.left + rect.height()  > src.getHeight() || rect.top + rect.width() > src.getWidth();
     }
 }

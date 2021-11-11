@@ -64,8 +64,9 @@ public class ObjectDetector {
         textViewResult.setText(resultText);
     }
 
-    public RectF getRect(){
+    public RectF getRect() throws OcrErrorException {
         Rect r = new Rect();
+        if(result.size() <= 0) throw new OcrErrorException();
         r.set((int)result.get(0).getBoundingBox().left, (int)result.get(0).getBoundingBox().top,
                 (int)result.get(0).getBoundingBox().right, (int)result.get(0).getBoundingBox().bottom);
 
