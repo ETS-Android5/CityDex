@@ -22,11 +22,9 @@ public class CityViewHolder extends RecyclerView.ViewHolder {
     public CityViewHolder(@NonNull View itemView) {
         super(itemView);
         this.itemView = itemView;
-        //TODO Créer le layout du ViewHolder
-        /*
-        textView = itemView.findViewById(R.id.cityViewHolderTextView);
-        imageView = itemView.findViewById(R.id.cityViewHolderImageView);
-        imageView.setImageResource(R.drawable.polish_cow);*/
+        textView = itemView.findViewById(R.id.cityHolderTextView);
+        imageView = itemView.findViewById(R.id.imageCityHolder);
+        imageView.setImageResource(R.drawable.polish_cow);
     }
 
 

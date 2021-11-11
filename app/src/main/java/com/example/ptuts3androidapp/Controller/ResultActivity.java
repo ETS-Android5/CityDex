@@ -36,7 +36,6 @@ public class ResultActivity extends AppCompatActivity {
         super.onResume();
         imageView.setImageBitmap(bitmapPhoto);
         System.out.println("bitmapPhoto = " + bitmapPhoto);
-
     }
 
     private void getDataFromPhotoActivity() {

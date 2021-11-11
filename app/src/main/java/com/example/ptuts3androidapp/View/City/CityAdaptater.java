@@ -28,8 +28,8 @@ public class CityAdaptater extends RecyclerView.Adapter<CityViewHolder> {
     public CityViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         Context context = parent.getContext();
         LayoutInflater inflater = LayoutInflater.from(context);
-        //Todo rajouter le bon layout   View view = inflater.inflate(R.layout."id du layout a remplacer", parent, false);
-        return null; //new CityViewHolder(view);
+        View view = inflater.inflate(R.layout.cityviewholder, parent, false);
+        return new CityViewHolder(view);
     }
 
     @Override

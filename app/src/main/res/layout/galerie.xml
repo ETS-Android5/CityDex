@@ -29,7 +29,7 @@
         tools:ignore="SpeakableTextPresentCheck" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerView3"
+        android:id="@+id/gallerieRecyclerView"
         android:layout_width="409dp"
         android:layout_height="574dp"
         android:layout_marginStart="1dp"
