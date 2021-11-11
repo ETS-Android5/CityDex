@@ -1,38 +1,27 @@
-package com.example.ptuts3androidapp;
+package com.example.ptuts3androidapp.Model.OCR;
 
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.ColorMatrix;
 import android.graphics.ColorMatrixColorFilter;
 import android.graphics.Paint;
-import android.graphics.Rect;
 import android.graphics.RectF;
-import android.os.Build;
 import android.os.Environment;
-import android.util.Log;
-
-import androidx.annotation.RequiresApi;
 
 import com.googlecode.tesseract.android.TessBaseAPI;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.nio.file.CopyOption;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.nio.file.StandardCopyOption;
 
-public class TessOCR {
+public class OCRDetection {
 
     private TessBaseAPI mTess;
     private String result = "";
 
-    public TessOCR(InputStream dataToCopy) throws IOException {
+    public OCRDetection(InputStream dataToCopy) throws IOException {
         mTess = new TessBaseAPI();
         String datapath = Environment.getExternalStorageDirectory() + "/Citydex/";
         String language = "fra";

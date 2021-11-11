@@ -1,22 +1,21 @@
-package com.example.ptuts3androidapp;
+package com.example.ptuts3androidapp.Model.DetectionTextPanneau;
 
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-import com.googlecode.tesseract.android.TessBaseAPI;
-
-import org.w3c.dom.Text;
+import com.example.ptuts3androidapp.Model.OCR.OCRDetection;
+import com.example.ptuts3androidapp.Model.OCR.ObjectDetector;
+import com.example.ptuts3androidapp.Model.OCR.OcrErrorException;
+import com.example.ptuts3androidapp.Model.OCR.OcrResultListener;
 
 import java.io.IOException;
 
-public class OCRFromObjectDetector  implements OcrResultListener{
+public class OCRFromObjectDetector  implements OcrResultListener {
 
     //Attributs
-    private TessOCR tessOCR;
+    private com.example.ptuts3androidapp.Model.OCR.OCRDetection OCRDetection;
     private ObjectDetector objectDetector;
     private Context context;
     private TextView textView;
@@ -28,7 +27,7 @@ public class OCRFromObjectDetector  implements OcrResultListener{
         objectDetector = new ObjectDetector(context);
 
         try {
-            tessOCR = new TessOCR(context.getAssets().open("fra.traineddata"));
+            OCRDetection = new OCRDetection(context.getAssets().open("fra.traineddata"));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -43,9 +42,9 @@ public class OCRFromObjectDetector  implements OcrResultListener{
         bitmap = Bitmap.createScaledBitmap(bitmap, 300, 300, true);
         //OCR detection
         try {
-            bitmap = tessOCR.cropImage(bitmap, objectDetector.getRect());
-            bitmap = tessOCR.toGrayscale(bitmap);
-            tessOCR.runOcrResult(this, bitmap);
+            bitmap = OCRDetection.cropImage(bitmap, objectDetector.getRect());
+            bitmap = OCRDetection.toGrayscale(bitmap);
+            OCRDetection.runOcrResult(this, bitmap);
             img.setImageBitmap(bitmap);
         } catch (OcrErrorException e) {
             e.printStackTrace();

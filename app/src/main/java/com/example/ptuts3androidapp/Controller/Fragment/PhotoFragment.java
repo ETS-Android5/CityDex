@@ -1,4 +1,4 @@
-package com.example.ptuts3androidapp.Fragment;
+package com.example.ptuts3androidapp.Controller.Fragment;
 
 import static android.content.Context.CAMERA_SERVICE;
 

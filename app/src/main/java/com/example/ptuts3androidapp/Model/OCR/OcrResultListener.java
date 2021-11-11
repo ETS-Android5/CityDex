@@ -1,4 +1,4 @@
-package com.example.ptuts3androidapp;
+package com.example.ptuts3androidapp.Model.OCR;
 
 public interface OcrResultListener {
 

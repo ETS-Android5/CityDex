@@ -4,11 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".Controller.MainActivity">
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/fragmentContainerView"
-        android:name="com.example.ptuts3androidapp.Fragment.PhotoFragment"
+        android:name="com.example.ptuts3androidapp.Controller.Fragment.PhotoFragment"
         android:layout_width="343dp"
         android:layout_height="297dp"
         tools:layout_editor_absoluteX="35dp" />
