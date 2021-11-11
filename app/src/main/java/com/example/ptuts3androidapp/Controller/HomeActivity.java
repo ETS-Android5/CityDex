@@ -24,7 +24,7 @@ public class HomeActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        backgroundRecyclerView.start(findViewById(R.id.recyclerView));
+        backgroundRecyclerView.start(findViewById(R.id.homeRecyclerView));
     }
 
 
