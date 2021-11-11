@@ -34,24 +34,13 @@ public class OCRFromObjectDetector  implements OcrResultListener{
         }
     }
 
-    //Getters
-    public TessOCR getTessOCR() {
-        return tessOCR;
-    }
-
-    public ObjectDetector getObjectDetector() {
-        return objectDetector;
-    }
-
     //Methode qui lance la détection d'objet + qui renvoie le résultat OCR
-    public void getOCRandObjectResult(Bitmap bitmap, TextView view, ImageView img){
+    public void runObjetDetectionAndOCR(Bitmap bitmap, TextView view, ImageView img){
         this.textView = view;
         //Object detection
         objectDetector.runObjectDetection(bitmap);
         objectDetector.displayData(view);
-
         bitmap = Bitmap.createScaledBitmap(bitmap, 300, 300, true);
-
         //OCR detection
         try {
             bitmap = tessOCR.cropImage(bitmap, objectDetector.getRect());
