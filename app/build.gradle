@@ -27,17 +27,18 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
     }
 
-    aaptOptions {
-        noCompress "tflite"
-    }
     buildFeatures {
         mlModelBinding true
+    }
+    androidResources {
+        noCompress 'tflite'
     }
 
 }
 
 dependencies {
 
+    implementation 'com.google.code.gson:gson:2.8.9'
     implementation 'com.rmtheis:tess-two:9.0.0'
     implementation 'pl.droidsonroids.gif:android-gif-drawable:1.2.17'
     implementation 'org.tensorflow:tensorflow-lite-task-vision:0.2.0'
