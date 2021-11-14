@@ -2,6 +2,8 @@ com/example/ptuts3androidapp/ml/LiteModelKerasOcrFloat162.java
  com.example.ptuts3androidapp.ml.LiteModelKerasOcrFloat162
  com.example.ptuts3androidapp.ml.LiteModelKerasOcrFloat162$1
  com.example.ptuts3androidapp.ml.LiteModelKerasOcrFloat162$Outputs
+com/example/ptuts3androidapp/CropUtils.java
+ com.example.ptuts3androidapp.CropUtils
 com/example/ptuts3androidapp/BuildConfig.java
  com.example.ptuts3androidapp.BuildConfig
 com/example/ptuts3androidapp/TessOCR.java

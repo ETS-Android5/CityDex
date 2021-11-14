@@ -2,40 +2,21 @@ package com.example.ptuts3androidapp;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.constraintlayout.solver.widgets.Rectangle;
-import androidx.core.content.ContextCompat;
 
 import android.Manifest;
-import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.ColorMatrix;
-import android.graphics.ColorMatrixColorFilter;
-import android.graphics.Paint;
-import android.graphics.Rect;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
-import android.util.Log;
-import android.webkit.PermissionRequest;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import org.checkerframework.checker.units.qual.C;
-
-import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.io.OutputStream;
-import java.nio.file.Files;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -58,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
         imgGray = findViewById(R.id.imgGray);
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            requestPermissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE,Manifest.permission.WRITE_EXTERNAL_STORAGE},permCode);
+            requestPermissions(perms,permCode);
         }
 
         ocr = null;
@@ -71,22 +52,27 @@ public class MainActivity extends AppCompatActivity {
         if (!dir.exists()){
             dir.mkdirs();
         }
-        File file = new File(Environment.getExternalStorageDirectory() + "/Citydex/images/image_travers_crop.png");
+        File file = new File(Environment.getExternalStorageDirectory() + "/Citydex/images/image_ocr.jpg");
         try {
-            copy(getAssets().open("image_travers_crop.png") ,file);
+            copy(getAssets().open("drawable/image_ocr.jpg") ,file);
         } catch (IOException e) {
             e.printStackTrace();
         }
 
         Bitmap bitmap = BitmapFactory.decodeFile(file.getPath());
 
-        Bitmap bitmap_gray = toGrayscale(bitmap);
+        Bitmap bitmap_gray = new CropUtils().cropImage(bitmap);
 
        // bitmap_gray = cropImage(bitmap_gray, new Rect(0,0,500,200));
 
         imgGray.setImageBitmap(bitmap_gray);
 
-        textView.setText(ocr.getOCRResult(bitmap_gray));
+        String res = ocr.getOCRResult(bitmap_gray);
+        res = res.replace('|','I');
+        res = res.replaceAll("[^a-zA-Z-]","");
+        textView.setText(res+" CHAUZON : "+similiraty(res, "CHAUZON"));
+
+
     }
 
     @Override
@@ -111,39 +97,41 @@ public class MainActivity extends AppCompatActivity {
         ocr.onDestroy();
     }
 
-    public Bitmap toGrayscale(Bitmap bmpOriginal)
-    {
 
-        //Permet d'enlever les pixels de "couleurs"
-        bmpOriginal = bmpOriginal.copy(Bitmap.Config.ARGB_8888 , true);
+    private double similiraty(String s1, String s2){
+        String longer = s1, shorter = s2;
+        if (s1.length() < s2.length()) { // longer should always have greater length
+            longer = s2; shorter = s1;
+        }
+        int longerLength = longer.length();
+        if (longerLength == 0) { return 1.0; /* both strings are zero length */ }
+        return (longerLength - levenshtein(longer, shorter)) / (double) longerLength;
+    }
 
-        /*for (int i = 0; i < bmpOriginal.getWidth(); i++){
-            for(int j = 0; j < bmpOriginal.getHeight(); j++){
-                    int c = bmpOriginal.getPixel(i,j);
-                    if(Color.red(c) > 100 || Color.blue(c) > 100 || Color.green(c) > 100){
-                        bmpOriginal.setPixel(i,j,Color.rgb(255,255,255));
+    private int levenshtein(String s1, String s2) {
+        s1 = s1.toLowerCase();
+        s2 = s2.toLowerCase();
+
+        int[] costs = new int[s2.length() + 1];
+        for (int i = 0; i <= s1.length(); i++) {
+            int lastValue = i;
+            for (int j = 0; j <= s2.length(); j++) {
+                if (i == 0)
+                    costs[j] = j;
+                else {
+                    if (j > 0) {
+                        int newValue = costs[j - 1];
+                        if (s1.charAt(i - 1) != s2.charAt(j - 1))
+                            newValue = Math.min(Math.min(newValue, lastValue),
+                                    costs[j]) + 1;
+                        costs[j - 1] = lastValue;
+                        lastValue = newValue;
                     }
+                }
             }
-        }*/
-
-        int width, height;
-        height = bmpOriginal.getHeight();
-        width = bmpOriginal.getWidth();
-
-        Bitmap bmpGrayscale = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
-        Canvas c = new Canvas(bmpGrayscale);
-        Paint paint = new Paint();
-        ColorMatrix cm = new ColorMatrix();
-        cm.setSaturation(0);
-        ColorMatrixColorFilter f = new ColorMatrixColorFilter(cm);
-        paint.setColorFilter(f);
-        c.drawBitmap(bmpOriginal, 0, 0, paint);
-        return bmpGrayscale;
+            if (i > 0)
+                costs[s2.length()] = lastValue;
+        }
+        return costs[s2.length()];
     }
-
-    private Bitmap cropImage(Bitmap src, Rect rect) {
-        Bitmap dest = src.createBitmap(src, rect.left, rect.top, rect.width(), rect.height());
-        return dest;
-    }
-
 }
