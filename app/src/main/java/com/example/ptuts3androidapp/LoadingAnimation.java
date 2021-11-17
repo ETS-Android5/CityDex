@@ -12,8 +12,9 @@ import java.util.List;
 public class LoadingAnimation {
 
     private List<List<View>> signsBlocks;
-
+    private AnimatorSet animation;
     public LoadingAnimation(ConstraintLayout layout, int numberOfGroup){
+        animation = new AnimatorSet();
         signsBlocks = new ArrayList<>();
         for (int i = 0; i < numberOfGroup; i++) {
             signsBlocks.add(new ArrayList<View>());
@@ -41,8 +42,7 @@ public class LoadingAnimation {
         ObjectAnimator hop = hopAnimation(view);
         ObjectAnimator down = downAnimation(view);
         ObjectAnimator wait= waitAnimation(view, i);
-
-        AnimatorSet animation = new AnimatorSet();
+        
         AnimatorSet animationHopDown = new AnimatorSet();
 
         if(wait.getDuration() > 0){
@@ -78,4 +78,7 @@ public class LoadingAnimation {
         return down;
     }
 
+    public AnimatorSet getAnimation() {
+        return animation;
+    }
 }
