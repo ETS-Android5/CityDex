@@ -24,20 +24,20 @@ public class CropUtils {
         Mat hierarchy = new Mat();
         Utils.bitmapToMat(src, test);
         Imgproc.cvtColor(test, testGray, Imgproc.COLOR_BGR2GRAY);
-        Imgproc.blur(testGray, testGray, new Size(3,3));
-        Imgproc.Canny(testGray,cannyOutput,255/3,255);
+        Imgproc.blur(testGray, testGray, new Size(3, 3));
+        Imgproc.Canny(testGray, cannyOutput, 255 / 3, 255);
         List<MatOfPoint> contours = new ArrayList<>();
-        Imgproc.findContours(cannyOutput,contours,hierarchy, Imgproc.RETR_TREE, Imgproc.CHAIN_APPROX_SIMPLE);
+        Imgproc.findContours(cannyOutput, contours, hierarchy, Imgproc.RETR_TREE, Imgproc.CHAIN_APPROX_SIMPLE);
         MatOfPoint2f[] contoursPoly = new MatOfPoint2f[contours.size()];
         Rect[] boundRect = new Rect[contours.size()];
         for (int i = 0; i < contours.size(); i++) {
             contoursPoly[i] = new MatOfPoint2f();
-            Imgproc.approxPolyDP(new MatOfPoint2f(contours.get(i).toArray()), contoursPoly[i], 3 , true);
+            Imgproc.approxPolyDP(new MatOfPoint2f(contours.get(i).toArray()), contoursPoly[i], 3, true);
             boundRect[i] = Imgproc.boundingRect(new MatOfPoint(new MatOfPoint(contoursPoly[i].toArray())));
         }
         int i = findLargestContour(contours);
-        Utils.matToBitmap(testGray,src);
-        src = Bitmap.createBitmap(src, (int)boundRect[i].x, (int)boundRect[i].y, (int)boundRect[i].width,(int)boundRect[i].height);
+        Utils.matToBitmap(testGray, src);
+        src = Bitmap.createBitmap(src, (int) boundRect[i].x, (int) boundRect[i].y, (int) boundRect[i].width, (int) boundRect[i].height);
         return src;
     }
 
