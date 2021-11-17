@@ -69,6 +69,8 @@ public class OCRDetection {
         }
     }
 
+    //TODO remove to grayscale and crop image and use crop image from cropUtils
+
     //Methode qui passe en nuance de gris un bitmap
     public Bitmap toGrayscale(Bitmap bmpOriginal)
     {
