@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#423232"
-    tools:context=".Controller.PhotoActivity">
+    tools:context="com.tlbail.ptuts3androidapp.Controller.PhotoActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/subrootResultConstraintLayout"
@@ -21,7 +21,7 @@
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/fragmentPhotoContainerView"
-        android:name="com.example.ptuts3androidapp.Controller.Fragment.PhotoFragment"
+        android:name="com.tlbail.ptuts3androidapp.Controller.Fragment.PhotoFragment"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"

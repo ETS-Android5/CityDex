@@ -6,7 +6,7 @@ android:id="@+id/loading_screen"
 android:layout_width="wrap_content"
 android:layout_height="match_parent"
 android:background="@color/black"
-tools:context=".Controller.LoadingScreenActivity">
+tools:context="com.tlbail.ptuts3androidapp.Controller.LoadingScreenActivity">
 
 
 <ImageView

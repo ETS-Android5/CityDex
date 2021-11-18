@@ -13,24 +13,24 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.PtutS3AndroidApp">
         <activity
-            android:name=".Controller.ResultActivity"
+            android:name="com.tlbail.ptuts3androidapp.Controller.ResultActivity"
             android:exported="false" />
         <activity
-            android:name=".Controller.PhotoActivity"
+            android:name="com.tlbail.ptuts3androidapp.Controller.PhotoActivity"
             android:exported="false" />
         <activity
-            android:name=".Controller.ReglageActivity"
+            android:name="com.tlbail.ptuts3androidapp.Controller.ReglageActivity"
             android:exported="false" />
         <activity
-            android:name=".Controller.CollectionActivity"
+            android:name="com.tlbail.ptuts3androidapp.Controller.CollectionActivity"
             android:exported="false" />
         <activity
-            android:name=".Controller.AchievementActivity"
+            android:name="com.tlbail.ptuts3androidapp.Controller.AchievementActivity"
             android:exported="false" />
         <activity
-            android:name=".Controller.HomeActivity"
+            android:name="com.tlbail.ptuts3androidapp.Controller.HomeActivity"
             android:exported="false" />
-        <activity android:name=".Controller.LoadingScreenActivity">
+        <activity android:name="com.tlbail.ptuts3androidapp.Controller.LoadingScreenActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

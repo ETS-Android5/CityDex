@@ -7,7 +7,7 @@ android {
     buildToolsVersion "30.0.3"
 
     defaultConfig {
-        applicationId "com.example.ptuts3androidapp"
+        applicationId "com.tlbail.ptuts3androidapp"
         minSdkVersion 21
         targetSdkVersion 30
         versionCode 1
