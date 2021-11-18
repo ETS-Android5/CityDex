@@ -163,6 +163,8 @@ public class ResultActivity extends AppCompatActivity implements OnPanneauResult
             Address address = list.get(0);
             String result = address.getLocality();
             Log.i("Ville trouvée", result);
+        } else {
+            Log.i("Localisation", "Non trouvée");
         }
 
     }
