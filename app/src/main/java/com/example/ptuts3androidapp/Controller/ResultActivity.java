@@ -8,6 +8,8 @@ import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.location.Address;
+import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -26,6 +28,8 @@ import com.example.ptuts3androidapp.Model.DetectionTextPanneau.ResultScan;
 import com.example.ptuts3androidapp.R;
 
 import java.io.IOException;
+import java.util.List;
+import java.util.Locale;
 
 public class ResultActivity extends AppCompatActivity implements OnPanneauResultFinishListener, LocationListener {
 
@@ -37,6 +41,7 @@ public class ResultActivity extends AppCompatActivity implements OnPanneauResult
     private ImageView imageView;
     private OCRFromObjectDetector ocrFromObjectDetector;
     private TextView textView;
+    private StringBuilder msg;
 
 
     @RequiresApi(api = Build.VERSION_CODES.M)
@@ -111,8 +116,8 @@ public class ResultActivity extends AppCompatActivity implements OnPanneauResult
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                textView.setText(" object detection : " + resultScan.getObjectDetectionTextResult()
-                        + " ocr detection " + resultScan.getOcrDetectionTextResult());
+                textView.setText(" Object Detection : " + resultScan.getObjectDetectionTextResult()
+                        + "\n Ocr Detection : " + resultScan.getOcrDetectionTextResult());
             }
         });
     }
@@ -122,6 +127,9 @@ public class ResultActivity extends AppCompatActivity implements OnPanneauResult
      */
     public void abonnementGPS() {
         //On s'abonne
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            return;
+        }
         locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 5000, 10, this);
     }
 
@@ -136,12 +144,27 @@ public class ResultActivity extends AppCompatActivity implements OnPanneauResult
     @Override
     public void onLocationChanged(final Location location) {
         //On affiche dans un message la nouvelle Localisation
-        final StringBuilder msg = new StringBuilder("lat : ");
+        msg = new StringBuilder("lat : ");
         msg.append(location.getLatitude());
         msg.append( "; lng : ");
         msg.append(location.getLongitude());
 
         Log.i("Localisation", "" + msg);
+
+        Geocoder geoCoder = new Geocoder(this, Locale.getDefault());
+        List<Address> list = null;
+        try {
+            list = geoCoder.getFromLocation(location
+                    .getLatitude(), location.getLongitude(), 1);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        if (list != null & list.size() > 0) {
+            Address address = list.get(0);
+            String result = address.getLocality();
+            Log.i("Ville trouvée", result);
+        }
+
     }
 
     @Override
