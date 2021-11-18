@@ -106,7 +106,8 @@ public class CityFetcherOnline implements CityFetcher{
 	private List<City> transformJsonArrayToCityList(JsonArray jsonArray) {
 		List<City> cities = new ArrayList<>();
 		for (JsonElement jsonElement : jsonArray) {
-			cities.add(transformJsonElementToCityObject(jsonElement));
+			if(transformJsonElementToCityObject(jsonElement) != null)
+				cities.add(transformJsonElementToCityObject(jsonElement));
 		}
 		return cities;
 	}
@@ -121,7 +122,14 @@ public class CityFetcherOnline implements CityFetcher{
 		}else {
 			return null;
 		}
-		Region region = Region.valueOfByName(cityJsonObject.get("region").getAsJsonObject().get("nom").getAsString());
+		Region region = null;
+		try {
+			region = Region.valueOfByName(cityJsonObject.get("region").getAsJsonObject().get("nom").getAsString());
+
+		}catch (IllegalArgumentException e){
+			System.err.println("Illegal argument exeception");
+			return null;
+		}
 		float surface = cityJsonObject.get("surface").getAsFloat();
 		int inhabitants = (cityJsonObject.get("population") == null) ? 0 : cityJsonObject.get("population").getAsInt();
 
@@ -151,7 +159,14 @@ public class CityFetcherOnline implements CityFetcher{
 		}else {
 			return null;
 		}
-		Region region = Region.valueOfByName(cityJsonObject.get("region").getAsJsonObject().get("nom").getAsString());
+		Region region = null;
+		try{
+			region = Region.valueOfByName(cityJsonObject.get("region").getAsJsonObject().get("nom").getAsString());
+
+		}catch (IllegalArgumentException e){
+			System.err.println("iillegal arg");
+			return null;
+		}
 		float surface = cityJsonObject.get("surface").getAsFloat();
 		if(cityJsonObject.get("population") != null && inhabitantsThreshold <= cityJsonObject.get("population").getAsInt()) {
 			inhabitants = cityJsonObject.get("population").getAsInt();
@@ -184,7 +199,13 @@ public class CityFetcherOnline implements CityFetcher{
 		}else {
 			return null;
 		}
-		Region region = Region.valueOfByName(cityJsonObject.get("region").getAsJsonObject().get("nom").getAsString());
+		Region region = null;
+		try {
+			region = Region.valueOfByName(cityJsonObject.get("region").getAsJsonObject().get("nom").getAsString());
+		}catch (IllegalArgumentException e){
+			System.err.println("illegal access");
+			return null;
+		}
 		if(surfaceThreshold <= cityJsonObject.get("surface").getAsFloat()) {
 			surface = cityJsonObject.get("surface").getAsFloat();
 		}else {
