@@ -51,6 +51,10 @@ public class BackgroundRecyclerView {
             }
         }
 
+        if(bitmaps.size() == 0){
+            return;
+        }
+
 
         BackgroundViewAdapter backgroundViewAdapter = new BackgroundViewAdapter(bitmaps);
 
