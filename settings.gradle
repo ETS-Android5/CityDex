@@ -1,2 +1,3 @@
 rootProject.name = "PtutS3AndroidApp"
 include ':app'
+include ':libs'

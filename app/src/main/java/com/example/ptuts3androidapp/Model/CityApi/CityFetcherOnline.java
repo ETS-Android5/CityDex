@@ -3,8 +3,10 @@ package com.example.ptuts3androidapp.Model.CityApi;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import javax.net.ssl.HttpsURLConnection;
@@ -21,86 +23,42 @@ public class CityFetcherOnline implements CityFetcher{
 
 	}
 
-	@Override
-	public City getCity(String name, Department department){
-		HttpsURLConnection httpsURLConnection = null;
+	public JsonArray getResultRequest(String request){
 		try {
-			URL url = new URL("https://geo.api.gouv.fr/departements/"+ department.getPostalCode() +"/communes?&fields=nom,population,surface,codeDepartement,region");
-			httpsURLConnection = (HttpsURLConnection) url.openConnection();
-			JsonElement root = JsonParser.parseReader(new InputStreamReader((InputStream)httpsURLConnection.getContent(),"UTF-8"));
-			JsonArray items = root.getAsJsonArray();
+			URL url = new URL(request);
+			HttpsURLConnection httpsURLConnection = (HttpsURLConnection) url.openConnection();
+			JsonElement jsonElement = JsonParser.parseReader(new InputStreamReader((InputStream) httpsURLConnection.getContent(),"UTF-8"));
 			httpsURLConnection.disconnect();
-			return transformJsonArrayToCityList(items, name);
+			return jsonElement.getAsJsonArray();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		return null;
+		return new JsonArray();
 	}
 
-	
+	@Override
+	public City getCity(String name, Department department){
+		return transformJsonArrayToCityList(getResultRequest("https://geo.api.gouv.fr/departements/"+ department.getPostalCode() +"/communes?&fields=nom,population,surface,codeDepartement,region"),name);
+	}
 
 	@Override
 	public List<City> getCitiesByDepartment(Department department) {
-		HttpsURLConnection httpsURLConnection = null;
-		try {
-			URL url = new URL("https://geo.api.gouv.fr/departements/" + department.getPostalCode() + "/communes?fields=nom,population,surface,codeDepartement,region");
-			httpsURLConnection = (HttpsURLConnection) url.openConnection();
-			JsonElement root = JsonParser.parseReader(new InputStreamReader((InputStream)httpsURLConnection.getContent(),"UTF-8"));
-			JsonArray items = root.getAsJsonArray();
-			httpsURLConnection.disconnect();
-			return transformJsonArrayToCityList(items);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		return new ArrayList<>();
+		return transformJsonArrayToCityList(getResultRequest("https://geo.api.gouv.fr/departements/" + department.getPostalCode() + "/communes?fields=nom,population,surface,codeDepartement,region"));
 	}
 
 	@Override
 	public List<City> getCitiesBySurface(float surface) {
-		HttpsURLConnection httpsURLConnection = null;
-		try {
-			URL url = new URL("https://geo.api.gouv.fr/communes?fields=nom,population,surface,codeDepartement,region");
-			httpsURLConnection = (HttpsURLConnection) url.openConnection();
-			JsonElement root = JsonParser.parseReader(new InputStreamReader((InputStream)httpsURLConnection.getContent(),"UTF-8"));
-			JsonArray items = root.getAsJsonArray();
-			httpsURLConnection.disconnect();
-			return transformJsonArrayToCityList(items, surface);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		return new ArrayList<>();
+		return transformJsonArrayToCityList(getResultRequest("https://geo.api.gouv.fr/communes?fields=nom,population,surface,codeDepartement,region"), surface);
 	}
 
 	@Override
 	public List<City> getCitiesByName(String name) {
-		HttpsURLConnection httpsURLConnection = null;
-		try {
-			URL url = new URL("https://geo.api.gouv.fr/communes?nom=" + name +"&fields=nom,population,surface,codeDepartement,region");
-			httpsURLConnection = (HttpsURLConnection) url.openConnection();
-			JsonElement root = JsonParser.parseReader(new InputStreamReader((InputStream)httpsURLConnection.getContent(),"UTF-8"));
-			JsonArray items = root.getAsJsonArray();
-			httpsURLConnection.disconnect();
-			return transformJsonArrayToCityList(items);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		return new ArrayList<>();
+		return transformJsonArrayToCityList(getResultRequest("https://geo.api.gouv.fr/communes?nom=" + name +"&fields=nom,population,surface,codeDepartement,region"));
 	}
 
 	@Override
 	public List<City> getCitiesByInhabitance(int inhabitants) {
-		HttpsURLConnection httpsURLConnection = null;
-		try {
-			URL url = new URL("https://geo.api.gouv.fr/communes?fields=nom,population,surface,codeDepartement,region");
-			httpsURLConnection = (HttpsURLConnection) url.openConnection();
-			JsonElement root = JsonParser.parseReader(new InputStreamReader((InputStream)httpsURLConnection.getContent(),"UTF-8"));
-			JsonArray items = root.getAsJsonArray();
-			httpsURLConnection.disconnect();
-			return transformJsonArrayToCityList(items,inhabitants);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		return new ArrayList<>();
+		return transformJsonArrayToCityList(getResultRequest("https://geo.api.gouv.fr/communes?fields=nom,population,surface,codeDepartement,region"),inhabitants);
 	}
 
 	private List<City> transformJsonArrayToCityList(JsonArray jsonArray) {
@@ -194,7 +152,7 @@ public class CityFetcherOnline implements CityFetcher{
 		city = new City(name, department, region, surface, inhabitants);
 		return city;
 	}
-	
+
 	private City transformJsonArrayToCityList(JsonArray jsonArray, String name) {
 		City city = null;
 		for (JsonElement jsonElement : jsonArray) {
