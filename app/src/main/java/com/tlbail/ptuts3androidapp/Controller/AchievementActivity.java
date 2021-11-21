@@ -23,7 +23,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.tlbail.ptuts3androidapp.Model.Achievement.Achievement;
-import com.example.ptuts3androidapp.R;
+import com.tlbail.ptuts3androidapp.R;
 import com.tlbail.ptuts3androidapp.Model.Achievement.GoogleAchievementManager;
 import com.tlbail.ptuts3androidapp.View.Achievement.AchievementAdaptater;
 

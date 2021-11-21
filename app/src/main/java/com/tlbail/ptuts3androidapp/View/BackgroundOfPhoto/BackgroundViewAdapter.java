@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.ptuts3androidapp.R;
+import com.tlbail.ptuts3androidapp.R;
 
 import java.util.List;
 

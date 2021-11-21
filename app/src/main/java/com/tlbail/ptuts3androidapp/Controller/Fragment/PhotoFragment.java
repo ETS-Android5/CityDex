@@ -23,7 +23,7 @@ import android.view.TextureView;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.ptuts3androidapp.R;
+import com.tlbail.ptuts3androidapp.R;
 
 import java.util.Arrays;
 

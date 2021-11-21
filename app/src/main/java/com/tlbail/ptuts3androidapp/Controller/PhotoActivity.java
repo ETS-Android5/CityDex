@@ -15,7 +15,7 @@ import android.widget.ImageButton;
 
 import com.tlbail.ptuts3androidapp.Model.Photo.Photo;
 import com.tlbail.ptuts3androidapp.Model.Photo.PhotoManager;
-import com.example.ptuts3androidapp.R;
+import com.tlbail.ptuts3androidapp.R;
 
 public class PhotoActivity extends AppCompatActivity {
 

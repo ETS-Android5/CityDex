@@ -8,7 +8,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.tlbail.ptuts3androidapp.Model.Achievement.Achievement;
-import com.example.ptuts3androidapp.R;
+import com.tlbail.ptuts3androidapp.R;
 
 public class AchievementViewHolder extends RecyclerView.ViewHolder {
     private TextView textView;

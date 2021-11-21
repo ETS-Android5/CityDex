@@ -20,7 +20,7 @@ import androidx.core.app.ActivityOptionsCompat;
 import androidx.core.content.FileProvider;
 import androidx.core.content.res.ResourcesCompat;
 
-import com.example.ptuts3androidapp.R;
+import com.tlbail.ptuts3androidapp.R;
 
 import java.io.File;
 import java.io.IOException;

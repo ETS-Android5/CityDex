@@ -7,7 +7,6 @@ import android.graphics.RectF;
 import android.util.Log;
 
 import com.tlbail.ptuts3androidapp.Model.OCR.OcrErrorException;
-import com.example.ptuts3androidapp.ml.SsdMobilenetV11Metadata1;
 
 import org.tensorflow.lite.support.image.TensorImage;
 import org.tensorflow.lite.support.label.Category;
@@ -15,6 +14,8 @@ import org.tensorflow.lite.task.vision.detector.Detection;
 
 import java.io.IOException;
 import java.util.List;
+
+import com.tlbail.ptuts3androidapp.ml.SsdMobilenetV11Metadata1;
 
 public class ObjectDetector {
 

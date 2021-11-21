@@ -10,7 +10,7 @@ import com.tlbail.ptuts3androidapp.Model.City.City;
 import com.tlbail.ptuts3androidapp.Model.City.CityLoaders.CityLocalLoader;
 import com.tlbail.ptuts3androidapp.Model.User.LocalDataLoader.UserPropertyLocalLoader;
 import com.tlbail.ptuts3androidapp.Model.User.User;
-import com.example.ptuts3androidapp.R;
+import com.tlbail.ptuts3androidapp.R;
 import com.tlbail.ptuts3androidapp.View.City.CityAdaptater;
 
 import java.util.List;

@@ -17,7 +17,7 @@ import com.google.android.gms.games.Games;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.tlbail.ptuts3androidapp.LoadingAnimation;
-import com.example.ptuts3androidapp.R;
+import com.tlbail.ptuts3androidapp.R;
 
 public class LoadingScreenActivity extends AppCompatActivity {
 
