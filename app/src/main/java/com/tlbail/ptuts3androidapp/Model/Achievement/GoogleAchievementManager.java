@@ -2,50 +2,52 @@ package com.tlbail.ptuts3androidapp.Model.Achievement;
 
 import android.content.Intent;
 import android.util.Log;
+import android.view.Gravity;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.ptuts3androidapp.R;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.games.AchievementsClient;
+import com.google.android.gms.games.Game;
 import com.google.android.gms.games.Games;
+import com.google.android.gms.games.GamesClient;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 
 public class GoogleAchievementManager implements OnCompleteListener<GoogleSignInAccount> {
+
+    private static GoogleAchievementManager instance;
+
+    public static GoogleAchievementManager getInstance(){
+        if(instance == null){
+            instance = new GoogleAchievementManager();
+        }
+        return instance;
+    }
+
+
     private static final int RC_ACHIEVEMENT_UI = 9003;
     private static final String TAG = "GoogleAchievementManage";
 
-
     // Client used to sign in with Google APIs
-    private GoogleSignInClient mGoogleSignInClient;
-    private AchievementsClient mAchievementsClient;
-
+    private GoogleSignInAccount googleSignInAccount;
     private AppCompatActivity appCompatActivity;
 
 
-    public GoogleAchievementManager(AppCompatActivity appCompatActivity) {
+
+    public void signInSilently(AppCompatActivity appCompatActivity) {
         this.appCompatActivity = appCompatActivity;
-        setupAchievement();
-    }
-
-    private void setupAchievement() {
-        mGoogleSignInClient = GoogleSignIn.getClient(appCompatActivity,
-                new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_GAMES_SIGN_IN).build());
-    }
-
-
-    public void signInSilently() {
         GoogleSignInOptions signInOptions = GoogleSignInOptions.DEFAULT_GAMES_SIGN_IN;
         GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(appCompatActivity);
         if (GoogleSignIn.hasPermissions(account, signInOptions.getScopeArray())) {
             // Already signed in.
-            // The signed in account is stored in the 'account' variable.
-            GoogleSignInAccount signedInAccount = account;
+            googleSignInAccount = account;
         } else {
             // Haven't been signed-in before. Try the silent sign-in first.
             GoogleSignInClient signInClient = GoogleSignIn.getClient(appCompatActivity, signInOptions);
@@ -56,21 +58,30 @@ public class GoogleAchievementManager implements OnCompleteListener<GoogleSignIn
     @Override
     public void onComplete(@NonNull Task<GoogleSignInAccount> task) {
         if (task.isSuccessful()) {
-            // The signed in account is stored in the task's result.
-            GoogleSignInAccount signedInAccount = task.getResult();
-            if(signedInAccount != null && signedInAccount.getAccount() != null)
-                Log.i("log", signedInAccount.getAccount().name);
+            googleSignInAccount = task.getResult();
+            if(googleSignInAccount != null && googleSignInAccount.getAccount() != null)
+                Log.i("log", googleSignInAccount.getAccount().name);
         } else {
-            // Player will need to sign-in explicitly using via UI.
-            // See [sign-in best practices](http://developers.google.com/games/services/checklist) for guidance on how and when to implement Interactive Sign-in,
-            // and [Performing Interactive Sign-in](http://developers.google.com/games/services/android/signin#performing_interactive_sign-in) for details on how to implement
-            // Interactive Sign-in.
-            //startSignInIntent();
             Log.e(TAG, task.getException().toString());
         }
 
     }
 
+    public AchievementsClient getAchievementsClient() {
+        if(appCompatActivity == null || googleSignInAccount == null) return null;
+        return Games.getAchievementsClient(appCompatActivity, googleSignInAccount);
+    }
+
+    public boolean isSigned(){
+        return googleSignInAccount != null;
+    }
+
+    public void unlockAchievement(int idViewToDisplay, String achievement_id){
+        GamesClient gamesClient = Games.getGamesClient(appCompatActivity, googleSignInAccount);
+        gamesClient.setViewForPopups(appCompatActivity.findViewById(idViewToDisplay));
+        gamesClient.setGravityForPopups(Gravity.TOP | Gravity.CENTER_HORIZONTAL);
+        Games.getAchievementsClient(appCompatActivity, googleSignInAccount).unlock(achievement_id);
+    }
 
     public void showAchievements() {
         Games.getAchievementsClient(appCompatActivity, GoogleSignIn.getLastSignedInAccount(appCompatActivity))
@@ -82,5 +93,8 @@ public class GoogleAchievementManager implements OnCompleteListener<GoogleSignIn
                     }
                 });
     }
+
+
+
 
 }

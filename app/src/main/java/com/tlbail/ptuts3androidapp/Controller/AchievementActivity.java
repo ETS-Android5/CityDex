@@ -42,9 +42,8 @@ public class AchievementActivity extends AppCompatActivity  {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.succes);
         bindUI();
-        googleAchievementManager = new GoogleAchievementManager(this);
+        googleAchievementManager = GoogleAchievementManager.getInstance();
         setupRecyclerView();
-
     }
 
     private void bindUI() {
@@ -53,7 +52,7 @@ public class AchievementActivity extends AppCompatActivity  {
         buttonShowSucces.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                googleAchievementManager.showAchievements();
+                if(googleAchievementManager.isSigned()) googleAchievementManager.showAchievements();
             }
         });
     }
@@ -73,7 +72,7 @@ public class AchievementActivity extends AppCompatActivity  {
     @Override
     protected void onResume() {
         super.onResume();
-        googleAchievementManager.signInSilently();
+        googleAchievementManager.signInSilently(this);
     }
 
 
