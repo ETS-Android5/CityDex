@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--Google Play game services IDs. Save this file as res/values/games-ids.xml in your project.-->
+<resources>
+    <!--app_id-->
+    <string name="app_id" translatable="false">314921727749</string>
+    <!--package_name-->
+    <string name="package_name" translatable="false">com.tlbail.ptuts3androidapp</string>
+    <!--achievement Trou paumé-->
+    <string name="achievement_trou_paum" translatable="false">CgkIhe6wlpUJEAIQAA</string>
+    <!--achievement Balkani-->
+    <string name="achievement_balkani" translatable="false">CgkIhe6wlpUJEAIQAQ</string>
+    <!--achievement Voyageur-->
+    <string name="achievement_voyageur" translatable="false">CgkIhe6wlpUJEAIQAg</string>
+    <!--achievement Chômeur-->
+    <string name="achievement_chmeur" translatable="false">CgkIhe6wlpUJEAIQAw</string>
+    <!--achievement Explorateur-->
+    <string name="achievement_explorateur" translatable="false">CgkIhe6wlpUJEAIQBQ</string>
+    <!--achievement Aller au fond des choses-->
+    <string name="achievement_aller_au_fond_des_choses" translatable="false">CgkIhe6wlpUJEAIQBg</string>
+    <!--achievement Le Commencement-->
+    <string name="achievement_le_commencement" translatable="false">CgkIhe6wlpUJEAIQBw</string>
+    <!--achievement Caché dans les profondeurs-->
+    <string name="achievement_cach_dans_les_profondeurs" translatable="false">CgkIhe6wlpUJEAIQCA</string>
+    <!--achievement Une terrible forteresse-->
+    <string name="achievement_une_terrible_forteresse" translatable="false">CgkIhe6wlpUJEAIQCQ</string>
+    <!--achievement Capitale-->
+    <string name="achievement_capitale" translatable="false">CgkIhe6wlpUJEAIQCg</string>
+    <!--achievement Seul au monde-->
+    <string name="achievement_seul_au_monde" translatable="false">CgkIhe6wlpUJEAIQCw</string>
+    <!--achievement Atlantide-->
+    <string name="achievement_atlantide" translatable="false">CgkIhe6wlpUJEAIQDA</string>
+    <!--achievement Exil volontaire-->
+    <string name="achievement_exil_volontaire" translatable="false">CgkIhe6wlpUJEAIQDQ</string>
+</resources>

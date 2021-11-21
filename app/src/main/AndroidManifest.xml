@@ -12,6 +12,10 @@
         android:roundIcon="@mipmap/app_icon_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.PtutS3AndroidApp">
+        <meta-data android:name="com.google.android.gms.games.APP_ID"
+            android:value="@string/app_id" />
+        <meta-data android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version"/>
         <activity
             android:name="com.tlbail.ptuts3androidapp.Controller.ResultActivity"
             android:exported="false" />
