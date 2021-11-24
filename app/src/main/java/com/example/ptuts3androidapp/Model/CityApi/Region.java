@@ -37,6 +37,6 @@ public enum Region {
 				return value;
 			}
 		}
-		throw new IllegalArgumentException();
+		return null;
 	}
 }

@@ -106,7 +106,7 @@ public enum Department {
 		private String postalCode;
 		private String departmentName;
 
-		private Department(String postalCode, String departmentName) {
+		Department(String postalCode, String departmentName) {
 			this.postalCode = postalCode;
 			this.departmentName = departmentName;
 		}
@@ -125,6 +125,6 @@ public enum Department {
 					return value;
 				}
 			}
-			throw new IllegalArgumentException();
+			return null;
 		}
 }

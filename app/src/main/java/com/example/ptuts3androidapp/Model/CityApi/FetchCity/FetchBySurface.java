@@ -1,0 +1,29 @@
+package com.example.ptuts3androidapp.Model.CityApi.FetchCity;
+
+import com.example.ptuts3androidapp.Model.CityApi.City;
+import com.example.ptuts3androidapp.Model.CityApi.Department;
+import com.example.ptuts3androidapp.Model.CityApi.Region;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+
+public class FetchBySurface extends FetchCity{
+
+    private float surfaceThreshold;
+
+    public FetchBySurface(float surfaceThreshold){
+        this.surfaceThreshold = surfaceThreshold;
+        this.request = "https://geo.api.gouv.fr/communes?fields=nom,population,surface,codeDepartement,region";
+    }
+
+    @Override
+    public City transformJsonElementToCityObject(JsonElement jsonElement) {
+        JsonObject cityJsonObject = jsonElement.getAsJsonObject();
+        String name = cityJsonObject.get("nom").getAsString();
+        Department department = Department.valueOfByCode(cityJsonObject.get("codeDepartement").getAsString());
+        Region region = Region.valueOfByName(cityJsonObject.get("region").getAsJsonObject().get("nom").getAsString());
+        float surface = cityJsonObject.get("surface").getAsFloat();
+        int inhabitants = (cityJsonObject.get("population") == null) ? 0 : cityJsonObject.get("population").getAsInt();
+        if(name == null || department == null || region == null || surfaceThreshold > surface) return null;
+        return new City(name, department, region, surface, inhabitants);
+    }
+}
