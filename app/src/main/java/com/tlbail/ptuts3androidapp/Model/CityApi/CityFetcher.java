@@ -1,12 +1,9 @@
-package com.tlbail.ptuts3androidapp.Model.CityApi;
+package com.example.ptuts3androidapp.Model.CityApi;
+
+import com.example.ptuts3androidapp.Model.CityApi.FetchCity.FetchCity;
 
 import java.util.List;
 
 public interface CityFetcher {
-
-	City getCity(String name, Department department);
-	List<City> getCitiesByDepartment(Department department);
-	List<City> getCitiesBySurface(float surface);
-	List<City> getCitiesByName(String name);
-	List<City> getCitiesByInhabitance(int nbPeople);
+	List<City> fetch(FetchCity fetchCity);
 }
