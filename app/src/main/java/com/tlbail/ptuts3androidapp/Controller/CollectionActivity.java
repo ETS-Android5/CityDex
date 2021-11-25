@@ -2,6 +2,7 @@ package com.tlbail.ptuts3androidapp.Controller;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.LinearSnapHelper;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
@@ -13,6 +14,7 @@ import com.tlbail.ptuts3androidapp.Model.User.User;
 import com.tlbail.ptuts3androidapp.R;
 import com.tlbail.ptuts3androidapp.View.City.CityAdaptater;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class CollectionActivity extends AppCompatActivity {
@@ -27,6 +29,8 @@ public class CollectionActivity extends AppCompatActivity {
         bindUI();
 
         setupRecyclerView();
+        List<City> cities = new ArrayList<>();
+
 
     }
 
@@ -43,6 +47,8 @@ public class CollectionActivity extends AppCompatActivity {
         CityAdaptater cityAdaptater = new CityAdaptater(cityList);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(cityAdaptater);
+        LinearSnapHelper snapHelper = new LinearSnapHelper();
+        snapHelper.attachToRecyclerView(recyclerView);
     }
 
 

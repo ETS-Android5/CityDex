@@ -1,6 +1,6 @@
-package com.example.ptuts3androidapp.Model.CityApi.FetchCity;
+package com.tlbail.ptuts3androidapp.Model.CityApi.FetchCity;
 
-import com.example.ptuts3androidapp.Model.CityApi.City;
+import com.tlbail.ptuts3androidapp.Model.CityApi.City;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;

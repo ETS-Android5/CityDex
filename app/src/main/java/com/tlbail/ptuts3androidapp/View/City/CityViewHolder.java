@@ -22,9 +22,9 @@ public class CityViewHolder extends RecyclerView.ViewHolder {
     public CityViewHolder(@NonNull View itemView) {
         super(itemView);
         this.itemView = itemView;
-        textView = itemView.findViewById(R.id.cityHolderTextView);
-        imageView = itemView.findViewById(R.id.imageCityHolder);
-        imageView.setImageResource(R.drawable.polish_cow);
+        textView = itemView.findViewById(R.id.cityText);
+        imageView = itemView.findViewById(R.id.citySign);
+        //TODO set image in imageView
     }
 
 

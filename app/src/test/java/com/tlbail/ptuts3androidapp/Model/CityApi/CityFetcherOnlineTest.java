@@ -1,5 +1,10 @@
 package com.tlbail.ptuts3androidapp.Model.CityApi;
 
+import com.tlbail.ptuts3androidapp.Model.CityApi.FetchCity.FetchByDepartment;
+import com.tlbail.ptuts3androidapp.Model.CityApi.FetchCity.FetchByInhabitance;
+import com.tlbail.ptuts3androidapp.Model.CityApi.FetchCity.FetchBySurface;
+import com.tlbail.ptuts3androidapp.Model.CityApi.FetchCity.FetchOneCity;
+
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -21,21 +26,20 @@ public class CityFetcherOnlineTest {
     @Test
     public void createNotNullCityFectcher(){
         Assert.assertNotNull(cityFetcher);
-
     }
 
     @Test
     public void cityByNameNotNull(){
-        City city = cityFetcher.getCity("Laval", Department.Mayenne);
-        System.out.println(city.name + " - " + city.department.getDepartmentName() +" - "+ city.inhabitants + " - " +city.surface);
-
+        List<City> cities = cityFetcher.fetch(new FetchOneCity("Laval", Department.Mayenne));
+        Assert.assertNotNull(cities);
+        printCities(cities);
     }
 
 
     @Test
     public void cityByDepartementNotNull(){
 
-        List<City> cities = cityFetcher.getCitiesByDepartment(Department.Ain);
+        List<City> cities = cityFetcher.fetch(new FetchByDepartment(Department.Ain));
         Assert.assertNotNull(cities);
         printCities(cities);
 
@@ -44,7 +48,7 @@ public class CityFetcherOnlineTest {
     @Test
     public void cityBySurface(){
 
-        List<City> cities = cityFetcher.getCitiesBySurface(10000);
+        List<City> cities = cityFetcher.fetch(new FetchBySurface(10000));
         Assert.assertNotNull(cities);
         printCities(cities);
     }
@@ -52,7 +56,7 @@ public class CityFetcherOnlineTest {
     @Test
     public void getcitybyHabitant(){
 
-        List<City> cities = cityFetcher.getCitiesByInhabitance(1000000);
+        List<City> cities = cityFetcher.fetch(new FetchByInhabitance(1000000));
         Assert.assertNotNull(cities);
         printCities(cities);
 

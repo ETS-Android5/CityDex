@@ -1,7 +1,7 @@
-package com.example.ptuts3androidapp.Model.CityApi;
+package com.tlbail.ptuts3androidapp.Model.CityApi;
 
 import java.util.List;
-import com.example.ptuts3androidapp.Model.CityApi.FetchCity.FetchCity;
+import com.tlbail.ptuts3androidapp.Model.CityApi.FetchCity.FetchCity;
 
 
 public class CityFetcherOnline implements CityFetcher{

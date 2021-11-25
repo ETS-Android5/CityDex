@@ -1,10 +1,10 @@
-package com.example.ptuts3androidapp.Model.CityApi;
+package com.tlbail.ptuts3androidapp.Model.CityApi;
 
-import com.example.ptuts3androidapp.Model.CityApi.FetchCity.FetchByDepartment;
-import com.example.ptuts3androidapp.Model.CityApi.FetchCity.FetchByInhabitance;
-import com.example.ptuts3androidapp.Model.CityApi.FetchCity.FetchByName;
-import com.example.ptuts3androidapp.Model.CityApi.FetchCity.FetchBySurface;
-import com.example.ptuts3androidapp.Model.CityApi.FetchCity.FetchOneCity;
+import com.tlbail.ptuts3androidapp.Model.CityApi.FetchCity.FetchByDepartment;
+import com.tlbail.ptuts3androidapp.Model.CityApi.FetchCity.FetchByInhabitance;
+import com.tlbail.ptuts3androidapp.Model.CityApi.FetchCity.FetchByName;
+import com.tlbail.ptuts3androidapp.Model.CityApi.FetchCity.FetchBySurface;
+import com.tlbail.ptuts3androidapp.Model.CityApi.FetchCity.FetchOneCity;
 
 import java.io.IOException;
 import java.util.List;
