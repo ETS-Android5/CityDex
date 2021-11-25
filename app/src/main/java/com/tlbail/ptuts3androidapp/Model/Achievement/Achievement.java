@@ -4,11 +4,13 @@ public class Achievement {
 
     private boolean isUnlocked;
     private String name;
+    private String description;
     private int DrawableId;
 
-    public Achievement(boolean isUnlocked, String name, int drawableId) {
+    public Achievement(boolean isUnlocked, String name, int drawableId, String description) {
         this.isUnlocked = isUnlocked;
         this.name = name;
+        this.description = description;
         DrawableId = drawableId;
     }
 
@@ -26,6 +28,7 @@ public class Achievement {
         return isUnlocked;
     }
 
-
-
+    public String getDescription() {
+        return description;
+    }
 }

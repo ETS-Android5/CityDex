@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.tlbail.ptuts3androidapp.Model.Achievement.Achievements;
 import com.tlbail.ptuts3androidapp.Model.Achievement.GoogleAchievementManager;
 import com.tlbail.ptuts3androidapp.Model.DetectionTextPanneau.OCRFromObjectDetector;
 import com.tlbail.ptuts3androidapp.Model.DetectionTextPanneau.OnPanneauResultFinishListener;
@@ -35,9 +36,8 @@ public class ResultActivity extends AppCompatActivity implements OnPanneauResult
         getDataFromPhotoActivity();
         setContentView(R.layout.activity_result);
         bindUI();
-        achievementManager = new GoogleAchievementManager();
-        if(!achievementManager.isSigned()) achievementManager.signInSilently(this);
-        achievementManager.unlockAchievement(R.id.activityResultLayout, getString(R.string.achievement_le_commencement));
+        Achievements achievements = new Achievements(this);
+        achievements.unlockAchivement(getString(R.string.achievement_le_commencement));
     }
 
     private void getDataFromPhotoActivity() {

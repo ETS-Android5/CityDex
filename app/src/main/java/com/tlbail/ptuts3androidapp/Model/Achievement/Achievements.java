@@ -1,5 +1,7 @@
 package com.tlbail.ptuts3androidapp.Model.Achievement;
 
+import android.widget.Toast;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.tlbail.ptuts3androidapp.Model.City.CityLoaders.CityLocalLoader;
@@ -28,36 +30,45 @@ public class Achievements {
         googleAchievementManager.showAchievements();
     }
 
+    public void unlockAchivement(String achivementId){
+
+        if(googleAchievementManager.isSigned()) googleAchievementManager.unlockAchievement(0, achivementId);
+        if(!user.containsKey(achivementId)){
+            user.put(achivementId, "true");
+            Toast.makeText(appCompatActivity.getApplicationContext(), "Succès débloquer ! ", Toast.LENGTH_LONG).show();
+
+        }
+    }
+
 
     public List<Achievement> getAchivements(){
         List<Achievement> achievements = new LinkedList<>();
         achievements.add(new Achievement(
-                user.containsKey(appCompatActivity.getString(R.string.achievement_trou_paum)), "Trou paumé", R.drawable.troupaume));
+                user.containsKey(appCompatActivity.getString(R.string.achievement_trou_paum)), "Trou paumé", R.drawable.troupaume, "obtenir 10 village avec moins de 200 habitants"));
         achievements.add(new Achievement(
-                user.containsKey(appCompatActivity.getString(R.string.achievement_balkani)), "Balkani", R.drawable.balkani));
+                user.containsKey(appCompatActivity.getString(R.string.achievement_balkani)), "Balkani", R.drawable.balkani, "Obtenir la ville Levallois-Perret."));
         achievements.add(new Achievement(
-                user.containsKey(appCompatActivity.getString(R.string.achievement_voyageur)), "Voyageur", R.drawable.voyageur));
+                user.containsKey(appCompatActivity.getString(R.string.achievement_voyageur)), "Voyageur", R.drawable.voyageur, "Une ville par région"));
         achievements.add(new Achievement(
-                user.containsKey(appCompatActivity.getString(R.string.achievement_chmeur)), "Chômeur", R.drawable.chomeur));
+                user.containsKey(appCompatActivity.getString(R.string.achievement_chmeur)), "Chômeur", R.drawable.chomeur, "Obtenir toutes le villes du jeu"));
         achievements.add(new Achievement(
-                user.containsKey(appCompatActivity.getString(R.string.achievement_explorateur)), "Explorateur", R.drawable.explorateur));
+                user.containsKey(appCompatActivity.getString(R.string.achievement_explorateur)), "Explorateur", R.drawable.explorateur, "Obtenir Lille, Brest, Nice, Strasbourg, Biarritz"));
         achievements.add(new Achievement(
-                user.containsKey(appCompatActivity.getString(R.string.achievement_aller_au_fond_des_choses)), "Aller au fond des choses", R.drawable.alleraufonddeschoses));
+                user.containsKey(appCompatActivity.getString(R.string.achievement_aller_au_fond_des_choses)), "Aller au fond des choses", R.drawable.alleraufonddeschoses, "Obtenir une ville dans la Creuse"));
         achievements.add(new Achievement(
-                user.containsKey(appCompatActivity.getString(R.string.achievement_le_commencement)), "Le commencement", R.drawable.lecommencement));
+                user.containsKey(appCompatActivity.getString(R.string.achievement_le_commencement)), "Le commencement", R.drawable.lecommencement, "Ajouter une première ville à sa collection."));
         achievements.add(new Achievement(
-                user.containsKey(appCompatActivity.getString(R.string.achievement_cach_dans_les_profondeurs)), "Cache dans les profondeurs", R.drawable.cachedanslesprofondeurs));
+                user.containsKey(appCompatActivity.getString(R.string.achievement_cach_dans_les_profondeurs)), "Cache dans les profondeurs", R.drawable.cachedanslesprofondeurs, "Ajouter une ville située dans les montagnes dans sa collection."));
         achievements.add(new Achievement(
-                user.containsKey(appCompatActivity.getString(R.string.achievement_une_terrible_forteresse)), "Une terrible forteresse", R.drawable.uneterribleforteresse));
+                user.containsKey(appCompatActivity.getString(R.string.achievement_une_terrible_forteresse)), "Une terrible forteresse", R.drawable.uneterribleforteresse, "Ajouter Saint-Malo à sa collection. "));
         achievements.add(new Achievement(
-                user.containsKey(appCompatActivity.getString(R.string.achievement_capitale)), "Capital", R.drawable.capital));
+                user.containsKey(appCompatActivity.getString(R.string.achievement_capitale)), "Capital", R.drawable.capital, "Ajouter Paris à sa collection."));
         achievements.add(new Achievement(
-                user.containsKey(appCompatActivity.getString(R.string.achievement_seul_au_monde)), "Seul au monde", R.drawable.seulaumonde));
+                user.containsKey(appCompatActivity.getString(R.string.achievement_seul_au_monde)), "Seul au monde", R.drawable.seulaumonde, "Ajouter une île à sa collection."));
         achievements.add(new Achievement(
-                user.containsKey(appCompatActivity.getString(R.string.achievement_atlantide)), "Atlantide", R.drawable.atlantide));
+                user.containsKey(appCompatActivity.getString(R.string.achievement_atlantide)), "Atlantide", R.drawable.atlantide, "Ajouter Le Mont-Saint-Michel à sa collection."));
         achievements.add(new Achievement(
-                user.containsKey(appCompatActivity.getString(R.string.achievement_exil_volontaire)), "Exil volontaire", R.drawable.exilvolontaire));
-
+                user.containsKey(appCompatActivity.getString(R.string.achievement_exil_volontaire)), "Exil volontaire", R.drawable.exilvolontaire, "Ajouter une commune des territoires d'outre-mer à sa collection."));
 
         return achievements;
 
