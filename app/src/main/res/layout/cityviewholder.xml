@@ -9,11 +9,11 @@
         android:id="@+id/citySign"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:src="@drawable/citysign"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/collection" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/cityText"
@@ -22,6 +22,7 @@
         android:text="TextView"
         app:layout_constraintBottom_toBottomOf="@+id/citySign"
         app:layout_constraintEnd_toEndOf="@+id/citySign"
-        app:layout_constraintStart_toStartOf="@+id/citySign"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/citySign" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

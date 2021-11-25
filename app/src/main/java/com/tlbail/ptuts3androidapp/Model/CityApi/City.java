@@ -14,4 +14,24 @@ public class City {
 		this.surface = surface;
 		this.inhabitants = inhabitants;
 	}
+
+	public String getName() {
+		return name;
+	}
+
+	public Department getDepartment() {
+		return department;
+	}
+
+	public float getSurface() {
+		return surface;
+	}
+
+	public int getInhabitants() {
+		return inhabitants;
+	}
+
+	public Region getRegion() {
+		return region;
+	}
 }

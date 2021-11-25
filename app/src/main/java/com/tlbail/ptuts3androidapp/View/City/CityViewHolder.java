@@ -8,7 +8,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.tlbail.ptuts3androidapp.Model.City.City;
+import com.tlbail.ptuts3androidapp.Model.CityApi.City;
 import com.tlbail.ptuts3androidapp.Model.City.CityData;
 import com.tlbail.ptuts3androidapp.R;
 
@@ -29,13 +29,7 @@ public class CityViewHolder extends RecyclerView.ViewHolder {
 
 
     public void updateViewHolder(City city){
-        this.textView.setText(city.getCityData().getCityProperty().get(CityData.CITY_NAME_KEY) +  city.toString());
-        if(city.getPhoto().getPhotoUri().toString().toLowerCase() == "") return;
-        try {
-            imageView.setImageBitmap(MediaStore.Images.Media.getBitmap(itemView.getContext().getContentResolver(),  city.getPhoto().getPhotoUri()));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        this.textView.setText(city.getName());
     }
 
 
