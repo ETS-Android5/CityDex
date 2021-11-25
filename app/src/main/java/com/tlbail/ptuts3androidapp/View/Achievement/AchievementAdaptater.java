@@ -1,11 +1,13 @@
 package com.tlbail.ptuts3androidapp.View.Achievement;
 
 import android.content.Context;
+import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.tlbail.ptuts3androidapp.Model.Achievement.Achievement;
@@ -32,6 +34,7 @@ public class AchievementAdaptater extends RecyclerView.Adapter<AchievementViewHo
         return new AchievementViewHolder(view);
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public void onBindViewHolder(@NonNull AchievementViewHolder holder, int position) {
         holder.updateViewHolder(achievements.get(position));
