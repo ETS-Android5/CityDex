@@ -31,6 +31,7 @@ public class ResultActivity extends AppCompatActivity implements OnPanneauResult
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getSupportActionBar().hide();
         getDataFromPhotoActivity();
         setContentView(R.layout.activity_result);
         bindUI();

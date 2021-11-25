@@ -17,7 +17,7 @@ public class HomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         getSupportActionBar().hide();
         backgroundRecyclerView = new BackgroundRecyclerView(this);
-        setContentView(R.layout.home);
+        setContentView(R.layout.activity_home);
         bindUI();
     }
 

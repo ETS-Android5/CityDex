@@ -30,6 +30,7 @@ public class PhotoActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         photoManager = new PhotoManager(this);
+        getSupportActionBar().hide();
         setContentView(R.layout.activity_photo);
         bindUI();
     }
@@ -76,7 +77,7 @@ public class PhotoActivity extends AppCompatActivity {
 
     private void addLoadingLayout() {
         LayoutInflater inflater = (LayoutInflater)   getApplicationContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View child = inflater.inflate(R.layout.photoresult, null);
+        View child = inflater.inflate(R.layout.layout_photoresult, null);
         constraintLayout.addView(child);
     }
 
