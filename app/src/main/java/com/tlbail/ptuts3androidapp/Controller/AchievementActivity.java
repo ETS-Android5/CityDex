@@ -49,31 +49,15 @@ public class AchievementActivity extends AppCompatActivity  {
     private static final String TAG = "AchievementActivity";
     private RecyclerView recyclerView;
     private Button buttonShowSucces;
-    private GoogleAchievementManager googleAchievementManager;
-    private GoogleSignInClient googleSignInClient;
-    // Client variables
-    private AchievementsClient mAchievementsClient;
-    private LeaderboardsClient mLeaderboardsClient;
-    private EventsClient mEventsClient;
-    private PlayersClient mPlayersClient;
-
-    // The diplay name of the signed in user.
-    private String mDisplayName = "";
-
+    private Achievements achievements;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getSupportActionBar().hide();
-
         setContentView(R.layout.activity_achievement);
-
         bindUI();
-        //googleAchievementManager = GoogleAchievementManager.getInstance();
         setupRecyclerView();
-
-        googleSignInClient = GoogleSignIn.getClient(this, new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_GAMES_SIGN_IN).build());
-
 
     }
 
@@ -85,15 +69,7 @@ public class AchievementActivity extends AppCompatActivity  {
         buttonShowSucces.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //googleAchievementManager.showAchievements();
-
-                if(isSignedIn()){
-                    onShowAchievementsRequested();
-                }else{
-                    startSignInIntent();
-                }
-
-
+                achievements.showAchievementInPlayStore();
             }
         });
 
@@ -101,187 +77,20 @@ public class AchievementActivity extends AppCompatActivity  {
 
 
     private void setupRecyclerView() {
-        List<Achievement> achievements = Achievements.getAchivements();
+        List<Achievement> achievements = new Achievements(this).getAchivements();
         AchievementAdaptater achievementAdaptater = new AchievementAdaptater(achievements);
         recyclerView.setAdapter(achievementAdaptater);
         recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
     }
 
-    private void startSignInIntent() {
-        startActivityForResult(googleSignInClient.getSignInIntent(), RC_SIGN_IN);
-    }
-
-    public void onShowAchievementsRequested() {
-        mAchievementsClient.getAchievementsIntent()
-                .addOnSuccessListener(new OnSuccessListener<Intent>() {
-                    @Override
-                    public void onSuccess(Intent intent) {
-                        startActivityForResult(intent, RC_UNUSED);
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        handleException(e, "achievement exeception");
-                    }
-                });
-    }
-
-
     @Override
     protected void onResume() {
         super.onResume();
-        //googleAchievementManager.signInSilently(this);
-        signInSilently();
-
-    }
-
-    private void signInSilently() {
-        Log.d(TAG, "signInSilently()");
-
-        googleSignInClient.silentSignIn().addOnCompleteListener(this,
-                new OnCompleteListener<GoogleSignInAccount>() {
-                    @Override
-                    public void onComplete(@NonNull Task<GoogleSignInAccount> task) {
-                        if (task.isSuccessful()) {
-                            Log.d(TAG, "signInSilently(): success");
-                            onConnected(task.getResult());
-                        } else {
-                            Log.d(TAG, "signInSilently(): failure", task.getException());
-                            onDisconnected();
-                        }
-                    }
-                });
+        achievements = new Achievements(this);
 
     }
 
 
-    private void onConnected(GoogleSignInAccount googleSignInAccount) {
-        Log.d(TAG, "onConnected(): connected to Google APIs");
 
-        mAchievementsClient = Games.getAchievementsClient(this, googleSignInAccount);
-        mLeaderboardsClient = Games.getLeaderboardsClient(this, googleSignInAccount);
-        mEventsClient = Games.getEventsClient(this, googleSignInAccount);
-        mPlayersClient = Games.getPlayersClient(this, googleSignInAccount);
-
-
-        // Set the greeting appropriately on main menu
-        mPlayersClient.getCurrentPlayer()
-                .addOnCompleteListener(new OnCompleteListener<Player>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Player> task) {
-                        String displayName;
-                        if (task.isSuccessful()) {
-                            displayName = task.getResult().getDisplayName();
-                            CharSequence charSequence = new String(("salut " + displayName));
-                            Toast.makeText(getApplicationContext(), charSequence, Toast.LENGTH_LONG).show();
-
-                        } else {
-                            Exception e = task.getException();
-                            handleException(e, "gogo");
-                            displayName = "???";
-                        }
-                        mDisplayName = displayName;
-                    }
-                });
-
-        /*
-        // if we have accomplishments to push, push them
-        if (!mOutbox.isEmpty()) {
-            pushAccomplishments();
-            Toast.makeText(this, getString(R.string.your_progress_will_be_uploaded),
-                    Toast.LENGTH_LONG).show();
-        }
-        */
-        loadAndPrintEvents();
-    }
-
-    private void onDisconnected() {
-        Log.d(TAG, "onDisconnected()");
-
-        mAchievementsClient = null;
-        mLeaderboardsClient = null;
-        mPlayersClient = null;
-    }
-
-    private boolean isSignedIn(){
-        return GoogleSignIn.getLastSignedInAccount(this) != null;
-    }
-
-
-    private void handleException(Exception e, String details) {
-        int status = 0;
-
-        if (e instanceof ApiException) {
-            ApiException apiException = (ApiException) e;
-            status = apiException.getStatusCode();
-        }
-
-        String message = details + status + e;
-
-        new AlertDialog.Builder(AchievementActivity.this)
-                .setMessage(message)
-                .setNeutralButton(android.R.string.ok, null)
-                .show();
-    }
-    private void loadAndPrintEvents() {
-
-        final AchievementActivity mainActivity = this;
-
-        mEventsClient.load(true)
-                .addOnSuccessListener(new OnSuccessListener<AnnotatedData<EventBuffer>>() {
-                    @Override
-                    public void onSuccess(AnnotatedData<EventBuffer> eventBufferAnnotatedData) {
-                        EventBuffer eventBuffer = eventBufferAnnotatedData.get();
-
-                        int count = 0;
-                        if (eventBuffer != null) {
-                            count = eventBuffer.getCount();
-                        }
-
-                        Log.i(TAG, "number of events: " + count);
-
-                        for (int i = 0; i < count; i++) {
-                            Event event = eventBuffer.get(i);
-                            Log.i(TAG, "event: "
-                                    + event.getName()
-                                    + " -> "
-                                    + event.getValue());
-                        }
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        handleException(e, "hehe le bug");
-                    }
-                });
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
-        super.onActivityResult(requestCode, resultCode, intent);
-        if (requestCode == RC_SIGN_IN) {
-            Task<GoogleSignInAccount> task =
-                    GoogleSignIn.getSignedInAccountFromIntent(intent);
-
-            try {
-                GoogleSignInAccount account = task.getResult(ApiException.class);
-                onConnected(account);
-            } catch (ApiException apiException) {
-                String message = apiException.getMessage();
-                if (message == null || message.isEmpty()) {
-                    message = "getString(R.string.signin_other_error)";
-                }
-
-                onDisconnected();
-
-                new AlertDialog.Builder(this)
-                        .setMessage(message)
-                        .setNeutralButton(android.R.string.ok, null)
-                        .show();
-            }
-        }
-    }
 
 }

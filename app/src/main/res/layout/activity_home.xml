@@ -150,7 +150,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/frameLayout3"
         app:layout_constraintVertical_bias="1.0"
-        app:srcCompat="@drawable/collec_icon" />
+        app:srcCompat="@drawable/galerie_v2" />
 
     <ImageView
         android:id="@+id/i_succes"

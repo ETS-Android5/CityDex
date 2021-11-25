@@ -28,4 +28,15 @@
         app:layout_constraintStart_toEndOf="@+id/achivementImageView"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.725" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayoutWhichHidePhotoAchievement"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="@+id/achivementImageView"
+        app:layout_constraintEnd_toEndOf="@+id/achivementImageView"
+        app:layout_constraintStart_toStartOf="@+id/achivementImageView"
+        app:layout_constraintTop_toTopOf="parent">
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
