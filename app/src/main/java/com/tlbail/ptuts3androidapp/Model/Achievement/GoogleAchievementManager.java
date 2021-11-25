@@ -22,15 +22,6 @@ import com.google.android.gms.tasks.Task;
 
 public class GoogleAchievementManager implements OnCompleteListener<GoogleSignInAccount> {
 
-    private static GoogleAchievementManager instance;
-
-    public static GoogleAchievementManager getInstance(){
-        if(instance == null){
-            instance = new GoogleAchievementManager();
-        }
-        return instance;
-    }
-
 
     private static final int RC_ACHIEVEMENT_UI = 9003;
     private static final String TAG = "GoogleAchievementManage";

@@ -35,7 +35,7 @@ public class ResultActivity extends AppCompatActivity implements OnPanneauResult
         getDataFromPhotoActivity();
         setContentView(R.layout.activity_result);
         bindUI();
-        achievementManager = GoogleAchievementManager.getInstance();
+        achievementManager = new GoogleAchievementManager();
         if(!achievementManager.isSigned()) achievementManager.signInSilently(this);
         achievementManager.unlockAchievement(R.id.activityResultLayout, getString(R.string.achievement_le_commencement));
     }
