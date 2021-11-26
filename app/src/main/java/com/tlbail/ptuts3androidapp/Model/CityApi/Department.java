@@ -22,7 +22,7 @@ public enum Department {
 		Correze("19", "Corrèze"),
 		CorseDuSud("2A", "Corse-du-Sud"),
 		HauteCorse("2B", "Haute-Corse"),
-		CoteDOr("21", "Cote-d'Or"),
+		CoteDOr("21", "Côte-d'Or"),
 		CotesDArmor("22", "Côtes-d'Armor"),
 		Creuse("23", "Creuse"),
 		Dordogne("24", "Dordogne"),

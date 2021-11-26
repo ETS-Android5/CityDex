@@ -53,7 +53,7 @@ public class OCRFromObjectDetector  implements OcrResultListener {
 
     private void abortOcrDetection() {
 
-        onPanneauResultFinishListener.onPanneauResultFinishListener(new ResultScan("erreur aucun text detecter", ""));
+        onPanneauResultFinishListener.onPanneauResultFinishListener(new ResultScan("Erreur aucun texte detecté", ""));
     }
 
     @Override

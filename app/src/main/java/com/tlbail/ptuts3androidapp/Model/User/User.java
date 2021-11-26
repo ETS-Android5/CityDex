@@ -47,7 +47,7 @@ public class User implements Map<String, String> {
         return Collections.unmodifiableMap(properties);
     }
 
-    public void  setProperty(String key, String value){
+    public void setProperty(String key, String value){
         properties.put(key, value);
         updateUserProperty();
     }
