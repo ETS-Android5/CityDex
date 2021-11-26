@@ -27,6 +27,8 @@ import com.tlbail.ptuts3androidapp.Model.Achievement.GoogleAchievementManager;
 import com.tlbail.ptuts3androidapp.Model.DetectionTextPanneau.OCRFromObjectDetector;
 import com.tlbail.ptuts3androidapp.Model.DetectionTextPanneau.OnPanneauResultFinishListener;
 import com.tlbail.ptuts3androidapp.Model.DetectionTextPanneau.ResultScan;
+import com.tlbail.ptuts3androidapp.Model.Localisation.LocalisationManager;
+import com.tlbail.ptuts3androidapp.Model.Localisation.OnLocationFind;
 import com.tlbail.ptuts3androidapp.R;
 
 import java.io.IOException;

@@ -1,4 +1,4 @@
-package com.example.ptuts3androidapp.Model.Localisation;
+package com.tlbail.ptuts3androidapp.Model.Localisation;
 
 public class CityNotFoundException extends Exception{
 

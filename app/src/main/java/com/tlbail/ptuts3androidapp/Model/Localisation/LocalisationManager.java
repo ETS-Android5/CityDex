@@ -1,4 +1,4 @@
-package com.example.ptuts3androidapp.Model.Localisation;
+package com.tlbail.ptuts3androidapp.Model.Localisation;
 
 import android.Manifest;
 import android.app.Activity;
@@ -17,7 +17,7 @@ import android.widget.Toast;
 import androidx.annotation.RequiresApi;
 import androidx.core.app.ActivityCompat;
 
-import com.example.ptuts3androidapp.Controller.ResultActivity;
+import com.tlbail.ptuts3androidapp.Controller.ResultActivity;
 
 import java.io.IOException;
 import java.util.List;
