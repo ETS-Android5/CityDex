@@ -5,10 +5,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.LinearSnapHelper;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.SnapHelper;
 
 import android.os.Bundle;
 import android.util.Log;
-import android.view.DragEvent;
+import android.view.MotionEvent;
 import android.view.View;
 
 import com.tlbail.ptuts3androidapp.Model.CityApi.*;
@@ -67,20 +68,32 @@ public class CollectionActivity extends AppCompatActivity {
         CityAdaptater cityAdaptater = new CityAdaptater(cities);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(cityAdaptater);
-        LinearSnapHelper snapHelper = new LinearSnapHelper();
-        snapHelper.attachToRecyclerView(recyclerView);
 
-        recyclerView.setOnScrollListener(new RecyclerView.OnScrollListener() {
+        recyclerView.addOnChildAttachStateChangeListener(new RecyclerView.OnChildAttachStateChangeListener() {
             @Override
-            public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
-                super.onScrollStateChanged(recyclerView, newState);
-                LinearLayoutManager llm = (LinearLayoutManager) recyclerView.getLayoutManager();
-                for (int i = 0; i < llm.getChildCount(); i++) {
-                    if (llm.getChildAt(i) != null) llm.getChildAt(i).animate().translationX(0);
+            public void onChildViewAttachedToWindow(@NonNull View view) {
+                RecyclerView.LayoutManager lm = recyclerView.getLayoutManager();
+                for (int j = 0; j < lm.getChildCount(); j++) {
+                    switch (j){
+                        case 0: case 6:
+                            lm.getChildAt(j).animate().translationX(-25);
+                            break;
+                        case 1: case 5:
+                            lm.getChildAt(j).animate().translationX(-50);
+                            break;
+                        case 2: case 4:
+                            lm.getChildAt(j).animate().translationX(-75);
+                            break;
+                        case 3:
+                            lm.getChildAt(j).animate().translationX(-100);
+                            break;
+                    }
                 }
-                View v = llm.getChildAt((llm.findLastCompletelyVisibleItemPosition() - llm.findFirstCompletelyVisibleItemPosition())  / 2 +1);
-                if (v!=null) v.animate().translationX(-100);
-                Log.i("test", cities.get((llm.findLastCompletelyVisibleItemPosition() - llm.findFirstCompletelyVisibleItemPosition())  / 2+1).getName());
+            }
+
+            @Override
+            public void onChildViewDetachedFromWindow(@NonNull View view) {
+
             }
         });
     }

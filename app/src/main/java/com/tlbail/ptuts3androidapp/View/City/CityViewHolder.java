@@ -32,5 +32,7 @@ public class CityViewHolder extends RecyclerView.ViewHolder {
         this.textView.setText(city.getName());
     }
 
-
+    public View getItemView() {
+        return itemView;
+    }
 }

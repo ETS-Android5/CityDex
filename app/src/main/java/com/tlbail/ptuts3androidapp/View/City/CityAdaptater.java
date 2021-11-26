@@ -1,9 +1,14 @@
 package com.tlbail.ptuts3androidapp.View.City;
 
+import android.animation.Animator;
+import android.animation.AnimatorSet;
+import android.animation.ObjectAnimator;
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -36,6 +41,12 @@ public class CityAdaptater extends RecyclerView.Adapter<CityViewHolder> {
     public void onBindViewHolder(@NonNull CityViewHolder holder, int position) {
         holder.updateViewHolder(cities.get(position));
     }
+
+    @Override
+    public void onViewRecycled(@NonNull CityViewHolder holder) {
+        super.onViewRecycled(holder);
+    }
+
 
 
     @Override
