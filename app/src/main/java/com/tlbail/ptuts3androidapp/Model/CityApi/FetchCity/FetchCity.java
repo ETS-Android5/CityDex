@@ -1,6 +1,6 @@
 package com.tlbail.ptuts3androidapp.Model.CityApi.FetchCity;
 
-import com.tlbail.ptuts3androidapp.Model.CityApi.City;
+import com.tlbail.ptuts3androidapp.Model.City.CityData;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
@@ -17,7 +17,7 @@ import javax.net.ssl.HttpsURLConnection;
 public abstract class FetchCity {
     protected String request;
 
-    public List<City> getCities(){
+    public List<CityData> getCities(){
         return transformJsonArrayToCityList(getResultRequest());
     }
 
@@ -34,16 +34,16 @@ public abstract class FetchCity {
         return new JsonArray();
     }
 
-    protected List<City> transformJsonArrayToCityList(JsonArray jsonArray){
-        List<City> cities = new ArrayList<>();
+    protected List<CityData> transformJsonArrayToCityList(JsonArray jsonArray){
+        List<CityData> cities = new ArrayList<>();
         for (JsonElement jsonElement : jsonArray) {
-            City city = transformJsonElementToCityObject(jsonElement);
-            if (city != null) {
-                cities.add(city);
+            CityData cityData = transformJsonElementToCityObject(jsonElement);
+            if (cityData != null) {
+                cities.add(cityData);
             }
         }
         return cities;
     }
 
-    protected abstract City transformJsonElementToCityObject(JsonElement jsonElement);
+    protected abstract CityData transformJsonElementToCityObject(JsonElement jsonElement);
 }

@@ -9,7 +9,6 @@ public class City implements Serializable {
     private Photo photo;
     private CityData cityData;
 
-
     public City(Photo photo, CityData cityData) {
         this.photo = photo;
         this.cityData = cityData;
