@@ -22,10 +22,14 @@ public class CityAdaptater extends RecyclerView.Adapter<CityViewHolder> {
 
 
     private List<City> cities;
+    private RecyclerView recyclerView;
+    private RecyclerView.SmoothScroller smoothScroller;
 
-    public CityAdaptater(List<City> cities) {
+    public CityAdaptater(List<City> cities, RecyclerView recyclerView, RecyclerView.SmoothScroller smoothScroller) {
         super();
         this.cities = cities;
+        this.recyclerView = recyclerView;
+        this.smoothScroller = smoothScroller;
     }
 
     @NonNull
@@ -40,14 +44,16 @@ public class CityAdaptater extends RecyclerView.Adapter<CityViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull CityViewHolder holder, int position) {
         holder.updateViewHolder(cities.get(position));
+        holder.getItemView().setMinimumHeight(recyclerView.getHeight()/8);
+        holder.getItemView().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                smoothScroller.setTargetPosition(holder.getAdapterPosition());
+                Log.e("t", holder.getAdapterPosition()+"");
+                recyclerView.getLayoutManager().startSmoothScroll(smoothScroller);
+            }
+        });
     }
-
-    @Override
-    public void onViewRecycled(@NonNull CityViewHolder holder) {
-        super.onViewRecycled(holder);
-    }
-
-
 
     @Override
     public int getItemCount() {
