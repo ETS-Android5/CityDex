@@ -1,72 +1,59 @@
 package com.tlbail.ptuts3androidapp.Controller;
 
-import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
 
-import android.Manifest;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
-import android.location.Address;
-import android.location.Geocoder;
-import android.location.Location;
-import android.location.LocationListener;
-import android.location.LocationManager;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.tlbail.ptuts3androidapp.Model.Achievement.Achievements;
-import com.tlbail.ptuts3androidapp.Model.Achievement.GoogleAchievementManager;
-import com.tlbail.ptuts3androidapp.Model.DetectionTextPanneau.OCRFromObjectDetector;
-import com.tlbail.ptuts3androidapp.Model.DetectionTextPanneau.OnPanneauResultFinishListener;
-import com.tlbail.ptuts3androidapp.Model.DetectionTextPanneau.ResultScan;
-import com.tlbail.ptuts3androidapp.Model.Localisation.LocalisationManager;
-import com.tlbail.ptuts3androidapp.Model.Localisation.OnLocationFind;
+import com.tlbail.ptuts3androidapp.Model.City.City;
+import com.tlbail.ptuts3androidapp.Model.DetectionTextPanneau.CityFoundListener;
+import com.tlbail.ptuts3androidapp.Model.DetectionTextPanneau.PhotoToCity;
+import com.tlbail.ptuts3androidapp.Model.DetectionTextPanneau.PhotoToCityDecorator;
 import com.tlbail.ptuts3androidapp.R;
 
 import java.io.IOException;
 
-public class ResultActivity extends AppCompatActivity implements OnPanneauResultFinishListener, OnLocationFind {
+public class ResultActivity extends AppCompatActivity implements  CityFoundListener {
 
-    private Bitmap bitmapPhoto;
     private ImageView imageView;
-    private OCRFromObjectDetector ocrFromObjectDetector;
     private TextView textView;
-    private GoogleAchievementManager achievementManager;
-
-    private LocalisationManager localisationManager;
+    private Button buttonNext;
+    private PhotoToCityDecorator photoToCityDecorator;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getSupportActionBar().hide();
-        getDataFromPhotoActivity();
         setContentView(R.layout.activity_result);
         bindUI();
         Achievements achievements = new Achievements(this);
         achievements.unlockAchivement(getString(R.string.achievement_le_commencement));
-        startLocation();
+
+        Uri uri = getUri();
+        if(uri == null) return;
+        photoToCityDecorator = new PhotoToCityDecorator(this, uri);
+        photoToCityDecorator.subscribeOnCityFound(this);
+        photoToCityDecorator.start();
+
     }
 
-    private void getDataFromPhotoActivity() {
+    private Uri getUri() {
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
-            Uri bitampUri = Uri.parse(extras.getString(PhotoActivity.URIBITMAPKEY));
-            try {
-                bitmapPhoto = MediaStore.Images.Media.getBitmap(this.getContentResolver(), bitampUri);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            return Uri.parse(extras.getString(PhotoActivity.URIBITMAPKEY));
         } else {
             Toast.makeText(getApplicationContext(), "erreur tu fait quoi beater", Toast.LENGTH_LONG);
             returnToPhotoActivity();
+            return null;
         }
     }
 
@@ -75,58 +62,70 @@ public class ResultActivity extends AppCompatActivity implements OnPanneauResult
         this.startActivity(activityIntent);
     }
 
+
     private void bindUI() {
         imageView = findViewById(R.id.resultedPhotoTakenImageView);
         textView = findViewById(R.id.resutlTextview);
+        buttonNext = findViewById(R.id.buttonBackresultActivity);
     }
 
 
     @Override
     protected void onResume() {
         super.onResume();
-        imageView.setImageBitmap(bitmapPhoto);
-        startOCR();
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            localisationManager.onResumeActivity();
-        }
+        imageView.setImageBitmap(photoToCityDecorator.getBitmap());
+        photoToCityDecorator.onResume();
     }
 
     @Override
     public void onPause() {
         super.onPause();
-
-        localisationManager.desabonnementGPS();
+        photoToCityDecorator.onPause();
     }
 
-    private void startOCR() {
-        ocrFromObjectDetector = new OCRFromObjectDetector(getApplicationContext());
-        ocrFromObjectDetector.runObjetDetectionAndOCR(bitmapPhoto, this);
-    }
-
-    private void startLocation(){
-        localisationManager = new LocalisationManager(this);
-        localisationManager.requestPermission();
-    }
 
     @Override
-    public void onPanneauResultFinishListener(ResultScan resultScan) {
+    public void onBackPressed() {}
+
+    @Override
+    public void onCityFoundt(City city) {
+        setButtonValueByCityValue(city);
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                textView.setText(" Object Detection : " + resultScan.getObjectDetectionTextResult()
-                        + "\n Ocr Detection : " + resultScan.getOcrDetectionTextResult());
+                if(city != null){
+                    textView.setText(city.toString());
+                    buttonNext.setText("voire ma ville");
+                }else {
+                    textView.setText("desoler aucune ville de trouvé");
+                    buttonNext.setText("reprendre une photo");
+                }
             }
         });
+
     }
 
-    @Override
-    public void isLocationFound(String result) {
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                textView.setText(textView.getText()
-                        + "\n Localisation trouvée : " + result);
-            }
-        });
+    private void setButtonValueByCityValue(City city) {
+        if(city != null){
+            buttonNext.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    goToCollectionActivity();
+                }
+            });
+        }else{
+            buttonNext.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    returnToPhotoActivity();
+                }
+            });
+        }
     }
+
+    private void goToCollectionActivity() {
+        Intent activityIntent = new Intent(this, CollectionActivity.class);
+        this.startActivity(activityIntent);
+    }
+
 }

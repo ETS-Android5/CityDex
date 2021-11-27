@@ -3,7 +3,9 @@ package com.tlbail.ptuts3androidapp.Model.City;
 import com.tlbail.ptuts3androidapp.Model.CityApi.Department;
 import com.tlbail.ptuts3androidapp.Model.CityApi.Region;
 
-public class CityData {
+import java.io.Serializable;
+
+public class CityData implements Serializable {
 	String name;
 	Department department;
 	Region region;

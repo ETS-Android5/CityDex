@@ -25,10 +25,7 @@ public class City implements Serializable {
 
     @Override
     public String toString() {
-        return "City{" +
-                "photo=" + photo +
-                ", cityData=" + cityData +
-                '}';
+        return cityData.getName();
     }
 
 

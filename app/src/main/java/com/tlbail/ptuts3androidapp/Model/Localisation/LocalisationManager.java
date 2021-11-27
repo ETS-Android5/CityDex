@@ -15,9 +15,11 @@ import android.util.Log;
 import android.widget.Toast;
 
 import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
 import com.tlbail.ptuts3androidapp.Controller.ResultActivity;
+import com.tlbail.ptuts3androidapp.Model.DetectionTextPanneau.PhotoToCity;
 
 import java.io.IOException;
 import java.util.List;
@@ -30,10 +32,12 @@ public class LocalisationManager implements LocationListener {
     private static final int LOCATION_REQUEST = 1340;
     private StringBuilder msg;
     private String locationFound;
-    private ResultActivity activity;
+    private PhotoToCity photoToCity;
+    private AppCompatActivity appCompatActivity;
 
-    public LocalisationManager(ResultActivity activity) {
-        this.activity = activity;
+    public LocalisationManager(PhotoToCity activity) {
+        this.photoToCity = activity;
+        this.appCompatActivity = photoToCity.getAppCompatActivity();
     }
 
     public String getLocationFound() {
@@ -42,14 +46,14 @@ public class LocalisationManager implements LocationListener {
 
     public void requestPermission() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            activity.requestPermissions(LOCATION_PERMS, LOCATION_REQUEST);
+            appCompatActivity.requestPermissions(LOCATION_PERMS, LOCATION_REQUEST);
         }
     }
 
     @RequiresApi(api = Build.VERSION_CODES.M)
     public void onResumeActivity() {
         //Obtention de la référence du service
-        locationManager =(LocationManager) activity.getSystemService(activity.LOCATION_SERVICE);
+        locationManager =(LocationManager) appCompatActivity.getSystemService(appCompatActivity.LOCATION_SERVICE);
 
         //Si le GPS est disponible, on s'y abonne
         boolean gps_enabled = false;
@@ -67,7 +71,7 @@ public class LocalisationManager implements LocationListener {
             abonnementGPS();
         }
         else {
-            Toast.makeText(activity.getApplicationContext(), "Active INTERNET et ta LOCALISATION !", Toast.LENGTH_SHORT).show();
+            Toast.makeText(appCompatActivity.getApplicationContext(), "Active INTERNET et ta LOCALISATION !", Toast.LENGTH_SHORT).show();
         }
 
     }
@@ -76,7 +80,7 @@ public class LocalisationManager implements LocationListener {
      */
     public void abonnementGPS() {
         //On s'abonne
-        if (ActivityCompat.checkSelfPermission(activity, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(activity, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+        if (ActivityCompat.checkSelfPermission(appCompatActivity, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(appCompatActivity, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             return;
         }
         locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 5000, 10, this);
@@ -91,31 +95,32 @@ public class LocalisationManager implements LocationListener {
             msg.append("; lng : ");
             msg.append(location.getLongitude());
 
-            Geocoder geoCoder = new Geocoder(activity, Locale.getDefault());
+            Geocoder geoCoder = new Geocoder(appCompatActivity, Locale.getDefault());
             List<Address> list = null;
             try {
                 list = geoCoder.getFromLocation(location
                         .getLatitude(), location.getLongitude(), 1);
+                if (list != null & list.size() > 0) {
+                    Address address = list.get(0);
+                    locationFound = address.getLocality();
+                    msg.append("; Ville détectée : " + address.getLocality());
+
+                    Log.i("Localisation", msg + "");
+                    Log.i("VilleLocation", locationFound);
+
+                    photoToCity.setLocationResult(locationFound);
+                } else {
+                    try {
+                        throw new CityNotFoundException();
+                    } catch (CityNotFoundException e) {
+                        e.printStackTrace();
+                    }
+                }
+
             } catch (IOException e) {
                 e.printStackTrace();
             }
 
-            if (list != null & list.size() > 0) {
-                Address address = list.get(0);
-                locationFound = address.getLocality();
-                msg.append("; Ville détectée : " + address.getLocality());
-
-                Log.i("Localisation", msg + "");
-                Log.i("VilleLocation", locationFound);
-
-                activity.isLocationFound(locationFound);
-            } else {
-                try {
-                    throw new CityNotFoundException();
-                } catch (CityNotFoundException e) {
-                    e.printStackTrace();
-                }
-            }
     }
 
     public StringBuilder toStringBuilder(){

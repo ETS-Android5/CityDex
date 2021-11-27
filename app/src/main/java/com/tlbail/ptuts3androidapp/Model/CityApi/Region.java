@@ -1,6 +1,8 @@
 package com.tlbail.ptuts3androidapp.Model.CityApi;
 
-public enum Region {
+import java.io.Serializable;
+
+public enum Region implements Serializable {
 	AUVERGNE_RHONES_ALPES("Auvergne-Rhône-Alpes"),
 	BOURGOGNE_FRANCHE_COMTE("Bourgogne-Franche-Comté"),
 	BRETAGNE("Bretagne"),

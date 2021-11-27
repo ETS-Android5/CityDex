@@ -1,6 +1,8 @@
 package com.tlbail.ptuts3androidapp.Model.CityApi;
 
-public enum Department {
+import java.io.Serializable;
+
+public enum Department implements Serializable {
 		Ain("01", "Ain"),
 		Aisne("02", "Aisne"),
 		Allier("03", "Allier"),
