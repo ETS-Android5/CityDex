@@ -39,7 +39,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView"
         android:clipToPadding="false"
-        android:paddingBottom="215.25dp"
-        android:paddingTop="215.25dp"/>
+        android:paddingBottom="280dp"
+        android:paddingTop="280dp"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
