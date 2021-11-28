@@ -7,13 +7,20 @@ import androidx.recyclerview.widget.LinearSnapHelper;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewTreeObserver;
+import android.widget.Adapter;
+import android.widget.EditText;
+import android.widget.TextView;
 
 import com.tlbail.ptuts3androidapp.Model.City.City;
 import com.tlbail.ptuts3androidapp.Model.City.CityData;
 import com.tlbail.ptuts3androidapp.Model.CityApi.*;
 import com.tlbail.ptuts3androidapp.Model.City.CityLoaders.CityLocalLoader;
+import com.tlbail.ptuts3androidapp.Model.Photo.Photo;
 import com.tlbail.ptuts3androidapp.Model.User.LocalDataLoader.UserPropertyLocalLoader;
 import com.tlbail.ptuts3androidapp.Model.User.User;
 import com.tlbail.ptuts3androidapp.R;
@@ -25,6 +32,7 @@ import java.util.List;
 public class CollectionActivity extends AppCompatActivity {
 
     private RecyclerView recyclerView;
+    private EditText cityToSearch;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,14 +42,49 @@ public class CollectionActivity extends AppCompatActivity {
         bindUI();
 
         setupRecyclerView();
-
-
+        setupListener();
 
     }
 
 
     private void bindUI() {
         recyclerView = findViewById(R.id.gallerieRecyclerView);
+        cityToSearch = findViewById(R.id.cityToSearch);
+    }
+
+    private List<String> getCityNameFromRecyclerView(){
+
+        LinearLayoutManager llm = (LinearLayoutManager) recyclerView.getLayoutManager();
+        List<String> cityNames = new ArrayList<>();
+
+        for (int i = 0; i < llm.getChildCount(); i++) {
+
+        }
+
+        return cityNames;
+    }
+
+
+    private void setupListener(){
+        cityToSearch.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+                String city = cityToSearch.getText().toString();
+                System.out.println(getCityNameFromRecyclerView().toString());
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
     }
 
 
@@ -50,23 +93,18 @@ public class CollectionActivity extends AppCompatActivity {
 
         List<City> cities = user.getOwnedCity();
 
-        /*List<CityData> cities = new ArrayList<>();
-        cities.add(new CityData("LAVAL", Department.Mayenne, Region.PAYS_DE_LA_LOIRE, 1,1));
-        cities.add(new CityData("TEST1", Department.Mayenne, Region.PAYS_DE_LA_LOIRE, 1,1));
-        cities.add(new CityData("TEST2", Department.Mayenne, Region.PAYS_DE_LA_LOIRE, 1,1));
-        cities.add(new CityData("TEST3", Department.Mayenne, Region.PAYS_DE_LA_LOIRE, 1,1));
-        cities.add(new CityData("TEST4", Department.Mayenne, Region.PAYS_DE_LA_LOIRE, 1,1));
-        cities.add(new CityData("TEST5", Department.Mayenne, Region.PAYS_DE_LA_LOIRE, 1,1));
-        cities.add(new CityData("TEST6", Department.Mayenne, Region.PAYS_DE_LA_LOIRE, 1,1));
-        cities.add(new CityData("TEST7", Department.Mayenne, Region.PAYS_DE_LA_LOIRE, 1,1));
-        cities.add(new CityData("TEST8", Department.Mayenne, Region.PAYS_DE_LA_LOIRE, 1,1));
-        cities.add(new CityData("TEST9", Department.Mayenne, Region.PAYS_DE_LA_LOIRE, 1,1));
-        cities.add(new CityData("TEST10", Department.Mayenne, Region.PAYS_DE_LA_LOIRE, 1,1));
-        cities.add(new CityData("TEST11", Department.Mayenne, Region.PAYS_DE_LA_LOIRE, 1,1));
-        cities.add(new CityData("TEST12", Department.Mayenne, Region.PAYS_DE_LA_LOIRE, 1,1));
-        cities.add(new CityData("TEST13", Department.Mayenne, Region.PAYS_DE_LA_LOIRE, 1,1));
-        cities.add(new CityData("TEST14", Department.Mayenne, Region.PAYS_DE_LA_LOIRE, 1,1));
-        cities.add(new CityData("TEST15", Department.Mayenne, Region.PAYS_DE_LA_LOIRE, 1,1));*/
+        cities.add(new City(new Photo("../../res/drawable/atlantide.jpg","LAVAL"), new CityData("LAVAL", Department.Mayenne, Region.PAYS_DE_LA_LOIRE, 1,1)));
+        cities.add(new City(new Photo("../../res/drawable/atlantide.jpg","TEST1"), new CityData("TEST1", Department.Mayenne, Region.PAYS_DE_LA_LOIRE, 1,1)));
+        cities.add(new City(new Photo("../../res/drawable/atlantide.jpg","TEST2"), new CityData("TEST2", Department.Mayenne, Region.PAYS_DE_LA_LOIRE, 1,1)));
+        cities.add(new City(new Photo("../../res/drawable/atlantide.jpg","TEST3"), new CityData("TEST3", Department.Mayenne, Region.PAYS_DE_LA_LOIRE, 1,1)));
+        cities.add(new City(new Photo("../../res/drawable/atlantide.jpg","TEST4"), new CityData("TEST4", Department.Mayenne, Region.PAYS_DE_LA_LOIRE, 1,1)));
+        cities.add(new City(new Photo("../../res/drawable/atlantide.jpg","TEST5"), new CityData("TEST5", Department.Mayenne, Region.PAYS_DE_LA_LOIRE, 1,1)));
+        cities.add(new City(new Photo("../../res/drawable/atlantide.jpg","TEST6"), new CityData("TEST6", Department.Mayenne, Region.PAYS_DE_LA_LOIRE, 1,1)));
+        cities.add(new City(new Photo("../../res/drawable/atlantide.jpg","TEST7"), new CityData("TEST7", Department.Mayenne, Region.PAYS_DE_LA_LOIRE, 1,1)));
+        cities.add(new City(new Photo("../../res/drawable/atlantide.jpg","TEST8"), new CityData("TEST8", Department.Mayenne, Region.PAYS_DE_LA_LOIRE, 1,1)));
+        cities.add(new City(new Photo("../../res/drawable/atlantide.jpg","TEST9"), new CityData("TEST9", Department.Mayenne, Region.PAYS_DE_LA_LOIRE, 1,1)));
+        cities.add(new City(new Photo("../../res/drawable/atlantide.jpg","TEST10"), new CityData("TEST10", Department.Mayenne, Region.PAYS_DE_LA_LOIRE, 1,1)));
+
 
         CityAdaptater cityAdaptater = new CityAdaptater(cities);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
