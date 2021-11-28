@@ -6,6 +6,6 @@ public class OcrErrorException extends Exception{
     @Nullable
     @Override
     public String getMessage() {
-        return super.getMessage() + " bonjour non ";
+        return super.getMessage() + " Aucun texte retrouvé ";
     }
 }

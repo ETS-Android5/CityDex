@@ -3,8 +3,11 @@ package com.tlbail.ptuts3androidapp.Controller;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.res.Configuration;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.TextView;
 
 import com.tlbail.ptuts3androidapp.R;
 import com.tlbail.ptuts3androidapp.View.BackgroundOfPhoto.BackgroundRecyclerView;
@@ -12,6 +15,7 @@ import com.tlbail.ptuts3androidapp.View.BackgroundOfPhoto.BackgroundRecyclerView
 public class HomeActivity extends AppCompatActivity {
 
     private BackgroundRecyclerView backgroundRecyclerView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

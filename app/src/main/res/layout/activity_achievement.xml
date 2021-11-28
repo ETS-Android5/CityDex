@@ -8,7 +8,7 @@
 
     <RelativeLayout
         android:layout_width="0dp"
-        android:layout_height="117dp"
+        android:layout_height="80dp"
         app:layout_constraintBottom_toTopOf="@+id/succesRecyclerView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -17,8 +17,8 @@
         <TextView
             android:id="@+id/textView"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="Succes"
+            android:layout_height="wrap_content"
+            android:text="Succès"
             android:textAlignment="center"
             android:textSize="60sp" />
     </RelativeLayout>
@@ -27,10 +27,10 @@
         android:id="@+id/succesRecyclerView"
         android:layout_width="400dp"
         android:layout_height="490dp"
-        android:layout_marginBottom="20dp"
+        android:layout_marginBottom="56dp"
         app:layout_constraintBottom_toTopOf="@+id/buttonShowSucces"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.492"
+        app:layout_constraintHorizontal_bias="0.454"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
