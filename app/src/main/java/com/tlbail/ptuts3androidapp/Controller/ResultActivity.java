@@ -36,12 +36,11 @@ public class ResultActivity extends AppCompatActivity implements  CityFoundListe
         setContentView(R.layout.activity_result);
         bindUI();
         Achievements achievements = new Achievements(this);
-        achievements.unlockAchivement(getString(R.string.achievement_le_commencement));
-
         Uri uri = getUri();
         if(uri == null) return;
         photoToCityDecorator = new PhotoToCityDecorator(this, uri);
         photoToCityDecorator.subscribeOnCityFound(this);
+        photoToCityDecorator.subscribeOnCityFound(achievements);
         photoToCityDecorator.start();
 
     }

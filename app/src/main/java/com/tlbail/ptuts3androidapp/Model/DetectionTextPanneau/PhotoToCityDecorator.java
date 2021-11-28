@@ -51,12 +51,12 @@ public class PhotoToCityDecorator extends PhotoToCity{
 
     @Override
     public void updateListener(City city) {
-        super.updateListener(city);
         if(city == null){
             deleteCityFromLocalStorage();
         }else {
             addCityToOwnCity(city);
         }
+        super.updateListener(city);
     }
 
     private void deleteCityFromLocalStorage() {

@@ -43,7 +43,8 @@ public class BackgroundRecyclerView {
         ) {
 
             try {
-                bitmaps.add(MediaStore.Images.Media.getBitmap(context.getContentResolver(),  city.getPhoto().getPhotoUri()));
+                if(city.getPhoto() != null && city.getPhoto().getPhotoUri() != null)
+                    bitmaps.add(MediaStore.Images.Media.getBitmap(context.getContentResolver(),  city.getPhoto().getPhotoUri()));
             } catch (IOException e) {
                 e.printStackTrace();
             }
