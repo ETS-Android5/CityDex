@@ -7,10 +7,13 @@
 
     <TextView
         android:id="@+id/textviewachievementdetail"
-        android:layout_width="211dp"
-        android:layout_height="42dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
-        android:text="TextView"
+        android:paddingBottom="10dp"
+        android:text="Titre du succès"
+        android:gravity="center"
+        android:textAlignment="center"
         android:textColor="#000000"
         android:textSize="34sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -19,13 +22,16 @@
 
     <TextView
         android:id="@+id/textviewDescriptionAchievement"
-        android:layout_width="213dp"
-        android:layout_height="111dp"
-        android:layout_marginTop="4dp"
-        android:text="TextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="7dp"
+        android:gravity="center"
+        android:paddingHorizontal="5dp"
+        android:paddingBottom="15dp"
+        android:text="Description du succès"
+        android:textAlignment="center"
         android:textColor="#000000"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textviewachievementdetail" />
 </androidx.constraintlayout.widget.ConstraintLayout>
