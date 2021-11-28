@@ -3,8 +3,9 @@ package com.tlbail.ptuts3androidapp.Model.City;
 import com.tlbail.ptuts3androidapp.Model.Photo.Photo;
 
 import java.io.Serializable;
+import java.util.Comparator;
 
-public class City implements Serializable, Comparable<City> {
+public class City implements Serializable {
 
     private Photo photo;
     private CityData cityData;
@@ -28,9 +29,24 @@ public class City implements Serializable, Comparable<City> {
         return cityData.getName();
     }
 
+    public static Comparator<City> ComparatorName = new Comparator<City>() {
+        @Override
+        public int compare(City c1, City c2) {
+            return c1.getCityData().getName().compareTo(c2.cityData.getName());
+        }
+    };
 
-    @Override
-    public int compareTo(City city) {
-        return this.getCityData().getName().compareTo(city.cityData.getName());
-    }
+    public static Comparator<City> ComparatorDpt = new Comparator<City>() {
+        @Override
+        public int compare(City c1, City c2) {
+            return c1.getCityData().getDepartment().getDepartmentName().compareTo(c2.cityData.getDepartment().getDepartmentName());
+        }
+    };
+
+    public static Comparator<City> ComparatorRegion = new Comparator<City>() {
+        @Override
+        public int compare(City c1, City c2) {
+            return c1.getCityData().getRegion().getName().compareTo(c2.cityData.getRegion().getName());
+        }
+    };
 }

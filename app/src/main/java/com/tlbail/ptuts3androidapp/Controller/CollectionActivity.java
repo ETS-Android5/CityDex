@@ -21,8 +21,11 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewTreeObserver;
 import android.widget.Adapter;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.tlbail.ptuts3androidapp.Model.City.City;
@@ -45,7 +48,7 @@ public class CollectionActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private EditText cityToSearch;
     private User user;
-    private Button tri;
+    private Spinner spinner;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +59,7 @@ public class CollectionActivity extends AppCompatActivity {
 
         setupRecyclerView();
         setupListener();
+        setUpSpinner();
 
     }
 
@@ -63,7 +67,55 @@ public class CollectionActivity extends AppCompatActivity {
     private void bindUI() {
         recyclerView = findViewById(R.id.gallerieRecyclerView);
         cityToSearch = findViewById(R.id.cityToSearch);
-        tri = findViewById(R.id.tri);
+        spinner = findViewById(R.id.spinner);
+    }
+
+    private void setUpSpinner(){
+        List<String> critereDeTri = new ArrayList<>();
+
+        critereDeTri.add("Par ordre d'obtention");
+        critereDeTri.add("Par ordre alphabétique");
+        critereDeTri.add("Par département");
+        critereDeTri.add("Par région");
+
+        ArrayAdapter<String> dataAdapterR = new ArrayAdapter<String>(this, R.layout.support_simple_spinner_dropdown_item,critereDeTri);
+        spinner.setAdapter(dataAdapterR);
+
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                String value = String.valueOf(spinner.getSelectedItem());
+                List<City> cities = new ArrayList<>(user.getOwnedCity());
+
+                if(value.compareTo("Par ordre d'obtention") == 0){
+                    CityAdaptater cityAdaptater = new CityAdaptater(user.getOwnedCity(), recyclerView);
+                    recyclerView.setAdapter(cityAdaptater);
+                }
+
+                if(value.compareTo("Par ordre alphabétique") == 0){
+                    Collections.sort(cities, City.ComparatorName);
+                    CityAdaptater cityAdaptater = new CityAdaptater(cities, recyclerView);
+                    recyclerView.setAdapter(cityAdaptater);
+                }
+
+                if(value.compareTo("Par département") == 0){
+                    Collections.sort(cities, City.ComparatorDpt);
+                    CityAdaptater cityAdaptater = new CityAdaptater(cities, recyclerView);
+                    recyclerView.setAdapter(cityAdaptater);
+                }
+
+                if(value.compareTo("Par région") == 0){
+                    Collections.sort(cities, City.ComparatorRegion);
+                    CityAdaptater cityAdaptater = new CityAdaptater(cities, recyclerView);
+                    recyclerView.setAdapter(cityAdaptater);
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+                //Nothing to do
+            }
+        });
     }
 
     private void setupListener(){
@@ -78,7 +130,6 @@ public class CollectionActivity extends AppCompatActivity {
 
                 String citySearched = cityToSearch.getText().toString();
 
-
                 for(int j = 0; j < user.getOwnedCity().size(); j++){
 
                     if(user.getOwnedCity().get(j).getCityData().getName().toUpperCase().compareTo(citySearched.toUpperCase()) == 0
@@ -86,21 +137,11 @@ public class CollectionActivity extends AppCompatActivity {
                         recyclerView.smoothScrollToPosition(j);
                     }
                 }
-
             }
 
             @Override
             public void afterTextChanged(Editable editable) {
 
-            }
-        });
-
-        tri.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Collections.sort(user.getOwnedCity());
-                CityAdaptater cityAdaptater = new CityAdaptater(user.getOwnedCity(), recyclerView);
-                recyclerView.setAdapter(cityAdaptater);
             }
         });
     }
@@ -112,17 +153,17 @@ public class CollectionActivity extends AppCompatActivity {
         List<City> cities = user.getOwnedCity();
 
         cities.add(new City(new Photo("../../res/drawable/atlantide.jpg","LAVAL"), new CityData("LAVAL", Department.Mayenne, Region.PAYS_DE_LA_LOIRE, 1,1)));
-        cities.add(new City(new Photo("../../res/drawable/atlantide.jpg","PARIS"), new CityData("PARIS", Department.Mayenne, Region.PAYS_DE_LA_LOIRE, 1,1)));
-        cities.add(new City(new Photo("../../res/drawable/atlantide.jpg","MARSEILLE"), new CityData("MARSEILLE", Department.Mayenne, Region.PAYS_DE_LA_LOIRE, 1,1)));
-        cities.add(new City(new Photo("../../res/drawable/atlantide.jpg","LYON"), new CityData("LYON", Department.Mayenne, Region.PAYS_DE_LA_LOIRE, 1,1)));
-        cities.add(new City(new Photo("../../res/drawable/atlantide.jpg","LILLE"), new CityData("LILLE", Department.Mayenne, Region.PAYS_DE_LA_LOIRE, 1,1)));
-        cities.add(new City(new Photo("../../res/drawable/atlantide.jpg","ANGERS"), new CityData("ANGERS", Department.Mayenne, Region.PAYS_DE_LA_LOIRE, 1,1)));
-        cities.add(new City(new Photo("../../res/drawable/atlantide.jpg","BREST"), new CityData("BREST", Department.Mayenne, Region.PAYS_DE_LA_LOIRE, 1,1)));
-        cities.add(new City(new Photo("../../res/drawable/atlantide.jpg","POITIERS"), new CityData("POITIERS", Department.Mayenne, Region.PAYS_DE_LA_LOIRE, 1,1)));
-        cities.add(new City(new Photo("../../res/drawable/atlantide.jpg","LE MANS"), new CityData("LE MANS", Department.Mayenne, Region.PAYS_DE_LA_LOIRE, 1,1)));
-        cities.add(new City(new Photo("../../res/drawable/atlantide.jpg","NANTES"), new CityData("NANTES", Department.Mayenne, Region.PAYS_DE_LA_LOIRE, 1,1)));
-        cities.add(new City(new Photo("../../res/drawable/atlantide.jpg","BORDEAUX"), new CityData("BORDEAUX", Department.Mayenne, Region.PAYS_DE_LA_LOIRE, 1,1)));
-        cities.add(new City(new Photo("../../res/drawable/atlantide.jpg","RICHELIEU"), new CityData("RICHELIEU", Department.Mayenne, Region.PAYS_DE_LA_LOIRE, 1,1)));
+        cities.add(new City(new Photo("../../res/drawable/atlantide.jpg","PARIS"), new CityData("PARIS", Department.SeineSaintDenis, Region.ILE_DE_FRANCE, 1,1)));
+        cities.add(new City(new Photo("../../res/drawable/atlantide.jpg","MARSEILLE"), new CityData("MARSEILLE", Department.BouchesDuRhone, Region.PROVENCE_ALPES_COTE_D_AZUR, 1,1)));
+        cities.add(new City(new Photo("../../res/drawable/atlantide.jpg","LYON"), new CityData("LYON", Department.Rhone, Region.AUVERGNE_RHONES_ALPES, 1,1)));
+        cities.add(new City(new Photo("../../res/drawable/atlantide.jpg","LILLE"), new CityData("LILLE", Department.Nord, Region.HAUTS_DE_FRANCE, 1,1)));
+        cities.add(new City(new Photo("../../res/drawable/atlantide.jpg","ANGERS"), new CityData("ANGERS", Department.MaineEtLoire, Region.PAYS_DE_LA_LOIRE, 1,1)));
+        cities.add(new City(new Photo("../../res/drawable/atlantide.jpg","BREST"), new CityData("BREST", Department.Finistere, Region.BRETAGNE, 1,1)));
+        cities.add(new City(new Photo("../../res/drawable/atlantide.jpg","POITIERS"), new CityData("POITIERS", Department.Vienne, Region.NOUVELLE_AQUITAINE, 1,1)));
+        cities.add(new City(new Photo("../../res/drawable/atlantide.jpg","LE MANS"), new CityData("LE MANS", Department.Sarthe, Region.PAYS_DE_LA_LOIRE, 1,1)));
+        cities.add(new City(new Photo("../../res/drawable/atlantide.jpg","NANTES"), new CityData("NANTES", Department.LoireAtlantique, Region.PAYS_DE_LA_LOIRE, 1,1)));
+        cities.add(new City(new Photo("../../res/drawable/atlantide.jpg","BORDEAUX"), new CityData("BORDEAUX", Department.Gironde, Region.NOUVELLE_AQUITAINE, 1,1)));
+        cities.add(new City(new Photo("../../res/drawable/atlantide.jpg","RICHELIEU"), new CityData("RICHELIEU", Department.IndreEtLoire, Region.CENTRE_VAL_DE_LOIRE, 1,1)));
 
         CityAdaptater cityAdaptater = new CityAdaptater(cities, recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
