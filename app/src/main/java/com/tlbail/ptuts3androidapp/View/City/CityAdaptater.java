@@ -1,9 +1,14 @@
 package com.tlbail.ptuts3androidapp.View.City;
 
+import android.animation.Animator;
+import android.animation.AnimatorSet;
+import android.animation.ObjectAnimator;
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -18,10 +23,12 @@ public class CityAdaptater extends RecyclerView.Adapter<CityViewHolder> {
 
 
     private List<City> cities;
+    private RecyclerView recyclerView;
 
-    public CityAdaptater(List<City> cities) {
+    public CityAdaptater(List<City> cities, RecyclerView recyclerView) {
         super();
         this.cities = cities;
+        this.recyclerView = recyclerView;
     }
 
     @NonNull
@@ -36,8 +43,14 @@ public class CityAdaptater extends RecyclerView.Adapter<CityViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull CityViewHolder holder, int position) {
         holder.updateViewHolder(cities.get(position));
+        holder.getItemView().setMinimumHeight(recyclerView.getHeight()/7);
+        holder.getItemView().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                recyclerView.getLayoutManager().smoothScrollToPosition(recyclerView, new RecyclerView.State(), holder.getAdapterPosition());
+            }
+        });
     }
-
 
     @Override
     public int getItemCount() {

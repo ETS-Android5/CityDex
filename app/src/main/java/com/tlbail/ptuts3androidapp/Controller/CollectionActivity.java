@@ -1,15 +1,23 @@
 package com.tlbail.ptuts3androidapp.Controller;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.LinearSmoothScroller;
 import androidx.recyclerview.widget.LinearSnapHelper;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.SnapHelper;
 
+import android.graphics.PointF;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.util.DisplayMetrics;
+import android.util.Log;
+import android.util.TypedValue;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewTreeObserver;
 import android.widget.Adapter;
@@ -111,19 +119,47 @@ public class CollectionActivity extends AppCompatActivity {
         recyclerView.setAdapter(cityAdaptater);
         LinearSnapHelper snapHelper = new LinearSnapHelper();
         snapHelper.attachToRecyclerView(recyclerView);
-
-        recyclerView.setOnScrollListener(new RecyclerView.OnScrollListener() {
+        recyclerView.setLayoutManager(new LinearLayoutManager(this){
             @Override
-            public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
-                super.onScrollStateChanged(recyclerView, newState);
-                LinearLayoutManager llm = (LinearLayoutManager) recyclerView.getLayoutManager();
-                for (int i = 0; i < llm.getChildCount(); i++) {
-                    if (llm.getChildAt(i) != null) llm.getChildAt(i).animate().translationX(0);
-                }
-                View v = llm.getChildAt((llm.findLastCompletelyVisibleItemPosition() - llm.findFirstCompletelyVisibleItemPosition())  / 2 +1);
-                if (v!=null) v.animate().translationX(-100);
-                Log.i("test", cities.get((llm.findLastCompletelyVisibleItemPosition() - llm.findFirstCompletelyVisibleItemPosition())  / 2+1).getCityData().getName());
+            public void smoothScrollToPosition(RecyclerView recyclerView, RecyclerView.State state, int position) {
+                LinearSmoothScroller smoothScroller = new LinearSmoothScroller(getApplicationContext()){
+                    @Override
+                    protected int calculateTimeForScrolling(int dx) {
+                        return dx/5;
+                    }
+                };
+                smoothScroller.setTargetPosition(position);
+                startSmoothScroll(smoothScroller);
+            }
+        });
+        recyclerView.setAdapter(cityAdaptater);
+
+        recyclerView.addOnChildAttachStateChangeListener(new RecyclerView.OnChildAttachStateChangeListener() {
+            @Override
+            public void onChildViewAttachedToWindow(@NonNull View view) {
+                collectionAnimation(snapHelper);
+            }
+
+            @Override
+            public void onChildViewDetachedFromWindow(@NonNull View view) {
+                collectionAnimation(snapHelper);
             }
         });
     }
+
+    private void collectionAnimation(SnapHelper snapHelper) {
+        RecyclerView.LayoutManager lm = recyclerView.getLayoutManager();
+        int snappedPosition = lm.getPosition(snapHelper.findSnapView(lm));
+        for (int i = 0; i < lm.getChildCount(); i++) {
+            if (lm.getChildAt(i) == null) continue;
+            else if (lm.getChildAt(i).equals(lm.findViewByPosition(snappedPosition))){
+                snapHelper.findSnapView(lm).animate().translationX(0);
+            }
+            else {
+                int relativePos = Math.abs(lm.getPosition(lm.getChildAt(i))-snappedPosition);
+                lm.getChildAt(i).animate().translationX(50*relativePos);
+            }
+        }
+    }
+
 }
