@@ -19,7 +19,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PhotoToCity {
+public abstract class PhotoToCity {
 
 
     public List<CityFoundListener> cityFoundListeners = new ArrayList<>();
@@ -122,18 +122,14 @@ public class PhotoToCity {
 
     private void finish() {
         if(ocrHaveCompleted && locationhaveCompleted){
-            updateListener(createCity());
+            updateListener(createCity(locationResult));
         }
     }
 
-    private City createCity() {
-        //Todo créer une vrai ville
-        if(dataIsUncorrect()) return null;
-        City city = new City(null, new CityData(locationResult, Department.MaineEtLoire, Region.PAYS_DE_LA_LOIRE, 1000, 1000));
-        return city;
-    }
+    protected abstract City createCity(String city);
 
-    private boolean dataIsUncorrect() {
+
+    protected boolean dataIsUncorrect() {
         //Todo check si la location est bonne et si on a bien trouvé une ville
         return locationResult == null || locationResult.isEmpty() ||
                 resultOcr == null || resultOcr.isEmpty();
