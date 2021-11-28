@@ -12,6 +12,9 @@
         android:paddingTop="10dp"
         android:text="Réglages"
         android:textAlignment="center"
-        android:textSize="60sp" />
+        android:textSize="60sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
