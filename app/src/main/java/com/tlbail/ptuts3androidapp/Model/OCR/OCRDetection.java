@@ -9,6 +9,7 @@ import android.graphics.RectF;
 import android.os.Environment;
 
 import com.googlecode.tesseract.android.TessBaseAPI;
+import com.tlbail.ptuts3androidapp.Model.DetectionTextPanneau.PhotoToCity;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -40,6 +41,29 @@ public class OCRDetection {
             }
         }).start();
     }
+
+    public void runOcrResult(PhotoToCity photoToCity,final Bitmap bitmap, RectF rectF) {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    Bitmap bitmape = Bitmap.createScaledBitmap(bitmap, 300, 300, true);
+                    bitmape = cropImage(bitmape, rectF);
+                    bitmape = toGrayscale(bitmape);
+
+                    mTess.setImage(bitmape);
+                    result ="";
+                    result = mTess.getUTF8Text();
+                    photoToCity.setOcrResult(result);
+                } catch (OcrErrorException e) {
+                    photoToCity.setOcrResult("");
+                    e.printStackTrace();
+                }
+
+            }
+        }).start();
+    }
+
 
     public void onDestroy() {
         if (mTess != null)

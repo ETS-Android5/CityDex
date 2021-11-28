@@ -8,7 +8,8 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.tlbail.ptuts3androidapp.Model.CityApi.City;
+import com.tlbail.ptuts3androidapp.Model.City.City;
+import com.tlbail.ptuts3androidapp.Model.City.CityData;
 import com.tlbail.ptuts3androidapp.R;
 
 import java.util.List;

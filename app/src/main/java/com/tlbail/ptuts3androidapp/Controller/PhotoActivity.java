@@ -35,6 +35,7 @@ public class PhotoActivity extends AppCompatActivity {
         bindUI();
     }
 
+
     private void bindUI() {
         fragmentPhoto = findViewById(R.id.fragmentPhotoContainerView);
         constraintLayout = findViewById(R.id.rootactivityPhotoConstraintLayout);

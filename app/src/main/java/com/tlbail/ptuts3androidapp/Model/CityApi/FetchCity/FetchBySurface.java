@@ -1,6 +1,6 @@
 package com.tlbail.ptuts3androidapp.Model.CityApi.FetchCity;
 
-import com.tlbail.ptuts3androidapp.Model.CityApi.City;
+import com.tlbail.ptuts3androidapp.Model.City.CityData;
 import com.tlbail.ptuts3androidapp.Model.CityApi.Department;
 import com.tlbail.ptuts3androidapp.Model.CityApi.Region;
 import com.google.gson.JsonElement;
@@ -16,7 +16,7 @@ public class FetchBySurface extends FetchCity{
     }
 
     @Override
-    public City transformJsonElementToCityObject(JsonElement jsonElement) {
+    public CityData transformJsonElementToCityObject(JsonElement jsonElement) {
         JsonObject cityJsonObject = jsonElement.getAsJsonObject();
         String name = cityJsonObject.get("nom").getAsString();
         Department department = Department.valueOfByCode(cityJsonObject.get("codeDepartement").getAsString());
@@ -24,6 +24,6 @@ public class FetchBySurface extends FetchCity{
         float surface = cityJsonObject.get("surface").getAsFloat();
         int inhabitants = (cityJsonObject.get("population") == null) ? 0 : cityJsonObject.get("population").getAsInt();
         if(name == null || department == null || region == null || surfaceThreshold > surface) return null;
-        return new City(name, department, region, surface, inhabitants);
+        return new CityData(name, department, region, surface, inhabitants);
     }
 }

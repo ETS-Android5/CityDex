@@ -3,10 +3,16 @@ package com.tlbail.ptuts3androidapp.Model.Achievement;
 import android.content.Intent;
 import android.util.Log;
 import android.view.Gravity;
+import android.widget.Toast;
 
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.gms.tasks.OnFailureListener;
 import com.tlbail.ptuts3androidapp.R;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
@@ -75,14 +81,27 @@ public class GoogleAchievementManager implements OnCompleteListener<GoogleSignIn
     }
 
     public void showAchievements() {
-        Games.getAchievementsClient(appCompatActivity, GoogleSignIn.getLastSignedInAccount(appCompatActivity))
-                .getAchievementsIntent()
-                .addOnSuccessListener(new OnSuccessListener<Intent>() {
+        System.out.println("ouverture des succès ..");
+        Toast.makeText(appCompatActivity, "Ouverture des succès ", Toast.LENGTH_LONG).show();
+        Task<Intent> intent = getAchievementsClient().getAchievementsIntent();
+        if(intent == null) {
+            System.err.println("erreur ouverture succès...");
+            return;
+        }
+
+        intent.addOnSuccessListener(new OnSuccessListener<Intent>() {
                     @Override
                     public void onSuccess(Intent intent) {
                         appCompatActivity.startActivityForResult(intent, RC_ACHIEVEMENT_UI);
                     }
-                });
+        });
+        intent.addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                System.err.println("echec " + e.getMessage());
+                Toast.makeText(appCompatActivity, e.getMessage(), Toast.LENGTH_LONG).show();
+            }
+        });
     }
 
 

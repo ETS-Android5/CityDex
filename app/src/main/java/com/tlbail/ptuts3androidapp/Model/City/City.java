@@ -9,7 +9,6 @@ public class City implements Serializable {
     private Photo photo;
     private CityData cityData;
 
-
     public City(Photo photo, CityData cityData) {
         this.photo = photo;
         this.cityData = cityData;
@@ -26,10 +25,7 @@ public class City implements Serializable {
 
     @Override
     public String toString() {
-        return "City{" +
-                "photo=" + photo +
-                ", cityData=" + cityData +
-                '}';
+        return cityData.getName();
     }
 
 
