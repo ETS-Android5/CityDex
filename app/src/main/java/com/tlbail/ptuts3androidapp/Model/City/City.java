@@ -4,7 +4,7 @@ import com.tlbail.ptuts3androidapp.Model.Photo.Photo;
 
 import java.io.Serializable;
 
-public class City implements Serializable {
+public class City implements Serializable, Comparable<City> {
 
     private Photo photo;
     private CityData cityData;
@@ -29,4 +29,8 @@ public class City implements Serializable {
     }
 
 
+    @Override
+    public int compareTo(City city) {
+        return this.getCityData().getName().compareTo(city.cityData.getName());
+    }
 }
