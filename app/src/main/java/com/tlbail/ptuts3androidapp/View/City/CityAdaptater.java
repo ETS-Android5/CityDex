@@ -31,6 +31,10 @@ public class CityAdaptater extends RecyclerView.Adapter<CityViewHolder> {
         this.recyclerView = recyclerView;
     }
 
+    public List<City> getCities() {
+        return cities;
+    }
+
     @NonNull
     @Override
     public CityViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -44,6 +48,7 @@ public class CityAdaptater extends RecyclerView.Adapter<CityViewHolder> {
     public void onBindViewHolder(@NonNull CityViewHolder holder, int position) {
         holder.updateViewHolder(cities.get(position));
         holder.getItemView().setMinimumHeight(recyclerView.getHeight()/7);
+        Log.e(recyclerView.getHeight()+"", recyclerView.getHeight()/7+"");
         holder.getItemView().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

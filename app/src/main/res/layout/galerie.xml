@@ -38,8 +38,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView"
         android:clipToPadding="false"
-        android:paddingBottom="280dp"
-        android:paddingTop="280dp"/>
+        android:paddingBottom="255.5dp"
+        android:paddingTop="255.5dp"/>
 
     <Spinner
         android:id="@+id/spinner"

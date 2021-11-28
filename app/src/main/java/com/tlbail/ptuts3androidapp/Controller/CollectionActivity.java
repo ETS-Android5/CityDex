@@ -49,6 +49,7 @@ public class CollectionActivity extends AppCompatActivity {
     private EditText cityToSearch;
     private User user;
     private Spinner spinner;
+    private SnapHelper snapHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,7 +89,7 @@ public class CollectionActivity extends AppCompatActivity {
                 List<City> cities = new ArrayList<>(user.getOwnedCity());
 
                 if(value.compareTo("Par ordre d'obtention") == 0){
-                    CityAdaptater cityAdaptater = new CityAdaptater(user.getOwnedCity(), recyclerView);
+                    CityAdaptater cityAdaptater = new CityAdaptater(cities, recyclerView);
                     recyclerView.setAdapter(cityAdaptater);
                 }
 
@@ -130,11 +131,15 @@ public class CollectionActivity extends AppCompatActivity {
 
                 String citySearched = cityToSearch.getText().toString();
 
-                for(int j = 0; j < user.getOwnedCity().size(); j++){
+                List<City> cities = ((CityAdaptater)recyclerView.getAdapter()).getCities();
+                RecyclerView.LayoutManager lm = recyclerView.getLayoutManager();
 
-                    if(user.getOwnedCity().get(j).getCityData().getName().toUpperCase().compareTo(citySearched.toUpperCase()) == 0
-                    || user.getOwnedCity().get(j).getCityData().getName().toUpperCase().startsWith(citySearched.toUpperCase())){
+                for(int j = 0; j < cities.size(); j++){
+
+                    if(cities.get(j).getCityData().getName().toUpperCase().compareTo(citySearched.toUpperCase()) == 0
+                    || (cities.get(j).getCityData().getName().toUpperCase().startsWith(citySearched.toUpperCase()) && !citySearched.equals(""))){
                         recyclerView.smoothScrollToPosition(j);
+                        break;
                     }
                 }
             }
@@ -168,7 +173,7 @@ public class CollectionActivity extends AppCompatActivity {
         CityAdaptater cityAdaptater = new CityAdaptater(cities, recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(cityAdaptater);
-        LinearSnapHelper snapHelper = new LinearSnapHelper();
+        snapHelper = new LinearSnapHelper();
         snapHelper.attachToRecyclerView(recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this){
             @Override
