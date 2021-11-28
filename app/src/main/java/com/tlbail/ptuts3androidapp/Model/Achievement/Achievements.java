@@ -559,7 +559,7 @@ public class Achievements implements CityFoundListener {
 
     @Override
     public void onCityFoundt(City city) {
-        if(city != null)return;
+        if(city == null)return;
         unlockAchievementByCityFound(city);
     }
 

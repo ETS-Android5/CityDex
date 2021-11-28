@@ -51,8 +51,9 @@ public class PhotoToCityDecorator extends PhotoToCity{
 
     @Override
     public void updateListener(City city) {
-        if(city == null){
+        if(city == null || user.getOwnedCity().contains(city)){
             deleteCityFromLocalStorage();
+            city = null;
         }else {
             addCityToOwnCity(city);
         }
