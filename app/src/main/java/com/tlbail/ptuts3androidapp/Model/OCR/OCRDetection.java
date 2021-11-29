@@ -49,7 +49,7 @@ public class OCRDetection {
                 try {
                     Bitmap bitmape = Bitmap.createScaledBitmap(bitmap, 300, 300, true);
                     bitmape = cropImage(bitmape, rectF);
-                    bitmape = toGrayscale(bitmape);
+                    bitmape = new SignImage().getGrayscaleCroppedSign(bitmape);
 
                     mTess.setImage(bitmape);
                     result ="";
