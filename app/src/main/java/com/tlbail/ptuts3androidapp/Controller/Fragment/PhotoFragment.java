@@ -3,6 +3,8 @@ package com.tlbail.ptuts3androidapp.Controller.Fragment;
 import static android.content.Context.CAMERA_SERVICE;
 
 import android.Manifest;
+import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.SurfaceTexture;
 import android.hardware.camera2.CameraAccessException;
@@ -17,12 +19,18 @@ import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Surface;
 import android.view.TextureView;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.PopupWindow;
 
+import com.tlbail.ptuts3androidapp.Controller.CollectionActivity;
+import com.tlbail.ptuts3androidapp.Controller.HomeActivity;
+import com.tlbail.ptuts3androidapp.Controller.PhotoActivity;
 import com.tlbail.ptuts3androidapp.R;
 
 import java.util.Arrays;
@@ -127,6 +135,7 @@ public class PhotoFragment extends Fragment implements TextureView.SurfaceTextur
             ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE}, PackageManager.PERMISSION_GRANTED);
 
             if (ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+                openPopUPRestartActivity();
                 return;
             }
             myCameraManager.openCamera(myCameraID, myStateCallBack, null);
@@ -135,6 +144,25 @@ public class PhotoFragment extends Fragment implements TextureView.SurfaceTextur
         catch (Exception e){
             e.printStackTrace();
         }
+    }
+
+    private void openPopUPRestartActivity() {
+        LayoutInflater layoutInflater = (LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+
+        PopupWindow pw = new PopupWindow(layoutInflater.inflate(R.layout.popupwindowlayout, null, false), getView().getWidth(), getView().getHeight(), true);
+        pw.showAtLocation(getActivity().findViewById(R.id.mainFragmentPhoto), Gravity.CENTER, 0, 0);
+
+        Button button = pw.getContentView().findViewById(R.id.buttonrestartPopUpWindow);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent activityIntent = new Intent(getActivity(), PhotoActivity.class);
+                getActivity().startActivity(activityIntent);
+            }
+        });
+
+
+
     }
 
 
@@ -169,6 +197,8 @@ public class PhotoFragment extends Fragment implements TextureView.SurfaceTextur
         }
 
     }
+
+
 
     @Override
     public void onSurfaceTextureAvailable(@NonNull SurfaceTexture surfaceTexture, int i, int i1) {

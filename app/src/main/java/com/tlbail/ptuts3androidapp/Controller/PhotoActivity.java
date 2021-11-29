@@ -82,4 +82,9 @@ public class PhotoActivity extends AppCompatActivity {
         constraintLayout.addView(child);
     }
 
+    @Override
+    public void onBackPressed() {
+        Intent activityIntent = new Intent(PhotoActivity.this, HomeActivity.class);
+        PhotoActivity.this.startActivity(activityIntent);
+    }
 }
