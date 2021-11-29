@@ -11,7 +11,7 @@
         android:id="@+id/img_ville"
         android:layout_width="316dp"
         android:layout_height="153dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="52dp"
         android:scaleType="fitCenter"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.505"
@@ -21,8 +21,9 @@
 
     <FrameLayout
         android:id="@+id/frameLayout4"
-        android:layout_width="317dp"
-        android:layout_height="104dp"
+        android:layout_width="323dp"
+        android:layout_height="131dp"
+        android:layout_marginTop="10sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
