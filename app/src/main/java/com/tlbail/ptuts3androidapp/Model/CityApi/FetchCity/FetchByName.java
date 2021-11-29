@@ -1,10 +1,14 @@
 package com.tlbail.ptuts3androidapp.Model.CityApi.FetchCity;
 
+import android.util.Log;
+
 import com.tlbail.ptuts3androidapp.Model.City.CityData;
 import com.tlbail.ptuts3androidapp.Model.CityApi.Department;
 import com.tlbail.ptuts3androidapp.Model.CityApi.Region;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
+
+import java.util.Locale;
 
 public class FetchByName extends FetchCity{
 

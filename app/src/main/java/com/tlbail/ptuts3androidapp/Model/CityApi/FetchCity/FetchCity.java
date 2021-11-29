@@ -14,11 +14,25 @@ import java.util.List;
 
 import javax.net.ssl.HttpsURLConnection;
 
+
 public abstract class FetchCity {
     protected String request;
+    private  List<CityData> cities;
 
     public List<CityData> getCities(){
-        return transformJsonArrayToCityList(getResultRequest());
+        try {
+            Thread t = new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    cities = transformJsonArrayToCityList(getResultRequest());
+                }
+            });
+            t.start();
+            t.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        return cities;
     }
 
     protected JsonArray getResultRequest(){
