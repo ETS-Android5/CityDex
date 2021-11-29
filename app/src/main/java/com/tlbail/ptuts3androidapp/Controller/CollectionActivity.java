@@ -182,6 +182,7 @@ public class CollectionActivity extends AppCompatActivity {
         snapHelper = new LinearSnapHelper();
         snapHelper.attachToRecyclerView(recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this){
+
             @Override
             public void smoothScrollToPosition(RecyclerView recyclerView, RecyclerView.State state, int position) {
                 LinearSmoothScroller smoothScroller = new LinearSmoothScroller(getApplicationContext()){
@@ -196,7 +197,16 @@ public class CollectionActivity extends AppCompatActivity {
         });
         recyclerView.setAdapter(cityAdaptater);
 
+        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                collectionAnimation(snapHelper);
+            }
+        });
+
         recyclerView.addOnChildAttachStateChangeListener(new RecyclerView.OnChildAttachStateChangeListener() {
+
             @Override
             public void onChildViewAttachedToWindow(@NonNull View view) {
                 collectionAnimation(snapHelper);
