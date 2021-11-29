@@ -8,7 +8,7 @@ import com.google.gson.JsonObject;
 
 public class FetchByDepartment extends FetchCity{
 
-    public FetchByDepartment(FecthCityListener fecthCityListener, Department department){
+    public FetchByDepartment(FetchCityListener fecthCityListener, Department department){
         super(fecthCityListener);
         this.request = "https://geo.api.gouv.fr/departements/" + department.getPostalCode() + "/communes?fields=nom,population,surface,codeDepartement,region";
     }

@@ -16,11 +16,11 @@ import javax.net.ssl.HttpsURLConnection;
 
 public abstract class FetchCity extends AsyncTask<Void, Void, List<CityData>> {
     protected String request;
-    private FecthCityListener fecthCityListener;
+    private FetchCityListener fecthCityListener;
 
 
-    public FetchCity(FecthCityListener fecthCityListener) {
-        this.fecthCityListener = fecthCityListener;
+    public FetchCity(FetchCityListener fecthCityListener) {
+            this.fecthCityListener = fecthCityListener;
     }
 
     @Override

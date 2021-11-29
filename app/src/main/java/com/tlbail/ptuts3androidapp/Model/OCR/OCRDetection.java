@@ -50,7 +50,6 @@ public class OCRDetection {
                     Bitmap bitmape = Bitmap.createScaledBitmap(bitmap, 300, 300, true);
                     bitmape = cropImage(bitmape, rectF);
                     bitmape = new SignImage().getGrayscaleCroppedSign(bitmape);
-
                     mTess.setImage(bitmape);
                     result ="";
                     result = mTess.getUTF8Text();

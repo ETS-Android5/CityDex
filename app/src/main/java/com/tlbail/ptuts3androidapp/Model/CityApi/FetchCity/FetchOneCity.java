@@ -10,7 +10,7 @@ public class FetchOneCity extends FetchCity{
 
     private String name;
 
-    public FetchOneCity(FecthCityListener fecthCityListener, String name, Department department){
+    public FetchOneCity(FetchCityListener fecthCityListener, String name, Department department){
         super(fecthCityListener);
         this.name = name;
         this.request = "https://geo.api.gouv.fr/departements/"+ department.getPostalCode() +"/communes?&fields=nom,population,surface,codeDepartement,region";

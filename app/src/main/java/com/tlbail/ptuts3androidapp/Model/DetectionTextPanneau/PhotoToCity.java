@@ -8,22 +8,19 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.tlbail.ptuts3androidapp.Model.City.City;
 import com.tlbail.ptuts3androidapp.Model.City.CityData;
-import com.tlbail.ptuts3androidapp.Model.CityApi.Department;
-import com.tlbail.ptuts3androidapp.Model.CityApi.FetchCity.FecthCityListener;
+import com.tlbail.ptuts3androidapp.Model.CityApi.FetchCity.FetchCityListener;
 import com.tlbail.ptuts3androidapp.Model.CityApi.FetchCity.FetchByName;
 import com.tlbail.ptuts3androidapp.Model.CityApi.FetchCity.FetchCity;
-import com.tlbail.ptuts3androidapp.Model.CityApi.Region;
 import com.tlbail.ptuts3androidapp.Model.Localisation.LocalisationManager;
 import com.tlbail.ptuts3androidapp.Model.OCR.OCRDetection;
 import com.tlbail.ptuts3androidapp.Model.OCR.OcrErrorException;
 import com.tlbail.ptuts3androidapp.Model.ObjectDetection.ObjectDetector;
-import com.tlbail.ptuts3androidapp.Model.Photo.Photo;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class PhotoToCity implements FecthCityListener {
+public abstract class PhotoToCity implements FetchCityListener {
 
 
     private static final long TIMEOUT = 10000;

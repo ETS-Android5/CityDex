@@ -4,7 +4,7 @@ import com.tlbail.ptuts3androidapp.Model.City.CityData;
 
 import java.util.List;
 
-public interface FecthCityListener {
+public interface FetchCityListener {
 
     public void onDataQueryComplete(List<CityData> cityData);
 
