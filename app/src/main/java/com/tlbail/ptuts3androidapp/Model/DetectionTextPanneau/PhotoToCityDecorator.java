@@ -10,7 +10,10 @@ import com.tlbail.ptuts3androidapp.Controller.ResultActivity;
 import com.tlbail.ptuts3androidapp.Model.City.City;
 import com.tlbail.ptuts3androidapp.Model.City.CityData;
 import com.tlbail.ptuts3androidapp.Model.City.CityLoaders.CityLocalLoader;
+import com.tlbail.ptuts3androidapp.Model.CityApi.CityFetcher;
 import com.tlbail.ptuts3androidapp.Model.CityApi.Department;
+import com.tlbail.ptuts3androidapp.Model.CityApi.FetchCity.FetchByName;
+import com.tlbail.ptuts3androidapp.Model.CityApi.FetchCity.FetchCity;
 import com.tlbail.ptuts3androidapp.Model.CityApi.Region;
 import com.tlbail.ptuts3androidapp.Model.Photo.Photo;
 import com.tlbail.ptuts3androidapp.Model.User.LocalDataLoader.UserPropertyLocalLoader;
@@ -30,6 +33,7 @@ public class PhotoToCityDecorator extends PhotoToCity{
     private Bitmap bitmap;
     private AppCompatActivity appCompatActivity;
     private User user;
+
 
     public PhotoToCityDecorator(ResultActivity appCompatActivity, Uri uri) {
         super(appCompatActivity);
@@ -67,8 +71,17 @@ public class PhotoToCityDecorator extends PhotoToCity{
     protected City createCity(String cityname) {
         //Todo créer une vrai ville
         if(dataIsUncorrect()) return null;
-        City city = new City(new Photo(uri, cityname), new CityData(cityname, Department.MaineEtLoire, Region.PAYS_DE_LA_LOIRE, 1000, 1000));
+
+        CityData cityData = getCityDataByName(cityname);
+        if(cityData == null) return null;
+
+        City city = new City(new Photo(uri, cityname), cityData);
         return city;
+    }
+
+    private CityData getCityDataByName(String cityname) {
+        FetchCity fetchCity = new FetchByName(cityname);
+        return fetchCity.getCities().get(0);
     }
 
     private void deleteCityFromLocalStorage() {

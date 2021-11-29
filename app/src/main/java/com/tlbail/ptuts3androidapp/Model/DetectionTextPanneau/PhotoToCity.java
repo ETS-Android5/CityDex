@@ -2,6 +2,7 @@ package com.tlbail.ptuts3androidapp.Model.DetectionTextPanneau;
 
 import android.graphics.Bitmap;
 import android.os.Build;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -94,7 +95,12 @@ public abstract class PhotoToCity {
             //img.setImageBitmap(bitmap);
         } catch (OcrErrorException e) {
             e.printStackTrace();
+            Toast.makeText(appCompatActivity,"aucun text trouvé !", Toast.LENGTH_LONG);
+            fail();
+
         }
+
+
     }
 
     private void startLocalisation() {

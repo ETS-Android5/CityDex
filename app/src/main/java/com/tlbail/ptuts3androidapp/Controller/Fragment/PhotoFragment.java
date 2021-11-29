@@ -86,7 +86,6 @@ public class PhotoFragment extends Fragment implements TextureView.SurfaceTextur
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
         // Inflate the layout for this fragment
         View result =  inflater.inflate(R.layout.fragment_photo, container, false);
 
@@ -183,6 +182,7 @@ public class PhotoFragment extends Fragment implements TextureView.SurfaceTextur
 
     @Override
     public boolean onSurfaceTextureDestroyed(@NonNull SurfaceTexture surfaceTexture) {
+        myCameraDevice.close();
         return false;
     }
 
