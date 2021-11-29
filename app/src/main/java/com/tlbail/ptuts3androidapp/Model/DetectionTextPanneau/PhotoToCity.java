@@ -89,12 +89,8 @@ public abstract class PhotoToCity {
     private void startOCR() {
         //ocrFromObjectDetector.runObjetDetectionAndOCR(bitmap);
         //OCR detection
-        try {
-            ocrDetection.runOcrResult(this, bitmap, objectDetector.getRect());
-            //img.setImageBitmap(bitmap);
-        } catch (OcrErrorException e) {
-            e.printStackTrace();
-        }
+        ocrDetection.runOcrResult(this, bitmap);
+        //img.setImageBitmap(bitmap);
     }
 
     private void startLocalisation() {
