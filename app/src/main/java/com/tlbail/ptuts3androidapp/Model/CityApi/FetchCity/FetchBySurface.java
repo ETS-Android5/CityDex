@@ -10,7 +10,8 @@ public class FetchBySurface extends FetchCity{
 
     private float surfaceThreshold;
 
-    public FetchBySurface(float surfaceThreshold){
+    public FetchBySurface(FecthCityListener fecthCityListener, float surfaceThreshold){
+        super(fecthCityListener);
         this.surfaceThreshold = surfaceThreshold;
         this.request = "https://geo.api.gouv.fr/communes?fields=nom,population,surface,codeDepartement,region";
     }

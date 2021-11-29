@@ -13,8 +13,15 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.net.ssl.HttpsURLConnection;
 
+
 public abstract class FetchCity extends AsyncTask<Void, Void, List<CityData>> {
     protected String request;
+    private FecthCityListener fecthCityListener;
+
+
+    public FetchCity(FecthCityListener fecthCityListener) {
+        this.fecthCityListener = fecthCityListener;
+    }
 
     @Override
     protected List<CityData> doInBackground(Void... voids) {
@@ -23,11 +30,11 @@ public abstract class FetchCity extends AsyncTask<Void, Void, List<CityData>> {
 
     @Override
     protected void onPostExecute(List<CityData> cities) {
-        
+        fecthCityListener.onDataQueryComplete(cities);
     }
 
     public List<CityData> requestCities(){
-        return transformJsonArrayToCityList(getResultRequest();
+        return transformJsonArrayToCityList(getResultRequest());
     }
 
     protected JsonArray getResultRequest(){

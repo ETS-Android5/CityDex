@@ -10,7 +10,8 @@ public class FetchByInhabitance extends FetchCity{
 
     private int inhabitantsThreshold;
 
-    public FetchByInhabitance(int inhabitantsThreshold){
+    public FetchByInhabitance(FecthCityListener fecthCityListener, int inhabitantsThreshold){
+        super(fecthCityListener);
         this.inhabitantsThreshold = inhabitantsThreshold;
         this.request = "https://geo.api.gouv.fr/communes?fields=nom,population,surface,codeDepartement,region";
     }

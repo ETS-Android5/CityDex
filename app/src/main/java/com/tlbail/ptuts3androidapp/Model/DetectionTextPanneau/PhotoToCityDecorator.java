@@ -64,20 +64,11 @@ public class PhotoToCityDecorator extends PhotoToCity{
     }
 
     @Override
-    protected City createCity(String cityname) {
+    protected City createCity(CityData cityData) {
         //Todo créer une vrai ville
-        if(dataIsUncorrect()) return null;
-
-        CityData cityData = getCityDataByName(cityname);
-        if(cityData == null) return null;
-
-        City city = new City(new Photo(uri, cityname), cityData);
+        if(dataIsUncorrect(cityData)) return null;
+        City city = new City(new Photo(uri, cityData.getName()), cityData);
         return city;
-    }
-
-    private CityData getCityDataByName(String cityname) {
-        FetchCity fetchCity = new FetchByName(cityname);
-        return fetchCity.getCities().get(0);
     }
 
     private void deleteCityFromLocalStorage() {

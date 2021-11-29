@@ -9,6 +9,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.tlbail.ptuts3androidapp.Model.City.City;
 import com.tlbail.ptuts3androidapp.Model.City.CityData;
 import com.tlbail.ptuts3androidapp.Model.CityApi.Department;
+import com.tlbail.ptuts3androidapp.Model.CityApi.FetchCity.FecthCityListener;
+import com.tlbail.ptuts3androidapp.Model.CityApi.FetchCity.FetchByName;
+import com.tlbail.ptuts3androidapp.Model.CityApi.FetchCity.FetchCity;
 import com.tlbail.ptuts3androidapp.Model.CityApi.Region;
 import com.tlbail.ptuts3androidapp.Model.Localisation.LocalisationManager;
 import com.tlbail.ptuts3androidapp.Model.OCR.OCRDetection;
@@ -20,9 +23,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class PhotoToCity {
+public abstract class PhotoToCity implements FecthCityListener {
 
 
+    private static final long TIMEOUT = 10000;
     public List<CityFoundListener> cityFoundListeners = new ArrayList<>();
 
     public void subscribeOnCityFound(CityFoundListener cityFoundListener){
@@ -51,8 +55,6 @@ public abstract class PhotoToCity {
     private boolean locationhaveCompleted;
     private String locationResult;
     private Bitmap bitmap;
-    private boolean objectDetectionCompleted;
-    private String objetDetectionResult;
 
     public AppCompatActivity getAppCompatActivity() {
         return appCompatActivity;
@@ -79,11 +81,12 @@ public abstract class PhotoToCity {
         startObjectDetection();
         startOCR();
         startLocalisation();
+        startTimeOut();
     }
+
 
     private void startObjectDetection() {
         objectDetector.runObjectDetection(bitmap);
-        objetDetectionResult = objectDetector.getResultDataInText();
     }
 
 
@@ -108,6 +111,24 @@ public abstract class PhotoToCity {
         localisationManager.requestPermission();
     }
 
+    private void startTimeOut() {
+        Runnable runnable = new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    Thread.sleep(TIMEOUT);
+                }catch (InterruptedException e){
+                    e.printStackTrace();
+                }
+                if(!ocrHaveCompleted || !locationhaveCompleted )
+                    fail();
+            }
+        };
+        Thread thread = new Thread(runnable);
+        thread.start();
+
+    }
+
 
     public void setOcrResult(String result){
         if(result.isEmpty()) {
@@ -128,15 +149,43 @@ public abstract class PhotoToCity {
 
     private void finish() {
         if(ocrHaveCompleted && locationhaveCompleted){
-            updateListener(createCity(locationResult));
+            System.out.println("ocr et location terminer");
+            getCityDataByName(locationResult);
         }
     }
 
-    protected abstract City createCity(String city);
+
+    private void getCityDataByName(String cityname) {
+        FetchCity fetchCity = new FetchByName(this,cityname);
+        fetchCity.execute();
+    }
+
+    @Override
+    public void onDataQueryComplete(List<CityData> cityDatas) {
+        if(cityDatas.size() <= 0)
+        {
+            fail();
+            return;
+        }
+        CityData cityDataToReturn = null;
+        for(CityData cityData : cityDatas){
+            if(cityData.getName().equalsIgnoreCase(locationResult))
+                cityDataToReturn = cityData;
+        }
+        if(cityDataToReturn == null) cityDataToReturn = cityDatas.get(0);
+        finishWithData(cityDataToReturn);
+    }
+
+    private void finishWithData(CityData cityData){
+        updateListener(createCity(cityData));
+    }
+
+    protected abstract City createCity(CityData city);
 
 
-    protected boolean dataIsUncorrect() {
+    protected boolean dataIsUncorrect(CityData cityData) {
         //Todo check si la location est bonne et si on a bien trouvé une ville
+        if(cityData == null) return false;
         return locationResult == null || locationResult.isEmpty() ||
                 resultOcr == null || resultOcr.isEmpty();
     }
