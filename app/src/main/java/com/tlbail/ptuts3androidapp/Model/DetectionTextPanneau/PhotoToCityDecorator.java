@@ -10,11 +10,8 @@ import com.tlbail.ptuts3androidapp.Controller.ResultActivity;
 import com.tlbail.ptuts3androidapp.Model.City.City;
 import com.tlbail.ptuts3androidapp.Model.City.CityData;
 import com.tlbail.ptuts3androidapp.Model.City.CityLoaders.CityLocalLoader;
-import com.tlbail.ptuts3androidapp.Model.CityApi.CityFetcher;
-import com.tlbail.ptuts3androidapp.Model.CityApi.Department;
 import com.tlbail.ptuts3androidapp.Model.CityApi.FetchCity.FetchByName;
 import com.tlbail.ptuts3androidapp.Model.CityApi.FetchCity.FetchCity;
-import com.tlbail.ptuts3androidapp.Model.CityApi.Region;
 import com.tlbail.ptuts3androidapp.Model.Photo.Photo;
 import com.tlbail.ptuts3androidapp.Model.User.LocalDataLoader.UserPropertyLocalLoader;
 import com.tlbail.ptuts3androidapp.Model.User.User;
@@ -23,7 +20,6 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.util.ArrayList;
 import java.util.List;
 
 public class PhotoToCityDecorator extends PhotoToCity{
