@@ -59,7 +59,7 @@ public class CityAdaptater extends RecyclerView.Adapter<CityViewHolder> {
             public void onClick(View view) {
                 recyclerView.getLayoutManager().smoothScrollToPosition(recyclerView, new RecyclerView.State(), holder.getAdapterPosition());
                 Intent intent = new Intent(appCompatActivity, InfoVilleActivity.class);
-                Log.i("Click sur une ville", "click");
+                intent.putExtra("City", getCities().get(holder.getAdapterPosition()).getCityData().getName());
                 appCompatActivity.startActivity(intent);
             }
         });

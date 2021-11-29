@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.SnapHelper;
 
 import android.graphics.PointF;
+import android.net.Uri;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -25,6 +26,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -159,18 +161,20 @@ public class CollectionActivity extends AppCompatActivity {
 
         List<City> cities = user.getOwnedCity();
 
-        cities.add(new City(new Photo("../../res/drawable/atlantide.jpg","LAVAL"), new CityData("LAVAL", Department.Mayenne, Region.PAYS_DE_LA_LOIRE, 1,1)));
-        cities.add(new City(new Photo("../../res/drawable/atlantide.jpg","PARIS"), new CityData("PARIS", Department.SeineSaintDenis, Region.ILE_DE_FRANCE, 1,1)));
-        cities.add(new City(new Photo("../../res/drawable/atlantide.jpg","MARSEILLE"), new CityData("MARSEILLE", Department.BouchesDuRhone, Region.PROVENCE_ALPES_COTE_D_AZUR, 1,1)));
+        cities.add(new City(new Photo("","LAVAL"), new CityData("LAVAL", Department.Mayenne, Region.PAYS_DE_LA_LOIRE, 1,1)));
+        cities.add(new City(new Photo("C:\\Users\\basti\\Documents\\GitHub\\PtutS3Android\\app\\src\\main\\res\\drawable\\atlantide.jpg","PARIS"), new CityData("PARIS", Department.SeineSaintDenis, Region.ILE_DE_FRANCE, 1,1)));
+        cities.add(new City(new Photo("drawable/atlantide.jpg","MARSEILLE"), new CityData("MARSEILLE", Department.BouchesDuRhone, Region.PROVENCE_ALPES_COTE_D_AZUR, 1,1)));
         cities.add(new City(new Photo("../../res/drawable/atlantide.jpg","LYON"), new CityData("LYON", Department.Rhone, Region.AUVERGNE_RHONES_ALPES, 1,1)));
-        cities.add(new City(new Photo("../../res/drawable/atlantide.jpg","LILLE"), new CityData("LILLE", Department.Nord, Region.HAUTS_DE_FRANCE, 1,1)));
-        cities.add(new City(new Photo("../../res/drawable/atlantide.jpg","ANGERS"), new CityData("ANGERS", Department.MaineEtLoire, Region.PAYS_DE_LA_LOIRE, 1,1)));
-        cities.add(new City(new Photo("../../res/drawable/atlantide.jpg","BREST"), new CityData("BREST", Department.Finistere, Region.BRETAGNE, 1,1)));
-        cities.add(new City(new Photo("../../res/drawable/atlantide.jpg","POITIERS"), new CityData("POITIERS", Department.Vienne, Region.NOUVELLE_AQUITAINE, 1,1)));
-        cities.add(new City(new Photo("../../res/drawable/atlantide.jpg","LE MANS"), new CityData("LE MANS", Department.Sarthe, Region.PAYS_DE_LA_LOIRE, 1,1)));
+        cities.add(new City(new Photo("C:/Users/basti/Documents/GitHub/PtutS3Android/app/src/main/res/drawable/atlantide.jpg","LILLE"), new CityData("LILLE", Department.Nord, Region.HAUTS_DE_FRANCE, 1,1)));
+        cities.add(new City(new Photo("../res/drawable/atlantide.jpg","ANGERS"), new CityData("ANGERS", Department.MaineEtLoire, Region.PAYS_DE_LA_LOIRE, 4270,40000)));
+        cities.add(new City(new Photo("res/drawable/atlantide.jpg","BREST"), new CityData("BREST", Department.Finistere, Region.BRETAGNE, 1,1)));
+        cities.add(new City(new Photo("./res/drawable/atlantide.jpg","POITIERS"), new CityData("POITIERS", Department.Vienne, Region.NOUVELLE_AQUITAINE, 1,1)));
+        cities.add(new City(new Photo("src/main/res/drawable/atlantide.jpg","LE MANS"), new CityData("LE MANS", Department.Sarthe, Region.PAYS_DE_LA_LOIRE, 1,1)));
         cities.add(new City(new Photo("../../res/drawable/atlantide.jpg","NANTES"), new CityData("NANTES", Department.LoireAtlantique, Region.PAYS_DE_LA_LOIRE, 1,1)));
         cities.add(new City(new Photo("../../res/drawable/atlantide.jpg","BORDEAUX"), new CityData("BORDEAUX", Department.Gironde, Region.NOUVELLE_AQUITAINE, 1,1)));
         cities.add(new City(new Photo("../../res/drawable/atlantide.jpg","RICHELIEU"), new CityData("RICHELIEU", Department.IndreEtLoire, Region.CENTRE_VAL_DE_LOIRE, 1,1)));
+
+        user.setOwnedCity(cities);
 
         CityAdaptater cityAdaptater = new CityAdaptater(cities, recyclerView, thisApp);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
