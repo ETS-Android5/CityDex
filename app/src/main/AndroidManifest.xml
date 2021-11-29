@@ -14,9 +14,6 @@
         android:roundIcon="@mipmap/app_icon_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.PtutS3AndroidApp" >
-        <activity
-            android:name=".activity_info_ville"
-            android:exported="true" />
 
         <meta-data
             android:name="com.google.android.gms.games.APP_ID"
@@ -50,6 +47,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".Controller.InfoVilleActivity"
+            android:exported="false" />
     </application>
 
 </manifest>

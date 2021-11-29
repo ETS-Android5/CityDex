@@ -50,6 +50,7 @@ public class CollectionActivity extends AppCompatActivity {
     private User user;
     private Spinner spinner;
     private SnapHelper snapHelper;
+    private AppCompatActivity thisApp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,6 +70,7 @@ public class CollectionActivity extends AppCompatActivity {
         recyclerView = findViewById(R.id.gallerieRecyclerView);
         cityToSearch = findViewById(R.id.cityToSearch);
         spinner = findViewById(R.id.spinner);
+        thisApp = this;
     }
 
     private void setUpSpinner(){
@@ -89,25 +91,25 @@ public class CollectionActivity extends AppCompatActivity {
                 List<City> cities = new ArrayList<>(user.getOwnedCity());
 
                 if(value.compareTo("Par ordre d'obtention") == 0){
-                    CityAdaptater cityAdaptater = new CityAdaptater(cities, recyclerView);
+                    CityAdaptater cityAdaptater = new CityAdaptater(cities, recyclerView, thisApp);
                     recyclerView.setAdapter(cityAdaptater);
                 }
 
                 if(value.compareTo("Par ordre alphabétique") == 0){
                     Collections.sort(cities, City.ComparatorName);
-                    CityAdaptater cityAdaptater = new CityAdaptater(cities, recyclerView);
+                    CityAdaptater cityAdaptater = new CityAdaptater(cities, recyclerView, thisApp);
                     recyclerView.setAdapter(cityAdaptater);
                 }
 
                 if(value.compareTo("Par département") == 0){
                     Collections.sort(cities, City.ComparatorDpt);
-                    CityAdaptater cityAdaptater = new CityAdaptater(cities, recyclerView);
+                    CityAdaptater cityAdaptater = new CityAdaptater(cities, recyclerView, thisApp);
                     recyclerView.setAdapter(cityAdaptater);
                 }
 
                 if(value.compareTo("Par région") == 0){
                     Collections.sort(cities, City.ComparatorRegion);
-                    CityAdaptater cityAdaptater = new CityAdaptater(cities, recyclerView);
+                    CityAdaptater cityAdaptater = new CityAdaptater(cities, recyclerView, thisApp);
                     recyclerView.setAdapter(cityAdaptater);
                 }
             }
@@ -170,7 +172,7 @@ public class CollectionActivity extends AppCompatActivity {
         cities.add(new City(new Photo("../../res/drawable/atlantide.jpg","BORDEAUX"), new CityData("BORDEAUX", Department.Gironde, Region.NOUVELLE_AQUITAINE, 1,1)));
         cities.add(new City(new Photo("../../res/drawable/atlantide.jpg","RICHELIEU"), new CityData("RICHELIEU", Department.IndreEtLoire, Region.CENTRE_VAL_DE_LOIRE, 1,1)));
 
-        CityAdaptater cityAdaptater = new CityAdaptater(cities, recyclerView);
+        CityAdaptater cityAdaptater = new CityAdaptater(cities, recyclerView, thisApp);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(cityAdaptater);
         snapHelper = new LinearSnapHelper();
