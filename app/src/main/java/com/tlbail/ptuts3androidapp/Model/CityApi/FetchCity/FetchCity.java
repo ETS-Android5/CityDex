@@ -1,38 +1,33 @@
 package com.tlbail.ptuts3androidapp.Model.CityApi.FetchCity;
 
+import android.os.AsyncTask;
 import com.tlbail.ptuts3androidapp.Model.City.CityData;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
-
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
-
 import javax.net.ssl.HttpsURLConnection;
 
-
-public abstract class FetchCity {
+public abstract class FetchCity extends AsyncTask<Void, Void, List<CityData>> {
     protected String request;
-    private  List<CityData> cities;
 
-    public List<CityData> getCities(){
-        try {
-            Thread t = new Thread(new Runnable() {
-                @Override
-                public void run() {
-                    cities = transformJsonArrayToCityList(getResultRequest());
-                }
-            });
-            t.start();
-            t.join();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        return cities;
+    @Override
+    protected List<CityData> doInBackground(Void... voids) {
+        return requestCities();
+    }
+
+    @Override
+    protected void onPostExecute(List<CityData> cities) {
+        
+    }
+
+    public List<CityData> requestCities(){
+        return transformJsonArrayToCityList(getResultRequest();
     }
 
     protected JsonArray getResultRequest(){
