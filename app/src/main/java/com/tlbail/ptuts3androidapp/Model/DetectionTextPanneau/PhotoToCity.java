@@ -4,10 +4,13 @@ import android.graphics.Bitmap;
 import android.os.Build;
 import android.widget.Toast;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.tlbail.ptuts3androidapp.Controller.ReglageActivity;
 import com.tlbail.ptuts3androidapp.Model.City.City;
 import com.tlbail.ptuts3androidapp.Model.City.CityData;
+import com.tlbail.ptuts3androidapp.Model.City.CityLoaders.CityLocalLoader;
 import com.tlbail.ptuts3androidapp.Model.CityApi.FetchCity.FetchCityListener;
 import com.tlbail.ptuts3androidapp.Model.CityApi.FetchCity.FetchByName;
 import com.tlbail.ptuts3androidapp.Model.CityApi.FetchCity.FetchCity;
@@ -15,15 +18,18 @@ import com.tlbail.ptuts3androidapp.Model.Localisation.LocalisationManager;
 import com.tlbail.ptuts3androidapp.Model.OCR.OCRDetection;
 import com.tlbail.ptuts3androidapp.Model.OCR.OcrErrorException;
 import com.tlbail.ptuts3androidapp.Model.ObjectDetection.ObjectDetector;
+import com.tlbail.ptuts3androidapp.Model.User.LocalDataLoader.UserPropertyLocalLoader;
+import com.tlbail.ptuts3androidapp.Model.User.User;
 
 import java.io.IOException;
+import java.lang.reflect.Parameter;
 import java.util.ArrayList;
 import java.util.List;
 
 public abstract class PhotoToCity implements FetchCityListener {
 
 
-    private static final long TIMEOUT = 10000;
+    private static final long DEFAULTTIMEOUT = 10;
     public List<CityFoundListener> cityFoundListeners = new ArrayList<>();
 
     public void subscribeOnCityFound(CityFoundListener cityFoundListener){
@@ -73,6 +79,7 @@ public abstract class PhotoToCity implements FetchCityListener {
         return bitmap;
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.M)
     public void start(Bitmap bitmap){
         this.bitmap =bitmap;
         startObjectDetection();
@@ -103,17 +110,30 @@ public abstract class PhotoToCity implements FetchCityListener {
 
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.M)
     private void startLocalisation() {
         localisationManager = new LocalisationManager(this);
-        localisationManager.requestPermission();
+        localisationManager.start();
     }
 
     private void startTimeOut() {
+        User user = new User(new UserPropertyLocalLoader(getAppCompatActivity()), new CityLocalLoader(getAppCompatActivity()));
+
+        final long timeLocationTimeOut;
+        if(user.containsKey(ReglageActivity.LOCATIONTIMEOUTKEY)){
+            timeLocationTimeOut = Long.parseLong(user.get(ReglageActivity.LOCATIONTIMEOUTKEY));
+            if(timeLocationTimeOut == -1){
+                return;
+            }
+        }else{
+            timeLocationTimeOut = DEFAULTTIMEOUT;
+        }
+
         Runnable runnable = new Runnable() {
             @Override
             public void run() {
                 try {
-                    Thread.sleep(TIMEOUT);
+                    Thread.sleep(timeLocationTimeOut * 1000);
                 }catch (InterruptedException e){
                     e.printStackTrace();
                 }

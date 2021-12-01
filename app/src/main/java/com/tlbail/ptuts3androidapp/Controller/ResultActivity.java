@@ -84,7 +84,10 @@ public class ResultActivity extends AppCompatActivity implements  CityFoundListe
 
 
     @Override
-    public void onBackPressed() {}
+    public void onBackPressed() {
+        Intent activityIntent = new Intent(ResultActivity.this, PhotoActivity.class);
+        ResultActivity.this.startActivity(activityIntent);
+    }
 
     @Override
     public void onCityFoundt(City city) {

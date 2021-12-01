@@ -6,6 +6,8 @@ import android.content.Intent;
 import android.content.res.Configuration;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.transition.Fade;
+import android.transition.TransitionInflater;
 import android.view.View;
 import android.widget.TextView;
 
@@ -23,6 +25,8 @@ public class HomeActivity extends AppCompatActivity {
         backgroundRecyclerView = new BackgroundRecyclerView(this);
         setContentView(R.layout.activity_home);
         bindUI();
+
+
     }
 
     @Override
@@ -67,5 +71,13 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent a = new Intent(Intent.ACTION_MAIN);
+        a.addCategory(Intent.CATEGORY_HOME);
+        a.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(a);
     }
 }
