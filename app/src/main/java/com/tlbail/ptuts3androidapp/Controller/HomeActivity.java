@@ -1,8 +1,11 @@
 package com.tlbail.ptuts3androidapp.Controller;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -10,6 +13,7 @@ import android.transition.Fade;
 import android.transition.TransitionInflater;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.tlbail.ptuts3androidapp.R;
 import com.tlbail.ptuts3androidapp.View.BackgroundOfPhoto.BackgroundRecyclerView;
@@ -65,13 +69,25 @@ public class HomeActivity extends AppCompatActivity {
         findViewById(R.id.photo_button).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent activityIntent = new Intent(HomeActivity.this, PhotoActivity.class);
-                HomeActivity.this.startActivity(activityIntent);
+                startPhotoActivity();
 
             }
         });
 
     }
+
+    private void startPhotoActivity() {
+        ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE}, PackageManager.PERMISSION_GRANTED);
+
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+            Toast.makeText(this, "accepté les condition et réssayer ! ", Toast.LENGTH_LONG).show();
+            return;
+        }
+        Intent activityIntent = new Intent(HomeActivity.this, PhotoActivity.class);
+        HomeActivity.this.startActivity(activityIntent);
+
+    }
+
 
     @Override
     public void onBackPressed() {
