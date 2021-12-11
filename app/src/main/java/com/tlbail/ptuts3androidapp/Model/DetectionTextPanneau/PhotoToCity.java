@@ -24,6 +24,7 @@ import com.tlbail.ptuts3androidapp.Model.User.User;
 import java.io.IOException;
 import java.lang.reflect.Parameter;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 public abstract class PhotoToCity implements FetchCityListener {
@@ -194,7 +195,24 @@ public abstract class PhotoToCity implements FetchCityListener {
     }
 
     private void finishWithData(CityData cityData){
+        if(cityIsAlreadyOwn(cityData)) {
+            Toast.makeText(appCompatActivity, " ville déjà obtenu ", Toast.LENGTH_LONG).show();
+            fail();
+            return;
+        }
         updateListener(createCity(cityData));
+    }
+
+    private boolean cityIsAlreadyOwn(CityData cityData) {
+        User user = new User(new UserPropertyLocalLoader(appCompatActivity),new CityLocalLoader(appCompatActivity) );
+        Iterator<City> ownCity = user.getOwnedCity().iterator();
+        while (ownCity.hasNext()){
+            CityData cityData1 = ownCity.next().getCityData();
+            if(cityData1.getName().equalsIgnoreCase(cityData.getName())){
+                return true;
+            }
+        }
+        return false;
     }
 
     protected abstract City createCity(CityData city);

@@ -89,7 +89,6 @@ public class LocalisationManager implements LocationListener {
         if (ActivityCompat.checkSelfPermission(appCompatActivity, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(appCompatActivity, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             return;
         }
-        Toast.makeText(appCompatActivity,"recherche en cours de la localisation ... ", Toast.LENGTH_LONG).show();
 
         locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 5000, 10, this);
     }

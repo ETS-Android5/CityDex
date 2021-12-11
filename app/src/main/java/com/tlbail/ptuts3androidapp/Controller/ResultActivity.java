@@ -99,7 +99,7 @@ public class ResultActivity extends AppCompatActivity implements  CityFoundListe
                     textView.setText(city.toString());
                     buttonNext.setText("voire ma ville");
                 }else {
-                    textView.setText("desoler aucune ville de trouvé");
+                    textView.setText("échec-city");
                     buttonNext.setText("reprendre une photo");
                 }
             }

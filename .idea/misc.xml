@@ -3,33 +3,9 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Document/GitHub/PtutS3Android/app/src/main/res/layout/activity_parametre.xml" value="0.5" />
-        <entry key="..\:/Document/GitHub/PtutS3Android/app/src/main/res/layout/activity_result.xml" value="0.33" />
-        <entry key="..\:/Document/GitHub/PtutS3Android/app/src/main/res/layout/fragment_photo.xml" value="0.15501519756838905" />
-        <entry key="..\:/Document/GitHub/PtutS3Android/app/src/main/res/layout/parametre.xml" value="0.32447916666666665" />
-        <entry key="..\:/Document/GitHub/PtutS3Android/app/src/main/res/layout/popupwindowlayout.xml" value="0.33" />
-        <entry key="..\:/Users/axelg/OneDrive/Documents/GitHub/PtutS3Android/app/src/main/res/drawable/app_icon_background.xml" value="0.2703125" />
-        <entry key="..\:/Users/axelg/OneDrive/Documents/GitHub/PtutS3Android/app/src/main/res/drawable/contour.xml" value="0.2703125" />
-        <entry key="..\:/Users/axelg/OneDrive/Documents/GitHub/PtutS3Android/app/src/main/res/drawable/gradient_background.xml" value="0.2703125" />
-        <entry key="..\:/Users/axelg/OneDrive/Documents/GitHub/PtutS3Android/app/src/main/res/layout/activity_achievement.xml" value="0.12708333333333333" />
-        <entry key="..\:/Users/axelg/OneDrive/Documents/GitHub/PtutS3Android/app/src/main/res/layout/activity_home.xml" value="0.25" />
-        <entry key="..\:/Users/axelg/OneDrive/Documents/GitHub/PtutS3Android/app/src/main/res/layout/activity_info_ville.xml" value="0.25" />
-        <entry key="..\:/Users/axelg/OneDrive/Documents/GitHub/PtutS3Android/app/src/main/res/layout/activity_loading_screen.xml" value="0.25416666666666665" />
-        <entry key="..\:/Users/axelg/OneDrive/Documents/GitHub/PtutS3Android/app/src/main/res/layout/activity_main.xml" value="0.2318840579710145" />
-        <entry key="..\:/Users/axelg/OneDrive/Documents/GitHub/PtutS3Android/app/src/main/res/layout/activity_photo.xml" value="0.25" />
-        <entry key="..\:/Users/axelg/OneDrive/Documents/GitHub/PtutS3Android/app/src/main/res/layout/activity_result.xml" value="0.25" />
-        <entry key="..\:/Users/axelg/OneDrive/Documents/GitHub/PtutS3Android/app/src/main/res/layout/archivemenviewholder.xml" value="0.25" />
-        <entry key="..\:/Users/axelg/OneDrive/Documents/GitHub/PtutS3Android/app/src/main/res/layout/cityviewholder.xml" value="0.25" />
-        <entry key="..\:/Users/axelg/OneDrive/Documents/GitHub/PtutS3Android/app/src/main/res/layout/fragment_photo.xml" value="0.25" />
-        <entry key="..\:/Users/axelg/OneDrive/Documents/GitHub/PtutS3Android/app/src/main/res/layout/galerie.xml" value="0.36666666666666664" />
-        <entry key="..\:/Users/axelg/OneDrive/Documents/GitHub/PtutS3Android/app/src/main/res/layout/home.xml" value="0.264" />
-        <entry key="..\:/Users/axelg/OneDrive/Documents/GitHub/PtutS3Android/app/src/main/res/layout/imageviewinframelayout.xml" value="0.25" />
-        <entry key="..\:/Users/axelg/OneDrive/Documents/GitHub/PtutS3Android/app/src/main/res/layout/layout_photoresult.xml" value="0.25" />
-        <entry key="..\:/Users/axelg/OneDrive/Documents/GitHub/PtutS3Android/app/src/main/res/layout/parametre.xml" value="0.25416666666666665" />
-        <entry key="..\:/Users/axelg/OneDrive/Documents/GitHub/PtutS3Android/app/src/main/res/layout/photo.xml" value="0.25416666666666665" />
-        <entry key="..\:/Users/axelg/OneDrive/Documents/GitHub/PtutS3Android/app/src/main/res/layout/succes.xml" value="0.24113475177304963" />
+        <entry key="..\:/Document/GitHub/PtutS3Android/app/src/main/res/layout/activity_photo.xml" value="0.5" />
+        <entry key="..\:/Document/GitHub/PtutS3Android/app/src/main/res/layout/activity_result.xml" value="0.36666666666666664" />
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="11" project-jdk-type="JavaSDK" />
 </project>

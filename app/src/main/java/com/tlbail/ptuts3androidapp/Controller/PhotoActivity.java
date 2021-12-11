@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.TextureView;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
 
 import com.tlbail.ptuts3androidapp.Model.Photo.Photo;
@@ -25,6 +26,7 @@ public class PhotoActivity extends AppCompatActivity {
     private boolean isloading;
     private PhotoManager photoManager;
     private View fragmentPhoto;
+    private ImageButton gallerieButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +46,14 @@ public class PhotoActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 takePhoto();
+            }
+        });
+        gallerieButton = findViewById(R.id.b_galeri2);
+        gallerieButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(PhotoActivity.this, CollectionActivity.class);
+                PhotoActivity.this.startActivity(intent);
             }
         });
     }
