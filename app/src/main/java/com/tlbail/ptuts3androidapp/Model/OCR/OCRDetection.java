@@ -118,8 +118,10 @@ public class OCRDetection {
 
     //Méthode qui crop un bitmap
     public Bitmap cropImage(Bitmap src, RectF rect) throws OcrErrorException {
-        if(rectIsNotCorrect(rect, src)) throw new OcrErrorException();
-        Bitmap dest = src.createBitmap(src, (int) rect.top, (int) rect.left, (int) rect.width(), (int) rect.height());
+        //if(rectIsNotCorrect(rect, src)) throw new OcrErrorException();
+        int width = (int) rect.width();
+        if(rect.top + rect.width() > src.getWidth()) width = (int) (src.getWidth() - rect.top);
+        Bitmap dest = src.createBitmap(src, (int) rect.top, (int) rect.left, width, (int) rect.height());
         return dest;
     }
 
