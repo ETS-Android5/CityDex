@@ -30,7 +30,7 @@ public class SignImage {
         cannyOutput = canny(grayscale);
         Rect rect = getSign(cannyOutput);
         Utils.matToBitmap(grayscale,src);
-        src = Bitmap.createBitmap(src, (int)rect.x, (int)rect.y, (int)rect.width,(int)rect.height);
+        //src = Bitmap.createBitmap(src, (int)rect.x, (int)rect.y, (int)rect.width,(int)rect.height);
         return src;
     }
 

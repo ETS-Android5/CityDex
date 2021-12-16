@@ -2,6 +2,7 @@ package com.tlbail.ptuts3androidapp.Model.DetectionTextPanneau;
 
 import android.graphics.Bitmap;
 import android.os.Build;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.RequiresApi;
@@ -20,6 +21,7 @@ import com.tlbail.ptuts3androidapp.Model.OCR.OcrErrorException;
 import com.tlbail.ptuts3androidapp.Model.ObjectDetection.ObjectDetector;
 import com.tlbail.ptuts3androidapp.Model.User.LocalDataLoader.UserPropertyLocalLoader;
 import com.tlbail.ptuts3androidapp.Model.User.User;
+import com.tlbail.ptuts3androidapp.R;
 
 import java.io.IOException;
 import java.lang.reflect.Parameter;
@@ -79,6 +81,7 @@ public abstract class PhotoToCity implements FetchCityListener {
     public Bitmap getBitmap() {
         return bitmap;
     }
+    public void setBitmap(Bitmap bitmap) {this.bitmap = bitmap;}
 
     @RequiresApi(api = Build.VERSION_CODES.M)
     public void start(Bitmap bitmap){
@@ -96,11 +99,9 @@ public abstract class PhotoToCity implements FetchCityListener {
 
 
     private void startOCR() {
-        //ocrFromObjectDetector.runObjetDetectionAndOCR(bitmap);
         //OCR detection
         try {
-            ocrDetection.runOcrResult(this, bitmap, objectDetector.getRect());
-            //img.setImageBitmap(bitmap);
+            ocrDetection.runOcrResult(this, objectDetector.getRect());
         } catch (OcrErrorException e) {
             e.printStackTrace();
             Toast.makeText(appCompatActivity,"aucun text trouvé !", Toast.LENGTH_LONG);
@@ -155,6 +156,7 @@ public abstract class PhotoToCity implements FetchCityListener {
         }
         ocrHaveCompleted = true;
         this.resultOcr = result;
+        System.out.println("resultOcr = " + resultOcr);
         finish();
     }
 
@@ -166,9 +168,25 @@ public abstract class PhotoToCity implements FetchCityListener {
 
 
     private void finish() {
+
+        if(ocrHaveCompleted){
+            TextView textView = appCompatActivity.findViewById(R.id.resutlTextview);
+            appCompatActivity.runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    textView.setText(resultOcr);
+                }
+            });
+        }
         if(ocrHaveCompleted && locationhaveCompleted){
             System.out.println("ocr et location terminer");
-            getCityDataByName(locationResult);
+
+            if(resultOcr.toUpperCase().contains(locationResult.toUpperCase())){
+                getCityDataByName(locationResult);
+            }else{
+                Toast.makeText(appCompatActivity, "ne prend pas de photo de panneau 🤡", Toast.LENGTH_LONG).show();
+                fail();
+            }
         }
     }
 

@@ -2,22 +2,16 @@ package com.tlbail.ptuts3androidapp.Model.ObjectDetection;
 
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.graphics.Rect;
 import android.graphics.RectF;
-import android.util.Log;
 
 import com.tlbail.ptuts3androidapp.Model.OCR.OcrErrorException;
 
 import org.tensorflow.lite.support.image.TensorImage;
-import org.tensorflow.lite.support.label.Category;
-import org.tensorflow.lite.task.vision.detector.Detection;
 
 import java.io.IOException;
-import java.sql.Ref;
 import java.util.List;
 
 import com.tlbail.ptuts3androidapp.ml.Model;
-import com.tlbail.ptuts3androidapp.ml.SsdMobilenetV11Metadata1;
 
 public class ObjectDetector {
 
@@ -31,26 +25,32 @@ public class ObjectDetector {
     }
 
 
-    private RectF category;
+    private RectF rectLocation;
 
     public void runObjectDetection(Bitmap bitmap){
         try {
             Model model = Model.newInstance(context);
 
 
-            bitmap = Bitmap.createScaledBitmap(bitmap, 300,300, true);
             TensorImage image = TensorImage.fromBitmap(bitmap);
 
             Model.Outputs outputs = model.process(image);
-            Model.DetectionResult detectionResult = outputs.getDetectionResultList().get(0);
+
+            List<Model.DetectionResult> detectionResults = outputs.getDetectionResultList();
+            Model.DetectionResult bestResult = outputs.getDetectionResultList().get(0);
 
             // Gets result from DetectionResult.
-            float location = detectionResult.getScoreAsFloat();
-            category = detectionResult.getLocationAsRectF();
-            String score = detectionResult.getCategoryAsString();
+            float score = bestResult.getScoreAsFloat();
+            rectLocation = bestResult.getLocationAsRectF();
+            String objectFind = bestResult.getCategoryAsString();
 
-            System.out.println("score = " + score);
-            
+            System.out.println("objectFind = " + objectFind);
+            System.out.println("score = " + bestResult.getScoreAsFloat());
+            System.out.println("category.left = " + rectLocation.left);
+            System.out.println("category.width() = " + rectLocation.width());
+            System.out.println("category.top = " + rectLocation.top);
+            System.out.println("category.height() = " + rectLocation.height());
+
             // Releases model resources if no longer used.
             model.close();
 
@@ -62,7 +62,7 @@ public class ObjectDetector {
 
 
     public RectF getRect() throws OcrErrorException {
-        return category;
+        return rectLocation;
     }
 
 }

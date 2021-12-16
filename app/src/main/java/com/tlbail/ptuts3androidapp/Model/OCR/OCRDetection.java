@@ -30,35 +30,18 @@ public class OCRDetection {
         mTess.init(datapath, language);
     }
 
-    public void runOcrResult(OcrResultListener ocrResultListener, Bitmap bitmap) {
+    public void runOcrResult(PhotoToCity photoToCity, RectF rectF) {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                mTess.setImage(bitmap);
-                result ="";
-                result = mTess.getUTF8Text();
-                ocrResultListener.onOcrFinish(result);
-            }
-        }).start();
-    }
+                    photoToCity.setBitmap(cropImage(photoToCity.getBitmap(), rectF));
+                    photoToCity.setBitmap(new SignImage().getGrayscaleCroppedSign(photoToCity.getBitmap()));
 
-    public void runOcrResult(PhotoToCity photoToCity,final Bitmap bitmap, RectF rectF) {
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    Bitmap bitmape = Bitmap.createScaledBitmap(bitmap, 300, 300, true);
-                    bitmape = cropImage(bitmape, rectF);
-                    bitmape = new SignImage().getGrayscaleCroppedSign(bitmape);
-                    mTess.setImage(bitmape);
-                    result ="";
+                    mTess.setImage(photoToCity.getBitmap());
                     result = mTess.getUTF8Text();
+                    result =  result.replaceAll("[^a-zA-Z ]", "");
                     photoToCity.setOcrResult(result);
-                } catch (OcrErrorException e) {
-                    photoToCity.setOcrResult("");
-                    e.printStackTrace();
-                }
-
+                    onDestroy();
             }
         }).start();
     }
@@ -92,40 +75,9 @@ public class OCRDetection {
         }
     }
 
-    //TODO remove to grayscale and crop image and use crop image from cropUtils
-
-    //Methode qui passe en nuance de gris un bitmap
-    public Bitmap toGrayscale(Bitmap bmpOriginal)
-    {
-
-        //Permet d'enlever les pixels de "couleurs"
-        bmpOriginal = bmpOriginal.copy(Bitmap.Config.ARGB_8888 , true);
-
-        int width, height;
-        height = bmpOriginal.getHeight();
-        width = bmpOriginal.getWidth();
-
-        Bitmap bmpGrayscale = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
-        Canvas c = new Canvas(bmpGrayscale);
-        Paint paint = new Paint();
-        ColorMatrix cm = new ColorMatrix();
-        cm.setSaturation(0);
-        ColorMatrixColorFilter f = new ColorMatrixColorFilter(cm);
-        paint.setColorFilter(f);
-        c.drawBitmap(bmpOriginal, 0, 0, paint);
-        return bmpGrayscale;
-    }
-
     //Méthode qui crop un bitmap
-    public Bitmap cropImage(Bitmap src, RectF rect) throws OcrErrorException {
-        //if(rectIsNotCorrect(rect, src)) throw new OcrErrorException();
-        int width = (int) rect.width();
-        if(rect.top + rect.width() > src.getWidth()) width = (int) (src.getWidth() - rect.top);
-        Bitmap dest = src.createBitmap(src, (int) rect.top, (int) rect.left, width, (int) rect.height());
+    public Bitmap cropImage(Bitmap src, RectF rect) {
+        Bitmap dest = src.createBitmap(src, (int) Math.max(0, rect.left), (int) rect.top, (int) rect.width(), (int) rect.height());
         return dest;
-    }
-
-    private boolean rectIsNotCorrect(RectF rect, Bitmap src) {
-        return rect == null || rect.top < 0 || rect.left < 0 || rect.left + rect.height()  > src.getHeight() || rect.top + rect.width() > src.getWidth();
     }
 }
