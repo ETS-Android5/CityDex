@@ -10,7 +10,7 @@ android {
         applicationId "com.tlbail.ptuts3androidapp"
         minSdkVersion 21
         targetSdkVersion 30
-        versionCode 7
+        versionCode 11
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"

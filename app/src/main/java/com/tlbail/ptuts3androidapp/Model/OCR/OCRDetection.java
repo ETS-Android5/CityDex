@@ -39,7 +39,8 @@ public class OCRDetection {
 
                     mTess.setImage(photoToCity.getBitmap());
                     result = mTess.getUTF8Text();
-                    result =  result.replaceAll("[^a-zA-Z ]", "");
+                    System.out.println("raw result = " + result);
+                    result =  result.replaceAll("[^a-zA-ZÉ ]", "");
                     photoToCity.setOcrResult(result);
                     onDestroy();
             }
