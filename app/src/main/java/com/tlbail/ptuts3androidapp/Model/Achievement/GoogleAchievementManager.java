@@ -42,13 +42,13 @@ public class GoogleAchievementManager implements OnCompleteListener<GoogleSignIn
         this.appCompatActivity = appCompatActivity;
         GoogleSignInOptions signInOptions = GoogleSignInOptions.DEFAULT_GAMES_SIGN_IN;
         GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(appCompatActivity);
-        if (GoogleSignIn.hasPermissions(account, signInOptions.getScopeArray())) {
+        if (account != null && GoogleSignIn.hasPermissions(account, signInOptions.getScopeArray())) {
             // Already signed in.
             googleSignInAccount = account;
         } else {
             // Haven't been signed-in before. Try the silent sign-in first.
             GoogleSignInClient signInClient = GoogleSignIn.getClient(appCompatActivity, signInOptions);
-            signInClient.silentSignIn().addOnCompleteListener(appCompatActivity, this);
+            if(signInClient != null) signInClient.silentSignIn().addOnCompleteListener(appCompatActivity, this);
         }
     }
 

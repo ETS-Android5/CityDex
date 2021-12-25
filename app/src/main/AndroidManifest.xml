@@ -26,23 +26,30 @@
 
         <activity
             android:name=".Controller.ResultActivity"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <activity
             android:name=".Controller.PhotoActivity"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <activity
             android:name=".Controller.ReglageActivity"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <activity
             android:name=".Controller.CollectionActivity"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <activity
             android:name=".Controller.AchievementActivity"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <activity
             android:name=".Controller.HomeActivity"
+            android:screenOrientation="portrait"
             android:exported="false" />
-        <activity android:name=".Controller.LoadingScreenActivity" >
+        <activity android:name=".Controller.LoadingScreenActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -51,6 +58,7 @@
         </activity>
         <activity
             android:name=".Controller.InfoVilleActivity"
+            android:screenOrientation="portrait"
             android:exported="false" />
     </application>
 

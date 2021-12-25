@@ -57,6 +57,7 @@ public class SignImage {
             addRect(contours, contoursPoly, boundRect, i);
         }
         int i = findLargestContour(contours);
+        if(contours.size() == 0) return null;
         return new Rect(boundRect[i].x, boundRect[i].y, boundRect[i].width, boundRect[i].height);
     }
 

@@ -18,3 +18,5 @@ local.properties
 app\.idea
 *.aab
 .idea/misc.xml
+app/release/app-release.apk
+app/release/output-metadata.json

@@ -409,6 +409,7 @@ public class Achievements implements CityFoundListener {
         this.appCompatActivity = appCompatActivity;
         user = new User(new UserPropertyLocalLoader(appCompatActivity), new CityLocalLoader(appCompatActivity));
 
+
         googleAchievementManager = new GoogleAchievementManager();
         googleAchievementManager.signInSilently(appCompatActivity);
     }
