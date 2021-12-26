@@ -35,12 +35,14 @@ public class OCRDetection {
             @Override
             public void run() {
                     photoToCity.setBitmap(cropImage(photoToCity.getBitmap(), rectF));
-                    photoToCity.setBitmap(new SignImage().getGrayscaleCroppedSign(photoToCity.getBitmap()));
+                    photoToCity.setBitmap(new SignImage().getImageForOCR(photoToCity.getBitmap()));
 
                     mTess.setImage(photoToCity.getBitmap());
                     result = mTess.getUTF8Text();
                     System.out.println("raw result = " + result);
-                    result =  result.replaceAll("[^a-zA-ZÉ ]", "");
+                    result = result.replace("|", "I");
+                    result = result.replaceAll("ST", "SAINT");
+                    result =  result.replaceAll("[^a-zA-ZÉ -]", "");
                     photoToCity.setOcrResult(result);
                     onDestroy();
             }

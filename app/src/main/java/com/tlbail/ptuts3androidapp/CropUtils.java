@@ -16,8 +16,6 @@ import java.util.List;
 
 public class CropUtils {
 
-
-
     public double similarity(String s1, String s2){
         String longer = s1, shorter = s2;
         if (s1.length() < s2.length()) { // longer should always have greater length

@@ -7,22 +7,19 @@ import org.opencv.android.Utils;
 import org.opencv.core.Mat;
 import org.opencv.core.Size;
 import org.opencv.imgproc.Imgproc;
+import org.opencv.photo.Photo;
 
 public class SignImage {
 
-    public SignImage(){
+    public SignImage(){}
 
-    }
-
-    public Bitmap getGrayscaleCroppedSign(Bitmap src) {
+    public Bitmap getImageForOCR(Bitmap src) {
         OpenCVLoader.initDebug();
         Mat test = new Mat();
-        Mat grayscale;
-        Mat cannyOutput;
         Utils.bitmapToMat(src, test);
-        grayscale = grayscale(test);
-        cannyOutput = canny(grayscale);
-        Utils.matToBitmap(cannyOutput,src);
+        Mat grayscale = grayscale(test);
+        Photo.fastNlMeansDenoising(grayscale, grayscale);
+        Utils.matToBitmap(grayscale,src);
         return src;
     }
 
@@ -31,11 +28,5 @@ public class SignImage {
         Imgproc.cvtColor(mat, grayscale, Imgproc.COLOR_BGR2GRAY);
         Imgproc.blur(grayscale, grayscale, new Size(3,3));
         return grayscale;
-    }
-
-    private Mat canny(Mat mat){
-        Mat cannyOutput = new Mat();
-        Imgproc.Canny(mat,cannyOutput,255/3,255);
-        return cannyOutput;
     }
 }
