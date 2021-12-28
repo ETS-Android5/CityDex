@@ -31,7 +31,6 @@ public class UserPropertyLocalLoader implements UserPropertyLoader {
         }
     }
 
-
     @Override
     public UserProperty getUserProperty() {
         try {

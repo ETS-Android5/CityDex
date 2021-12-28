@@ -83,6 +83,7 @@ public class GoogleAchievementManager implements OnCompleteListener<GoogleSignIn
     public void showAchievements() {
         System.out.println("ouverture des succès ..");
         Toast.makeText(appCompatActivity, "Ouverture des succès ", Toast.LENGTH_LONG).show();
+        if(getAchievementsClient() == null) return;
         Task<Intent> intent = getAchievementsClient().getAchievementsIntent();
         if(intent == null) {
             System.err.println("erreur ouverture succès...");
