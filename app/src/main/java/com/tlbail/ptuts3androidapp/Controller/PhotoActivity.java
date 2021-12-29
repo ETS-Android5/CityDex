@@ -2,6 +2,7 @@ package com.tlbail.ptuts3androidapp.Controller;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.constraintlayout.widget.ConstraintSet;
 
 import android.content.Context;
 import android.content.Intent;
@@ -90,6 +91,11 @@ public class PhotoActivity extends AppCompatActivity {
         LayoutInflater inflater = (LayoutInflater)   getApplicationContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View child = inflater.inflate(R.layout.layout_photoresult, null);
         constraintLayout.addView(child);
+        ConstraintSet set = new ConstraintSet();
+        set.clone(constraintLayout);
+        set.connect(child.getId(), ConstraintSet.LEFT, constraintLayout.getId(), ConstraintSet.LEFT, 0);
+        set.connect(child.getId(), ConstraintSet.RIGHT, constraintLayout.getId(), ConstraintSet.RIGHT, 0);
+        set.applyTo(constraintLayout);
     }
 
     @Override
