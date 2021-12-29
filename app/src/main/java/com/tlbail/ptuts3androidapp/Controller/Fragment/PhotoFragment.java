@@ -19,6 +19,7 @@ import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 
+import android.util.DisplayMetrics;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Surface;
@@ -26,10 +27,9 @@ import android.view.TextureView;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.PopupWindow;
 
-import com.tlbail.ptuts3androidapp.Controller.CollectionActivity;
-import com.tlbail.ptuts3androidapp.Controller.HomeActivity;
 import com.tlbail.ptuts3androidapp.Controller.PhotoActivity;
 import com.tlbail.ptuts3androidapp.R;
 
@@ -90,7 +90,6 @@ public class PhotoFragment extends Fragment implements TextureView.SurfaceTextur
     private TextureView myTextrureView;
     private CaptureRequest.Builder myCaptureRequestBuilder;
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -104,8 +103,43 @@ public class PhotoFragment extends Fragment implements TextureView.SurfaceTextur
 
         myCameraManager = (CameraManager) getActivity().getSystemService(CAMERA_SERVICE);
 
+        fitBestParams();
 
         return result;
+    }
+
+    private void fitBestParams(){
+
+        float cameraAspectRatio = (float) 0.75;
+
+        //Preparation
+        DisplayMetrics metrics = new DisplayMetrics();
+        getActivity().getWindowManager().getDefaultDisplay().getMetrics(metrics);
+        int screenWidth = metrics.widthPixels;
+        int screenHeight = metrics.heightPixels;
+        int finalWidth = screenWidth;
+        int finalHeight = screenHeight;
+        int widthDifference = 0;
+        int heightDifference = 0;
+        float screenAspectRatio = (float) screenWidth / screenHeight;
+
+        //Determines whether we crop width or crop height
+        if (screenAspectRatio > cameraAspectRatio) { //Keep width crop height
+            finalHeight = (int) (screenWidth / cameraAspectRatio);
+            heightDifference = finalHeight - screenHeight;
+        } else { //Keep height crop width
+            finalWidth = (int) (screenHeight * cameraAspectRatio);
+            widthDifference = finalWidth - screenWidth;
+        }
+
+        //Apply the result to the Preview
+        FrameLayout.LayoutParams lp = (FrameLayout.LayoutParams) myTextrureView.getLayoutParams();
+        lp.width = finalWidth;
+        lp.height = finalHeight;
+        //Below 2 lines are to center the preview, since cropping default occurs at the right and bottom
+        lp.leftMargin = - (widthDifference / 2);
+        lp.topMargin = - (heightDifference / 2);
+        myTextrureView.setLayoutParams(lp);
     }
 
     private CameraDevice.StateCallback myStateCallBack = new CameraDevice.StateCallback() {

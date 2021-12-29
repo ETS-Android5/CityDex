@@ -5,7 +5,7 @@
     android:id="@+id/rootactivityPhotoConstraintLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#423232"
+    android:background="#8F8888"
     tools:context="com.tlbail.ptuts3androidapp.Controller.PhotoActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -35,9 +35,9 @@
         android:id="@+id/takePhotoImageButton"
         android:layout_width="138dp"
         android:layout_height="122dp"
-        android:layout_marginBottom="76dp"
         android:background="@color/cardview_shadow_end_color"
         android:scaleType="fitCenter"
+        android:layout_marginBottom="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -48,8 +48,8 @@
         android:id="@+id/b_galeri2"
         android:layout_width="88dp"
         android:layout_height="69dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="100dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="30dp"
         android:background="@color/cardview_shadow_end_color"
         android:scaleType="fitCenter"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -61,6 +61,7 @@
         android:id="@+id/imageView3"
         android:layout_width="277dp"
         android:layout_height="62dp"
+        android:layout_marginTop="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"

@@ -50,7 +50,7 @@
             android:scaleType="fitCenter"
             app:srcCompat="@drawable/panneau_agglomeration"
             tools:ignore="SpeakableTextPresentCheck" />
-
+S
         <TextView
             android:id="@+id/t_collec"
             android:layout_width="wrap_content"
