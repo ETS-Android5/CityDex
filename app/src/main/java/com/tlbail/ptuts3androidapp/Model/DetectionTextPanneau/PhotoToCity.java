@@ -1,6 +1,7 @@
 package com.tlbail.ptuts3androidapp.Model.DetectionTextPanneau;
 
 import android.graphics.Bitmap;
+import android.media.MediaPlayer;
 import android.os.Build;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -103,6 +104,7 @@ public abstract class PhotoToCity implements FetchCityListener {
         startObjectDetection();
         try {
             if(objectDetector.getRect() == null){
+                yapasdepanneaux();
                 fail();
                 return;
             }
@@ -115,6 +117,7 @@ public abstract class PhotoToCity implements FetchCityListener {
             startTimeOut();
         }
     }
+
 
 
     private void startObjectDetection() {
@@ -326,5 +329,20 @@ public abstract class PhotoToCity implements FetchCityListener {
 
     public void onPause() {
         if(localisationManager != null) localisationManager.desabonnementGPS();
+        if(mediaPlayer != null) mediaPlayer.stop();
     }
+
+    private MediaPlayer mediaPlayer;
+
+    private void yapasdepanneaux() {
+        Toast.makeText(appCompatActivity,"toset", Toast.LENGTH_LONG).show();
+        mediaPlayer = MediaPlayer.create(appCompatActivity,R.raw.yapasdepanneau);
+        mediaPlayer.start();
+
+    }
+
+
 }
+
+
+
