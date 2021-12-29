@@ -24,7 +24,6 @@ import com.tlbail.ptuts3androidapp.Model.User.User;
 import com.tlbail.ptuts3androidapp.R;
 
 import java.io.IOException;
-import java.lang.reflect.Parameter;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -127,7 +126,7 @@ public abstract class PhotoToCity implements FetchCityListener {
             appCompatActivity.runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    Toast.makeText(appCompatActivity,"aucun text trouvé !", Toast.LENGTH_LONG);
+                    Toast.makeText(appCompatActivity,"Aucun texte trouvé !", Toast.LENGTH_LONG);
                 }
             });
             fail();
@@ -186,7 +185,7 @@ public abstract class PhotoToCity implements FetchCityListener {
             appCompatActivity.runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    Toast.makeText(appCompatActivity, "aucun texte de trouvé ", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(appCompatActivity, "Aucun texte trouvé ", Toast.LENGTH_SHORT).show();
                 }
             });
             fail();
@@ -194,7 +193,7 @@ public abstract class PhotoToCity implements FetchCityListener {
         }
         ocrHaveCompleted = true;
         this.resultOcr = result;
-        System.out.println("resultOcr = " + resultOcr);
+        System.out.println("Result OCR après regex = " + resultOcr);
         finish();
     }
 
@@ -217,7 +216,7 @@ public abstract class PhotoToCity implements FetchCityListener {
             });
         }
         if(ocrHaveCompleted  && locationhaveCompleted){
-            System.out.println("ocr et location terminer");
+            System.out.println("OCR et localisation terminés");
 
             if(resultOcr.toUpperCase().contains(locationResult.toUpperCase())){
                 getCityDataByName(locationResult);
@@ -225,7 +224,7 @@ public abstract class PhotoToCity implements FetchCityListener {
                 appCompatActivity.runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        Toast.makeText(appCompatActivity, "ne prend pas de photo de panneau 🤡", Toast.LENGTH_LONG).show();
+                        Toast.makeText(appCompatActivity, "La localisation ne matche pas", Toast.LENGTH_LONG).show();
                     }
                 });
                 fail();
@@ -233,7 +232,7 @@ public abstract class PhotoToCity implements FetchCityListener {
         }
 
         if(ocrHaveCompleted && !verifLocatIsActivated){
-            System.out.println("ocr terminer et verifLocat desactivé");
+            System.out.println("Ocr terminé et Localisation desactivé");
             getCityDataByName(resultOcr);
         }
     }
@@ -251,7 +250,7 @@ public abstract class PhotoToCity implements FetchCityListener {
             appCompatActivity.runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    Toast.makeText(appCompatActivity, "Aucunne ville avec " + resultOcr +  " trouvé 😭", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(appCompatActivity, "Aucne ville avec " + resultOcr +  " trouvée 😭", Toast.LENGTH_SHORT).show();
                 }
             });
 
@@ -272,7 +271,7 @@ public abstract class PhotoToCity implements FetchCityListener {
             appCompatActivity.runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    Toast.makeText(appCompatActivity, " ville déjà obtenu ", Toast.LENGTH_LONG).show();
+                    Toast.makeText(appCompatActivity, " Ville déjà obtenue ", Toast.LENGTH_LONG).show();
                 }
             });
             fail();

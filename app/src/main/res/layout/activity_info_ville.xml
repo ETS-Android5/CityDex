@@ -94,18 +94,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/t_surface" />
 
-    <ProgressBar
-        android:id="@+id/p_surface"
-        style="?android:attr/progressBarStyleHorizontal"
-        android:minHeight="50dp"
-        android:minWidth="200dp"
-        android:layout_width="181dp"
-        android:layout_height="23dp"
-        app:layout_constraintBottom_toTopOf="@+id/t_habitant"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/t_surface"
-        app:layout_constraintTop_toBottomOf="@+id/t_region" />
-
     <TextView
         android:id="@+id/t_p_surface"
         android:layout_width="wrap_content"

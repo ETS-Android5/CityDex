@@ -1,27 +1,20 @@
 package com.tlbail.ptuts3androidapp.Controller;
 
-import static android.graphics.PorterDuff.Mode.SRC_IN;
-
-import android.graphics.Color;
 import android.os.Bundle;
 import android.widget.ImageView;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.tlbail.ptuts3androidapp.Model.City.City;
 import com.tlbail.ptuts3androidapp.Model.City.CityLoaders.CityLocalLoader;
-import com.tlbail.ptuts3androidapp.Model.CityApi.FetchCity.FetchByName;
-import com.tlbail.ptuts3androidapp.Model.CityApi.FetchCity.FetchCity;
 import com.tlbail.ptuts3androidapp.Model.User.LocalDataLoader.UserPropertyLocalLoader;
 import com.tlbail.ptuts3androidapp.Model.User.User;
 import com.tlbail.ptuts3androidapp.R;
 
 public class InfoVilleActivity extends AppCompatActivity{
 
-        private TextView t_ville, t_dpt, t_region, t_p_surface, t_habitants;
-        private ProgressBar p_surface;
+        private TextView t_ville, t_dpt, t_region, t_habitants, t_surface;
         private ImageView img_ville;
         private int progressStatus = 0;
 
@@ -36,11 +29,10 @@ public class InfoVilleActivity extends AppCompatActivity{
         }
 
         private void bindUI(){
-            p_surface = (ProgressBar) findViewById(R.id.p_surface);
             t_ville = findViewById(R.id.t_ville);
             t_dpt = findViewById(R.id.t_departement);
             t_region = findViewById(R.id.t_region);
-            t_p_surface = findViewById(R.id.t_p_surface);
+            t_surface = findViewById(R.id.t_surface);
             img_ville = findViewById(R.id.img_ville);
             t_habitants = findViewById(R.id.t_habitant);
         }
@@ -75,8 +67,7 @@ public class InfoVilleActivity extends AppCompatActivity{
 
             //ProgressBar
             float txtProgress = cityToDisplay.getCityData().getSurface();
-            t_p_surface.setText(txtProgress/100 + " km2");
-            p_surface.getProgressDrawable().setColorFilter(Color.GREEN, SRC_IN);
+            t_surface.setText(t_surface.getText() + " " + txtProgress/100 + " km2");
 
             //Habitants
             int inhabitants = cityToDisplay.getCityData().getInhabitants();

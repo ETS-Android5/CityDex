@@ -30,7 +30,7 @@ public class PhotoManager {
 
     private void writeBitmapToFile(Bitmap bmp, File fileToWrite){
         try {
-            System.out.println("l'image est save en" + fileToWrite.getName());
+            System.out.println("L'image est save en " + fileToWrite.getName());
             FileOutputStream stream = new FileOutputStream(fileToWrite);
             bmp.compress(Bitmap.CompressFormat.PNG, 100, stream);
             //Cleanup

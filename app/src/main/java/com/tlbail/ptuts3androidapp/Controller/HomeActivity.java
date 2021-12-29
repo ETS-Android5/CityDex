@@ -6,13 +6,8 @@ import androidx.core.app.ActivityCompat;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.content.res.Configuration;
-import android.graphics.Color;
 import android.os.Bundle;
-import android.transition.Fade;
-import android.transition.TransitionInflater;
 import android.view.View;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.tlbail.ptuts3androidapp.R;

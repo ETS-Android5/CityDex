@@ -1,10 +1,6 @@
 package com.tlbail.ptuts3androidapp.Model.OCR;
 
 import android.graphics.Bitmap;
-import android.graphics.Canvas;
-import android.graphics.ColorMatrix;
-import android.graphics.ColorMatrixColorFilter;
-import android.graphics.Paint;
 import android.graphics.RectF;
 import android.os.Environment;
 
@@ -39,11 +35,11 @@ public class OCRDetection {
 
                     mTess.setImage(photoToCity.getBitmap());
                     result = mTess.getUTF8Text();
-                    System.out.println("raw result = " + result);
+                    System.out.println("Résultat OCR = " + result);
                     result = result.replace("|", "I");
                     result = result.replaceAll("ST", "SAINT");
                     result =  result.replaceAll("[^a-zA-ZÉ -]", "");
-                    result = result.replaceAll(" - |- ","");
+                    result = result.replaceAll(" -|- ","-");
                     photoToCity.setOcrResult(result);
                     onDestroy();
             }

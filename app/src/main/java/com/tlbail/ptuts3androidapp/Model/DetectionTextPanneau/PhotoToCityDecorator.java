@@ -10,8 +10,6 @@ import com.tlbail.ptuts3androidapp.Controller.ResultActivity;
 import com.tlbail.ptuts3androidapp.Model.City.City;
 import com.tlbail.ptuts3androidapp.Model.City.CityData;
 import com.tlbail.ptuts3androidapp.Model.City.CityLoaders.CityLocalLoader;
-import com.tlbail.ptuts3androidapp.Model.CityApi.FetchCity.FetchByName;
-import com.tlbail.ptuts3androidapp.Model.CityApi.FetchCity.FetchCity;
 import com.tlbail.ptuts3androidapp.Model.Photo.Photo;
 import com.tlbail.ptuts3androidapp.Model.User.LocalDataLoader.UserPropertyLocalLoader;
 import com.tlbail.ptuts3androidapp.Model.User.User;
@@ -65,7 +63,7 @@ public class PhotoToCityDecorator extends PhotoToCity{
 
     @Override
     protected City createCity(CityData cityData) {
-        //Todo créer une vrai ville
+        //Todo créer une vraie ville
         if(dataIsUncorrect(cityData)) return null;
         City city = new City(new Photo(uri, cityData.getName()), cityData);
         return city;

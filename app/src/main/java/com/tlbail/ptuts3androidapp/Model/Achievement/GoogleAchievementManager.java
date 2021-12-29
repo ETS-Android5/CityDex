@@ -4,22 +4,15 @@ import android.content.Intent;
 import android.util.Log;
 import android.view.Gravity;
 import android.widget.Toast;
-
-import androidx.activity.result.ActivityResult;
-import androidx.activity.result.ActivityResultCallback;
-import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnFailureListener;
-import com.tlbail.ptuts3androidapp.R;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.games.AchievementsClient;
-import com.google.android.gms.games.Game;
 import com.google.android.gms.games.Games;
 import com.google.android.gms.games.GamesClient;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -81,12 +74,12 @@ public class GoogleAchievementManager implements OnCompleteListener<GoogleSignIn
     }
 
     public void showAchievements() {
-        System.out.println("ouverture des succès ..");
+        System.out.println("Ouverture des succès ...");
         Toast.makeText(appCompatActivity, "Ouverture des succès ", Toast.LENGTH_LONG).show();
         if(getAchievementsClient() == null) return;
         Task<Intent> intent = getAchievementsClient().getAchievementsIntent();
         if(intent == null) {
-            System.err.println("erreur ouverture succès...");
+            System.err.println("Erreur ouverture succès...");
             return;
         }
 
@@ -99,7 +92,7 @@ public class GoogleAchievementManager implements OnCompleteListener<GoogleSignIn
         intent.addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
-                System.err.println("echec " + e.getMessage());
+                System.err.println("Echec " + e.getMessage());
                 Toast.makeText(appCompatActivity, e.getMessage(), Toast.LENGTH_LONG).show();
             }
         });
