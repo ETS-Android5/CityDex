@@ -9,6 +9,7 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.tlbail.ptuts3androidapp.Controller.ReglageActivity;
+import com.tlbail.ptuts3androidapp.CropUtils;
 import com.tlbail.ptuts3androidapp.Model.City.City;
 import com.tlbail.ptuts3androidapp.Model.City.CityData;
 import com.tlbail.ptuts3androidapp.Model.City.CityLoaders.CityLocalLoader;
@@ -22,6 +23,8 @@ import com.tlbail.ptuts3androidapp.Model.ObjectDetection.ObjectDetector;
 import com.tlbail.ptuts3androidapp.Model.User.LocalDataLoader.UserPropertyLocalLoader;
 import com.tlbail.ptuts3androidapp.Model.User.User;
 import com.tlbail.ptuts3androidapp.R;
+
+import org.checkerframework.checker.units.qual.C;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -61,6 +64,7 @@ public abstract class PhotoToCity implements FetchCityListener {
     private String locationResult;
     private Bitmap bitmap;
     private boolean verifLocatIsActivated = true;
+    private CropUtils mCropUtils;
 
     public AppCompatActivity getAppCompatActivity() {
         return appCompatActivity;
@@ -69,6 +73,7 @@ public abstract class PhotoToCity implements FetchCityListener {
 
     public PhotoToCity(AppCompatActivity appCompatActivity){
         this.appCompatActivity = appCompatActivity;
+        mCropUtils = new CropUtils();
         objectDetector = new ObjectDetector(appCompatActivity);
         try {
             ocrDetection = new OCRDetection(appCompatActivity.getAssets().open("fra.traineddata"));
@@ -217,8 +222,9 @@ public abstract class PhotoToCity implements FetchCityListener {
         }
         if(ocrHaveCompleted  && locationhaveCompleted){
             System.out.println("OCR et localisation terminés");
+            System.out.println("% de similtude : " + mCropUtils.similarity(resultOcr.toUpperCase(), locationResult.toUpperCase()));
 
-            if(resultOcr.toUpperCase().contains(locationResult.toUpperCase())){
+            if(resultOcr.toUpperCase().contains(locationResult.toUpperCase()) || mCropUtils.similarity(resultOcr.toUpperCase(), locationResult.toUpperCase()) > 0.7){
                 getCityDataByName(locationResult);
             }else{
                 appCompatActivity.runOnUiThread(new Runnable() {

@@ -65,7 +65,7 @@ public class InfoVilleActivity extends AppCompatActivity{
             String region = cityToDisplay.getCityData().getRegion().getName();
             t_region.setText(t_region.getText() + " " + region);
 
-            //ProgressBar
+            //Surface
             float txtProgress = cityToDisplay.getCityData().getSurface();
             t_surface.setText(t_surface.getText() + " " + txtProgress/100 + " km2");
 

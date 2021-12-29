@@ -37,9 +37,12 @@ public class OCRDetection {
                     result = mTess.getUTF8Text();
                     System.out.println("Résultat OCR = " + result);
                     result = result.replace("|", "I");
-                    result = result.replaceAll("ST", "SAINT");
-                    result =  result.replaceAll("[^a-zA-ZÉ -]", "");
-                    result = result.replaceAll(" -|- ","-");
+                    result = result.replaceAll("ST ", "SAINT ");
+                    result = result.replaceAll("[^a-zA-ZÉÈ -]", "");
+                    result = result.replaceAll("^ ", "");
+                    result = result.replaceAll(" $", "");
+                    result = result.replace(" - ", "-");
+
                     photoToCity.setOcrResult(result);
                     onDestroy();
             }
