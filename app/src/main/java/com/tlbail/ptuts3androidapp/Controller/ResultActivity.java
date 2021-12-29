@@ -3,24 +3,18 @@ package com.tlbail.ptuts3androidapp.Controller;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.tlbail.ptuts3androidapp.Model.Achievement.Achievements;
 import com.tlbail.ptuts3androidapp.Model.City.City;
 import com.tlbail.ptuts3androidapp.Model.DetectionTextPanneau.CityFoundListener;
-import com.tlbail.ptuts3androidapp.Model.DetectionTextPanneau.PhotoToCity;
 import com.tlbail.ptuts3androidapp.Model.DetectionTextPanneau.PhotoToCityDecorator;
 import com.tlbail.ptuts3androidapp.R;
-
-import java.io.IOException;
 
 public class ResultActivity extends AppCompatActivity implements  CityFoundListener {
 
@@ -50,7 +44,6 @@ public class ResultActivity extends AppCompatActivity implements  CityFoundListe
         if (extras != null) {
             return Uri.parse(extras.getString(PhotoActivity.URIBITMAPKEY));
         } else {
-            Toast.makeText(getApplicationContext(), "erreur tu fait quoi beater", Toast.LENGTH_LONG);
             returnToPhotoActivity();
             return null;
         }
@@ -97,10 +90,10 @@ public class ResultActivity extends AppCompatActivity implements  CityFoundListe
             public void run() {
                 if(city != null){
                     textView.setText(city.toString());
-                    buttonNext.setText("voire ma ville");
+                    buttonNext.setText("Voir ma ville");
                 }else {
-                    textView.setText("échec-city");
-                    buttonNext.setText("reprendre une photo");
+                    textView.setText("ECHEC-CITY");
+                    buttonNext.setText("Reprendre une photo");
                 }
             }
         });

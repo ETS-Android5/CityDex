@@ -28,7 +28,14 @@
         <entry key="..\:/Users/basti/Documents/GitHub/PtutS3Android/app/src/main/res/layout/activity_home.xml" value="0.176" />
         <entry key="..\:/Users/basti/Documents/GitHub/PtutS3Android/app/src/main/res/layout/activity_info_ville.xml" value="0.2125" />
         <entry key="..\:/Users/basti/Documents/GitHub/PtutS3Android/app/src/main/res/layout/activity_loading_screen.xml" value="0.2296875" />
+        <entry key="..\:/Users/basti/Documents/GitHub/PtutS3Android/app/src/main/res/layout/activity_parametre.xml" value="0.23854166666666668" />
         <entry key="..\:/Users/basti/Documents/GitHub/PtutS3Android/app/src/main/res/layout/activity_photo.xml" value="0.2296875" />
+        <entry key="..\:/Users/basti/Documents/GitHub/PtutS3Android/app/src/main/res/layout/fragment_photo.xml" value="0.23854166666666668" />
+        <entry key="..\:/Users/basti/Documents/GitHub/PtutS3Android/app/src/main/res/layout/galerie.xml" value="0.23324275362318841" />
+        <entry key="..\:/Users/basti/Documents/GitHub/PtutS3Android/app/src/main/res/layout/imageviewinframelayout.xml" value="0.23854166666666668" />
+        <entry key="..\:/Users/basti/Documents/GitHub/PtutS3Android/app/src/main/res/layout/layout_achievementdetail.xml" value="0.23324275362318841" />
+        <entry key="..\:/Users/basti/Documents/GitHub/PtutS3Android/app/src/main/res/layout/layout_photoresult.xml" value="0.23854166666666668" />
+        <entry key="..\:/Users/basti/Documents/GitHub/PtutS3Android/app/src/main/res/layout/popupwindowlayout.xml" value="0.23854166666666668" />
       </map>
     </option>
   </component>

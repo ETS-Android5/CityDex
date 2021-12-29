@@ -80,7 +80,7 @@ public class HomeActivity extends AppCompatActivity {
         ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE}, PackageManager.PERMISSION_GRANTED);
 
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
-            Toast.makeText(this, "accepté les condition et réssayer ! ", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "Acceptez les conditions et réessayez ! ", Toast.LENGTH_LONG).show();
             return;
         }
         Intent activityIntent = new Intent(HomeActivity.this, PhotoActivity.class);
