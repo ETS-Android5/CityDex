@@ -43,6 +43,7 @@ public class OCRDetection {
                     result = result.replace("|", "I");
                     result = result.replaceAll("ST", "SAINT");
                     result =  result.replaceAll("[^a-zA-ZÉ -]", "");
+                    result = result.replaceAll(" - |- ","");
                     photoToCity.setOcrResult(result);
                     onDestroy();
             }
