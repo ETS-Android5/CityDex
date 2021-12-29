@@ -91,6 +91,7 @@ public class PhotoActivity extends AppCompatActivity {
         LayoutInflater inflater = (LayoutInflater)   getApplicationContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View child = inflater.inflate(R.layout.layout_photoresult, null);
         constraintLayout.addView(child);
+        child.setId(R.id.layout_photoresult);
         ConstraintSet set = new ConstraintSet();
         set.clone(constraintLayout);
         set.connect(child.getId(), ConstraintSet.LEFT, constraintLayout.getId(), ConstraintSet.LEFT, 0);
