@@ -1,4 +1,4 @@
-package com.tlbail.ptuts3androidapp.Model.DetectionTextPanneau;
+package com.tlbail.ptuts3androidapp.Model.PanneauVersVille;
 
 import android.graphics.Bitmap;
 import android.media.MediaPlayer;
@@ -24,8 +24,6 @@ import com.tlbail.ptuts3androidapp.Model.ObjectDetection.ObjectDetector;
 import com.tlbail.ptuts3androidapp.Model.User.LocalDataLoader.UserPropertyLocalLoader;
 import com.tlbail.ptuts3androidapp.Model.User.User;
 import com.tlbail.ptuts3androidapp.R;
-
-import org.checkerframework.checker.units.qual.C;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -335,7 +333,6 @@ public abstract class PhotoToCity implements FetchCityListener {
     private MediaPlayer mediaPlayer;
 
     private void yapasdepanneaux() {
-        Toast.makeText(appCompatActivity,"toset", Toast.LENGTH_LONG).show();
         mediaPlayer = MediaPlayer.create(appCompatActivity,R.raw.yapasdepanneau);
         mediaPlayer.start();
 

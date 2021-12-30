@@ -8,7 +8,7 @@ import com.tlbail.ptuts3androidapp.Model.City.City;
 import com.tlbail.ptuts3androidapp.Model.City.CityLoaders.CityLocalLoader;
 import com.tlbail.ptuts3androidapp.Model.CityApi.Department;
 import com.tlbail.ptuts3androidapp.Model.CityApi.Region;
-import com.tlbail.ptuts3androidapp.Model.DetectionTextPanneau.CityFoundListener;
+import com.tlbail.ptuts3androidapp.Model.PanneauVersVille.CityFoundListener;
 import com.tlbail.ptuts3androidapp.Model.User.LocalDataLoader.UserPropertyLocalLoader;
 import com.tlbail.ptuts3androidapp.Model.User.User;
 import com.tlbail.ptuts3androidapp.R;

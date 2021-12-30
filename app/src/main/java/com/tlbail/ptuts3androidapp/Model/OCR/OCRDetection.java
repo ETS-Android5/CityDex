@@ -5,7 +5,7 @@ import android.graphics.RectF;
 import android.os.Environment;
 
 import com.googlecode.tesseract.android.TessBaseAPI;
-import com.tlbail.ptuts3androidapp.Model.DetectionTextPanneau.PhotoToCity;
+import com.tlbail.ptuts3androidapp.Model.PanneauVersVille.PhotoToCity;
 
 import java.io.File;
 import java.io.FileOutputStream;

@@ -1,4 +1,4 @@
-package com.tlbail.ptuts3androidapp.Model.DetectionTextPanneau;
+package com.tlbail.ptuts3androidapp.Model.PanneauVersVille;
 
 import com.tlbail.ptuts3androidapp.Model.City.City;
 

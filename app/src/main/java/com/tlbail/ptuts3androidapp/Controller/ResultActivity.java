@@ -12,8 +12,8 @@ import android.widget.TextView;
 
 import com.tlbail.ptuts3androidapp.Model.Achievement.Achievements;
 import com.tlbail.ptuts3androidapp.Model.City.City;
-import com.tlbail.ptuts3androidapp.Model.DetectionTextPanneau.CityFoundListener;
-import com.tlbail.ptuts3androidapp.Model.DetectionTextPanneau.PhotoToCityDecorator;
+import com.tlbail.ptuts3androidapp.Model.PanneauVersVille.CityFoundListener;
+import com.tlbail.ptuts3androidapp.Model.PanneauVersVille.PhotoToCityDecorator;
 import com.tlbail.ptuts3androidapp.R;
 
 public class ResultActivity extends AppCompatActivity implements  CityFoundListener {

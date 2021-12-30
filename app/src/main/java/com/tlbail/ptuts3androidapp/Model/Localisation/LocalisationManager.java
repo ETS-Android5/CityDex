@@ -15,7 +15,7 @@ import android.widget.Toast;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
-import com.tlbail.ptuts3androidapp.Model.DetectionTextPanneau.PhotoToCity;
+import com.tlbail.ptuts3androidapp.Model.PanneauVersVille.PhotoToCity;
 
 import java.io.IOException;
 import java.util.List;
