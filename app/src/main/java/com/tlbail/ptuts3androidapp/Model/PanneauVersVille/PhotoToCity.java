@@ -97,7 +97,6 @@ public abstract class PhotoToCity implements FetchCityListener {
     }
     public void setBitmap(Bitmap bitmap) {this.bitmap = bitmap;}
 
-    @RequiresApi(api = Build.VERSION_CODES.M)
     public void start(Bitmap bitmap){
         this.bitmap =bitmap;
         startObjectDetection();
@@ -143,7 +142,6 @@ public abstract class PhotoToCity implements FetchCityListener {
 
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.M)
     private void startLocalisation() {
         localisationManager = new LocalisationManager(this);
         localisationManager.start();
