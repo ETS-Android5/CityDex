@@ -64,6 +64,7 @@ public abstract class PhotoToCity implements FetchCityListener {
     private Bitmap bitmap;
     private boolean verifLocatIsActivated = true;
     private CropUtils mCropUtils;
+    private boolean haveFail = false;
 
     public AppCompatActivity getAppCompatActivity() {
         return appCompatActivity;
@@ -211,7 +212,7 @@ public abstract class PhotoToCity implements FetchCityListener {
 
 
     private void finish() {
-
+        if(haveFail) return;
         if(ocrHaveCompleted){
             TextView textView = appCompatActivity.findViewById(R.id.resutlTextview);
             appCompatActivity.runOnUiThread(new Runnable() {
@@ -315,6 +316,7 @@ public abstract class PhotoToCity implements FetchCityListener {
     }
 
     private void fail(){
+        haveFail = true;
         updateListener(null);
     }
 
