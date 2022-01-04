@@ -142,7 +142,7 @@ public abstract class PhotoToCity implements FetchCityListener {
             appCompatActivity.runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    Toast.makeText(appCompatActivity,"Aucun texte trouvé !", Toast.LENGTH_LONG);
+                    Toast.makeText(appCompatActivity,"aye ! je n'ai pas réussi pas demarrer l'ocr ", Toast.LENGTH_LONG);
                 }
             });
             fail();
