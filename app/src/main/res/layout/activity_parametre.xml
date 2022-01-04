@@ -29,6 +29,7 @@
             android:id="@+id/switch1VerifierLocat"
             android:layout_width="356dp"
             android:layout_height="73dp"
+            android:checked="true"
             android:text="Verifier la localisation"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
