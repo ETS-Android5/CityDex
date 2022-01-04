@@ -82,7 +82,7 @@ public class ReglageActivity extends AppCompatActivity {
             user.put(LOCATIONTIMEOUTKEY, String.valueOf(valueLocationTimeOut));
         System.out.println("String.valueOf(switch1VerifierLocat.isChecked()) = " + String.valueOf(switch1VerifierLocat.isChecked()));
         user.put(VERIFLOCATKEY, String.valueOf(switch1VerifierLocat.isChecked()));
-        Toast.makeText(getApplicationContext(), "Information enregistré ", Toast.LENGTH_LONG).show();
+        Toast.makeText(getApplicationContext(), "Information enregistrée ", Toast.LENGTH_LONG).show();
         finish();
     }
 

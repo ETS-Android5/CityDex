@@ -544,7 +544,7 @@ public class Achievements implements CityFoundListener {
         achievements.add(new Achievement(
                 user.containsKey(appCompatActivity.getString(R.string.achievement_une_terrible_forteresse)), "Une terrible forteresse", R.drawable.uneterribleforteresse, "Ajouter Saint-Malo à sa collection"));
         achievements.add(new Achievement(
-                user.containsKey(appCompatActivity.getString(R.string.achievement_capitale)), "Capital", R.drawable.capital, "Ajouter Paris à sa collection"));
+                user.containsKey(appCompatActivity.getString(R.string.achievement_capitale)), "Capitale", R.drawable.capital, "Ajouter Paris à sa collection"));
         achievements.add(new Achievement(
                 user.containsKey(appCompatActivity.getString(R.string.achievement_seul_au_monde)), "Seul au monde", R.drawable.seulaumonde, "Ajouter une île à sa collection"));
         achievements.add(new Achievement(
