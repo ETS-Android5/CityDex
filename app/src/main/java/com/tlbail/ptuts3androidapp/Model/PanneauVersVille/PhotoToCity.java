@@ -137,8 +137,16 @@ public abstract class PhotoToCity implements FetchCityListener {
             });
             fail();
 
+        }catch (RuntimeException e){
+            e.printStackTrace();
+            appCompatActivity.runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    Toast.makeText(appCompatActivity,"Aucun texte trouvé !", Toast.LENGTH_LONG);
+                }
+            });
+            fail();
         }
-
 
     }
 
