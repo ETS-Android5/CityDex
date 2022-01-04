@@ -78,6 +78,8 @@ public class ReglageActivity extends AppCompatActivity {
 
     private void valider() {
         int valueLocationTimeOut = Integer.parseInt(editTextLocationTimeOut.getText().toString());
+        if(!user.containsKey(LOCATIONTIMEOUTKEY))
+            user.put(LOCATIONTIMEOUTKEY, String.valueOf(valueLocationTimeOut));
         if(user.containsKey(LOCATIONTIMEOUTKEY) && valueLocationTimeOut != Integer.parseInt(user.get(LOCATIONTIMEOUTKEY)))
             user.put(LOCATIONTIMEOUTKEY, String.valueOf(valueLocationTimeOut));
         System.out.println("String.valueOf(switch1VerifierLocat.isChecked()) = " + String.valueOf(switch1VerifierLocat.isChecked()));
