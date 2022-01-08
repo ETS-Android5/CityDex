@@ -341,9 +341,11 @@ public abstract class PhotoToCity implements FetchCityListener {
     private MediaPlayer mediaPlayer;
 
     private void yapasdepanneaux() {
+        /*
+        Desactivé a cause de bastien 😡😠
         mediaPlayer = MediaPlayer.create(appCompatActivity,R.raw.yapasdepanneau);
         mediaPlayer.start();
-
+        */
     }
 
 
