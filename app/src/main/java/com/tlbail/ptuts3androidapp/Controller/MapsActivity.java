@@ -25,6 +25,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     private GoogleMap mMap;
     private ActivityMapsBinding binding;
+    private String chosenCity;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +39,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+
+
+        //get Extra
+        chosenCity = getIntent().getStringExtra("City");
+
+
     }
 
     /**
@@ -68,7 +76,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private List<LatLng> getLatLngFromCities(List<City> cities) {
         List<LatLng> latLngs = new ArrayList<>();
         for(City city: cities){
-            latLngs.add(city.getCityData().getPosition());
+            if(chosenCity != null && city.getCityData().getName().equalsIgnoreCase(chosenCity)){
+                latLngs.add(0, city.getCityData().getPosition());
+            }else{
+                latLngs.add(city.getCityData().getPosition());
+
+            }
         }
         return latLngs;
     }
@@ -79,6 +92,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             Toast.makeText(this, "Tu ne possède aucunne ville ! ", Toast.LENGTH_LONG).show();
             return;
         }
+
         mMap.moveCamera(CameraUpdateFactory.newLatLng(cities.get(0)));
 
         for(LatLng latLng : cities){
