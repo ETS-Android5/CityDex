@@ -36,7 +36,11 @@ public class LocalisationManager implements LocationListener {
         this.appCompatActivity = photoToCity.getAppCompatActivity();
     }
 
-    private String getLocationFound() {
+    public LocalisationManager(AppCompatActivity appCompatActivity){
+        this.appCompatActivity = appCompatActivity;
+    }
+
+    public String getLocationFound() {
         return locationFound;
     }
 
@@ -111,7 +115,9 @@ public class LocalisationManager implements LocationListener {
                     Log.i("Localisation", msg + "");
                     Log.i("VilleLocation", locationFound);
 
-                    photoToCity.setLocationResult(locationFound);
+                    if(photoToCity != null) {
+                        photoToCity.setLocationResult(locationFound);
+                    }
                 } else {
                     try {
                         throw new CityNotFoundException();
