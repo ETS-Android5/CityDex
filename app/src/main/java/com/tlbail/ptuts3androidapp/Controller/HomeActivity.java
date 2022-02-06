@@ -61,6 +61,13 @@ public class HomeActivity extends AppCompatActivity {
 
             }
         });
+        findViewById(R.id.map_button).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent activityIntent = new Intent(HomeActivity.this, MapsActivity.class);
+                HomeActivity.this.startActivity(activityIntent);
+            }
+        });
         findViewById(R.id.photo_button).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

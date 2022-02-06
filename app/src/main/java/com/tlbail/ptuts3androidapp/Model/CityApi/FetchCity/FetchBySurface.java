@@ -1,5 +1,7 @@
 package com.tlbail.ptuts3androidapp.Model.CityApi.FetchCity;
 
+import com.google.android.gms.maps.model.LatLng;
+import com.google.gson.JsonArray;
 import com.tlbail.ptuts3androidapp.Model.City.CityData;
 import com.tlbail.ptuts3androidapp.Model.CityApi.Department;
 import com.tlbail.ptuts3androidapp.Model.CityApi.Region;
@@ -13,7 +15,7 @@ public class FetchBySurface extends FetchCity{
     public FetchBySurface(FetchCityListener fecthCityListener, float surfaceThreshold){
         super(fecthCityListener);
         this.surfaceThreshold = surfaceThreshold;
-        this.request = "https://geo.api.gouv.fr/communes?fields=nom,population,surface,codeDepartement,region";
+        this.request = "https://geo.api.gouv.fr/communes?fields=nom,population,surface,centre,codeDepartement,region";
     }
 
     @Override
@@ -25,6 +27,12 @@ public class FetchBySurface extends FetchCity{
         float surface = cityJsonObject.get("surface").getAsFloat();
         int inhabitants = (cityJsonObject.get("population") == null) ? 0 : cityJsonObject.get("population").getAsInt();
         if(name == null || department == null || region == null || surfaceThreshold > surface) return null;
-        return new CityData(name, department, region, surface, inhabitants);
+
+        JsonArray jsonArrayCoord = cityJsonObject.get("centre").getAsJsonObject().get("coordinates").getAsJsonArray();
+        double latitude = jsonArrayCoord.get(1).getAsDouble();
+        double longitude = jsonArrayCoord.get(0).getAsDouble();
+        LatLng latLng = new LatLng(latitude, longitude);
+
+        return  new CityData(name, department, region, surface, inhabitants, latLng);
     }
 }
