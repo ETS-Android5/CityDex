@@ -1,8 +1,8 @@
 package com.tlbail.ptuts3androidapp;
 
-public class CropUtils {
+public class StringSimilarity {
 
-    public CropUtils(){
+    public StringSimilarity(){
 
     }
 
