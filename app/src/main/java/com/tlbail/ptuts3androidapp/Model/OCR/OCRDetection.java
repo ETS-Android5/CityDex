@@ -19,15 +19,15 @@ public class OCRDetection {
     private String result = "";
 
     public OCRDetection(InputStream dataToCopy) throws IOException {
-        mTess = new TessBaseAPI();
+        /*mTess = new TessBaseAPI();
         String datapath = Environment.getExternalStorageDirectory() + "/Citydex/";
         String language = "fra";
         createOCRData(dataToCopy, datapath);
-        mTess.init(datapath, language);
+        mTess.init(datapath, language);*/
     }
 
     public void runOcrResult(PhotoToCity photoToCity, RectF rectF) {
-        new Thread(new Runnable() {
+        /*new Thread(new Runnable() {
             @Override
             public void run() {
                     photoToCity.setBitmap(cropImage(photoToCity.getBitmap(), rectF));
@@ -46,36 +46,36 @@ public class OCRDetection {
                     photoToCity.setOcrResult(result);
                     onDestroy();
             }
-        }).start();
+        }).start();*/
     }
 
 
     public void onDestroy() {
-        if (mTess != null)
-            mTess.end();
+        /*if (mTess != null)
+            mTess.end();*/
     }
 
     private void copy(InputStream in, File dst) throws IOException {
-            try (OutputStream out = new FileOutputStream(dst)) {
+            /*try (OutputStream out = new FileOutputStream(dst)) {
                 // Transfer bytes from in to out
                 byte[] buf = new byte[1024];
                 int len;
                 while ((len = in.read(buf)) > 0) {
                     out.write(buf, 0, len);
                 }
-            }
+            }*/
     }
 
 
     private void createOCRData(InputStream dataToCopy, String datapath) throws IOException {
-        File dir = new File(datapath + "tessdata/");
+        /*File dir = new File(datapath + "tessdata/");
         if (!dir.exists()) {
             dir.mkdirs();
         }
         File data = new File(dir.getAbsolutePath(), "fra.traineddata");
         if (!data.exists()){
             copy(dataToCopy, data);
-        }
+        }*/
     }
 
     //Méthode qui crop un bitmap
