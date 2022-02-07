@@ -274,12 +274,11 @@ public abstract class PhotoToCity implements FetchCityListener {
         CityData cityDataToReturn = null;
         double threshold = 0.7;
         for(CityData cityData : cityDatas){
-
             if(cityData.getName().equalsIgnoreCase(locationResult)){
                 cityDataToReturn = cityData;
                 break;
             }
-            if(similarity.similarity(cityData.getName(), locationResult) > threshold){
+            if(similarity.similarity(cityData.getName().toUpperCase(), resultOcr.toUpperCase()) > threshold){
                 cityDataToReturn = cityData;
                 threshold += 0.1;
             }
