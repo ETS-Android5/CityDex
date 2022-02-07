@@ -4,13 +4,10 @@ import android.graphics.Bitmap;
 import android.media.MediaPlayer;
 import android.os.Build;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import androidx.annotation.RequiresApi;
+import android.widget.Toast;;
 import androidx.appcompat.app.AppCompatActivity;
-
 import com.tlbail.ptuts3androidapp.Controller.ReglageActivity;
-import com.tlbail.ptuts3androidapp.CropUtils;
+import com.tlbail.ptuts3androidapp.StringSimilarity;
 import com.tlbail.ptuts3androidapp.Model.City.City;
 import com.tlbail.ptuts3androidapp.Model.City.CityData;
 import com.tlbail.ptuts3androidapp.Model.City.CityLoaders.CityLocalLoader;
@@ -63,7 +60,7 @@ public abstract class PhotoToCity implements FetchCityListener {
     private String locationResult;
     private Bitmap bitmap;
     private boolean verifLocatIsActivated = true;
-    private CropUtils mCropUtils;
+    private StringSimilarity similarity;
     private boolean haveFail = false;
 
     public AppCompatActivity getAppCompatActivity() {
@@ -73,10 +70,10 @@ public abstract class PhotoToCity implements FetchCityListener {
 
     public PhotoToCity(AppCompatActivity appCompatActivity){
         this.appCompatActivity = appCompatActivity;
-        mCropUtils = new CropUtils();
+        similarity = new StringSimilarity();
         objectDetector = new ObjectDetector(appCompatActivity);
         try {
-            ocrDetection = new OCRDetection(appCompatActivity.getAssets().open("fra.traineddata"));
+            ocrDetection = new OCRDetection(/*appCompatActivity.getAssets().open("fra.traineddata")*/);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -217,6 +214,8 @@ public abstract class PhotoToCity implements FetchCityListener {
     }
 
 
+
+
     private void finish() {
         if(haveFail) return;
         if(ocrHaveCompleted){
@@ -230,9 +229,10 @@ public abstract class PhotoToCity implements FetchCityListener {
         }
         if(ocrHaveCompleted  && locationhaveCompleted){
             System.out.println("OCR et localisation terminés");
-            System.out.println("% de similtude : " + mCropUtils.similarity(resultOcr.toUpperCase(), locationResult.toUpperCase()));
+            System.out.println("% de similtude : " + similarity.similarity(resultOcr.toUpperCase(), locationResult.toUpperCase()));
 
-            if(resultOcr.toUpperCase().contains(locationResult.toUpperCase()) || mCropUtils.similarity(resultOcr.toUpperCase(), locationResult.toUpperCase()) > 0.7){
+            if(resultOcr.toUpperCase().equals(locationResult) ||resultOcr.toUpperCase().contains(locationResult.toUpperCase()) || similarity.similarity(resultOcr.toUpperCase(), locationResult.toUpperCase()) > 0.7){
+                getCityDataByName(locationResult);
                 getCityDataByName(locationResult);
             }else{
                 appCompatActivity.runOnUiThread(new Runnable() {
@@ -272,9 +272,17 @@ public abstract class PhotoToCity implements FetchCityListener {
             return;
         }
         CityData cityDataToReturn = null;
+        double threshold = 0.7;
         for(CityData cityData : cityDatas){
-            if(cityData.getName().equalsIgnoreCase(locationResult))
+
+            if(cityData.getName().equalsIgnoreCase(locationResult)){
                 cityDataToReturn = cityData;
+                break;
+            }
+            if(similarity.similarity(cityData.getName(), locationResult) > threshold){
+                cityDataToReturn = cityData;
+                threshold += 0.1;
+            }
         }
         if(cityDataToReturn == null) cityDataToReturn = cityDatas.get(0);
         finishWithData(cityDataToReturn);
