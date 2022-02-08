@@ -2,7 +2,7 @@ package com.tlbail.ptuts3androidapp.Model.PanneauVersVille;
 
 import android.graphics.Bitmap;
 import android.graphics.RectF;
-import android.widget.Toast;;
+import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import com.tlbail.ptuts3androidapp.Controller.ReglageActivity;
 import com.tlbail.ptuts3androidapp.Model.Localisation.LocalizationListener;
@@ -35,7 +35,7 @@ public abstract class PhotoToCity implements FetchCityListener, LocalizationList
     public List<CityFoundListener> cityFoundListeners = new ArrayList<>();
 
 
-    private boolean verifLocatIsActivated = true;
+    private boolean verifLocatIsActivated = false;
 
     public AppCompatActivity getAppCompatActivity() {
         return appCompatActivity;
@@ -116,7 +116,7 @@ public abstract class PhotoToCity implements FetchCityListener, LocalizationList
 
     @Override
     public void onDataQueryComplete(List<CityData> cityDataList) {
-        if(cityDataList.isEmpty()){
+        if(cityDataList == null ||cityDataList.isEmpty()){
             makeToast("Aucne ville avec " + ocrResult +  " trouvée 😭");
             fail();
             return;
