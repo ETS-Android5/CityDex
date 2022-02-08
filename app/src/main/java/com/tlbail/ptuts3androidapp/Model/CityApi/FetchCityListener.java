@@ -1,4 +1,4 @@
-package com.tlbail.ptuts3androidapp.Model.CityApi.FetchCity;
+package com.tlbail.ptuts3androidapp.Model.CityApi;
 
 import com.tlbail.ptuts3androidapp.Model.City.CityData;
 
