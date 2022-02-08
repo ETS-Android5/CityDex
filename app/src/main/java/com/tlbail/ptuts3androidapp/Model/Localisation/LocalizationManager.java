@@ -1,6 +1,7 @@
 package com.tlbail.ptuts3androidapp.Model.Localisation;
 
 import android.Manifest;
+import android.app.Activity;
 import android.content.pm.PackageManager;
 import android.location.Address;
 import android.location.Geocoder;
@@ -11,7 +12,6 @@ import androidx.core.app.ActivityCompat;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
-import com.tlbail.ptuts3androidapp.Model.PanneauVersVille.PhotoToCity;
 import java.io.IOException;
 import java.util.List;
 import java.util.Locale;
@@ -25,9 +25,9 @@ public class LocalizationManager {
     private static final int LOCATION_REQUEST = 1340;
 
 
-    public LocalizationManager(PhotoToCity activity) {
-        localizationListener = activity;
-        this.appCompatActivity = activity.getAppCompatActivity();
+    public LocalizationManager(AppCompatActivity activity, LocalizationListener localizationListener) {
+        this.localizationListener = localizationListener;
+        this.appCompatActivity = activity;
         locationClient = LocationServices.getFusedLocationProviderClient(appCompatActivity);
     }
 
