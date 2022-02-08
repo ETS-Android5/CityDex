@@ -9,6 +9,7 @@ import android.Manifest;
 import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
@@ -22,13 +23,16 @@ import android.widget.Toast;
 
 import com.tlbail.ptuts3androidapp.Model.City.City;
 import com.tlbail.ptuts3androidapp.Model.City.CityLoaders.CityLocalLoader;
+import com.tlbail.ptuts3androidapp.Model.Localisation.LocalisationManager;
 import com.tlbail.ptuts3androidapp.Model.Localisation.LocationTrack;
+import com.tlbail.ptuts3androidapp.Model.OCR.SignImage;
 import com.tlbail.ptuts3androidapp.Model.User.LocalDataLoader.UserPropertyLocalLoader;
 import com.tlbail.ptuts3androidapp.Model.User.User;
 import com.tlbail.ptuts3androidapp.R;
 import com.tlbail.ptuts3androidapp.View.BackgroundOfPhoto.BackgroundRecyclerView;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class HomeActivity extends AppCompatActivity {
@@ -37,14 +41,17 @@ public class HomeActivity extends AppCompatActivity {
 
     public static final String CHANNEL_1_ID = "channel1";
     private NotificationManagerCompat notificationManagerCompat;
-    private boolean hasCity = false;
 
     private User user;
     private List<City> cities;
 
-    private LocationTrack location;
-    private Geocoder geocoder;
-    private Address adresse;
+    private boolean hasCity = false;
+    private LocalisationManager mLocalisationManager;
+    private String adresse;
+
+    private boolean hasfinish = false;
+
+    private Context context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,42 +61,49 @@ public class HomeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_home);
         bindUI();
 
-        if(location.canGetLocation()){
-            List<Address> adresses = null;
+        context = this;
+        user = new User(new UserPropertyLocalLoader(getApplicationContext()), new CityLocalLoader(getApplicationContext()));
+        cities = user.getOwnedCity();
 
-            try
-            {
-                adresses = geocoder.getFromLocation(location.getLatitude(), location.getLongitude(), 1);
-            }catch (IOException ioException)
-            {
-                Log.e("GPS", "erreur", ioException);
-            }
-            catch (IllegalArgumentException illegalArgumentException)
-            {
-                Log.e("GPS", "erreur ", illegalArgumentException);
-            }
+        mLocalisationManager = new LocalisationManager(this);
+        mLocalisationManager.start();
+        mLocalisationManager.onResumeActivity();
 
-            if (adresses == null || adresses.size()  == 0)
-            {
-                Log.e("GPS", "erreur aucune adresse !");
-            }
-            else
-            {
-                adresse = adresses.get(0);
-               System.out.println(adresse);
-            }
-        }
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
 
-        for (City city: cities) {
-            if (city.getCityData().getName().equalsIgnoreCase(adresse.getLocality())){
-               hasCity = true;
-            }
-        }
+                try {
+                    Thread.sleep(10000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
 
-        if(!hasCity){
-            notificationManagerCompat = NotificationManagerCompat.from(this);
-            createNotif();
-        }
+                Log.i("Terminéééééééé", hasfinish + "");
+
+                if(mLocalisationManager.getLocationFound() != null && !mLocalisationManager.getLocationFound().isEmpty()){
+
+                    adresse = mLocalisationManager.getLocationFound();
+                    hasfinish = true;
+
+                    for (City city: cities) {
+                        if (city.getCityData().getName().equalsIgnoreCase(adresse)){
+                            hasCity = true;
+                        }
+                    }
+
+                    Log.i("Terminé", hasfinish + "");
+
+                    if(!hasCity && hasfinish){
+                        notificationManagerCompat = NotificationManagerCompat.from(context);
+                        createNotif();
+                    }
+                }
+
+                mLocalisationManager.desabonnementGPS();
+            }
+        }).start();
+
     }
 
     private void createNotif() {
@@ -113,7 +127,7 @@ public class HomeActivity extends AppCompatActivity {
                 .setSmallIcon(R.mipmap.app_icon).setColor(Color.RED)
                 .setContentTitle("Nouvelle ville disponible !")
                 .setContentText("Vous vous trouvez dans une nouvelle ville ! " +
-                        "Ajouter " + adresse.getLocality() + " à votre collection !")
+                        "Ajouter " + adresse + " à votre collection !")
                 .setPriority(NotificationCompat.PRIORITY_HIGH)
                 .setCategory(NotificationCompat.CATEGORY_MESSAGE)
                 .build();
@@ -162,8 +176,6 @@ public class HomeActivity extends AppCompatActivity {
 
         user = new User(new UserPropertyLocalLoader(getApplicationContext()), new CityLocalLoader(getApplicationContext()));
         cities = user.getOwnedCity();
-        geocoder = new Geocoder(this);
-        location = new LocationTrack(this);
     }
 
     private void startPhotoActivity() {
