@@ -16,11 +16,17 @@ public class ObjectDetector {
 
     private Context context;
     private RectF rectLocation;
+    private static ObjectDetector objectDetector;
 
-    public ObjectDetector(Context context) {//TODO passer en singleton
+    private ObjectDetector(Context context) {//TODO passer en singleton
         this.context = context;
     }
 
+    public static ObjectDetector getInstance(Context context){
+        if (objectDetector != null) return objectDetector;
+        objectDetector = new ObjectDetector(context);
+        return objectDetector;
+    }
 
     public void runObjectDetection(Bitmap image){
         try {
