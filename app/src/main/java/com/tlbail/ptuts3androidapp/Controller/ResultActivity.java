@@ -16,7 +16,7 @@ import com.tlbail.ptuts3androidapp.Model.PanneauVersVille.CityFoundListener;
 import com.tlbail.ptuts3androidapp.Model.PanneauVersVille.PhotoToCityDecorator;
 import com.tlbail.ptuts3androidapp.R;
 
-public class ResultActivity extends AppCompatActivity implements  CityFoundListener {
+public class ResultActivity extends AppCompatActivity implements CityFoundListener {
 
     private ImageView imageView;
     private TextView textView;
@@ -65,14 +65,12 @@ public class ResultActivity extends AppCompatActivity implements  CityFoundListe
     @Override
     protected void onResume() {
         super.onResume();
-        imageView.setImageBitmap(photoToCityDecorator.getBitmap());
-        photoToCityDecorator.onResume();
+        imageView.setImageBitmap(photoToCityDecorator.getPhotoToTransform());
     }
 
     @Override
     public void onPause() {
         super.onPause();
-        photoToCityDecorator.onPause();
     }
 
 
@@ -83,7 +81,7 @@ public class ResultActivity extends AppCompatActivity implements  CityFoundListe
     }
 
     @Override
-    public void onCityFoundt(City city) {
+    public void onCityFound(City city) {
         setButtonValueByCityValue(city);
         runOnUiThread(new Runnable() {
             @Override
