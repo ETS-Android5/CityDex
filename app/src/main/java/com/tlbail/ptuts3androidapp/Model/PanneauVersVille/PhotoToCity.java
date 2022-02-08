@@ -46,7 +46,7 @@ public abstract class PhotoToCity implements FetchCityListener, LocalizationList
         this.appCompatActivity = appCompatActivity;
         objectDetector = ObjectDetector.getInstance(appCompatActivity);
         ocrDetector = new CityNameOCRDetector(this);
-        localizationManager = new LocalizationManager(this);
+        localizationManager = new LocalizationManager(getAppCompatActivity(), this);
 
         User user = new User(new UserPropertyLocalLoader(appCompatActivity), new CityLocalLoader(appCompatActivity));
         if(user.containsKey(ReglageActivity.VERIFLOCATKEY)) {
