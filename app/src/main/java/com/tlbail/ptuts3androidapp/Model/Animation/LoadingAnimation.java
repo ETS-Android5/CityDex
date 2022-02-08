@@ -1,4 +1,4 @@
-package com.tlbail.ptuts3androidapp;
+package com.tlbail.ptuts3androidapp.Model.Animation;
 
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;

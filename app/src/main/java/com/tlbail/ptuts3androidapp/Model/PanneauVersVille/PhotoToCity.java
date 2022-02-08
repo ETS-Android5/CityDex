@@ -7,7 +7,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.tlbail.ptuts3androidapp.Controller.ReglageActivity;
 import com.tlbail.ptuts3androidapp.Model.Localisation.LocalizationListener;
 import com.tlbail.ptuts3androidapp.Model.OCR.OcrResultListener;
-import com.tlbail.ptuts3androidapp.StringUtils;
+import com.tlbail.ptuts3androidapp.Model.Utils.StringUtils;
 import com.tlbail.ptuts3androidapp.Model.City.City;
 import com.tlbail.ptuts3androidapp.Model.City.CityData;
 import com.tlbail.ptuts3androidapp.Model.City.CityLoaders.CityLocalLoader;

@@ -16,7 +16,7 @@ import com.google.android.gms.games.AchievementsClient;
 import com.google.android.gms.games.Games;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.tlbail.ptuts3androidapp.LoadingAnimation;
+import com.tlbail.ptuts3androidapp.Model.Animation.LoadingAnimation;
 import com.tlbail.ptuts3androidapp.Model.ObjectDetection.ObjectDetector;
 import com.tlbail.ptuts3androidapp.R;
 
