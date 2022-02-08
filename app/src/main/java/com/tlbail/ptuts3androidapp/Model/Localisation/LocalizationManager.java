@@ -5,12 +5,12 @@ import android.content.pm.PackageManager;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
+import android.os.Build;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.tlbail.ptuts3androidapp.Model.PanneauVersVille.PhotoToCity;
 import java.io.IOException;
 import java.util.List;
@@ -21,6 +21,8 @@ public class LocalizationManager {
     private AppCompatActivity appCompatActivity;
     private LocalizationListener localizationListener;
     private FusedLocationProviderClient locationClient;
+    private static final String[] LOCATION_PERMS = {Manifest.permission.ACCESS_FINE_LOCATION};
+    private static final int LOCATION_REQUEST = 1340;
 
 
     public LocalizationManager(PhotoToCity activity) {
@@ -29,7 +31,14 @@ public class LocalizationManager {
         locationClient = LocationServices.getFusedLocationProviderClient(appCompatActivity);
     }
 
+    private void requestPermission() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            appCompatActivity.requestPermissions(LOCATION_PERMS, LOCATION_REQUEST);
+        }
+    }
+
     public void getLocation() {
+        requestPermission();
         if (ActivityCompat.checkSelfPermission(appCompatActivity, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(appCompatActivity, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             return;
         }
