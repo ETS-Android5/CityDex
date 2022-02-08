@@ -6,6 +6,6 @@ import java.util.List;
 
 public interface FetchCityListener {
 
-    public void onDataQueryComplete(List<CityData> cityData);
+    void onDataQueryComplete(List<CityData> cityData);
 
 }
