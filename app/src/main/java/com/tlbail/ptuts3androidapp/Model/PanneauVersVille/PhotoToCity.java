@@ -35,7 +35,7 @@ public abstract class PhotoToCity implements FetchCityListener, LocalizationList
     public List<CityFoundListener> cityFoundListeners = new ArrayList<>();
 
 
-    private boolean verifLocatIsActivated = false;
+    private boolean verifLocationIsActivated = false;
 
     public AppCompatActivity getAppCompatActivity() {
         return appCompatActivity;
@@ -49,13 +49,8 @@ public abstract class PhotoToCity implements FetchCityListener, LocalizationList
         localizationManager = new LocalizationManager(getAppCompatActivity(), this);
 
         User user = new User(new UserPropertyLocalLoader(appCompatActivity), new CityLocalLoader(appCompatActivity));
-        if(user.containsKey(ReglageActivity.VERIFLOCATKEY)) {
-            if(user.get(ReglageActivity.VERIFLOCATKEY).equals(String.valueOf(false))){
-                verifLocatIsActivated = false;
-            }else {
-                verifLocatIsActivated = true;
-            }
-        }
+        if(user.containsKey(ReglageActivity.VERIFLOCATKEY))
+            verifLocationIsActivated =user.get(ReglageActivity.VERIFLOCATKEY).equals(String.valueOf(false));
     }
 
     public Bitmap getPhotoToTransform() {
@@ -84,7 +79,7 @@ public abstract class PhotoToCity implements FetchCityListener, LocalizationList
     }
 
     private void transformToCity(){
-        if(!verifLocatIsActivated)
+        if(!verifLocationIsActivated)
             getCityDataByName(ocrResult);
         else if(isLocationAndOcrMatching())
             getCityDataByName(locationResult);
@@ -170,7 +165,7 @@ public abstract class PhotoToCity implements FetchCityListener, LocalizationList
 
     protected boolean dataIsUncorrect(CityData cityData) {
         if(cityData == null) return false;
-        if(verifLocatIsActivated){
+        if(verifLocationIsActivated){
             return locationResult == null || locationResult.isEmpty() ||
                     ocrResult == null || ocrResult.isEmpty();
         }else{
