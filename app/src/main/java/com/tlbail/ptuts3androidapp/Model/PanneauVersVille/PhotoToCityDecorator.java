@@ -25,13 +25,11 @@ public class PhotoToCityDecorator extends PhotoToCity{
 
     private Uri uri;
     private Bitmap bitmap;
-    private AppCompatActivity appCompatActivity;
     private User user;
 
 
     public PhotoToCityDecorator(ResultActivity appCompatActivity, Uri uri) {
         super(appCompatActivity);
-        this.appCompatActivity = appCompatActivity;
         this.uri = uri;
         bitmap = uriToBitmap(uri);
         user = new User(new UserPropertyLocalLoader(appCompatActivity), new CityLocalLoader(appCompatActivity));
@@ -63,7 +61,6 @@ public class PhotoToCityDecorator extends PhotoToCity{
 
     @Override
     protected City createCity(CityData cityData) {
-        //Todo créer une vraie ville
         if(dataIsUncorrect(cityData)) return null;
         City city = new City(new Photo(uri, cityData.getName()), cityData);
         return city;
