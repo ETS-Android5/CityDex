@@ -1,67 +1,42 @@
 package com.tlbail.ptuts3androidapp.Model.PanneauVersVille;
 
 import android.graphics.Bitmap;
-import android.media.MediaPlayer;
-import android.os.Build;
-import android.widget.TextView;
+import android.graphics.RectF;
 import android.widget.Toast;;
 import androidx.appcompat.app.AppCompatActivity;
 import com.tlbail.ptuts3androidapp.Controller.ReglageActivity;
-import com.tlbail.ptuts3androidapp.StringSimilarity;
+import com.tlbail.ptuts3androidapp.Model.Localisation.LocalizationListener;
+import com.tlbail.ptuts3androidapp.Model.OCR.OcrResultListener;
+import com.tlbail.ptuts3androidapp.StringUtils;
 import com.tlbail.ptuts3androidapp.Model.City.City;
 import com.tlbail.ptuts3androidapp.Model.City.CityData;
 import com.tlbail.ptuts3androidapp.Model.City.CityLoaders.CityLocalLoader;
 import com.tlbail.ptuts3androidapp.Model.CityApi.FetchCity.FetchCityListener;
 import com.tlbail.ptuts3androidapp.Model.CityApi.FetchCity.FetchByName;
 import com.tlbail.ptuts3androidapp.Model.CityApi.FetchCity.FetchCity;
-import com.tlbail.ptuts3androidapp.Model.Localisation.LocalisationManager;
-import com.tlbail.ptuts3androidapp.Model.OCR.OCRDetection;
+import com.tlbail.ptuts3androidapp.Model.Localisation.LocalizationManager;
+import com.tlbail.ptuts3androidapp.Model.OCR.CityNameOCRDetector;
 import com.tlbail.ptuts3androidapp.Model.OCR.OcrErrorException;
 import com.tlbail.ptuts3androidapp.Model.ObjectDetection.ObjectDetector;
 import com.tlbail.ptuts3androidapp.Model.User.LocalDataLoader.UserPropertyLocalLoader;
 import com.tlbail.ptuts3androidapp.Model.User.User;
-import com.tlbail.ptuts3androidapp.R;
-
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public abstract class PhotoToCity implements FetchCityListener {
+public abstract class PhotoToCity implements FetchCityListener, LocalizationListener, OcrResultListener {
 
-
-    private static final long DEFAULTTIMEOUT = 10;
+    private CityNameOCRDetector ocrDetector;
+    private LocalizationManager localizationManager;
+    private ObjectDetector objectDetector;
+    protected AppCompatActivity appCompatActivity;
+    private Bitmap photoToTransform;
+    private String ocrResult;
+    private String locationResult;
     public List<CityFoundListener> cityFoundListeners = new ArrayList<>();
 
-    public void subscribeOnCityFound(CityFoundListener cityFoundListener){
-        cityFoundListeners.add(cityFoundListener);
-    }
 
-    public void unsubscribeOnCityFound(CityFoundListener cityFoundListener){
-        cityFoundListeners.remove(cityFoundListener);
-    }
-
-    public void updateListener(City city){
-       for(CityFoundListener cityFoundListener: cityFoundListeners){
-           cityFoundListener.onCityFoundt(city);
-       }
-    }
-
-
-
-
-    private AppCompatActivity appCompatActivity;
-    private LocalisationManager localisationManager;
-    private ObjectDetector objectDetector;
-    private OCRDetection ocrDetection;
-    private boolean ocrHaveCompleted;
-    private String resultOcr;
-    private boolean locationhaveCompleted;
-    private String locationResult;
-    private Bitmap bitmap;
     private boolean verifLocatIsActivated = true;
-    private StringSimilarity similarity;
-    private boolean haveFail = false;
 
     public AppCompatActivity getAppCompatActivity() {
         return appCompatActivity;
@@ -70,13 +45,10 @@ public abstract class PhotoToCity implements FetchCityListener {
 
     public PhotoToCity(AppCompatActivity appCompatActivity){
         this.appCompatActivity = appCompatActivity;
-        similarity = new StringSimilarity();
         objectDetector = new ObjectDetector(appCompatActivity);
-        try {
-            ocrDetection = new OCRDetection(/*appCompatActivity.getAssets().open("fra.traineddata")*/);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        ocrDetector = new CityNameOCRDetector(this);
+        localizationManager = new LocalizationManager(this);
+
         User user = new User(new UserPropertyLocalLoader(appCompatActivity), new CityLocalLoader(appCompatActivity));
         if(user.containsKey(ReglageActivity.VERIFLOCATKEY)) {
             if(user.get(ReglageActivity.VERIFLOCATKEY).equals(String.valueOf(false))){
@@ -85,216 +57,97 @@ public abstract class PhotoToCity implements FetchCityListener {
                 verifLocatIsActivated = true;
             }
         }
-
-
     }
 
-    public Bitmap getBitmap() {
-        return bitmap;
+    public Bitmap getPhotoToTransform() {
+        return photoToTransform;
     }
-    public void setBitmap(Bitmap bitmap) {this.bitmap = bitmap;}
 
-    public void start(Bitmap bitmap){
-        this.bitmap =bitmap;
+    public void setPhotoToTransform(Bitmap photoToTransform) {this.photoToTransform = photoToTransform;}
+
+    public void start(Bitmap photoToTransform){
+        this.photoToTransform = photoToTransform;
         startObjectDetection();
-        try {
-            if(objectDetector.getRect() == null){
-                yapasdepanneaux();
-                fail();
-                return;
-            }
-        } catch (OcrErrorException e) {
-            e.printStackTrace();
-        }
-        startOCR();
-        if(verifLocatIsActivated){
-            startLocalisation();
-            startTimeOut();
-        }
+        RectF signLocationInPhoto = objectDetector.getRect();
+        ocrDetector.runOcrResult(signLocationInPhoto);
     }
 
+    @Override
+    public void onOcrFinish(String result) {
+        ocrResult = result;
+        localizationManager.getLocation();
+    }
 
+    @Override
+    public void onLocationReceived(String location) {
+        locationResult = location;
+        transformToCity();
+    }
+
+    private void transformToCity(){
+        if(!verifLocatIsActivated)
+            getCityDataByName(ocrResult);
+        else if(isLocationAndOcrMatching())
+            getCityDataByName(locationResult);
+        else
+            makeToast("Localisation différente du nom de ville");
+    }
+
+    private boolean isLocationAndOcrMatching() {
+        return ocrResult.equalsIgnoreCase(locationResult) || StringUtils.similarity(ocrResult, locationResult) > 0.7;
+    }
 
     private void startObjectDetection() {
-        objectDetector.runObjectDetection(bitmap);
+        objectDetector.runObjectDetection(photoToTransform);
     }
 
-
-    private void startOCR() {
-        //OCR detection
-        try {
-            ocrDetection.runOcrResult(this, objectDetector.getRect());
-        } catch (OcrErrorException e) {
-            e.printStackTrace();
-            appCompatActivity.runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-                    Toast.makeText(appCompatActivity,"Aucun texte trouvé !", Toast.LENGTH_LONG);
-                }
-            });
-            fail();
-
-        }catch (RuntimeException e){
-            e.printStackTrace();
-            appCompatActivity.runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-                    Toast.makeText(appCompatActivity,"aye ! je n'ai pas réussi pas demarrer l'ocr ", Toast.LENGTH_LONG);
-                }
-            });
-            fail();
-        }
-
-    }
-
-    private void startLocalisation() {
-        localisationManager = new LocalisationManager(this);
-        localisationManager.start();
-    }
-
-    private void startTimeOut() {
-        User user = new User(new UserPropertyLocalLoader(getAppCompatActivity()), new CityLocalLoader(getAppCompatActivity()));
-
-        final long timeLocationTimeOut;
-        if(user.containsKey(ReglageActivity.LOCATIONTIMEOUTKEY)){
-            timeLocationTimeOut = Long.parseLong(user.get(ReglageActivity.LOCATIONTIMEOUTKEY));
-            if(timeLocationTimeOut == -1){
-                return;
-            }
-        }else{
-            timeLocationTimeOut = DEFAULTTIMEOUT;
-        }
-
-        Runnable runnable = new Runnable() {
+    private void makeToast(String message){
+        appCompatActivity.runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                try {
-                    Thread.sleep(timeLocationTimeOut * 1000);
-                }catch (InterruptedException e){
-                    e.printStackTrace();
-                }
-                if(!ocrHaveCompleted || !locationhaveCompleted ){
-                    appCompatActivity.runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            Toast.makeText(appCompatActivity, "Localisation indisponible", Toast.LENGTH_SHORT).show();
-                        }
-                    });
-                    fail();
-                }
+                Toast.makeText(appCompatActivity, message, Toast.LENGTH_LONG).show();
             }
-        };
-        Thread thread = new Thread(runnable);
-        thread.start();
-
+        });
     }
 
-
-    public void setOcrResult(String result){
-        if(result.isEmpty()) {
-            appCompatActivity.runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-                    Toast.makeText(appCompatActivity, "Aucun texte trouvé ", Toast.LENGTH_SHORT).show();
-                }
-            });
-            fail();
-            return;
-        }
-        ocrHaveCompleted = true;
-        this.resultOcr = result;
-        System.out.println("Result OCR après regex = " + resultOcr);
-        finish();
-    }
-
-    public void setLocationResult(String result){
-        locationhaveCompleted = true;
-        locationResult = result;
-        finish();
-    }
-
-
-
-
-    private void finish() {
-        if(haveFail) return;
-        if(ocrHaveCompleted){
-            TextView textView = appCompatActivity.findViewById(R.id.resutlTextview);
-            appCompatActivity.runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-                    textView.setText(resultOcr);
-                }
-            });
-        }
-        if(ocrHaveCompleted  && locationhaveCompleted){
-            System.out.println("OCR et localisation terminés");
-            System.out.println("% de similtude : " + similarity.similarity(resultOcr.toUpperCase(), locationResult.toUpperCase()));
-
-            if(resultOcr.toUpperCase().equals(locationResult) ||resultOcr.toUpperCase().contains(locationResult.toUpperCase()) || similarity.similarity(resultOcr.toUpperCase(), locationResult.toUpperCase()) > 0.7){
-                getCityDataByName(locationResult);
-                getCityDataByName(locationResult);
-            }else{
-                appCompatActivity.runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        Toast.makeText(appCompatActivity, "La localisation ne matche pas", Toast.LENGTH_LONG).show();
-                    }
-                });
-                fail();
-            }
-        }
-
-        if(ocrHaveCompleted && !verifLocatIsActivated){
-            System.out.println("Ocr terminé et Localisation desactivé");
-            getCityDataByName(resultOcr);
-        }
-    }
-
-
-    private void getCityDataByName(String cityname) {
-        FetchCity fetchCity = new FetchByName(this,cityname);
+    private void getCityDataByName(String cityName) {
+        FetchCity fetchCity = new FetchByName(this,cityName);
         fetchCity.execute();
     }
 
     @Override
-    public void onDataQueryComplete(List<CityData> cityDatas) {
-        if(cityDatas.size() <= 0)
-        {
-            appCompatActivity.runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-                    Toast.makeText(appCompatActivity, "Aucne ville avec " + resultOcr +  " trouvée 😭", Toast.LENGTH_SHORT).show();
-                }
-            });
-
+    public void onDataQueryComplete(List<CityData> cityDataList) {
+        if(cityDataList.isEmpty()){
+            makeToast("Aucne ville avec " + ocrResult +  " trouvée 😭");
             fail();
             return;
         }
-        CityData cityDataToReturn = null;
-        double threshold = 0.7;
-        for(CityData cityData : cityDatas){
-            if(cityData.getName().equalsIgnoreCase(locationResult)){
-                cityDataToReturn = cityData;
-                break;
-            }
-            if(similarity.similarity(cityData.getName().toUpperCase(), resultOcr.toUpperCase()) > threshold){
-                cityDataToReturn = cityData;
-                threshold += 0.1;
-            }
-        }
-        if(cityDataToReturn == null) cityDataToReturn = cityDatas.get(0);
+        CityData cityDataToReturn = getBestExistingCity(cityDataList);
         finishWithData(cityDataToReturn);
     }
 
+    private CityData getBestExistingCity(List<CityData> cityDataList){
+        CityData cityDataToReturn = null;
+        double threshold = 0.7;
+        for(CityData cityData : cityDataList){
+            double similarity = StringUtils.similarity(cityData.getName(), ocrResult);
+            if(cityData.getName().equalsIgnoreCase(locationResult)) {
+                cityDataToReturn = cityData;
+                break;
+            }
+            else if(similarity > threshold){
+                cityDataToReturn = cityData;
+            }
+            threshold = similarity;
+        }
+        if(cityDataToReturn == null) cityDataToReturn = cityDataList.get(0);
+        return cityDataToReturn;
+    }
+
+
     private void finishWithData(CityData cityData){
         if(cityIsAlreadyOwn(cityData)) {
-            appCompatActivity.runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-                    Toast.makeText(appCompatActivity, " Ville déjà obtenue ", Toast.LENGTH_LONG).show();
-                }
-            });
+            makeToast(" Ville déjà obtenue ");
             fail();
             return;
         }
@@ -317,44 +170,29 @@ public abstract class PhotoToCity implements FetchCityListener {
 
 
     protected boolean dataIsUncorrect(CityData cityData) {
-        //Todo check si la location est bonne et si on a bien trouvé une ville
         if(cityData == null) return false;
         if(verifLocatIsActivated){
             return locationResult == null || locationResult.isEmpty() ||
-                    resultOcr == null || resultOcr.isEmpty();
+                    ocrResult == null || ocrResult.isEmpty();
         }else{
-            return resultOcr == null || resultOcr.isEmpty();
+            return ocrResult == null || ocrResult.isEmpty();
         }
 
     }
 
     private void fail(){
-        haveFail = true;
         updateListener(null);
     }
 
-    public void onResume() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            if(localisationManager != null) localisationManager.onResumeActivity();
+    public void subscribeOnCityFound(CityFoundListener cityFoundListener){
+        cityFoundListeners.add(cityFoundListener);
+    }
+
+    public void updateListener(City city){
+        for(CityFoundListener cityFoundListener: cityFoundListeners){
+            cityFoundListener.onCityFound(city);
         }
-
     }
-
-    public void onPause() {
-        if(localisationManager != null) localisationManager.desabonnementGPS();
-        if(mediaPlayer != null) mediaPlayer.stop();
-    }
-
-    private MediaPlayer mediaPlayer;
-
-    private void yapasdepanneaux() {
-        /*
-        Desactivé a cause de bastien 😡😠
-        mediaPlayer = MediaPlayer.create(appCompatActivity,R.raw.yapasdepanneau);
-        mediaPlayer.start();
-        */
-    }
-
 
 }
 
