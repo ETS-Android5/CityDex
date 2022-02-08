@@ -11,7 +11,8 @@ public class FetchByName extends FetchCity {
 
     public FetchByName(FetchCityListener fecthCityListener, String name){
         super(fecthCityListener);
-        this.request = "https://geo.api.gouv.fr/communes?nom=" + name +"&fields=nom,population,surface,codeDepartement,region";
+        if(name != null)
+            this.request = "https://geo.api.gouv.fr/communes?nom=" + name +"&fields=nom,population,surface,codeDepartement,region";
     }
 
     @Override

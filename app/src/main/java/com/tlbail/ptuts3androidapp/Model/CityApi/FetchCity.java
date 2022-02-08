@@ -39,6 +39,7 @@ public abstract class FetchCity extends AsyncTask<Void, Void, List<CityData>> {
 
     protected JsonArray getResultRequest(){
         try {
+            if(request == null) return null;
             URL url = new URL(request);
             HttpsURLConnection httpsURLConnection = (HttpsURLConnection) url.openConnection();
             JsonElement jsonElement = JsonParser.parseReader(new InputStreamReader((InputStream) httpsURLConnection.getContent(),"UTF-8"));
@@ -51,6 +52,7 @@ public abstract class FetchCity extends AsyncTask<Void, Void, List<CityData>> {
     }
 
     protected List<CityData> transformJsonArrayToCityList(JsonArray jsonArray){
+        if(jsonArray == null) return null;
         List<CityData> cities = new ArrayList<>();
         for (JsonElement jsonElement : jsonArray) {
             CityData cityData = transformJsonElementToCityObject(jsonElement);
