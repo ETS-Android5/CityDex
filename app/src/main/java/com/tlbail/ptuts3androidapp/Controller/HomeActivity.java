@@ -25,15 +25,11 @@ import android.widget.Toast;
 import com.tlbail.ptuts3androidapp.Model.City.City;
 import com.tlbail.ptuts3androidapp.Model.City.CityLoaders.CityLocalLoader;
 import com.tlbail.ptuts3androidapp.Model.Localisation.LocalisationManager;
-import com.tlbail.ptuts3androidapp.Model.Localisation.LocationTrack;
-import com.tlbail.ptuts3androidapp.Model.OCR.SignImage;
 import com.tlbail.ptuts3androidapp.Model.User.LocalDataLoader.UserPropertyLocalLoader;
 import com.tlbail.ptuts3androidapp.Model.User.User;
 import com.tlbail.ptuts3androidapp.R;
 import com.tlbail.ptuts3androidapp.View.BackgroundOfPhoto.BackgroundRecyclerView;
 
-import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 public class HomeActivity extends AppCompatActivity {
@@ -80,8 +76,6 @@ public class HomeActivity extends AppCompatActivity {
                     e.printStackTrace();
                 }
 
-                Log.i("Terminéééééééé", hasfinish + "");
-
                 if(mLocalisationManager.getLocationFound() != null && !mLocalisationManager.getLocationFound().isEmpty()){
 
                     adresse = mLocalisationManager.getLocationFound();
@@ -92,8 +86,6 @@ public class HomeActivity extends AppCompatActivity {
                             hasCity = true;
                         }
                     }
-
-                    Log.i("Terminé", hasfinish + "");
 
                     if(!hasCity && hasfinish){
                         notificationManagerCompat = NotificationManagerCompat.from(context);
