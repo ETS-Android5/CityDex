@@ -14,12 +14,16 @@ import com.tlbail.ptuts3androidapp.ml.Model;
 public class ObjectDetector {
 
 
-    private Context context;
     private RectF rectLocation;
     private static ObjectDetector objectDetector;
+    private Model model;
 
-    private ObjectDetector(Context context) {//TODO passer en singleton
-        this.context = context;
+    private ObjectDetector(Context context) {
+        try {
+            model = Model.newInstance(context);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public static ObjectDetector getInstance(Context context){
@@ -28,23 +32,17 @@ public class ObjectDetector {
         return objectDetector;
     }
 
-    public void runObjectDetection(Bitmap image){
-        try {
-            Model model = Model.newInstance(context);
-            TensorImage tensorImage = TensorImage.fromBitmap(image);
-            Model.Outputs outputs = model.process(tensorImage);
-            Model.DetectionResult bestLocation = outputs.getDetectionResultList().get(0);
-            rectLocation = getLocationFromDetection(image, bestLocation);
-            model.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    public RectF runObjectDetection(Bitmap image) throws NoSignInImageException{
+        TensorImage tensorImage = TensorImage.fromBitmap(image);
+        Model.Outputs outputs = model.process(tensorImage);
+        Model.DetectionResult bestLocation = outputs.getDetectionResultList().get(0);
+        RectF location = getLocationFromDetection(image, bestLocation);
+        if(location == null) throw new NoSignInImageException();
+        return location;
     }
 
     private RectF getLocationFromDetection(Bitmap image, Model.DetectionResult bestResult) {
-        float score = bestResult.getScoreAsFloat();
-        if(score < 0.2) fail();
-        if(!isInImage(bestResult.getLocationAsRectF(), image)) fail();
+        if(!isInImage(bestResult.getLocationAsRectF(), image)) return null;
         return bestResult.getLocationAsRectF();
     }
 
@@ -57,13 +55,8 @@ public class ObjectDetector {
                 && rectLocation.top + rectLocation.height() <= image.getHeight();
     }
 
-    private void fail(){
-        Toast.makeText(context.getApplicationContext(), "Pas de panneau", Toast.LENGTH_LONG).show();
+    private void fail(){//TODO mettre le toast autre part
+        //Toast.makeText(context.getApplicationContext(), "Pas de panneau", Toast.LENGTH_LONG).show();
         rectLocation = null;
     }
-
-    public RectF getRect(){
-        return rectLocation;
-    }
-
 }
