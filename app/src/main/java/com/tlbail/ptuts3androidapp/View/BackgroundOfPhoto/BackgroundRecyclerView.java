@@ -73,6 +73,7 @@ public class BackgroundRecyclerView {
 
     public void autoScroll() {
         velocity = 1;
+        handler = new Handler();
         handler.post(scrollTask());
     }
 
