@@ -31,48 +31,24 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     private void bindUI() {
-        findViewById(R.id.collec_button).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent activityIntent = new Intent(HomeActivity.this, CollectionActivity.class);
-                HomeActivity.this.startActivity(activityIntent);
-            }
-        });
-        findViewById(R.id.succes_button).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent activityIntent = new Intent(HomeActivity.this, AchievementActivity.class);
-                HomeActivity.this.startActivity(activityIntent);
+        findViewById(R.id.collec_button).setOnClickListener(v -> startIntent(CollectionActivity.class));
+        findViewById(R.id.succes_button).setOnClickListener(v -> startIntent(AchievementActivity.class));
+        findViewById(R.id.reglage_button).setOnClickListener(v -> startIntent(OptionsActivity.class));
+        findViewById(R.id.photo_button).setOnClickListener(v -> startPhotoActivity());
+    }
 
-            }
-        });
-        findViewById(R.id.reglage_button).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent activityIntent = new Intent(HomeActivity.this, OptionsActivity.class);
-                HomeActivity.this.startActivity(activityIntent);
-
-            }
-        });
-        findViewById(R.id.photo_button).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startPhotoActivity();
-
-            }
-        });
-
+    public void startIntent(Class className){
+        Intent activityIntent = new Intent(this, className);
+        this.startActivity(activityIntent);
     }
 
     private void startPhotoActivity() {
         ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE}, PackageManager.PERMISSION_GRANTED);
-
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
             Toast.makeText(this, "Acceptez les conditions et réessayez ! ", Toast.LENGTH_LONG).show();
             return;
         }
-        Intent activityIntent = new Intent(HomeActivity.this, PhotoActivity.class);
-        HomeActivity.this.startActivity(activityIntent);
+        startIntent(PhotoActivity.class);
     }
 
 
