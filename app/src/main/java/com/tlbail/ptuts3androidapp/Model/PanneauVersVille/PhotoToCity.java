@@ -70,17 +70,13 @@ public class PhotoToCity implements FetchCityListener,OcrResultListener, Localiz
             fail("Localisation différente du nom de ville");
     }
 
-    private boolean isLocationAndOcrMatching() {
-        return ocrResult.equalsIgnoreCase(locationResult) || StringUtils.similarity(ocrResult, locationResult) > 0.7;
-    }
-
-    private void makeToast(String message){
-        appCompatActivity.runOnUiThread(() -> Toast.makeText(appCompatActivity, message, Toast.LENGTH_LONG).show());
-    }
-
     private void getCityDataByName(String cityName) {
         FetchCity fetchCity = new FetchByName(this,cityName);
         fetchCity.execute();
+    }
+
+    private boolean isLocationAndOcrMatching() {
+        return ocrResult.equalsIgnoreCase(locationResult) || StringUtils.similarity(ocrResult, locationResult) > 0.7;
     }
 
     @Override
@@ -90,7 +86,7 @@ public class PhotoToCity implements FetchCityListener,OcrResultListener, Localiz
             return;
         }
         CityData cityDataToReturn = getBestExistingCity(cityDataList);
-        finishWithData(cityDataToReturn);
+        finish(cityDataToReturn);
     }
 
     private CityData getBestExistingCity(List<CityData> cityDataList){
@@ -111,10 +107,8 @@ public class PhotoToCity implements FetchCityListener,OcrResultListener, Localiz
         return cityDataToReturn;
     }
 
-    private void finishWithData(CityData cityData){
-        if(cityData == null)
-            fail("Ville non trouvée");
-        else if(userCityManager.isCityAlreadyOwned(cityData))
+    private void finish(CityData cityData){
+        if(userCityManager.isCityAlreadyOwned(cityData))
             fail(" Ville déjà obtenue ");
         else
             addCityToUser(userCityManager.createCity(cityData));
@@ -135,10 +129,11 @@ public class PhotoToCity implements FetchCityListener,OcrResultListener, Localiz
         userCityManager.deletePhotoCityFromLocalStorage();
     }
 
+    private void makeToast(String message){
+        appCompatActivity.runOnUiThread(() -> Toast.makeText(appCompatActivity, message, Toast.LENGTH_LONG).show());
+    }
+
     public void subscribeOnCityFound(CityFoundListener cityFoundListener){
         cityFoundListeners.add(cityFoundListener);
     }
-
-
-    //TODO refaire tout les checks de null value en plus propre
 }
