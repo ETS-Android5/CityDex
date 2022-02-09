@@ -96,16 +96,13 @@ public class ResultActivity extends AppCompatActivity implements CityFoundListen
     @Override
     public void onCityFound(City city) {
         setButtonValueByCityValue(city);
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                if(city != null){
-                    textView.setText(city.toString());
-                    buttonNext.setText("Voir ma ville");
-                }else {
-                    textView.setText("ECHEC-CITY");
-                    buttonNext.setText("Reprendre une photo");
-                }
+        runOnUiThread(() -> {
+            if(city != null){
+                textView.setText(city.toString());
+                buttonNext.setText("Voir ma ville");
+            }else {
+                textView.setText("ECHEC-CITY");
+                buttonNext.setText("Reprendre une photo");
             }
         });
 
@@ -113,19 +110,9 @@ public class ResultActivity extends AppCompatActivity implements CityFoundListen
 
     private void setButtonValueByCityValue(City city) {
         if(city != null){
-            buttonNext.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    goToCollectionActivity();
-                }
-            });
+            buttonNext.setOnClickListener(v -> goToCollectionActivity());
         }else{
-            buttonNext.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    returnToPhotoActivity();
-                }
-            });
+            buttonNext.setOnClickListener(v -> returnToPhotoActivity());
         }
     }
 
