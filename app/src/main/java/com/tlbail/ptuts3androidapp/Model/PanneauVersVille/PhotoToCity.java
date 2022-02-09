@@ -13,6 +13,7 @@ import com.tlbail.ptuts3androidapp.Model.CityApi.FetchCityListener;
 import com.tlbail.ptuts3androidapp.Model.Localisation.LocalizationListener;
 import com.tlbail.ptuts3androidapp.Model.Localisation.LocalizationManager;
 import com.tlbail.ptuts3androidapp.Model.OCR.OcrResultListener;
+import com.tlbail.ptuts3androidapp.Model.ObjectDetection.NoSignInImageException;
 import com.tlbail.ptuts3androidapp.Model.Utils.StringUtils;
 import java.util.ArrayList;
 import java.util.List;
@@ -40,7 +41,12 @@ public class PhotoToCity implements FetchCityListener,OcrResultListener, Localiz
 
     public void start(Bitmap photoToTransform, Uri photoUri){
         userCityManager.setPhotoUri(photoUri);
-        cityDetectorInPhoto.start(photoToTransform);
+        try {
+            cityDetectorInPhoto.start(photoToTransform);
+        } catch (NoSignInImageException e) {
+            e.printStackTrace();
+            fail("Pas de panneau dans la photo. Reprenez une photo");
+        }
     }
 
     @Override
