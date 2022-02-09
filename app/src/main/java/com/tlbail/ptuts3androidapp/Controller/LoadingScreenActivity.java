@@ -16,7 +16,8 @@ import com.google.android.gms.games.AchievementsClient;
 import com.google.android.gms.games.Games;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.tlbail.ptuts3androidapp.LoadingAnimation;
+import com.tlbail.ptuts3androidapp.Model.Animation.LoadingAnimation;
+import com.tlbail.ptuts3androidapp.Model.ObjectDetection.ObjectDetector;
 import com.tlbail.ptuts3androidapp.R;
 
 public class LoadingScreenActivity extends AppCompatActivity {
@@ -26,10 +27,8 @@ public class LoadingScreenActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_loading_screen);
         getSupportActionBar().hide();
-
-
         setupAchievement();
-
+        initializeObjetDetector();
         LoadingAnimation loadingAnimation = new LoadingAnimation(findViewById(R.id.loading_screen), 4);
 
 
@@ -59,6 +58,22 @@ public class LoadingScreenActivity extends AppCompatActivity {
 
 
 
+    }
+
+    private void initializeObjetDetector(){
+        Thread objectDetectorInitializationThread = new Thread(){
+            @Override
+            public void run() {
+                super.run();
+                ObjectDetector.getInstance(getApplicationContext());
+            }
+        };
+        objectDetectorInitializationThread.start();
+        try {
+            objectDetectorInitializationThread.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
     private void setupAchievement() {

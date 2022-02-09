@@ -1,13 +1,10 @@
-package com.tlbail.ptuts3androidapp;
+package com.tlbail.ptuts3androidapp.Model.Utils;
 
-public class CropUtils {
+public class StringUtils {
 
-    public CropUtils(){
-
-    }
-
-    public double similarity(String s1, String s2){
-        String longer = s1, shorter = s2;
+    public static double similarity(String s1, String s2){
+        String longer = s1.toLowerCase();
+        String shorter = s2.toLowerCase();
         if (s1.length() < s2.length()) { // longer should always have greater length
             longer = s2; shorter = s1;
         }
@@ -16,7 +13,7 @@ public class CropUtils {
         return (longerLength - levenshtein(longer, shorter)) / (double) longerLength;
     }
 
-    private int levenshtein(String s1, String s2) {
+    private static int levenshtein(String s1, String s2) {
         s1 = s1.toLowerCase();
         s2 = s2.toLowerCase();
 

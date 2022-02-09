@@ -1,16 +1,18 @@
-package com.tlbail.ptuts3androidapp.Model.CityApi.FetchCity;
+package com.tlbail.ptuts3androidapp.Model.CityApi;
 
 import com.tlbail.ptuts3androidapp.Model.City.CityData;
 import com.tlbail.ptuts3androidapp.Model.CityApi.Department;
+import com.tlbail.ptuts3androidapp.Model.CityApi.FetchCity;
 import com.tlbail.ptuts3androidapp.Model.CityApi.Region;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 
-public class FetchByName extends FetchCity{
+public class FetchByName extends FetchCity {
 
     public FetchByName(FetchCityListener fecthCityListener, String name){
         super(fecthCityListener);
-        this.request = "https://geo.api.gouv.fr/communes?nom=" + name +"&fields=nom,population,surface,codeDepartement,region";
+        if(name != null)
+            this.request = "https://geo.api.gouv.fr/communes?nom=" + name +"&fields=nom,population,surface,codeDepartement,region";
     }
 
     @Override

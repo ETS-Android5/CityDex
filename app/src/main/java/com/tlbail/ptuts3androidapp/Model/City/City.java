@@ -1,7 +1,6 @@
 package com.tlbail.ptuts3androidapp.Model.City;
 
 import com.tlbail.ptuts3androidapp.Model.Photo.Photo;
-
 import java.io.Serializable;
 import java.util.Comparator;
 

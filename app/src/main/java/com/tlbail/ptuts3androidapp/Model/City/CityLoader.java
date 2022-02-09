@@ -5,9 +5,9 @@ import java.util.List;
 public interface CityLoader {
 
 
-    public List<City> getCities();
+    List<City> getCities();
 
-    public void setCities(List<City> cities);
+    void setCities(List<City> cities);
 
 
 }

@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.tlbail.ptuts3androidapp.Model.City.City;
+import com.tlbail.ptuts3androidapp.Model.City.CityData;
 import com.tlbail.ptuts3androidapp.Model.City.CityLoaders.CityLocalLoader;
 
 import java.util.Collection;
@@ -36,6 +37,14 @@ public class User implements Map<String, String> {
     public void setOwnedCity(List<City> ownedCity) {
         this.ownedCity = ownedCity;
         cityLocalLoader.setCities(ownedCity);
+    }
+
+    public boolean isCityAlreadyOwned(CityData cityData){
+        for (City city : ownedCity) {
+            if(city.getCityData().getName().equalsIgnoreCase(cityData.getName()))
+                return true;
+        }
+        return false;
     }
 
 
