@@ -16,7 +16,7 @@ import com.tlbail.ptuts3androidapp.Model.User.LocalDataLoader.UserPropertyLocalL
 import com.tlbail.ptuts3androidapp.Model.User.User;
 import com.tlbail.ptuts3androidapp.R;
 
-public class ReglageActivity extends AppCompatActivity {
+public class OptionsActivity extends AppCompatActivity {
 
 
     public static final String LOCATIONTIMEOUTKEY = "LOCATIONTIMEOUT";
@@ -39,9 +39,6 @@ public class ReglageActivity extends AppCompatActivity {
         if(user.containsKey(LOCATIONTIMEOUTKEY)){
             editTextLocationTimeOut.setText(user.get(LOCATIONTIMEOUTKEY));
         }
-
-
-
     }
 
     private void bindUI() {

@@ -37,7 +37,7 @@
             android:screenOrientation="portrait"
             android:exported="false" />
         <activity
-            android:name=".Controller.ReglageActivity"
+            android:name=".Controller.OptionsActivity"
             android:screenOrientation="portrait"
             android:exported="false" />
         <activity

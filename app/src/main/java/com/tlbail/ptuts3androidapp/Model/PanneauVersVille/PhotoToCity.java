@@ -10,18 +10,18 @@ import com.tlbail.ptuts3androidapp.Model.City.CityData;
 import com.tlbail.ptuts3androidapp.Model.CityApi.FetchByName;
 import com.tlbail.ptuts3androidapp.Model.CityApi.FetchCity;
 import com.tlbail.ptuts3androidapp.Model.CityApi.FetchCityListener;
-import com.tlbail.ptuts3androidapp.Model.Localisation.LocalizationListener;
-import com.tlbail.ptuts3androidapp.Model.Localisation.LocalizationManager;
+import com.tlbail.ptuts3androidapp.Model.Localisation.LocationListener;
+import com.tlbail.ptuts3androidapp.Model.Localisation.LocationManager;
 import com.tlbail.ptuts3androidapp.Model.OCR.OcrResultListener;
 import com.tlbail.ptuts3androidapp.Model.ObjectDetection.NoSignInImageException;
 import com.tlbail.ptuts3androidapp.Model.Utils.StringUtils;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PhotoToCity implements FetchCityListener,OcrResultListener, LocalizationListener {
+public class PhotoToCity implements FetchCityListener,OcrResultListener, LocationListener {
 
     private CityDetectorInPhoto cityDetectorInPhoto;
-    private LocalizationManager localizationManager;
+    private LocationManager locationManager;
     private UserCityManager userCityManager;
 
     private AppCompatActivity appCompatActivity;
@@ -36,7 +36,7 @@ public class PhotoToCity implements FetchCityListener,OcrResultListener, Localiz
         this.appCompatActivity = appCompatActivity;
         cityDetectorInPhoto = new CityDetectorInPhoto(appCompatActivity, this);
         userCityManager = new UserCityManager(appCompatActivity);
-        localizationManager = new LocalizationManager(appCompatActivity, this);
+        locationManager = new LocationManager(appCompatActivity, this);
     }
 
     public void start(Bitmap photoToTransform, Uri photoUri){
@@ -52,7 +52,7 @@ public class PhotoToCity implements FetchCityListener,OcrResultListener, Localiz
     @Override
     public void onOcrFinish(String result) {
         ocrResult = result;
-        localizationManager.getLocation();
+        locationManager.getLocation();
     }
 
     @Override
