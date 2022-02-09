@@ -18,14 +18,14 @@ import java.util.Locale;
 public class LocationManager {
 
     private AppCompatActivity appCompatActivity;
-    private LocationListener localizationListener;
+    private LocationListener locationListener;
     private FusedLocationProviderClient locationClient;
     private static final String[] LOCATION_PERMS = {Manifest.permission.ACCESS_FINE_LOCATION};
     private static final int LOCATION_REQUEST = 1340;
 
 
     public LocationManager(AppCompatActivity activity, LocationListener localizationListener) {
-        this.localizationListener = localizationListener;
+        this.locationListener = localizationListener;
         this.appCompatActivity = activity;
         locationClient = LocationServices.getFusedLocationProviderClient(appCompatActivity);
     }
@@ -42,7 +42,7 @@ public class LocationManager {
             return;
         }
         locationClient.getCurrentLocation(LocationRequest.PRIORITY_LOW_POWER, null).addOnSuccessListener(
-                location -> localizationListener.onLocationReceived(getCityFromLocation(location))
+                location -> locationListener.onLocationReceived(getCityFromLocation(location))
         );
     }
 
