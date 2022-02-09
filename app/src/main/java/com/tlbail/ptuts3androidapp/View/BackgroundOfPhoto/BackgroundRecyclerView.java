@@ -82,7 +82,7 @@ public class BackgroundRecyclerView {
             int count = -1;
             @Override
             public void run() {
-                if(recyclerView.getAdapter().getItemCount() <= 0) return;
+                if(recyclerView.getAdapter().getItemCount() <= 1) return;
                 if (count+velocity < 0 || count+velocity >= recyclerView.getAdapter().getItemCount())
                     velocity = -velocity;
                 count += velocity;
@@ -91,5 +91,4 @@ public class BackgroundRecyclerView {
             }
         };
     }
-
 }
