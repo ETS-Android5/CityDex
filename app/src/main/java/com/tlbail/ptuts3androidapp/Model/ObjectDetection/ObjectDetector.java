@@ -54,9 +54,4 @@ public class ObjectDetector {
                 && rectLocation.left + rectLocation.width() <= image.getWidth()
                 && rectLocation.top + rectLocation.height() <= image.getHeight();
     }
-
-    private void fail(){//TODO mettre le toast autre part
-        //Toast.makeText(context.getApplicationContext(), "Pas de panneau", Toast.LENGTH_LONG).show();
-        rectLocation = null;
-    }
 }
