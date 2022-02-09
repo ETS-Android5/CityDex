@@ -82,7 +82,7 @@ public class PhotoActivity extends AppCompatActivity {
     private Uri getUriBitmapOfFragment() {
         TextureView textureView = fragmentPhoto.findViewById(R.id.photoPreviewTextureView);
         Bitmap bitmap = textureView.getBitmap();
-        Photo photoToReturn = photoManager.createPhotoObjectFromBitmap(bitmap);
+        Photo photoToReturn = photoManager.createPhotoFromBitmap(bitmap);
         return photoToReturn.getPhotoUri();
     }
 
