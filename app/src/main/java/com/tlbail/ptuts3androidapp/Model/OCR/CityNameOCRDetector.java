@@ -1,27 +1,26 @@
 package com.tlbail.ptuts3androidapp.Model.OCR;
 
+import android.graphics.Bitmap;
 import android.graphics.RectF;
 import com.google.mlkit.vision.common.InputImage;
 import com.google.mlkit.vision.text.TextRecognition;
 import com.google.mlkit.vision.text.TextRecognizer;
 import com.google.mlkit.vision.text.latin.TextRecognizerOptions;
-import com.tlbail.ptuts3androidapp.Model.PanneauVersVille.PhotoToCity;
 
 public class CityNameOCRDetector {
 
     private TextRecognizer textRecognizer;
-    private PhotoToCity photoToCity;
+    private OcrResultListener ocrResultListener;
 
-    public CityNameOCRDetector(PhotoToCity photoToCity){
-        this.photoToCity = photoToCity;
+    public CityNameOCRDetector(OcrResultListener ocrResultListener){
+        this.ocrResultListener = ocrResultListener;
         textRecognizer = TextRecognition.getClient(TextRecognizerOptions.DEFAULT_OPTIONS);
     }
 
-    public void runOcrResult(RectF rectF) {
-        photoToCity.setPhotoToTransform(SignImage.getImageForOCR(photoToCity.getPhotoToTransform(), rectF));
-        InputImage image = InputImage.fromBitmap(photoToCity.getPhotoToTransform(),0);
+    public void runOcrResult(Bitmap photo, RectF rectF) {
+        InputImage image = InputImage.fromBitmap(SignImage.getImageForOCR(photo, rectF),0);
         textRecognizer.process(image).addOnSuccessListener(
-                text -> photoToCity.onOcrFinish(correctOCRResult(text.getText()))
+                text -> ocrResultListener.onOcrFinish(correctOCRResult(text.getText()))
         );
     }
 
