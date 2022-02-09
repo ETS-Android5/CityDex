@@ -6,6 +6,7 @@ import android.graphics.RectF;
 
 import com.tlbail.ptuts3androidapp.Model.OCR.CityNameOCRDetector;
 import com.tlbail.ptuts3androidapp.Model.OCR.OcrResultListener;
+import com.tlbail.ptuts3androidapp.Model.ObjectDetection.NoSignInImageException;
 import com.tlbail.ptuts3androidapp.Model.ObjectDetection.ObjectDetector;
 
 public class CityDetectorInPhoto {
@@ -18,10 +19,8 @@ public class CityDetectorInPhoto {
         ocrDetector = new CityNameOCRDetector(ocrResultListener);
     }
 
-    public void start(Bitmap imageToProcess){//TODO Faire en sorte que la methode retourne quelque chose
+    public void start(Bitmap imageToProcess) throws NoSignInImageException {//TODO Faire en sorte que la methode retourne quelque chose
         RectF signLocationInImage = objectDetector.runObjectDetection(imageToProcess);
-        if(signLocationInImage == null)
-            return;
         ocrDetector.runOcrResult(imageToProcess, signLocationInImage);
     }
 }
