@@ -21,7 +21,7 @@ public class PhotoManager {
         this.appCompatActivity = appCompatActivity;
     }
 
-    public Photo createPhotoObjectFromBitmap(Bitmap bitmap){
+    public Photo createPhotoFromBitmap(Bitmap bitmap){
         File createimagefile = createImageFile();
         writeBitmapToFile(bitmap, createimagefile);
         Photo photo = new Photo(Uri.fromFile(createimagefile), null);
@@ -30,7 +30,6 @@ public class PhotoManager {
 
     private void writeBitmapToFile(Bitmap bmp, File fileToWrite){
         try {
-            System.out.println("L'image est save en " + fileToWrite.getName());
             FileOutputStream stream = new FileOutputStream(fileToWrite);
             bmp.compress(Bitmap.CompressFormat.PNG, 100, stream);
             //Cleanup
