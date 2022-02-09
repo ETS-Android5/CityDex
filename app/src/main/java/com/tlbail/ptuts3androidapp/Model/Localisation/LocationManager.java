@@ -1,7 +1,6 @@
 package com.tlbail.ptuts3androidapp.Model.Localisation;
 
 import android.Manifest;
-import android.app.Activity;
 import android.content.pm.PackageManager;
 import android.location.Address;
 import android.location.Geocoder;
@@ -16,16 +15,16 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Locale;
 
-public class LocalizationManager {
+public class LocationManager {
 
     private AppCompatActivity appCompatActivity;
-    private LocalizationListener localizationListener;
+    private LocationListener localizationListener;
     private FusedLocationProviderClient locationClient;
     private static final String[] LOCATION_PERMS = {Manifest.permission.ACCESS_FINE_LOCATION};
     private static final int LOCATION_REQUEST = 1340;
 
 
-    public LocalizationManager(AppCompatActivity activity, LocalizationListener localizationListener) {
+    public LocationManager(AppCompatActivity activity, LocationListener localizationListener) {
         this.localizationListener = localizationListener;
         this.appCompatActivity = activity;
         locationClient = LocationServices.getFusedLocationProviderClient(appCompatActivity);

@@ -150,7 +150,7 @@ public class HomeActivity extends AppCompatActivity {
         findViewById(R.id.reglage_button).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent activityIntent = new Intent(HomeActivity.this, ReglageActivity.class);
+                Intent activityIntent = new Intent(HomeActivity.this, OptionsActivity.class);
                 HomeActivity.this.startActivity(activityIntent);
 
             }
