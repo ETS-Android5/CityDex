@@ -2,14 +2,12 @@ package com.tlbail.ptuts3androidapp.Controller;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
-
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
-
 import com.tlbail.ptuts3androidapp.R;
 import com.tlbail.ptuts3androidapp.View.BackgroundOfPhoto.BackgroundRecyclerView;
 
@@ -24,8 +22,6 @@ public class HomeActivity extends AppCompatActivity {
         backgroundRecyclerView = new BackgroundRecyclerView(this);
         setContentView(R.layout.activity_home);
         bindUI();
-
-
     }
 
     @Override
@@ -33,9 +29,6 @@ public class HomeActivity extends AppCompatActivity {
         super.onResume();
         backgroundRecyclerView.start(findViewById(R.id.homeRecyclerView));
     }
-
-
-
 
     private void bindUI() {
         findViewById(R.id.collec_button).setOnClickListener(new View.OnClickListener() {
@@ -80,7 +73,6 @@ public class HomeActivity extends AppCompatActivity {
         }
         Intent activityIntent = new Intent(HomeActivity.this, PhotoActivity.class);
         HomeActivity.this.startActivity(activityIntent);
-
     }
 
 
