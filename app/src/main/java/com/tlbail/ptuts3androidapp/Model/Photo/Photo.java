@@ -7,11 +7,7 @@ import java.io.Serializable;
 public class Photo implements Serializable {
 
     private String photoUri;
-    private String location; //TODO choisir le bon type pour le stockage de la postion
-
-    public Photo(String photoPath, String location) {
-        this(Uri.parse(photoPath), location);
-    }
+    private String location;
 
     public Photo(Uri photoUri, String location) {
         this.photoUri = photoUri.toString();
