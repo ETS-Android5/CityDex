@@ -148,7 +148,6 @@ public class CollectionActivity extends AppCompatActivity {
         user.setOwnedCity(cities);
 
         CityAdaptater cityAdaptater = new CityAdaptater(cities, recyclerView, thisApp);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(cityAdaptater);
         snapHelper = new LinearSnapHelper();
         snapHelper.attachToRecyclerView(recyclerView);
@@ -166,6 +165,7 @@ public class CollectionActivity extends AppCompatActivity {
                 startSmoothScroll(smoothScroller);
             }
         });
+
         recyclerView.setAdapter(cityAdaptater);
 
         recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
