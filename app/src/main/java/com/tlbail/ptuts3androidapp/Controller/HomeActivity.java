@@ -12,7 +12,6 @@ import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Toast;
 import com.tlbail.ptuts3androidapp.R;
 import com.tlbail.ptuts3androidapp.View.BackgroundOfPhoto.BackgroundRecyclerView;
