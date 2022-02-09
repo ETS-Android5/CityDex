@@ -3,7 +3,6 @@ package com.tlbail.ptuts3androidapp.Model.PanneauVersVille;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.RectF;
-
 import com.tlbail.ptuts3androidapp.Model.OCR.CityNameOCRDetector;
 import com.tlbail.ptuts3androidapp.Model.OCR.OcrResultListener;
 import com.tlbail.ptuts3androidapp.Model.ObjectDetection.NoSignInImageException;
@@ -19,7 +18,7 @@ public class CityDetectorInPhoto {
         ocrDetector = new CityNameOCRDetector(ocrResultListener);
     }
 
-    public void start(Bitmap imageToProcess) throws NoSignInImageException {//TODO Faire en sorte que la methode retourne quelque chose
+    public void start(Bitmap imageToProcess) throws NoSignInImageException {
         RectF signLocationInImage = objectDetector.runObjectDetection(imageToProcess);
         ocrDetector.runOcrResult(imageToProcess, signLocationInImage);
     }

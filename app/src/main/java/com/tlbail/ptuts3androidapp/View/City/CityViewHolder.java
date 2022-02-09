@@ -20,7 +20,6 @@ public class CityViewHolder extends RecyclerView.ViewHolder {
         this.itemView = itemView;
         textView = itemView.findViewById(R.id.cityText);
         imageView = itemView.findViewById(R.id.citySign);
-        //TODO set image in imageView
     }
 
 
