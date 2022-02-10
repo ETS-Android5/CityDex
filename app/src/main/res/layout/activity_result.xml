@@ -11,7 +11,7 @@
         android:id="@+id/resultedPhotoTakenImageView"
         android:layout_width="0dp"
         android:layout_height="366dp"
-        android:src="@drawable/polish_cow"
+        android:src="@drawable/logo_application_citidex"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"

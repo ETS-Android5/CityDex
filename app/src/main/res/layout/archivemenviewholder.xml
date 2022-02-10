@@ -12,7 +12,7 @@
         app:layout_constraintEnd_toStartOf="@+id/descriptionAchivement"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/polish_cow" />
+        app:srcCompat="@drawable/logo_application_citidex" />
 
     <TextView
         android:id="@+id/descriptionAchivement"

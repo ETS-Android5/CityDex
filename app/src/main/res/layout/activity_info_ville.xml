@@ -7,18 +7,6 @@
     android:layout_height="match_parent"
     tools:context=".Controller.InfoVilleActivity">
 
-    <ImageView
-        android:id="@+id/img_ville"
-        android:layout_width="353dp"
-        android:layout_height="236dp"
-        android:scaleType="fitCenter"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/frameLayout4"
-        app:layout_constraintVertical_bias="0.121"
-        app:srcCompat="@drawable/panneau_vannes" />
-
     <FrameLayout
         android:id="@+id/frameLayout4"
         android:layout_width="323dp"
@@ -46,11 +34,20 @@
             android:textSize="20sp" />
     </FrameLayout>
 
+    <ImageView
+        android:id="@+id/img_ville"
+        android:layout_width="369dp"
+        android:layout_height="273dp"
+        android:scaleType="fitCenter"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/frameLayout4"
+        app:srcCompat="@drawable/logo_application_citidex" />
+
     <TextView
         android:id="@+id/t_departement"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
         android:text="Département :"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -62,7 +59,6 @@
         android:id="@+id/t_region"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
         android:text="Région :"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -74,7 +70,6 @@
         android:id="@+id/t_surface"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
         android:text="Surface :"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -86,7 +81,6 @@
         android:id="@+id/t_habitant"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
         android:text="Habitants :"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"

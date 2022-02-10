@@ -29,8 +29,11 @@ public class LoadingScreenActivity extends AppCompatActivity {
         getSupportActionBar().hide();
         setupAchievement();
         initializeObjetDetector();
-        LoadingAnimation loadingAnimation = new LoadingAnimation(findViewById(R.id.loading_screen), 4);
+        setUpAnimation();
+    }
 
+    private void setUpAnimation(){
+        LoadingAnimation loadingAnimation = new LoadingAnimation(findViewById(R.id.loading_screen), 4);
 
         loadingAnimation.start();
         loadingAnimation.getAnimation().addListener(new Animator.AnimatorListener() {
@@ -55,9 +58,6 @@ public class LoadingScreenActivity extends AppCompatActivity {
 
             }
         });
-
-
-
     }
 
     private void initializeObjetDetector(){
