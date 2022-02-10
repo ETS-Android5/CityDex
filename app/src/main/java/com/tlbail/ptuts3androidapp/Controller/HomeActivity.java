@@ -2,7 +2,6 @@ package com.tlbail.ptuts3androidapp.Controller;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
-
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -48,7 +47,6 @@ public class HomeActivity extends AppCompatActivity {
         bindUI();
 
         mNotificationManager = new NotificationManager(this);
-
     }
 
     @Override
@@ -63,16 +61,12 @@ public class HomeActivity extends AppCompatActivity {
         findViewById(R.id.reglage_button).setOnClickListener(v -> startIntent(OptionsActivity.class));
         findViewById(R.id.photo_button).setOnClickListener(v -> startPhotoActivity());
 
-        user = new User(new UserPropertyLocalLoader(getApplicationContext()), new CityLocalLoader(getApplicationContext()));
-        cities = user.getOwnedCity();
         mNotificationManager = new NotificationManager(this);
     }
 
     public void startIntent(Class className){
         Intent activityIntent = new Intent(this, className);
         this.startActivity(activityIntent);
-        user = new User(new UserPropertyLocalLoader(getApplicationContext()), new CityLocalLoader(getApplicationContext()));
-        cities = user.getOwnedCity();
     }
 
     private void startPhotoActivity() {
