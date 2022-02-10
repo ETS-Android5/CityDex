@@ -8,7 +8,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Switch;
 import android.widget.Toast;
 
 import com.tlbail.ptuts3androidapp.Model.City.CityLoaders.CityLocalLoader;
@@ -17,7 +16,6 @@ import com.tlbail.ptuts3androidapp.Model.User.User;
 import com.tlbail.ptuts3androidapp.R;
 
 public class OptionsActivity extends AppCompatActivity {
-
 
     public static final String LOCATIONTIMEOUTKEY = "LOCATIONTIMEOUT";
     public static final String VERIFLOCATKEY = "VERIFLOCATKEY";
