@@ -38,6 +38,9 @@ public class HomeActivity extends AppCompatActivity {
     private boolean hasfinish = false;
     private NotificationManager mNotificationManager;
 
+    private String[] perms = {Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE};
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,7 +48,7 @@ public class HomeActivity extends AppCompatActivity {
         backgroundRecyclerView = new BackgroundRecyclerView(this);
         setContentView(R.layout.activity_home);
         bindUI();
-
+        requestPermissions(perms, PackageManager.PERMISSION_GRANTED);
         mNotificationManager = new NotificationManager(this);
     }
 
@@ -70,9 +73,9 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     private void startPhotoActivity() {
-        ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE}, PackageManager.PERMISSION_GRANTED);
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
             Toast.makeText(this, "Acceptez les conditions et réessayez ! ", Toast.LENGTH_LONG).show();
+            requestPermissions(new String[]{Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE}, PackageManager.PERMISSION_GRANTED);
             return;
         }
         startIntent(PhotoActivity.class);
