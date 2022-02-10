@@ -5,37 +5,18 @@ import androidx.core.app.ActivityCompat;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.graphics.Color;
-import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.graphics.Color;
-import android.location.Address;
-import android.location.Geocoder;
-import android.os.Build;
 import android.os.Bundle;
 import android.widget.Toast;
 
-import com.tlbail.ptuts3androidapp.Model.City.City;
-import com.tlbail.ptuts3androidapp.Model.City.CityLoaders.CityLocalLoader;
 import com.tlbail.ptuts3androidapp.Model.Notification.NotificationManager;
-import com.tlbail.ptuts3androidapp.Model.User.LocalDataLoader.UserPropertyLocalLoader;
-import com.tlbail.ptuts3androidapp.Model.User.User;
 import com.tlbail.ptuts3androidapp.R;
 import com.tlbail.ptuts3androidapp.View.BackgroundOfPhoto.BackgroundRecyclerView;
 
-import java.util.List;
 
 public class HomeActivity extends AppCompatActivity {
 
     private BackgroundRecyclerView backgroundRecyclerView;
 
-    private User user;
-    private List<City> cities;
-
-    private boolean hasCity = false;
-    private String adresse;
-
-    private boolean hasfinish = false;
     private NotificationManager mNotificationManager;
 
     private String[] perms = {Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE};
