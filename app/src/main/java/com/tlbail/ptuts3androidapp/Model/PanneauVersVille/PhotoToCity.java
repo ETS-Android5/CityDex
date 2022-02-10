@@ -82,7 +82,7 @@ public class PhotoToCity implements FetchCityListener,OcrResultListener, Locatio
     @Override
     public void onDataQueryComplete(List<CityData> cityDataList) {
         if(cityDataList == null ||cityDataList.isEmpty()){
-            fail("Aucne ville avec " + ocrResult +  " trouvée 😭");
+            fail("Aucune ville avec " + ocrResult +  " trouvée 😭");
             return;
         }
         CityData cityDataToReturn = getBestExistingCity(cityDataList);
@@ -100,6 +100,8 @@ public class PhotoToCity implements FetchCityListener,OcrResultListener, Locatio
             }
             else if(similarity > threshold){
                 cityDataToReturn = cityData;
+                if(cityData.getName().equalsIgnoreCase(ocrResult))
+                    cityDataToReturn = cityData;
             }
             threshold = similarity;
         }

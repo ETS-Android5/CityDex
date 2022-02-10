@@ -45,10 +45,10 @@ public class LocationManager {
 
     public void getLocation() {
         requestPermission();
-        while (ActivityCompat.checkSelfPermission(appCompatActivity, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(appCompatActivity, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED);
-        locationClient.getCurrentLocation(LocationRequest.PRIORITY_LOW_POWER, null).addOnSuccessListener(
-                location -> locationListener.onLocationReceived(getCityFromLocation(location))
-        );
+        if (ActivityCompat.checkSelfPermission(appCompatActivity, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(appCompatActivity, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED);
+        locationClient.getCurrentLocation(LocationRequest.PRIORITY_LOW_POWER, null)
+                .addOnSuccessListener( location -> locationListener.onLocationReceived(getCityFromLocation(location)))
+                .addOnFailureListener(e -> locationListener.onLocationReceived(getCityFromLocation(null)));
     }
 
     private String getCityFromLocation(Location location){
