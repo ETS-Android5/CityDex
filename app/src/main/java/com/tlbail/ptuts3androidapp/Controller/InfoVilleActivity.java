@@ -1,10 +1,14 @@
 package com.tlbail.ptuts3androidapp.Controller;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.tlbail.ptuts3androidapp.Model.City.City;
 import com.tlbail.ptuts3androidapp.Model.City.CityLoaders.CityLocalLoader;
@@ -17,6 +21,7 @@ public class InfoVilleActivity extends AppCompatActivity{
         private TextView t_ville, t_dpt, t_region, t_habitants, t_surface;
         private ImageView img_ville;
         private int progressStatus = 0;
+        private Button voirsuruneCarteButton;
 
         @Override
         protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +40,20 @@ public class InfoVilleActivity extends AppCompatActivity{
             t_surface = findViewById(R.id.t_surface);
             img_ville = findViewById(R.id.img_ville);
             t_habitants = findViewById(R.id.t_habitant);
+            voirsuruneCarteButton = findViewById(R.id.voirsuruneCarteButton);
+            voirsuruneCarteButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    ouvrirLaVilleSurLaCarte();
+                }
+            });
+        }
+
+        private void ouvrirLaVilleSurLaCarte() {
+            Intent intent = new Intent(this, MapsActivity.class);
+            intent.putExtra("City", getIntent().getStringExtra("City"));
+            startActivity(intent);
+
         }
 
         private void setAllInfos(){

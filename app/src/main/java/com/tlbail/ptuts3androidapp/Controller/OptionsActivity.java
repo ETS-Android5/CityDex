@@ -25,6 +25,7 @@ public class OptionsActivity extends AppCompatActivity {
     private Button buttonValide;
     private EditText editTextLocationTimeOut;
     private User user;
+    private Switch switch1VerifierLocat;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +38,16 @@ public class OptionsActivity extends AppCompatActivity {
         if(user.containsKey(LOCATIONTIMEOUTKEY)){
             editTextLocationTimeOut.setText(user.get(LOCATIONTIMEOUTKEY));
         }
+
+        if(user.containsKey(VERIFLOCATKEY)){
+            if(user.get(ReglageActivity.VERIFLOCATKEY).equals(String.valueOf(false))){
+                switch1VerifierLocat.setChecked(false);
+            }else {
+                switch1VerifierLocat.setChecked(true);
+            }
+
+        }
+
     }
 
     private void bindUI() {
@@ -64,6 +75,8 @@ public class OptionsActivity extends AppCompatActivity {
                 openSource();
             }
         });
+
+        switch1VerifierLocat = findViewById(R.id.switch1VerifierLocat);
     }
 
     private void openSource() {
@@ -82,6 +95,7 @@ public class OptionsActivity extends AppCompatActivity {
             user.put(LOCATIONTIMEOUTKEY, String.valueOf(valueLocationTimeOut));
         if(user.containsKey(LOCATIONTIMEOUTKEY) && valueLocationTimeOut != Integer.parseInt(user.get(LOCATIONTIMEOUTKEY)))
             user.put(LOCATIONTIMEOUTKEY, String.valueOf(valueLocationTimeOut));
+        user.put(VERIFLOCATKEY, String.valueOf(switch1VerifierLocat.isChecked()));
         Toast.makeText(getApplicationContext(), "Information enregistrée ", Toast.LENGTH_LONG).show();
         finish();
     }

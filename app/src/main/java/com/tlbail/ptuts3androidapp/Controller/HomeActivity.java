@@ -43,6 +43,7 @@ public class HomeActivity extends AppCompatActivity {
         findViewById(R.id.collec_button).setOnClickListener(v -> startIntent(CollectionActivity.class));
         findViewById(R.id.succes_button).setOnClickListener(v -> startIntent(AchievementActivity.class));
         findViewById(R.id.reglage_button).setOnClickListener(v -> startIntent(OptionsActivity.class));
+        findViewById(R.id.map_button).setOnClickListener(v -> startIntent(MapsActivity.class));
         findViewById(R.id.photo_button).setOnClickListener(v -> startPhotoActivity());
 
         mNotificationManager = new NotificationManager(this);
