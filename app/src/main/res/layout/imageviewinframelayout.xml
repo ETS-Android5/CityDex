@@ -15,5 +15,5 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0"
-        app:srcCompat="@drawable/polish_cow" />
+        app:srcCompat="@drawable/logo_application_citidex" />
 </androidx.constraintlayout.widget.ConstraintLayout>
