@@ -5,14 +5,38 @@ import androidx.core.app.ActivityCompat;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.graphics.Color;
+import android.location.Address;
+import android.location.Geocoder;
+import android.os.Build;
 import android.os.Bundle;
 import android.widget.Toast;
+
+import com.tlbail.ptuts3androidapp.Model.City.City;
+import com.tlbail.ptuts3androidapp.Model.City.CityLoaders.CityLocalLoader;
+import com.tlbail.ptuts3androidapp.Model.Notification.NotificationManager;
+import com.tlbail.ptuts3androidapp.Model.User.LocalDataLoader.UserPropertyLocalLoader;
+import com.tlbail.ptuts3androidapp.Model.User.User;
 import com.tlbail.ptuts3androidapp.R;
 import com.tlbail.ptuts3androidapp.View.BackgroundOfPhoto.BackgroundRecyclerView;
+
+import java.util.List;
 
 public class HomeActivity extends AppCompatActivity {
 
     private BackgroundRecyclerView backgroundRecyclerView;
+
+    private User user;
+    private List<City> cities;
+
+    private boolean hasCity = false;
+    private String adresse;
+
+    private boolean hasfinish = false;
+    private NotificationManager mNotificationManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,6 +45,8 @@ public class HomeActivity extends AppCompatActivity {
         backgroundRecyclerView = new BackgroundRecyclerView(this);
         setContentView(R.layout.activity_home);
         bindUI();
+
+        mNotificationManager = new NotificationManager(this);
     }
 
     @Override
@@ -34,6 +60,8 @@ public class HomeActivity extends AppCompatActivity {
         findViewById(R.id.succes_button).setOnClickListener(v -> startIntent(AchievementActivity.class));
         findViewById(R.id.reglage_button).setOnClickListener(v -> startIntent(OptionsActivity.class));
         findViewById(R.id.photo_button).setOnClickListener(v -> startPhotoActivity());
+
+        mNotificationManager = new NotificationManager(this);
     }
 
     public void startIntent(Class className){

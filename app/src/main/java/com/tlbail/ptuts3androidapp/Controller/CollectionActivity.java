@@ -206,9 +206,9 @@ public class CollectionActivity extends AppCompatActivity {
     }
 
 
-    @Override
+    /*@Override
     public void onBackPressed() {
         Intent intent = new Intent(this, HomeActivity.class);
         startActivity(intent);
-    }
+    }*/
 }
