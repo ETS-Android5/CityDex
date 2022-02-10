@@ -21,15 +21,24 @@ import com.google.android.gms.location.LocationCallback;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationResult;
 import com.google.android.gms.location.LocationServices;
+import com.tlbail.ptuts3androidapp.Model.City.City;
+import com.tlbail.ptuts3androidapp.Model.City.CityLoaders.CityLocalLoader;
+import com.tlbail.ptuts3androidapp.Model.User.LocalDataLoader.UserPropertyLocalLoader;
+import com.tlbail.ptuts3androidapp.Model.User.User;
 import com.tlbail.ptuts3androidapp.R;
 
 import java.io.IOException;
+import java.util.List;
 
 public class NotificationManager {
 
     private Context context;
     private Notification mNotification;
     private NotificationManagerCompat notificationManagerCompat;
+
+    private User user;
+    private List<City> cities;
+    private boolean hasCity = false;
 
     public static final String CHANNEL_1_ID = "channel1";
 
@@ -38,6 +47,10 @@ public class NotificationManager {
 
     public NotificationManager(Context context) {
         this.context = context;
+
+        user = new User(new UserPropertyLocalLoader(context), new CityLocalLoader(context));
+        cities = user.getOwnedCity();
+
         notificationManagerCompat = NotificationManagerCompat.from(context);
         client = LocationServices.getFusedLocationProviderClient(context);
 
@@ -51,7 +64,16 @@ public class NotificationManager {
         LocationCallback locationCallback = new LocationCallback() {
             @Override
             public void onLocationResult(@NonNull LocationResult locationResult) {
-                createNotification(addressFromLocation(locationResult.getLastLocation()));
+
+                for(City city : cities){
+                    if(city.getCityData().getName().equalsIgnoreCase(addressFromLocation(locationResult.getLastLocation()))){
+                        hasCity = true;
+                    }
+                }
+
+                if(!hasCity) {
+                    createNotification(addressFromLocation(locationResult.getLastLocation()));
+                }
             }
         };
 
