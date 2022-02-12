@@ -16,7 +16,6 @@
         android:requestLegacyExternalStorage="true"
         android:roundIcon="@mipmap/app_icon_round"
         android:screenOrientation="portrait"
-        android:requestLegacyExternalStorage="true"
         android:theme="@style/Theme.PtutS3AndroidApp" >
         <meta-data
             android:name="com.google.mlkit.vision.DEPENDENCIES"

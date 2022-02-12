@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Switch;
 import android.widget.Toast;
 
 import com.tlbail.ptuts3androidapp.Model.City.CityLoaders.CityLocalLoader;
@@ -40,7 +41,7 @@ public class OptionsActivity extends AppCompatActivity {
         }
 
         if(user.containsKey(VERIFLOCATKEY)){
-            if(user.get(ReglageActivity.VERIFLOCATKEY).equals(String.valueOf(false))){
+            if(user.get(OptionsActivity.VERIFLOCATKEY).equals(String.valueOf(false))){
                 switch1VerifierLocat.setChecked(false);
             }else {
                 switch1VerifierLocat.setChecked(true);
