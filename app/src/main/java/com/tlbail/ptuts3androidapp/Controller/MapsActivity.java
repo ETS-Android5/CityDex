@@ -25,8 +25,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     private GoogleMap mMap;
     private ActivityMapsBinding binding;
-    private String chosenCity;
-
+    private String choosenCity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,7 +41,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
 
         //get Extra
-        chosenCity = getIntent().getStringExtra("City");
+        choosenCity = getIntent().getStringExtra("City");
 
 
     }
@@ -76,7 +75,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private List<LatLng> getLatLngFromCities(List<City> cities) {
         List<LatLng> latLngs = new ArrayList<>();
         for(City city: cities){
-            if(chosenCity != null && city.getCityData().getName().equalsIgnoreCase(chosenCity)){
+            if(choosenCity != null && city.getCityData().getName().equalsIgnoreCase(choosenCity)){
                 latLngs.add(0, city.getCityData().getPosition());
             }else{
                 latLngs.add(city.getCityData().getPosition());
@@ -89,7 +88,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private void addMarkerOfCities(List<LatLng> cities){
 
         if(cities.size() == 0) {
-            Toast.makeText(this, "Tu ne possède aucunne ville ! ", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "Tu ne possèdes aucune ville ! ", Toast.LENGTH_LONG).show();
             return;
         }
 
