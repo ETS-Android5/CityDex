@@ -47,6 +47,14 @@ public class User implements Map<String, String> {
         return false;
     }
 
+    public boolean isCityAlreadyOwned(String name){
+        for (City city : ownedCity) {
+            if(city.getCityData().getName().equalsIgnoreCase(name))
+                return true;
+        }
+        return false;
+    }
+
 
     /**
      * the map returned is unmodifiable please use setProperty
