@@ -1,9 +1,12 @@
 package com.tlbail.ptuts3androidapp.Model.PanneauVersVille;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.tlbail.ptuts3androidapp.Controller.PhotoActivity;
 import com.tlbail.ptuts3androidapp.Controller.ResultActivity;
 import com.tlbail.ptuts3androidapp.Model.City.City;
 import com.tlbail.ptuts3androidapp.Model.City.CityData;
@@ -61,6 +64,11 @@ public class PhotoToCity implements FetchCityListener,OcrResultListener, Locatio
         transformToCity();
     }
 
+    @Override
+    public void onLocationFailed(String message) {
+        fail(message);
+    }
+
     private void transformToCity(){
         if(!verifLocationIsActivated)
             getCityDataByName(ocrResult);
@@ -98,7 +106,7 @@ public class PhotoToCity implements FetchCityListener,OcrResultListener, Locatio
                 cityDataToReturn = cityData;
                 break;
             }
-            else if(similarity > threshold){
+            else if(similarity >= threshold){
                 cityDataToReturn = cityData;
                 if(cityData.getName().equalsIgnoreCase(ocrResult))
                     cityDataToReturn = cityData;
@@ -118,17 +126,25 @@ public class PhotoToCity implements FetchCityListener,OcrResultListener, Locatio
 
     public void addCityToUser(City city) {
         userCityManager.addCityToOwnCity(city);
-        updateListener(city);
+        findCity(city);
     }
-    public void updateListener(City city){
-        for(CityFoundListener cityFoundListener: cityFoundListeners){
-            cityFoundListener.onCityFound(city);
+
+    private void findCity(City city){
+        for (CityFoundListener listener : cityFoundListeners) {
+            listener.onCityFound(city);
+        }
+    }
+
+    private void couldNotFindCity(){
+        for (CityFoundListener listener : cityFoundListeners) {
+            listener.onCityNotFound();
         }
     }
 
     private void fail(String message){
         makeToast(message);
         userCityManager.deletePhotoCityFromLocalStorage();
+        couldNotFindCity();
     }
 
     private void makeToast(String message){
@@ -137,5 +153,10 @@ public class PhotoToCity implements FetchCityListener,OcrResultListener, Locatio
 
     public void subscribeOnCityFound(CityFoundListener cityFoundListener){
         cityFoundListeners.add(cityFoundListener);
+    }
+
+    private void startPhotoIntent(){
+        Intent intent = new Intent(appCompatActivity, PhotoActivity.class);
+        appCompatActivity.startActivity(intent);
     }
 }

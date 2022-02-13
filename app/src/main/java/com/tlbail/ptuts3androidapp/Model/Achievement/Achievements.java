@@ -560,8 +560,12 @@ public class Achievements implements CityFoundListener {
 
     @Override
     public void onCityFound(City city) {
-        if(city == null)return;
         unlockAchievementByCityFound(city);
+    }
+
+    @Override
+    public void onCityNotFound() {
+        return;
     }
 
 

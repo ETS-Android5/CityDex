@@ -71,4 +71,8 @@ public class NotificationManager implements LocationListener {
         sendNotification(location);
     }
 
+    @Override
+    public void onLocationFailed(String message) {
+        return;
+    }
 }

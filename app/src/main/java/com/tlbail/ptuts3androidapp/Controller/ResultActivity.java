@@ -94,25 +94,20 @@ public class ResultActivity extends AppCompatActivity implements CityFoundListen
 
     @Override
     public void onCityFound(City city) {
-        setButtonValueByCityValue(city);
+        buttonNext.setOnClickListener(v -> goToCollectionActivity());
         runOnUiThread(() -> {
-            if(city != null){
-                textView.setText(city.toString());
-                buttonNext.setText("Voir ma ville");
-            }else {
-                textView.setText("ECHEC-CITY");
-                buttonNext.setText("Reprendre une photo");
-            }
+            textView.setText(city.toString());
+            buttonNext.setText("Voir ma ville");
         });
-
     }
 
-    private void setButtonValueByCityValue(City city) {
-        if(city != null){
-            buttonNext.setOnClickListener(v -> goToCollectionActivity());
-        }else{
-            buttonNext.setOnClickListener(v -> returnToPhotoActivity());
-        }
+    @Override
+    public void onCityNotFound() {
+        buttonNext.setOnClickListener(v -> returnToPhotoActivity());
+        runOnUiThread(()->{
+            textView.setText("ECHEC-CITY");
+            buttonNext.setText("Reprendre une photo");
+        });
     }
 
     private void goToCollectionActivity() {
