@@ -4,7 +4,6 @@ import android.app.Notification;
 import android.app.NotificationChannel;
 import android.content.Context;
 import android.graphics.Color;
-import android.os.Build;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
@@ -35,24 +34,28 @@ public class NotificationManager implements LocationListener {
 
     }
 
-    public void createNotification(String address) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            NotificationChannel channel = new NotificationChannel(
+    private void sendNotification(String address)  {
+        prepareNotification();
+        Notification notification = createNotification(address);
+        int notificationId = 1;
+        notificationManagerCompat.notify(notificationId, mNotification);
+    }
+
+    private void prepareNotification(){
+        NotificationChannel channel = null;
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+            channel = new NotificationChannel(
                     CHANNEL_1_ID,
                     "Channel 1",
                     android.app.NotificationManager.IMPORTANCE_HIGH
             );
-
             android.app.NotificationManager manager = context.getSystemService(android.app.NotificationManager.class);
             manager.createNotificationChannel(channel);
-
-            sendNotification(address);
         }
     }
 
-    private void sendNotification(String address)  {
-
-        mNotification = new NotificationCompat.Builder(context, CHANNEL_1_ID)
+    private Notification createNotification(String address){
+        return new NotificationCompat.Builder(context, CHANNEL_1_ID)
                 .setSmallIcon(R.mipmap.app_icon).setColor(Color.RED)
                 .setContentTitle("Nouvelle ville disponible !")
                 .setContentText("Vous vous trouvez dans une nouvelle ville ! " +
@@ -60,16 +63,13 @@ public class NotificationManager implements LocationListener {
                 .setPriority(NotificationCompat.PRIORITY_HIGH)
                 .setCategory(NotificationCompat.CATEGORY_MESSAGE)
                 .build();
-
-        int notificationId = 1;
-        notificationManagerCompat.notify(notificationId, mNotification);
     }
-
 
     @Override
     public void onLocationReceived(String location) {
         if(user.isCityAlreadyOwned(location)) return;
         createNotification(location);
+        sendNotification(location);
     }
 
 }
