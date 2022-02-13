@@ -15,7 +15,6 @@ import com.tlbail.ptuts3androidapp.Model.User.User;
 import com.tlbail.ptuts3androidapp.R;
 
 public class NotificationManager implements LocationListener {
-    private Notification mNotification;
     private NotificationManagerCompat notificationManagerCompat;
     private User user;
     Context context;
@@ -38,7 +37,7 @@ public class NotificationManager implements LocationListener {
         prepareNotification();
         Notification notification = createNotification(address);
         int notificationId = 1;
-        notificationManagerCompat.notify(notificationId, mNotification);
+        notificationManagerCompat.notify(notificationId, notification);
     }
 
     private void prepareNotification(){
