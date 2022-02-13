@@ -46,23 +46,13 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     }
 
-    /**
-     * Manipulates the map once available.
-     * This callback is triggered when the map is ready to be used.
-     * This is where we can add markers or lines, add listeners or move the camera. In this case,
-     * we just add a marker near Sydney, Australia.
-     * If Google Play services is not installed on the device, the user will be prompted to install
-     * it inside the SupportMapFragment. This method will only be triggered once the user has
-     * installed Google Play services and returned to the app.
-     */
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
 
         List<City> cities = getAllCityFromUser();
 
-        List<LatLng> latLngs = getLatLngFromCities(cities);
-        addMarkerOfCities(latLngs);
+        addMarker(cities);
     }
 
 
@@ -72,34 +62,30 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     }
 
 
-    private List<LatLng> getLatLngFromCities(List<City> cities) {
-        List<LatLng> latLngs = new ArrayList<>();
-        for(City city: cities){
-            if(choosenCity != null && city.getCityData().getName().equalsIgnoreCase(choosenCity)){
-                latLngs.add(0, city.getCityData().getPosition());
-            }else{
-                latLngs.add(city.getCityData().getPosition());
 
-            }
-        }
-        return latLngs;
-    }
+    private void addMarker(List<City> cities){
 
-    private void addMarkerOfCities(List<LatLng> cities){
+        mMap.moveCamera(CameraUpdateFactory.zoomTo(5));
 
         if(cities.size() == 0) {
             Toast.makeText(this, "Tu ne possèdes aucune ville ! ", Toast.LENGTH_LONG).show();
+            mMap.moveCamera(CameraUpdateFactory.newLatLng(new LatLng(47.233654387753106, -0.7290989017941045)));
+
             return;
         }
 
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(cities.get(0)));
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(cities.get(0).getCityData().getPosition()));
 
-        for(LatLng latLng : cities){
-            mMap.addMarker(new MarkerOptions().position(latLng).title("Marker in Sydney"));
+        for(City city : cities){
+            if(choosenCity != null & city.getCityData().getName().equalsIgnoreCase(choosenCity)){
+                mMap.moveCamera(CameraUpdateFactory.newLatLng(city.getCityData().getPosition()));
+            }
+            mMap.addMarker(new MarkerOptions().position(city.getCityData().getPosition()).title(city.getCityData().getName()));
+
         }
-
-
     }
+
+
 
 
 
