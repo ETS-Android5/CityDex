@@ -13,8 +13,6 @@ import com.tlbail.ptuts3androidapp.ml.Model;
 
 public class ObjectDetector {
 
-
-    private RectF rectLocation;
     private static ObjectDetector objectDetector;
     private Model model;
 
