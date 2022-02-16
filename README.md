@@ -6,15 +6,15 @@ Pour collectionner des villes, l'utilisateur doit prendre en photo des panneaux 
 
 ## Sommaire
 
-### [Technologies](https://github.com/TLBail/CityDex/edit/main/README.md#technologies)
- - [Java et Android SDK](https://github.com/TLBail/CityDex/edit/main/README.md#java-et-android-sdk)
- - [Détection d'objet](https://github.com/TLBail/CityDex/edit/main/README.md#java-et-android-sdk)
- - [OCR](https://github.com/TLBail/CityDex/edit/main/README.md#ocr-reconnaissance-optique-de-caractère)
- - [OpenCV](https://github.com/TLBail/CityDex/edit/main/README.md#opencv)
- - [API Découpage administratif](https://github.com/TLBail/CityDex/edit/main/README.md#api-découpage-administratif-api-du-gouvernement-français)
- - [Localisation](https://github.com/TLBail/CityDex/edit/main/README.md#localisation)
+### [Technologies](https://github.com/TLBail/CityDex/blob/main/README.md#technologies)
+ - [Java et Android SDK](https://github.com/TLBail/CityDex/blob/main/README.md#java-et-android-sdk)
+ - [Détection d'objet](https://github.com/TLBail/CityDex/blob/main/README.md#java-et-android-sdk)
+ - [OCR](https://github.com/TLBail/CityDex/blob/main/README.md#ocr-reconnaissance-optique-de-caractère)
+ - [OpenCV](https://github.com/TLBail/CityDex/blob/main/README.md#opencv)
+ - [API Découpage administratif](https://github.com/TLBail/CityDex/blob/main/README.md#api-découpage-administratif-api-du-gouvernement-français)
+ - [Localisation](https://github.com/TLBail/CityDex/blob/main/README.md#localisation)
 
-### [Contributeurs](https://github.com/TLBail/CityDex/edit/main/README.md#contributeurs)
+### [Contributeurs](https://github.com/TLBail/CityDex/blob/main/README.md#contributeurs)
 
 ## Technologies
 
