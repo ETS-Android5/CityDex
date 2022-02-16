@@ -26,8 +26,8 @@ Lien du SDK : https://developer.android.com
 ### Detection d'objet
 
 L'application utilise la détection d'objet pour reconnaitre un panneau dans une image.
-Nous utilisons TensorFlowLite avec un modèle entrainé sur plus de 250 images de panneau pour identifier sur l'image un panneau et sa position grâce à ces données 
-l'image est rognée sur le panneau pour facilité l'ocr. 
+Nous utilisons TensorFlowLite avec un modèle entrainé sur plus de 250 images de panneau pour identifier la postition d'un panneau et sa position dans une image.
+La position retournée est un rectangle ce qui nous permet de rogner l'image pour faciliter l'OCR.
 
 ### OCR (Reconnaissance optique de caractère)
 
