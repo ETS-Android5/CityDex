@@ -35,14 +35,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         setContentView(binding.getRoot());
 
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
-        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
-                .findFragmentById(R.id.map);
+        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
-
 
         //get Extra
         choosenCity = getIntent().getStringExtra("City");
-
 
     }
 
@@ -55,13 +52,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         addMarker(cities);
     }
 
-
     private List<City> getAllCityFromUser() {
         User user = new User(new UserPropertyLocalLoader(this), new CityLocalLoader(this));
         return user.getOwnedCity();
     }
-
-
 
     private void addMarker(List<City> cities){
 
@@ -84,9 +78,5 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         }
     }
-
-
-
-
 
 }

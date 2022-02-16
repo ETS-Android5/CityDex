@@ -30,16 +30,8 @@ public class AchievementViewHolder extends RecyclerView.ViewHolder {
         imageView = itemView.findViewById(R.id.achivementImageView);
         textView = itemView.findViewById(R.id.descriptionAchivement);
         constraintLayout = itemView.findViewById(R.id.constraintLayoutWhichHidePhotoAchievement);
-
-        itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showPopUp();
-            }
-        });
+        itemView.setOnClickListener(v -> showPopUp());
     }
-
-
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     public void updateViewHolder(Achievement achievement){
@@ -51,7 +43,6 @@ public class AchievementViewHolder extends RecyclerView.ViewHolder {
         }else{
             constraintLayout.setBackgroundColor(Color.argb(0,255,255,255));
             textView.setTextColor(Color.BLACK);
-
         }
     }
 
@@ -61,17 +52,15 @@ public class AchievementViewHolder extends RecyclerView.ViewHolder {
         LayoutInflater layoutInflater = (LayoutInflater) itemView.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
         View customView = layoutInflater.inflate(R.layout.layout_achievementdetail, null);
-        // reference the textview of custom_popup_dialog
-        TextView tv = (TextView) customView.findViewById(R.id.textviewachievementdetail);
-        TextView descriptionTextView = (TextView) customView.findViewById(R.id.textviewDescriptionAchievement);
 
+        TextView tv = customView.findViewById(R.id.textviewachievementdetail);
+        TextView descriptionTextView = customView.findViewById(R.id.textviewDescriptionAchievement);
 
         tv.setText(achievement.getName());
         descriptionTextView.setText(achievement.getDescription());
 
-
         builder.setView(customView);
-        AlertDialog alertDialog = builder.create();
+        builder.create();
         builder.show();
 
     }

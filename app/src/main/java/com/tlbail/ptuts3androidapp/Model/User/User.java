@@ -26,9 +26,7 @@ public class User implements Map<String, String> {
         this.properties = userPropertyLoader.getUserProperty().getProperties();
         this.cityLocalLoader = cityLocalLoader;
         ownedCity = cityLocalLoader.getCities();
-
     }
-
 
     public List<City> getOwnedCity() {
         return ownedCity;
@@ -53,20 +51,6 @@ public class User implements Map<String, String> {
                 return true;
         }
         return false;
-    }
-
-
-    /**
-     * the map returned is unmodifiable please use setProperty
-     * @return
-     */
-    public Map<String, String> getUserProperties() {
-        return Collections.unmodifiableMap(properties);
-    }
-
-    public void setProperty(String key, String value){
-        properties.put(key, value);
-        updateUserProperty();
     }
 
     private void updateUserProperty(){

@@ -17,6 +17,9 @@ public class InfoVilleActivity extends AppCompatActivity{
 
         private TextView t_ville, t_dpt, t_region, t_habitants, t_surface;
         private ImageView img_ville;
+        private String dpt, region;
+        private float txtProgress;
+        private int inhabitants;
 
         @Override
         protected void onCreate(Bundle savedInstanceState) {
@@ -35,51 +38,42 @@ public class InfoVilleActivity extends AppCompatActivity{
             img_ville = findViewById(R.id.img_ville);
             t_habitants = findViewById(R.id.t_habitant);
 
-            findViewById(R.id.voirsuruneCarteButton).setOnClickListener(v -> ouvrirLaVilleSurLaCarte());
+            findViewById(R.id.voirsuruneCarteButton).setOnClickListener(v -> displayCityOnTheMap());
         }
 
-        private void ouvrirLaVilleSurLaCarte() {
+        private void displayCityOnTheMap() {
             Intent intent = new Intent(this, MapsActivity.class);
             intent.putExtra("City", getIntent().getStringExtra("City"));
             startActivity(intent);
-
         }
 
         private void setAllInfos(){
             
             User user = new User(new UserPropertyLocalLoader(getApplicationContext()), new CityLocalLoader(getApplicationContext()));
             City cityToDisplay = null;
-            
-            //Name
+
             String cityClicked = getIntent().getStringExtra("City");
             t_ville.setText(cityClicked);
-            
-            //get All City Info in local
+
             for(City city : user.getOwnedCity()){
                 if(city.getCityData().getName().compareTo(cityClicked) == 0){
                     cityToDisplay = city;
                 }
             }
 
-            //Img
             img_ville.setImageURI(cityToDisplay.getPhoto().getPhotoUri());
-            System.out.println(cityToDisplay.getPhoto().getPhotoUri());
+            dpt = cityToDisplay.getCityData().getDepartment().getDepartmentName();
+            region = cityToDisplay.getCityData().getRegion().getName();
+            txtProgress = cityToDisplay.getCityData().getSurface();
+            inhabitants = cityToDisplay.getCityData().getInhabitants();
 
-            //Dpt
-            String dpt = cityToDisplay.getCityData().getDepartment().getDepartmentName();
+            updateCityInfos();
+        }
+
+        private void updateCityInfos(){
             t_dpt.setText(t_dpt.getText() + " " + dpt);
-
-            //Region
-            String region = cityToDisplay.getCityData().getRegion().getName();
             t_region.setText(t_region.getText() + " " + region);
-
-            //Surface
-            float txtProgress = cityToDisplay.getCityData().getSurface();
             t_surface.setText(t_surface.getText() + " " + txtProgress/100 + " km2");
-
-            //Habitants
-            int inhabitants = cityToDisplay.getCityData().getInhabitants();
             t_habitants.setText(t_habitants.getText() + " " + inhabitants);
-
         }
 }

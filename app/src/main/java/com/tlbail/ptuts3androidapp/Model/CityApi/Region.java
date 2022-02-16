@@ -25,7 +25,7 @@ public enum Region implements Serializable {
 	
 	private String name;
 	
-	private Region(String name) {
+	Region(String name) {
 		this.name = name;
 	}
 	

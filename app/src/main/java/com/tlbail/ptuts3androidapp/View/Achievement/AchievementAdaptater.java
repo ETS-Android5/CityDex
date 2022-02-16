@@ -17,7 +17,6 @@ import java.util.List;
 
 public class AchievementAdaptater extends RecyclerView.Adapter<AchievementViewHolder> {
 
-
     private List<Achievement> achievements;
 
     public AchievementAdaptater(List<Achievement> achievements) {

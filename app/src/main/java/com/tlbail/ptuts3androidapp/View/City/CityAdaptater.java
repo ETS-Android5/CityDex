@@ -1,6 +1,5 @@
 package com.tlbail.ptuts3androidapp.View.City;
 
-
 import android.content.Context;
 import android.content.Intent;
 import android.util.Log;

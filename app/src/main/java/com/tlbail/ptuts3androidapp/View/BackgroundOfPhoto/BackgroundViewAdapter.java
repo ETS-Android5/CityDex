@@ -15,7 +15,6 @@ import java.util.List;
 
 public class BackgroundViewAdapter extends RecyclerView.Adapter<BitmapViewHolder> {
 
-
     private List<Bitmap> bitmaps;
 
     public BackgroundViewAdapter(List<Bitmap> bitmaps) {

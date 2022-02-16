@@ -1,12 +1,10 @@
 package com.tlbail.ptuts3androidapp.Model.PanneauVersVille;
 
-import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.tlbail.ptuts3androidapp.Controller.PhotoActivity;
 import com.tlbail.ptuts3androidapp.Controller.ResultActivity;
 import com.tlbail.ptuts3androidapp.Model.City.City;
 import com.tlbail.ptuts3androidapp.Model.City.CityData;
@@ -155,8 +153,4 @@ public class PhotoToCity implements FetchCityListener,OcrResultListener, Locatio
         cityFoundListeners.add(cityFoundListener);
     }
 
-    private void startPhotoIntent(){
-        Intent intent = new Intent(appCompatActivity, PhotoActivity.class);
-        appCompatActivity.startActivity(intent);
-    }
 }

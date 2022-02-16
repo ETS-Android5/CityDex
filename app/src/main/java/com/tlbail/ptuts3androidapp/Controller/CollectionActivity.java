@@ -49,7 +49,6 @@ public class CollectionActivity extends AppCompatActivity {
 
     }
 
-
     private void bindUI() {
         recyclerView = findViewById(R.id.gallerieRecyclerView);
         cityToSearch = findViewById(R.id.cityToSearch);
@@ -58,14 +57,14 @@ public class CollectionActivity extends AppCompatActivity {
     }
 
     private void setUpSpinner(){
-        List<String> critereDeTri = new ArrayList<>();
+        List<String> criteria = new ArrayList<>();
 
-        critereDeTri.add("Par ordre d'obtention");
-        critereDeTri.add("Par ordre alphabétique");
-        critereDeTri.add("Par département");
-        critereDeTri.add("Par région");
+        criteria.add("Par ordre d'obtention");
+        criteria.add("Par ordre alphabétique");
+        criteria.add("Par département");
+        criteria.add("Par région");
 
-        ArrayAdapter<String> dataAdapterR = new ArrayAdapter<String>(this, R.layout.support_simple_spinner_dropdown_item,critereDeTri);
+        ArrayAdapter<String> dataAdapterR = new ArrayAdapter<String>(this, R.layout.support_simple_spinner_dropdown_item,criteria);
         spinner.setAdapter(dataAdapterR);
 
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -100,7 +99,7 @@ public class CollectionActivity extends AppCompatActivity {
 
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
-                //Nothing to do
+
             }
         });
     }
@@ -203,10 +202,4 @@ public class CollectionActivity extends AppCompatActivity {
         }
     }
 
-
-    /*@Override
-    public void onBackPressed() {
-        Intent intent = new Intent(this, HomeActivity.class);
-        startActivity(intent);
-    }*/
 }

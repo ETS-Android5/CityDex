@@ -22,6 +22,9 @@ import com.tlbail.ptuts3androidapp.R;
 
 public class LoadingScreenActivity extends AppCompatActivity {
 
+    private GoogleSignInOptions signInOptions;
+    private GoogleSignInAccount account;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -75,27 +78,27 @@ public class LoadingScreenActivity extends AppCompatActivity {
         }
     }
 
+    private void preConditions(){
+        signInOptions = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_GAMES_SIGN_IN)
+                .requestScopes(Games.SCOPE_GAMES_SNAPSHOTS)
+                .build();
+        GoogleSignIn.getClient(this, signInOptions);
+        account = GoogleSignIn.getLastSignedInAccount(this);
+    }
+
     private void setupAchievement() {
-        GoogleSignInOptions  signInOptions =
-                new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_GAMES_SIGN_IN)
-                        .requestScopes(Games.SCOPE_GAMES_SNAPSHOTS)
-                        .build();
-        GoogleSignInClient mGoogleSignInClient = GoogleSignIn.getClient(this,signInOptions);
-        GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
+
+        preConditions();
+
         if (GoogleSignIn.hasPermissions(account, signInOptions.getScopeArray())) {
-            // Already signed in.
-            // The signed in account is stored in the 'account' variable.
+            // Already signed in. The signed in account is stored in the 'account' variable.
             GoogleSignInAccount signedInAccount = account;
-            AchievementsClient achievementsClient = Games.getAchievementsClient(getApplicationContext(), signedInAccount);
-            Log.i("achivement", achievementsClient.toString());
+            Games.getAchievementsClient(getApplicationContext(), signedInAccount);
         } else {
             // Haven't been signed-in before. Try the silent sign-in first.
             GoogleSignInClient signInClient = GoogleSignIn.getClient(this, signInOptions);
-            signInClient
-                    .silentSignIn()
-                    .addOnCompleteListener(
-                            this,
-                            new OnCompleteListener<GoogleSignInAccount>() {
+            signInClient.silentSignIn().addOnCompleteListener(
+                            this, new OnCompleteListener<GoogleSignInAccount>() {
                                 @Override
                                 public void onComplete(@NonNull Task<GoogleSignInAccount> task) {
                                     if (task.isSuccessful()) {
@@ -109,11 +112,7 @@ public class LoadingScreenActivity extends AppCompatActivity {
                                         // and [Performing Interactive Sign-in](http://developers.google.com/games/services/android/signin#performing_interactive_sign-in) for details on how to implement
                                         // Interactive Sign-in.
                                     }
-                                }
-                            });
+                                }});
         }
-
-
-
     }
 }

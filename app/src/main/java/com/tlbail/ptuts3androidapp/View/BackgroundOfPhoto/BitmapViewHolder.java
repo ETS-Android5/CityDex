@@ -19,10 +19,8 @@ public class BitmapViewHolder extends RecyclerView.ViewHolder {
         imageView = itemView.findViewById(R.id.imageView4);
     }
 
-
     public void updateViewHolder(Bitmap bitmap){
         imageView.setImageBitmap(bitmap);
     }
-
 
 }

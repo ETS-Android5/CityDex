@@ -22,7 +22,6 @@ public class CityViewHolder extends RecyclerView.ViewHolder {
         imageView = itemView.findViewById(R.id.citySign);
     }
 
-
     public void updateViewHolder(City city){
         this.textView.setText(city.getCityData().getName());
     }

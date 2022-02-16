@@ -47,7 +47,7 @@ public class OptionsActivity extends AppCompatActivity {
     private void bindUI() {
 
         findViewById(R.id.buttonAnnuleParametre).setOnClickListener(v -> finish());
-        findViewById(R.id.buttonValideParametre).setOnClickListener(v -> valider());
+        findViewById(R.id.buttonValideParametre).setOnClickListener(v -> validate());
         findViewById(R.id.sourceDuProjetButton).setOnClickListener(v -> openSource());
 
         editTextLocationTimeOut = findViewById(R.id.editTextNumberLocationTimeOutParametre);
@@ -59,7 +59,7 @@ public class OptionsActivity extends AppCompatActivity {
         startActivity(browserIntent);
     }
 
-    private void valider() {
+    private void validate() {
         int valueLocationTimeOut = Integer.parseInt(editTextLocationTimeOut.getText().toString());
         if(!user.containsKey(LOCATIONTIMEOUTKEY))
             user.put(LOCATIONTIMEOUTKEY, String.valueOf(valueLocationTimeOut));
