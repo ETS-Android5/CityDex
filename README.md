@@ -31,7 +31,7 @@ L'application utilise la détection d'objet pour reconnaitre un panneau dans une
 
 ### OCR (Reconnaissance optique de caractère)
 
-L'application utilise l'OCR pour lire le nom de ville dans le panneau. Nous avions d'abord utilisé tess-two, qui permet d'utiliser Tesseract dans Android. Cependant les résultats étant très moyens et la bibliothèque n'étant plus maintenue, nous avons décidé de changer de bibliothèque. Nous utilisons maintenant le ML Kit Text Recognition (https://developers.google.com/ml-kit/vision/text-recognition) de Google. 
+L'application utilise l'OCR pour lire le nom de ville dans le panneau. Nous avions d'abord utilisé tess-two, qui permet d'utiliser Tesseract dans Android. Cependant les résultats étant très moyens et la bibliothèque n'étant plus maintenue, nous avons décidé de changer de bibliothèque. Nous utilisons maintenant le [ML Kit Text Recognition](https://developers.google.com/ml-kit/vision/text-recognition) de Google. 
 
 ### OpenCV
 
@@ -43,7 +43,7 @@ Cette API nommée API Géo nous permet de récupérer des informations sommaires
 
 ### Localisation
 
-L'application utilise la localisation comme mesure d'anti-triche. Nous utilisions pour cela la bibliothèque fourni dans le SDK Android. Cependant la détection de la localisation durait beaucoup de temps et le code devenait compliqué à comprendre et à maintenir. Nous avons changé de bibliothèque pour utiliser la localisation du GooglePlayService<br/> (FusedLocationProviderClient : https://developers.google.com/android/reference/com/google/android/gms/location/FusedLocationProviderClient).
+L'application utilise la localisation comme mesure d'anti-triche. Nous utilisions pour cela la bibliothèque fourni dans le SDK Android. Cependant la détection de la localisation durait beaucoup de temps et le code devenait compliqué à comprendre et à maintenir. Nous avons changé de bibliothèque pour utiliser la localisation du GooglePlayService ([FusedLocationProviderClient](https://developers.google.com/android/reference/com/google/android/gms/location/FusedLocationProviderClient)) 
 
 ### Notifications
 
