@@ -31,7 +31,6 @@ public class OptionsActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getSupportActionBar().hide();
         setContentView(R.layout.activity_parametre);
         bindUI();
         user = new User(new UserPropertyLocalLoader(this), new CityLocalLoader(this));

@@ -32,7 +32,6 @@ public class PhotoActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         photoManager = new PhotoManager(this);
-        getSupportActionBar().hide();
         setContentView(R.layout.activity_photo);
         bindUI();
     }

@@ -30,7 +30,6 @@ public class ResultActivity extends AppCompatActivity implements CityFoundListen
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getSupportActionBar().hide();
         setContentView(R.layout.activity_result);
         bindUI();
         Achievements achievements = new Achievements(this);
