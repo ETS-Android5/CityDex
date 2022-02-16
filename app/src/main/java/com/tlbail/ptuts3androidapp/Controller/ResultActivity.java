@@ -65,13 +65,11 @@ public class ResultActivity extends AppCompatActivity implements CityFoundListen
         this.startActivity(activityIntent);
     }
 
-
     private void bindUI() {
         imageView = findViewById(R.id.resultedPhotoTakenImageView);
         textView = findViewById(R.id.resutlTextview);
         buttonNext = findViewById(R.id.buttonBackresultActivity);
     }
-
 
     @Override
     protected void onResume() {
@@ -83,7 +81,6 @@ public class ResultActivity extends AppCompatActivity implements CityFoundListen
     public void onPause() {
         super.onPause();
     }
-
 
     @Override
     public void onBackPressed() {

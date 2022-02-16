@@ -12,7 +12,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.TextureView;
 import android.view.View;
-import android.widget.ImageButton;
 
 import com.tlbail.ptuts3androidapp.Model.Photo.Photo;
 import com.tlbail.ptuts3androidapp.Model.Photo.PhotoManager;
@@ -21,12 +20,10 @@ import com.tlbail.ptuts3androidapp.R;
 public class PhotoActivity extends AppCompatActivity {
 
     public static final String URIBITMAPKEY = "bitmap";
-    private ImageButton imageButton;
     private ConstraintLayout constraintLayout;
     private boolean isloading;
     private PhotoManager photoManager;
     private View fragmentPhoto;
-    private ImageButton gallerieButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,25 +33,11 @@ public class PhotoActivity extends AppCompatActivity {
         bindUI();
     }
 
-
     private void bindUI() {
         fragmentPhoto = findViewById(R.id.fragmentPhotoContainerView);
         constraintLayout = findViewById(R.id.rootactivityPhotoConstraintLayout);
-        imageButton = findViewById(R.id.takePhotoImageButton);
-        imageButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                takePhoto();
-            }
-        });
-        gallerieButton = findViewById(R.id.b_galeri2);
-        gallerieButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(PhotoActivity.this, CollectionActivity.class);
-                PhotoActivity.this.startActivity(intent);
-            }
-        });
+        findViewById(R.id.takePhotoImageButton).setOnClickListener(v -> takePhoto());
+        findViewById(R.id.b_galeri2).setOnClickListener(v -> startIntent(CollectionActivity.class));
     }
 
     private void takePhoto() {
@@ -67,7 +50,11 @@ public class PhotoActivity extends AppCompatActivity {
             }
         }).start();
         isloading = true;
+    }
 
+    public void startIntent(Class className){
+        Intent activityIntent = new Intent(this, className);
+        this.startActivity(activityIntent);
     }
 
     private void startResultActivityWithPhotoInfo() {

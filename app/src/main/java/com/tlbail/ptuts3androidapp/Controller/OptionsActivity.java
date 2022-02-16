@@ -5,8 +5,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Switch;
 import android.widget.Toast;
@@ -21,9 +19,6 @@ public class OptionsActivity extends AppCompatActivity {
     public static final String LOCATIONTIMEOUTKEY = "LOCATIONTIMEOUT";
     public static final String VERIFLOCATKEY = "VERIFLOCATKEY";
 
-    private Button sourceDuProjetButton;
-    private Button buttonAnnuler;
-    private Button buttonValide;
     private EditText editTextLocationTimeOut;
     private User user;
     private Switch switch1VerifierLocat;
@@ -47,46 +42,21 @@ public class OptionsActivity extends AppCompatActivity {
             }
 
         }
-
     }
 
     private void bindUI() {
-        buttonAnnuler = findViewById(R.id.buttonAnnuleParametre);
-        buttonAnnuler.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                annuler();
-            }
-        });
-        buttonValide = findViewById(R.id.buttonValideParametre);
-        buttonValide.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                valider();
-            }
-        });
+
+        findViewById(R.id.buttonAnnuleParametre).setOnClickListener(v -> finish());
+        findViewById(R.id.buttonValideParametre).setOnClickListener(v -> valider());
+        findViewById(R.id.sourceDuProjetButton).setOnClickListener(v -> openSource());
 
         editTextLocationTimeOut = findViewById(R.id.editTextNumberLocationTimeOutParametre);
-
-        sourceDuProjetButton = findViewById(R.id.sourceDuProjetButton);
-        sourceDuProjetButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                openSource();
-            }
-        });
-
         switch1VerifierLocat = findViewById(R.id.switch1VerifierLocat);
     }
 
     private void openSource() {
         Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/TLBail/PtutS3Android"));
         startActivity(browserIntent);
-    }
-
-
-    private void annuler() {
-        finish();
     }
 
     private void valider() {

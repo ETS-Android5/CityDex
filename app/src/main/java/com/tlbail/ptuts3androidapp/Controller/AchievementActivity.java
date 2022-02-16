@@ -5,7 +5,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 
 import com.tlbail.ptuts3androidapp.Model.Achievement.Achievement;
@@ -17,13 +16,7 @@ import java.util.List;
 
 public class AchievementActivity extends AppCompatActivity  {
 
-    // request codes we use when invoking an external activity
-    private static final int RC_UNUSED = 5001;
-    private static final int RC_SIGN_IN = 9001;
-
-    private static final String TAG = "AchievementActivity";
     private RecyclerView recyclerView;
-    private Button buttonShowSucces;
     private Achievements achievements;
 
     @Override
@@ -32,23 +25,12 @@ public class AchievementActivity extends AppCompatActivity  {
         setContentView(R.layout.activity_achievement);
         bindUI();
         setupRecyclerView();
-
     }
-
-
 
     private void bindUI() {
         recyclerView = findViewById(R.id.succesRecyclerView);
-        buttonShowSucces = findViewById(R.id.buttonShowSucces);
-        buttonShowSucces.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                achievements.showAchievementInPlayStore();
-            }
-        });
-
+        findViewById(R.id.succesRecyclerView).setOnClickListener(v -> achievements.showAchievementInPlayStore());
     }
-
 
     private void setupRecyclerView() {
         List<Achievement> achievements = new Achievements(this).getAchivements();
@@ -61,10 +43,6 @@ public class AchievementActivity extends AppCompatActivity  {
     protected void onResume() {
         super.onResume();
         achievements = new Achievements(this);
-
     }
-
-
-
 
 }
