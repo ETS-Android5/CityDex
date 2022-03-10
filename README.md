@@ -1,22 +1,29 @@
 # CityDex
 
+![Android](https://img.shields.io/static/v1?style=for-the-badge&message=Android&color=222222&logo=Android&logoColor=3DDC84&label=)
+![Android Studio](https://img.shields.io/static/v1?style=for-the-badge&message=Android+Studio&color=222222&logo=Android+Studio&logoColor=3DDC84&label=)
+![Java](https://img.shields.io/static/v1?style=for-the-badge&message=Java&color=007396&logo=Java&logoColor=FFFFFF&label=)
+![Google Maps](https://img.shields.io/static/v1?style=for-the-badge&message=Google+Maps&color=4285F4&logo=Google+Maps&logoColor=FFFFFF&label=)
+![TensorFlow](https://img.shields.io/static/v1?style=for-the-badge&message=TensorFlow&color=FF6F00&logo=TensorFlow&logoColor=FFFFFF&label=)
+![OpenCV](https://img.shields.io/static/v1?style=for-the-badge&message=OpenCV&color=5C3EE8&logo=OpenCV&logoColor=FFFFFF&label=)
+
 CityDex est une application Android qui a été réalisée lors d'un projet universitaire. Il s'agit d'une application mobile ludique de collection de villes à partir des panneaux d'entrée d'agglomération de France. Autrement dit, pour collectionner des villes, l'utilisateur doit prendre en photo des panneaux d'entrée d'agglomération françaises.
 
 <img src="https://user-images.githubusercontent.com/74766923/154358973-19783a27-341d-4fc0-ad1f-9ca93bc5e070.png" width="150"/>
 
 ## Sommaire
 
-[Technologies](https://github.com/TLBail/CityDex/blob/main/README.md#technologies)
- - [Java et Android SDK](https://github.com/TLBail/CityDex/blob/main/README.md#java-et-android-sdk)
- - [Détection d'objet](https://github.com/TLBail/CityDex/blob/main/README.md#java-et-android-sdk)
- - [OCR](https://github.com/TLBail/CityDex/blob/main/README.md#ocr-reconnaissance-optique-de-caractère)
- - [OpenCV](https://github.com/TLBail/CityDex/blob/main/README.md#opencv)
- - [API Découpage administratif](https://github.com/TLBail/CityDex/blob/main/README.md#api-découpage-administratif-api-du-gouvernement-français)
- - [Localisation](https://github.com/TLBail/CityDex/blob/main/README.md#localisation)
- - [Notifications](https://github.com/TLBail/CityDex/blob/main/README.md#notifications)
+[Technologies](#technologies)
+ - [Java et Android SDK](#java-et-android-sdk)
+ - [Détection d'objet](#java-et-android-sdk)
+ - [OCR](#ocr-reconnaissance-optique-de-caractère)
+ - [OpenCV](#opencv)
+ - [API Découpage administratif](#api-découpage-administratif-api-du-gouvernement-français)
+ - [Localisation](h#localisation)
+ - [Notifications](#notifications)
  
-[Problèmes](https://github.com/TLBail/CityDex/blob/main/README.md#probl%C3%A8mes)<br/>
-[Contributeurs](https://github.com/TLBail/CityDex/blob/main/README.md#contributeurs)
+[Problèmes](#probl%C3%A8mes)<br/>
+[Contributeurs](#contributeurs)
 
 ## Technologies
 
